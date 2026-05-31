@@ -157,7 +157,7 @@ namespace mos6502 {
 		const word xword = static_cast<word>(m_X);
 
 		const byte low = ReadByte( (table + xword) & 0x00FF );
-		const byte high = ReadByte( (table + xword + 1) & 0xFF00);
+		const byte high = ReadByte((table + xword + 1) & 0x00FF);
 
 		outCycles = 5; // reference data-tables ellude to 4 cycles
 
@@ -183,16 +183,18 @@ namespace mos6502 {
 	}
 
 	address CPU::Addr_REL(fast_byte& outCycles) {
-		byte rel = ReadByte(m_PC);
+		const byte rel = ReadByte(m_PC);
 		m_PC++;
 
-		if (rel & 0x80)
-			rel |= 0xFF00;
+		// Store the signed 8-bit branch displacement sign-extended to 16 bits.
+		// The old byte temporary truncated the 0xFF00 sign extension and made
+		// backward branches jump forward instead.
+		const word offset = (rel & 0x80) ? static_cast<word>(0xFF00u | rel) : static_cast<word>(rel);
 
 		// The branch itself will determine the cost
 		outCycles = 1;
 
-		return { rel };
+		return { offset };
 	}
 
 	address CPU::Addr_ZPG(fast_byte& outCycles) { 

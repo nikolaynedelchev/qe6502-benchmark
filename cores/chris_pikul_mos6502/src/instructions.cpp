@@ -239,7 +239,7 @@ namespace mos6502 {
 		{ 0x6D, Instruction::ADC, AddressMode::ABS, 3, 4, false },
 		{ 0x6E, Instruction::ROR, AddressMode::ABS, 3, 6, false },
 		{ 0x6f, Instruction::ILL, AddressMode::ILL, 1, 2, false }, // ILLEGAL
-		{ 0x70, Instruction::BVC, AddressMode::REL, 2, 2, true },
+		{ 0x70, Instruction::BVS, AddressMode::REL, 2, 2, true },
 		{ 0x71, Instruction::ADC, AddressMode::INY, 2, 5, true },
 		{ 0x72, Instruction::ILL, AddressMode::ILL, 1, 2, false }, // ILLEGAL
 		{ 0x73, Instruction::ILL, AddressMode::ILL, 1, 2, false }, // ILLEGAL

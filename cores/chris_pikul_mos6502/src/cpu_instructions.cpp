@@ -154,43 +154,40 @@ namespace mos6502 {
 	}
 
 	fast_byte CPU::Ins_ADC(const address& addr) {
-		word result = 0;
+		const byte value = FetchData(addr);
+		const byte carry = GetStatusFlag(StatusFlag::CARRY);
+		const word binary = static_cast<word>(m_Acc) + static_cast<word>(value) + carry;
 
 		if (HasStatusFlag(StatusFlag::DECIMAL)) {
-			// Make BCD versions of the acc and value
-			int acc_i = (m_Acc & 0xF) + (((m_Acc >> 4) & 0xF) * 10);
-			byte val = FetchData(addr);
-			int val_i = (val & 0xF) + (((val >> 4) & 0xF) * 10);
+			uint8_t low = static_cast<uint8_t>((m_Acc & 0x0F) + (value & 0x0F) + carry);
+			uint8_t high = static_cast<uint8_t>((m_Acc >> 4) + (value >> 4));
+			if (low > 9) {
+				low = static_cast<uint8_t>(low - 10);
+				high++;
+			}
 
-			// Calculate the integer results
-			int temp = acc_i + val_i + GetStatusFlag(StatusFlag::CARRY);
-			
-			// Find and isolate the compliments
-			int hundreds = temp / 100;
-			int tens = (temp - (hundreds * 100)) / 10;
-			int ones = temp - (hundreds * 100) - (tens * 10);
+			byte result = static_cast<byte>((high << 4) | (low & 0x0F));
+			SetStatusFlag(StatusFlag::ZERO, GET_LOW_BYTE(binary) == 0);
+			SetStatusFlag(StatusFlag::NEGATIVE, IS_NEGATIVE(result));
+			SetStatusFlag(StatusFlag::INT_OVERFLOW, (~(m_Acc ^ value) & (m_Acc ^ result) & 0x80) != 0);
 
-			result = (tens << 4) | ones;
+			if (high > 9) {
+				result = static_cast<byte>(result - 0xA0);
+				SetStatusFlag(StatusFlag::CARRY, true);
+			} else {
+				SetStatusFlag(StatusFlag::CARRY, false);
+			}
 
-			SetStatusFlag(StatusFlag::CARRY, result > 0x99);
-		} else {
-			word carry = static_cast<word>(GetStatusFlag(StatusFlag::CARRY));
-			word acc = static_cast<word>(m_Acc);
-			word val = static_cast<word>(FetchData(addr));
-
-			result = acc + val + carry;
-
-			SetStatusFlag(StatusFlag::CARRY, result > 0xFF);
-			SetStatusFlag(StatusFlag::INT_OVERFLOW, (~(acc ^ val) & (acc ^ result)) & 0x0080);
+			m_Acc = result;
+			return 1;
 		}
 
-		SetStatusFlag(StatusFlag::ZERO, GET_LOW_BYTE(result) == 0);
+		const byte result = GET_LOW_BYTE(binary);
+		SetStatusFlag(StatusFlag::CARRY, binary > 0xFF);
+		SetStatusFlag(StatusFlag::ZERO, result == 0);
 		SetStatusFlag(StatusFlag::NEGATIVE, IS_NEGATIVE(result));
-
-		//Assign the results
-		m_Acc = GET_LOW_BYTE(result); //Make it a byte
-
-		// Minimum clock cycles required
+		SetStatusFlag(StatusFlag::INT_OVERFLOW, (~(m_Acc ^ value) & (m_Acc ^ result) & 0x80) != 0);
+		m_Acc = result;
 		return 1;
 	}
 
@@ -205,16 +202,21 @@ namespace mos6502 {
 
 	fast_byte CPU::Ins_ASL(const address& addr) {
 		word result = static_cast<word>(FetchData(addr)) << 1;
+		const byte resultByte = GET_LOW_BYTE(result);
 
 		{ // Set the processor status flags
 			SetStatusFlag(StatusFlag::CARRY, result > 0xFF);
-			SetStatusFlag(StatusFlag::ZERO, GET_LOW_BYTE(result) == 0);
-			SetStatusFlag(StatusFlag::NEGATIVE, IS_NEGATIVE(result));
+			SetStatusFlag(StatusFlag::ZERO, resultByte == 0);
+			SetStatusFlag(StatusFlag::NEGATIVE, IS_NEGATIVE(resultByte));
 		}
 
-		m_Acc = result & 0x00FF;
+		if (m_WasSupplied) {
+			m_Acc = resultByte;
+		} else {
+			WriteByte(addr, resultByte);
+		}
 
-		return 1;
+		return m_WasSupplied ? 1 : 3;
 	}
 
 	fast_byte CPU::Ins_BCC(const address& addr) { 
@@ -278,8 +280,8 @@ namespace mos6502 {
 		PushToStack(GET_HIGH_BYTE(m_PC)); // High bit
 		PushToStack(GET_LOW_BYTE(m_PC)); // Low bit
 
-		//Push the Processor Status onto the stack
-		PushToStack(m_ProcStatus.value);
+		// Push the Processor Status as it appears on the bus for BRK.
+		PushToStack(m_ProcStatus.value | static_cast<byte>(StatusFlag::BREAK) | static_cast<byte>(StatusFlag::UNUSED));
 
 		//Load the interrupt vector
 		const byte low = ReadByte(0xFFFE);
@@ -288,8 +290,8 @@ namespace mos6502 {
 		//Set the PC to the vector
 		m_PC = MAKE_WORD(low, high);
 
-		//Set the break flag
-		SetStatusFlag(StatusFlag::BREAK, true);
+		//Mask further IRQs after the status value has been pushed.
+		SetStatusFlag(StatusFlag::INTERRUPT, true);
 
 		return 6; //5 bytes of IO and the function
 	}
@@ -485,18 +487,21 @@ namespace mos6502 {
 
 	fast_byte CPU::Ins_LSR(const address& addr) {
 		const byte value = FetchData(addr);
-
 		const byte result = value >> 1;
 
 		{ //Set status flag
 			SetStatusFlag(StatusFlag::CARRY, value & 0x01); // Last bit
 			SetStatusFlag(StatusFlag::ZERO, result == 0);
-			SetStatusFlag(StatusFlag::NEGATIVE, IS_NEGATIVE(result));
+			SetStatusFlag(StatusFlag::NEGATIVE, false);
 		}
 
-		m_Acc = result;
+		if (m_WasSupplied) {
+			m_Acc = result;
+		} else {
+			WriteByte(addr, result);
+		}
 
-		return 1;
+		return m_WasSupplied ? 1 : 3;
 	}
 
 	fast_byte CPU::Ins_NOP(const address& addr) {
@@ -524,7 +529,7 @@ namespace mos6502 {
 	}
 
 	fast_byte CPU::Ins_PHP(const address& addr) { 
-		PushToStack(m_ProcStatus.value);
+		PushToStack(m_ProcStatus.value | static_cast<byte>(StatusFlag::BREAK) | static_cast<byte>(StatusFlag::UNUSED));
 
 		return 2; 
 	}
@@ -569,7 +574,7 @@ namespace mos6502 {
 
 	fast_byte CPU::Ins_ROR(const address& addr) {
 		const byte value = FetchData(addr);
-		const byte result = (value >> 1) | (GetStatusFlag(StatusFlag::CARRY) << 8);
+		const byte result = (value >> 1) | (GetStatusFlag(StatusFlag::CARRY) << 7);
 
 		{ // Set status flags
 			SetStatusFlag(StatusFlag::CARRY, value & 0x01);
@@ -609,53 +614,41 @@ namespace mos6502 {
 	}
 
 	fast_byte CPU::Ins_SBC(const address& addr) {
-		word result = 0;
+		const byte value = FetchData(addr);
+		const byte carry = GetStatusFlag(StatusFlag::CARRY);
+		const word binary = static_cast<word>(m_Acc) + static_cast<word>(value ^ 0xFFu) + carry;
 
 		if (HasStatusFlag(StatusFlag::DECIMAL)) {
-			// Make BCD versions of the acc and value
-			int acc_i = (m_Acc & 0xF) + (((m_Acc >> 4) & 0xF) * 10);
-			byte val = FetchData(addr);
-			int val_i = (val & 0xF) + (((val >> 4) & 0xF) * 10);
-
-			// Calculate the integer results
-			int temp = acc_i - val_i - (HasStatusFlag(StatusFlag::CARRY) ? 0 : 1);
-			if (temp < 0) temp += 2; // Hack: Correct for wrap around
-
-			// Find and isolate the compliments
-			int hundreds = std::abs(temp / 100);
-			int tens = (std::abs(temp) - (hundreds * 100)) / 10;
-			int ones = std::abs(temp) - (hundreds * 100) - (tens * 10);
-
-			if (temp < 0) {
-				tens = 9 - tens;
-				ones = 9 - ones;
+			const int borrow = carry ? 0 : 1;
+			int low = static_cast<int>(m_Acc & 0x0F) - static_cast<int>(value & 0x0F) - borrow;
+			int high = static_cast<int>(m_Acc >> 4) - static_cast<int>(value >> 4);
+			if (low < 0) {
+				low += 10;
+				high--;
 			}
 
-			result = (tens << 4) | ones;
+			byte result = static_cast<byte>((static_cast<byte>(high) << 4) | (low & 0x0F));
+			SetStatusFlag(StatusFlag::ZERO, GET_LOW_BYTE(binary) == 0);
+			SetStatusFlag(StatusFlag::NEGATIVE, IS_NEGATIVE(result));
+			SetStatusFlag(StatusFlag::INT_OVERFLOW, ((m_Acc ^ value) & (m_Acc ^ result) & 0x80) != 0);
 
-			SetStatusFlag(StatusFlag::CARRY, temp > 0);
-		} else {
-			word carry = static_cast<word>(GetStatusFlag(StatusFlag::CARRY));
-			word acc = static_cast<word>(m_Acc);
-			word val = static_cast<word>(FetchData(addr));
+			if (high < 0) {
+				result = static_cast<byte>(result + 0xA0);
+				SetStatusFlag(StatusFlag::CARRY, false);
+			} else {
+				SetStatusFlag(StatusFlag::CARRY, true);
+			}
 
-			result = acc + (val ^ 0xFF) + carry;
-
-			//Correct for wrap around
-			if (!(result & 0xFF00))
-				result++;
-
-			SetStatusFlag(StatusFlag::CARRY, result < 0xFF);
-			SetStatusFlag(StatusFlag::INT_OVERFLOW, (~(acc ^ val) & (acc ^ result)) & 0x0080);
+			m_Acc = result;
+			return 1;
 		}
 
-		SetStatusFlag(StatusFlag::ZERO, GET_LOW_BYTE(result) == 0);
+		const byte result = GET_LOW_BYTE(binary);
+		SetStatusFlag(StatusFlag::CARRY, binary > 0xFF);
+		SetStatusFlag(StatusFlag::ZERO, result == 0);
 		SetStatusFlag(StatusFlag::NEGATIVE, IS_NEGATIVE(result));
-
-		//Assign the results
-		m_Acc = GET_LOW_BYTE(result); //Make it a byte
-
-		// Minimum clock cycles required
+		SetStatusFlag(StatusFlag::INT_OVERFLOW, ((m_Acc ^ value) & (m_Acc ^ result) & 0x80) != 0);
+		m_Acc = result;
 		return 1;
 	}
 
