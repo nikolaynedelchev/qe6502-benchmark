@@ -61,7 +61,7 @@ static inline void cycl()
     if (v != t) { goto reg_fail; }
 #define P_CHAR                                                                 \
 	(cpu.P[CARRY] | (cpu.P[ZERO] << 1) | (cpu.P[INTERRUPT] << 2) | (cpu.P[DECIMAL] << 3) |     \
-	 (cpu.P[B0] << 4) | (cpu.P[B1] << 5) | (cpu.P[OVERFLOW] << 6) | (cpu.P[NEGATIVE] << 7))
+	 (cpu.P[B0] << 4) | (cpu.P[B1] << 5) | (cpu.P[OVERFLOW_FLAG] << 6) | (cpu.P[NEGATIVE] << 7))
 bool Eval(const nlohmann::basic_json<>& c)
 {
     // Init state
@@ -80,7 +80,7 @@ bool Eval(const nlohmann::basic_json<>& c)
     cpu.P[DECIMAL]      = P & (1 << DECIMAL);
     cpu.P[B0]           = P & (1 << B0);
     cpu.P[B1]           = P & (1 << B1);
-    cpu.P[OVERFLOW]     = P & (1 << OVERFLOW);
+    cpu.P[OVERFLOW_FLAG]     = P & (1 << OVERFLOW_FLAG);
     cpu.P[NEGATIVE]     = P & (1 << NEGATIVE);
 
     const auto& r = ini["ram"];

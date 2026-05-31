@@ -174,7 +174,7 @@ void CPU::cycle()
 
 #define P_CHAR                                                                 \
 	(P[CARRY] | (P[ZERO] << 1) | (P[INTERRUPT] << 2) | (P[DECIMAL] << 3) |     \
-	 (P[B0] << 4) | (P[B1] << 5) | (P[OVERFLOW] << 6) | (P[NEGATIVE] << 7))
+	 (P[B0] << 4) | (P[B1] << 5) | (P[OVERFLOW_FLAG] << 6) | (P[NEGATIVE] << 7))
 void CPU::interrupt()
 {
 	if (iflag == INONE) {
@@ -307,14 +307,14 @@ void CPU::exec()
 		case 0x38: return o_fl(P[CARRY], true);
 		case 0x58: return o_fl(P[INTERRUPT], false);
 		case 0x78: return o_fl(P[INTERRUPT], true);
-		case 0xB8: return o_fl(P[OVERFLOW], false);
+		case 0xB8: return o_fl(P[OVERFLOW_FLAG], false);
 		case 0xD8: return o_fl(P[DECIMAL], false);
 		case 0xF8: return o_fl(P[DECIMAL], true);
 		/* Branch instructions */
 		case 0x10: return o_br(P[NEGATIVE], false);
 		case 0x30: return o_br(P[NEGATIVE], true);
-		case 0x50: return o_br(P[OVERFLOW], false);
-		case 0x70: return o_br(P[OVERFLOW], true);
+		case 0x50: return o_br(P[OVERFLOW_FLAG], false);
+		case 0x70: return o_br(P[OVERFLOW_FLAG], true);
 		case 0x90: return o_br(P[CARRY], false);
 		case 0xB0: return o_br(P[CARRY], true);
 		case 0xD0: return o_br(P[ZERO], false);
@@ -683,11 +683,36 @@ void CPU::o_adc()
 {
 	uint8_t p = rd((wv1 << 8) | wv0);
 
-	int16_t r = p + A + P[CARRY];
-	P[CARRY]	   = r > 0xFF;
-	P[OVERFLOW]	   = (~(A ^ p) & (A ^ r)) & 0x80;
-	A			   = r;
-	flUpdate(A);
+	if (P[DECIMAL]) {
+		const uint8_t old_a = A;
+		const uint8_t carry = P[CARRY] ? 1 : 0;
+		const uint8_t bin_result = old_a + p + carry;
+
+		uint8_t low = (old_a & 0x0F) + (p & 0x0F) + carry;
+		uint8_t high = (old_a >> 4) + (p >> 4);
+		if (low > 9) {
+			low -= 10;
+			++high;
+		}
+
+		uint8_t result = (high << 4) | (low & 0x0F);
+		P[ZERO] = bin_result == 0;
+		P[NEGATIVE] = result & 0x80;
+		P[OVERFLOW_FLAG] = ((~(old_a ^ p) & (old_a ^ result)) & 0x80) != 0;
+		if (high > 9) {
+			result -= 0xA0;
+			P[CARRY] = true;
+		} else {
+			P[CARRY] = false;
+		}
+		A = result;
+	} else {
+		int16_t r = p + A + P[CARRY];
+		P[CARRY]	   = r > 0xFF;
+		P[OVERFLOW_FLAG]	   = (~(A ^ p) & (A ^ r)) & 0x80;
+		A			   = r;
+		flUpdate(A);
+	}
 	state = FETCH;
 }
 void CPU::o_and()
@@ -733,7 +758,7 @@ void CPU::o_bit()
 {
 	uint8_t p = rd((wv1 << 8) | wv0);
 
-	P[OVERFLOW] = (p >> 6) & 1;
+	P[OVERFLOW_FLAG] = (p >> 6) & 1;
 	P[NEGATIVE] = (p >> 7) & 1;
 
 	p			= A & p;
@@ -990,11 +1015,36 @@ void CPU::o_sbc()
 {
 	uint8_t p = rd((wv1 << 8) | wv0);
 
-	uint16_t r = A + (p ^ 0xFF) + P[CARRY];
-	P[CARRY]    = r > 0xFF;
-	P[OVERFLOW] = (((A ^ r) & ((p ^ 0xFF) ^ r)) & 0x80) != 0;
-	A			= r;
-	flUpdate(A);
+	if (P[DECIMAL]) {
+		const uint8_t old_a = A;
+		const uint8_t carry = P[CARRY] ? 1 : 0;
+		const uint8_t bin_result = old_a + (p ^ 0xFF) + carry;
+
+		int8_t low = (old_a & 0x0F) - (p & 0x0F) - (carry ? 0 : 1);
+		int8_t high = (old_a >> 4) - (p >> 4);
+		if (low < 0) {
+			low += 10;
+			--high;
+		}
+
+		uint8_t result = (static_cast<uint8_t>(high) << 4) | (static_cast<uint8_t>(low) & 0x0F);
+		P[ZERO] = bin_result == 0;
+		P[NEGATIVE] = result & 0x80;
+		P[OVERFLOW_FLAG] = (((old_a ^ p) & (old_a ^ result)) & 0x80) != 0;
+		if (high < 0) {
+			result += 0xA0;
+			P[CARRY] = false;
+		} else {
+			P[CARRY] = true;
+		}
+		A = result;
+	} else {
+		uint16_t r = A + (p ^ 0xFF) + P[CARRY];
+		P[CARRY]    = r > 0xFF;
+		P[OVERFLOW_FLAG] = (((A ^ r) & ((p ^ 0xFF) ^ r)) & 0x80) != 0;
+		A			= r;
+		flUpdate(A);
+	}
 	state = FETCH;
 }
 void CPU::o_php()
@@ -1027,7 +1077,7 @@ void CPU::o_plp()
 	P[DECIMAL]	 = (p >> 3) & 1;
 	P[B0]		 = 0;
 	P[B1]		 = 1;
-	P[OVERFLOW]	 = (p >> 6) & 1;
+	P[OVERFLOW_FLAG]	 = (p >> 6) & 1;
 	P[NEGATIVE]	 = (p >> 7) & 1;
 	state		 = FETCH;
 }
@@ -1222,7 +1272,7 @@ void CPU::o_rra()
 		wr(av, wv0);
 		signed short r = wv0 + A + P[CARRY];
 		P[CARRY]	   = r > 0xFF;
-		P[OVERFLOW]	   = ~(A ^ wv0) & (A ^ wv0) & 0x80;
+		P[OVERFLOW_FLAG]	   = ~(A ^ wv0) & (A ^ wv0) & 0x80;
 		A			   = r;
 		flUpdate(A);
 		state = FETCH;
@@ -1234,7 +1284,7 @@ void CPU::o_arr()
 	addm = IMPLIED;
 	o_ror();
 	P[CARRY]	= (A >> 6) & 1;
-	P[OVERFLOW] = ((A >> 6) & 1) ^ (((A >> 5) & 1));
+	P[OVERFLOW_FLAG] = ((A >> 6) & 1) ^ (((A >> 5) & 1));
 }
 void CPU::o_shy()
 {
@@ -1359,7 +1409,7 @@ void CPU::o_isc()
 		uint16_t r = (0x100 + A) - wv0;
 		if (r < 0x100)
 			P[CARRY] = false;
-		P[OVERFLOW] = ~(A ^ wv0) & (A ^ wv0) & 0x80;
+		P[OVERFLOW_FLAG] = ~(A ^ wv0) & (A ^ wv0) & 0x80;
 		A			= r;
 		flUpdate(A);
 		state = FETCH;

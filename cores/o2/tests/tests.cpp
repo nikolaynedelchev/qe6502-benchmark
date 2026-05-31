@@ -21,7 +21,7 @@ TEST_CASE("startup", "[init]")
 		REQUIRE(cpu.P[DECIMAL] == false);
 		REQUIRE(cpu.P[B0] == true);
 		REQUIRE(cpu.P[B1] == true);
-		REQUIRE(cpu.P[OVERFLOW] == false);
+		REQUIRE(cpu.P[OVERFLOW_FLAG] == false);
 		REQUIRE(cpu.P[NEGATIVE] == false);
 
 		REQUIRE(cpu.state == FETCH);

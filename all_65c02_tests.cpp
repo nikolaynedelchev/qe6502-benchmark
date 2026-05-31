@@ -1,6 +1,7 @@
 #include <fake65c02_toolbox.hpp>
 #include <qe6502_toolbox.hpp>
 #include <sflib65c02_toolbox.hpp>
+#include <vremu6502_toolbox.hpp>
 
 #include <benchmark6502/results.hpp>
 
@@ -61,6 +62,12 @@ int main()
 
     print_smoke_result("fake65c02", fake65c02_toolbox::run_smoke_test(), summary);
     print_klaus_result("fake65c02", "Klaus 65C02 ext", fake65c02_toolbox::run_klaus_65c02_extended(measured_runs), summary);
+
+    print_smoke_result("vrEmu6502", vremu6502_toolbox::run_smoke_test(), summary);
+    print_klaus_result("vrEmu6502 WDC 65C02", "Klaus standard", vremu6502_toolbox::run_klaus_wdc_65c02_standard(measured_runs), summary);
+    print_klaus_result("vrEmu6502 WDC 65C02", "Klaus extended", vremu6502_toolbox::run_klaus_wdc_65c02_extended(measured_runs), summary);
+    print_klaus_result("vrEmu6502 RW 65C02", "Klaus standard", vremu6502_toolbox::run_klaus_rockwell_65c02_standard(measured_runs), summary);
+    print_klaus_result("vrEmu6502 RW 65C02", "Klaus extended", vremu6502_toolbox::run_klaus_rockwell_65c02_extended(measured_runs), summary);
 
     print_smoke_result("sflib65c02", sflib65c02_toolbox::run_smoke_test(), summary);
     print_klaus_result("sflib65c02", "Klaus 65C02 ext", sflib65c02_toolbox::run_klaus_65c02_extended(measured_runs), summary);
