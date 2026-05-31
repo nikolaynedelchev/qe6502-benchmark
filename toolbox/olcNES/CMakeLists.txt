@@ -3,6 +3,7 @@ add_library(olcNES_toolbox STATIC
     ${PROJECT_SOURCE_DIR}/cores/olcNES/olc6502.cpp
     src/smoke.cpp
     src/klaus_benchmark.cpp
+    src/singlestep.cpp
 )
 
 target_include_directories(olcNES_toolbox
@@ -10,6 +11,11 @@ target_include_directories(olcNES_toolbox
     PUBLIC ${PROJECT_SOURCE_DIR}/toolbox/common/include
     PRIVATE ${PROJECT_SOURCE_DIR}/cores/olcNES
     PRIVATE ${PROJECT_SOURCE_DIR}
+)
+
+
+target_link_libraries(olcNES_toolbox
+    PUBLIC benchmark6502_common
 )
 
 target_compile_features(olcNES_toolbox PUBLIC cxx_std_17)

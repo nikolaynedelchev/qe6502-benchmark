@@ -270,6 +270,30 @@ int main(int argc, char** argv)
             if (gianlucag_singlestep.harness_error) {
                 summary.record(false);
             }
+
+            std::cout << "\nStarting sflib6502 NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result sflib6502_singlestep = sflib6502_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, sflib6502_singlestep);
+            write_singlestep_log(corpus, sflib6502_singlestep, summary);
+            if (sflib6502_singlestep.harness_error) {
+                summary.record(false);
+            }
+
+            std::cout << "\nStarting olcNES NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result olcNES_singlestep = olcNES_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, olcNES_singlestep);
+            write_singlestep_log(corpus, olcNES_singlestep, summary);
+            if (olcNES_singlestep.harness_error) {
+                summary.record(false);
+            }
+
+            std::cout << "\nStarting chris-pikul/mos6502 NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result chris_pikul_singlestep = chris_pikul_mos6502_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, chris_pikul_singlestep);
+            write_singlestep_log(corpus, chris_pikul_singlestep, summary);
+            if (chris_pikul_singlestep.harness_error) {
+                summary.record(false);
+            }
         } catch (const std::exception& e) {
             std::cout << "\nSingleStep NMOS harness error: " << e.what() << "\n";
             summary.record(false);

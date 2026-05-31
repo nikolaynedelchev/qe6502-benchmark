@@ -248,6 +248,13 @@ target_link_libraries(sflib6502_klaus_benchmark
     PRIVATE sflib6502_toolbox
 )
 
+add_executable(sflib6502_singlestep_nmos
+    sflib6502_singlestep_nmos.cpp
+)
+
+target_link_libraries(sflib6502_singlestep_nmos
+    PRIVATE sflib6502_toolbox
+)
 
 add_executable(sflib65c02_smoketest
     sflib65c02_smoke_test.cpp
@@ -282,6 +289,14 @@ target_link_libraries(olcNES_klaus_benchmark
     PRIVATE olcNES_toolbox
 )
 
+add_executable(olcNES_singlestep_nmos
+    olcNES_singlestep_nmos.cpp
+)
+
+target_link_libraries(olcNES_singlestep_nmos
+    PRIVATE olcNES_toolbox
+)
+
 add_executable(chris_pikul_mos6502_smoketest
     chris_pikul_mos6502_smoke_test.cpp
 )
@@ -295,6 +310,14 @@ add_executable(chris_pikul_mos6502_klaus_benchmark
 )
 
 target_link_libraries(chris_pikul_mos6502_klaus_benchmark
+    PRIVATE chris_pikul_mos6502_toolbox
+)
+
+add_executable(chris_pikul_mos6502_singlestep_nmos
+    chris_pikul_mos6502_singlestep_nmos.cpp
+)
+
+target_link_libraries(chris_pikul_mos6502_singlestep_nmos
     PRIVATE chris_pikul_mos6502_toolbox
 )
 
@@ -365,12 +388,15 @@ if(MSVC)
     target_compile_options(peddle_klaus_benchmark PRIVATE /W4)
     target_compile_options(sflib6502_smoketest PRIVATE /W4)
     target_compile_options(sflib6502_klaus_benchmark PRIVATE /W4)
+    target_compile_options(sflib6502_singlestep_nmos PRIVATE /W4)
     target_compile_options(sflib65c02_smoketest PRIVATE /W4)
     target_compile_options(sflib65c02_klaus_extended_benchmark PRIVATE /W4)
     target_compile_options(olcNES_smoketest PRIVATE /W4)
     target_compile_options(olcNES_klaus_benchmark PRIVATE /W4)
+    target_compile_options(olcNES_singlestep_nmos PRIVATE /W4)
     target_compile_options(chris_pikul_mos6502_smoketest PRIVATE /W4)
     target_compile_options(chris_pikul_mos6502_klaus_benchmark PRIVATE /W4)
+    target_compile_options(chris_pikul_mos6502_singlestep_nmos PRIVATE /W4)
     target_compile_options(all_6502_tests PRIVATE /W4)
     target_compile_options(all_65c02_tests PRIVATE /W4)
 else()
@@ -410,12 +436,15 @@ else()
     target_compile_options(peddle_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(sflib6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(sflib6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(sflib6502_singlestep_nmos PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(sflib65c02_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(sflib65c02_klaus_extended_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(olcNES_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(olcNES_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(olcNES_singlestep_nmos PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(chris_pikul_mos6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(chris_pikul_mos6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(chris_pikul_mos6502_singlestep_nmos PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(all_6502_tests PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(all_65c02_tests PRIVATE -Wall -Wextra -Wpedantic)
 endif()
