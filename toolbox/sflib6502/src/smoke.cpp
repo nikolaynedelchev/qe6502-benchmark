@@ -5,6 +5,30 @@ extern "C" {
 }
 
 #include <cstdint>
+#include <cstddef>
+
+namespace {
+
+int client_read(M6502* cpu, const std::uint16_t address, std::uint8_t)
+{
+    return cpu->memory[address];
+}
+
+int client_write(M6502* cpu, const std::uint16_t address, const std::uint8_t data)
+{
+    cpu->memory[address] = data;
+    return data;
+}
+
+void install_client_memory_callbacks(M6502* cpu)
+{
+    for (std::size_t address = 0; address < 0x10000u; ++address) {
+        M6502_setCallback(cpu, read, address, client_read);
+        M6502_setCallback(cpu, write, address, client_write);
+    }
+}
+
+} // namespace
 
 namespace sflib6502_toolbox {
 
@@ -27,6 +51,7 @@ benchmark6502::smoke_result run_smoke_test()
     if (cpu == nullptr) {
         return {false, "M6502_new failed"};
     }
+    install_client_memory_callbacks(cpu);
 
     M6502_reset(cpu);
     M6502_step(cpu);

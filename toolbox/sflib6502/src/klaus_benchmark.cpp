@@ -7,6 +7,7 @@ extern "C" {
 #include <array>
 #include <chrono>
 #include <cstdint>
+#include <cstddef>
 #include <cstring>
 
 static const std::uint8_t s_klaus_nmos_rom[0x10000] =
@@ -17,6 +18,25 @@ namespace {
 constexpr std::uint16_t klaus_start_address = 0x0400u;
 constexpr std::uint16_t klaus_success_address = 0x3469u;
 constexpr std::uint64_t max_instructions = 100000000ull;
+
+int client_read(M6502* cpu, const std::uint16_t address, std::uint8_t)
+{
+    return cpu->memory[address];
+}
+
+int client_write(M6502* cpu, const std::uint16_t address, const std::uint8_t data)
+{
+    cpu->memory[address] = data;
+    return data;
+}
+
+void install_client_memory_callbacks(M6502* cpu)
+{
+    for (std::size_t address = 0; address < 0x10000u; ++address) {
+        M6502_setCallback(cpu, read, address, client_read);
+        M6502_setCallback(cpu, write, address, client_write);
+    }
+}
 
 struct run_result {
     bool passed;
@@ -35,6 +55,7 @@ run_result run_klaus_once()
     if (cpu == nullptr) {
         return {false, 0};
     }
+    install_client_memory_callbacks(cpu);
 
     M6502_reset(cpu);
     registers.pc = klaus_start_address;
