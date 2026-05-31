@@ -16,6 +16,7 @@ set(QE6502_INSTALL OFF CACHE BOOL "" FORCE)
 add_subdirectory(cores/qe6502)
 add_subdirectory(toolbox/qe6502)
 add_subdirectory(toolbox/floooh_chips)
+add_subdirectory(toolbox/gianlucag_mos6502)
 
 add_executable(qe6502_benchmark_smoketest
     smoke_test.cpp
@@ -49,18 +50,30 @@ target_link_libraries(floooh_chips_smoketest
     PRIVATE floooh_chips_toolbox
 )
 
+add_executable(gianlucag_mos6502_smoketest
+    gianlucag_mos6502_smoke_test.cpp
+)
+
+target_link_libraries(gianlucag_mos6502_smoketest
+    PRIVATE gianlucag_mos6502_toolbox
+)
+
 if(MSVC)
     target_compile_options(qe6502_toolbox PRIVATE /W4)
     target_compile_options(floooh_chips_toolbox PRIVATE /W4)
+    target_compile_options(gianlucag_mos6502_toolbox PRIVATE /W4)
     target_compile_options(qe6502_benchmark_smoketest PRIVATE /W4)
     target_compile_options(floooh_chips_smoketest PRIVATE /W4)
     target_compile_options(qe6502_klaus_benchmark PRIVATE /W4)
     target_compile_options(floooh_chips_klaus_benchmark PRIVATE /W4)
+    target_compile_options(gianlucag_mos6502_smoketest PRIVATE /W4)
 else()
     target_compile_options(qe6502_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(floooh_chips_toolbox PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(gianlucag_mos6502_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(qe6502_benchmark_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(floooh_chips_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(qe6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(floooh_chips_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(gianlucag_mos6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
 endif()
