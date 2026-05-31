@@ -14,6 +14,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <string>
 
 namespace {
 
@@ -56,6 +57,19 @@ void print_klaus_result(const char* const name, const benchmark6502::klaus_bench
     std::cout << '\n';
 }
 
+void write_singlestep_log(const benchmark6502::singlestep_corpus& corpus,
+                          const benchmark6502::singlestep_result& result,
+                          test_summary& summary)
+{
+    try {
+        const std::string log_path = benchmark6502::write_singlestep_detail_log(corpus, result);
+        std::cout << "Wrote SingleStep detail log: " << log_path << "\n";
+    } catch (const std::exception& e) {
+        std::cout << "SingleStep detail log error: " << e.what() << "\n";
+        summary.record(false);
+    }
+}
+
 } // namespace
 
 int main(int argc, char** argv)
@@ -95,13 +109,24 @@ int main(int argc, char** argv)
 
     try {
         const benchmark6502::singlestep_corpus_options corpus_options = benchmark6502::parse_singlestep_corpus_options(argc, argv);
+        std::cout << "\nLoading SingleStep NMOS corpus...\n";
         const benchmark6502::singlestep_corpus corpus = benchmark6502::load_singlestep_corpus(benchmark6502::singlestep_model::nmos6502, corpus_options);
-        std::cout << "\nSingleStep NMOS corpus loaded once: " << corpus.model_path
+        std::cout << "Loaded SingleStep NMOS corpus: " << corpus.model_path
                   << "  cases=" << corpus.total_cases() << "\n\n";
 
+        std::cout << "Starting qe6502 NMOS SingleStep...\n";
         const benchmark6502::singlestep_result qe6502_singlestep = qe6502_toolbox::run_singlestep_nmos(corpus);
         benchmark6502::print_singlestep_result(corpus, qe6502_singlestep);
+        write_singlestep_log(corpus, qe6502_singlestep, summary);
         if (qe6502_singlestep.harness_error) {
+            summary.record(false);
+        }
+
+        std::cout << "\nStarting floooh/chips NMOS SingleStep...\n";
+        const benchmark6502::singlestep_result floooh_singlestep = floooh_chips_toolbox::run_singlestep_nmos(corpus);
+        benchmark6502::print_singlestep_result(corpus, floooh_singlestep);
+        write_singlestep_log(corpus, floooh_singlestep, summary);
+        if (floooh_singlestep.harness_error) {
             summary.record(false);
         }
     } catch (const std::exception& e) {

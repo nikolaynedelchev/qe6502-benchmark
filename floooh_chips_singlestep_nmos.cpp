@@ -1,4 +1,4 @@
-#include <qe6502_toolbox.hpp>
+#include <floooh_chips_toolbox.hpp>
 
 #include <benchmark6502/singlestep.hpp>
 
@@ -13,8 +13,8 @@ int main(int argc, char** argv)
         const benchmark6502::singlestep_corpus corpus = benchmark6502::load_singlestep_corpus(benchmark6502::singlestep_model::nmos6502, options);
         std::cout << "Loaded SingleStep NMOS corpus: " << corpus.model_path
                   << "  cases=" << corpus.total_cases() << "\n";
-        std::cout << "Starting qe6502 NMOS SingleStep...\n";
-        const benchmark6502::singlestep_result result = qe6502_toolbox::run_singlestep_nmos(corpus);
+        std::cout << "Starting floooh/chips NMOS SingleStep...\n";
+        const benchmark6502::singlestep_result result = floooh_chips_toolbox::run_singlestep_nmos(corpus);
         benchmark6502::print_singlestep_result(corpus, result);
         const std::string log_path = benchmark6502::write_singlestep_detail_log(corpus, result);
         std::cout << "Wrote SingleStep detail log: " << log_path << "\n";

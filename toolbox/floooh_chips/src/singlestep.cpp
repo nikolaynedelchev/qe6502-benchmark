@@ -1,10 +1,9 @@
-#include <qe6502_toolbox.hpp>
+#include <floooh_chips_toolbox.hpp>
 
-#include <qe6502/cpu.hpp>
+#include "chips/m6502.h"
 
 #include <array>
-#include <exception>
-#include <sstream>
+#include <cstdint>
 #include <vector>
 
 namespace {
@@ -22,15 +21,14 @@ void load_ram(std::array<std::uint8_t, 0x10000>& memory, const std::vector<bench
     }
 }
 
-void set_initial_state(qe6502::cpu& cpu, const benchmark6502::singlestep_cpu_state& state)
+void set_initial_state(m6502_t& cpu, const benchmark6502::singlestep_cpu_state& state)
 {
-    cpu.pc(state.pc);
-    cpu.s(state.s);
-    cpu.a(state.a);
-    cpu.x(state.x);
-    cpu.y(state.y);
-    cpu.p(state.p);
-    cpu.jump_to(cpu.pc());
+    m6502_set_pc(&cpu, state.pc);
+    m6502_set_s(&cpu, state.s);
+    m6502_set_a(&cpu, state.a);
+    m6502_set_x(&cpu, state.x);
+    m6502_set_y(&cpu, state.y);
+    m6502_set_p(&cpu, state.p);
 }
 
 bool is_nmos_kil_opcode(const std::uint8_t opcode)
@@ -54,16 +52,16 @@ bool is_nmos_kil_opcode(const std::uint8_t opcode)
     }
 }
 
-bool compare_final_state(const qe6502::cpu& cpu,
+bool compare_final_state(m6502_t& cpu,
                          const std::array<std::uint8_t, 0x10000>& memory,
                          const benchmark6502::singlestep_cpu_state& expected)
 {
-    if (cpu.pc() != expected.pc ||
-        cpu.s() != expected.s ||
-        cpu.a() != expected.a ||
-        cpu.x() != expected.x ||
-        cpu.y() != expected.y ||
-        cpu.p() != expected.p) {
+    if (m6502_pc(&cpu) != expected.pc ||
+        m6502_s(&cpu) != expected.s ||
+        m6502_a(&cpu) != expected.a ||
+        m6502_x(&cpu) != expected.x ||
+        m6502_y(&cpu) != expected.y ||
+        m6502_p(&cpu) != expected.p) {
         return false;
     }
 
@@ -87,8 +85,15 @@ case_result run_case(const benchmark6502::singlestep_case& test_case, const std:
     std::array<std::uint8_t, 0x10000> memory{};
     load_ram(memory, test_case.initial.ram);
 
-    qe6502::cpu cpu{qe6502::model::nmos};
+    m6502_t cpu{};
+    m6502_desc_t desc{};
+    uint64_t pins = m6502_init(&cpu, &desc);
+    (void)pins;
     set_initial_state(cpu, test_case.initial);
+
+    pins = M6502_RW | M6502_SYNC;
+    M6502_SET_ADDR(pins, test_case.initial.pc);
+    M6502_SET_DATA(pins, memory[test_case.initial.pc]);
 
     const bool kil_opcode = is_nmos_kil_opcode(opcode);
     const std::size_t expected_cycle_count = kil_opcode && test_case.cycles.size() > 2u
@@ -100,9 +105,9 @@ case_result run_case(const benchmark6502::singlestep_case& test_case, const std:
     actual_cycles.reserve(expected_cycle_count == 0u ? 1u : expected_cycle_count);
 
     for (std::size_t cycle = 0; cycle < max_cycles; ++cycle) {
-        const bool write = cpu.is_write();
-        const std::uint16_t address = cpu.bus_address();
-        const std::uint8_t bus_value = write ? cpu.bus_data() : memory[address];
+        const bool write = (pins & M6502_RW) == 0u;
+        const std::uint16_t address = M6502_GET_ADDR(pins);
+        const std::uint8_t bus_value = write ? M6502_GET_DATA(pins) : memory[address];
         actual_cycles.push_back({address,
                                  bus_value,
                                  write ? benchmark6502::singlestep_memory_operation::write
@@ -110,14 +115,16 @@ case_result run_case(const benchmark6502::singlestep_case& test_case, const std:
 
         if (write) {
             memory[address] = bus_value;
+        } else {
+            M6502_SET_DATA(pins, bus_value);
         }
 
-        cpu.tick(bus_value);
+        pins = m6502_tick(&cpu, pins);
 
         if (kil_opcode && actual_cycles.size() >= expected_cycle_count) {
             break;
         }
-        if (!kil_opcode && cpu.is_opcode_fetch()) {
+        if (!kil_opcode && (pins & M6502_SYNC) != 0u) {
             break;
         }
     }
@@ -139,12 +146,12 @@ case_result run_case(const benchmark6502::singlestep_case& test_case, const std:
 
 } // namespace
 
-namespace qe6502_toolbox {
+namespace floooh_chips_toolbox {
 
 benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus)
 {
     benchmark6502::singlestep_result result;
-    result.core_name = "qe6502";
+    result.core_name = "floooh/chips";
     result.model_name = "NMOS";
 
     for (unsigned opcode_value = 0; opcode_value <= 0xffu; ++opcode_value) {
@@ -177,4 +184,4 @@ benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::single
     return result;
 }
 
-} // namespace qe6502_toolbox
+} // namespace floooh_chips_toolbox

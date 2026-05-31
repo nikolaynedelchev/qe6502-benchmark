@@ -4,6 +4,7 @@
 #include <nlohmann/json.hpp>
 
 #include <cstdlib>
+#include <cctype>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -146,6 +147,45 @@ void record_level(singlestep_level_summary& summary, const singlestep_opcode_res
             summary.illegal_failed++;
         }
     }
+}
+
+
+std::string sanitize_path_component(const std::string& text)
+{
+    std::string out;
+    out.reserve(text.size());
+    for (const unsigned char ch : text) {
+        if (std::isalnum(ch) != 0) {
+            out.push_back(static_cast<char>(std::tolower(ch)));
+        } else if (ch == '-' || ch == '_') {
+            out.push_back(static_cast<char>(ch));
+        } else if (ch == '/' || ch == '\\' || ch == ' ') {
+            out.push_back('_');
+        }
+    }
+    if (out.empty()) {
+        out = "unknown";
+    }
+    return out;
+}
+
+std::string hex_opcode(const std::uint8_t opcode)
+{
+    std::ostringstream out;
+    out << "0x" << std::uppercase << std::hex << std::setw(2) << std::setfill('0')
+        << static_cast<unsigned>(opcode);
+    return out.str();
+}
+
+void write_level_columns(std::ostream& out, const singlestep_opcode_level_result& level)
+{
+    if (!level.supported) {
+        out << "unsupported\t0\t0";
+        return;
+    }
+    out << (level.failed ? "failed" : "passed") << '\t'
+        << (level.failed ? 1 : 0) << '\t'
+        << level.failed_cases;
 }
 
 void print_level(const char* name, const singlestep_level_summary& level)
@@ -334,6 +374,52 @@ void print_singlestep_result(const singlestep_corpus& corpus, const singlestep_r
     print_level("instruction:", summary.instruction);
     print_level("cycle-count:", summary.cycle_count);
     print_level("bus-trace:", summary.bus_trace);
+}
+
+std::string default_singlestep_detail_log_path(const singlestep_result& result)
+{
+    return "singlestep_" + sanitize_path_component(result.core_name) + "_" +
+           sanitize_path_component(result.model_name) + "_detail.tsv";
+}
+
+void write_singlestep_detail_log(const singlestep_corpus& corpus,
+                                 const singlestep_result& result,
+                                 const std::string& path)
+{
+    std::ofstream out{path};
+    if (!out) {
+        throw std::runtime_error("failed to open SingleStep detail log for writing: " + path);
+    }
+
+    out << "core\tmodel\tcorpus\topcode\tmnemonic\taddressing_mode\tlegal_nmos\tcases_run\t"
+        << "instruction_status\tinstruction_failed_opcode\tinstruction_failed_cases\t"
+        << "cycle_count_status\tcycle_count_failed_opcode\tcycle_count_failed_cases\t"
+        << "bus_trace_status\tbus_trace_failed_opcode\tbus_trace_failed_cases\n";
+
+    for (const auto& opcode_result : result.opcodes) {
+        const opcode_metadata metadata = nmos_opcode_metadata(opcode_result.opcode);
+        out << result.core_name << '\t'
+            << result.model_name << '\t'
+            << corpus.model_path << '\t'
+            << hex_opcode(opcode_result.opcode) << '\t'
+            << metadata.mnemonic << '\t'
+            << addressing_mode_name(metadata.mode) << '\t'
+            << (metadata.legal_nmos ? "yes" : "no") << '\t'
+            << opcode_result.cases_run << '\t';
+        write_level_columns(out, opcode_result.instruction);
+        out << '\t';
+        write_level_columns(out, opcode_result.cycle_count);
+        out << '\t';
+        write_level_columns(out, opcode_result.bus_trace);
+        out << '\n';
+    }
+}
+
+std::string write_singlestep_detail_log(const singlestep_corpus& corpus, const singlestep_result& result)
+{
+    const std::string path = default_singlestep_detail_log_path(result);
+    write_singlestep_detail_log(corpus, result, path);
+    return path;
 }
 
 } // namespace benchmark6502

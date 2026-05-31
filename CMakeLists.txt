@@ -70,6 +70,14 @@ target_link_libraries(floooh_chips_klaus_benchmark
     PRIVATE floooh_chips_toolbox
 )
 
+add_executable(floooh_chips_singlestep_nmos
+    floooh_chips_singlestep_nmos.cpp
+)
+
+target_link_libraries(floooh_chips_singlestep_nmos
+    PRIVATE floooh_chips_toolbox
+)
+
 add_executable(floooh_chips_smoketest
     flooh_smoke_test.cpp
 )

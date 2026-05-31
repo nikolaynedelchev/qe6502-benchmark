@@ -66,6 +66,7 @@ struct singlestep_corpus_options {
 struct singlestep_opcode_level_result {
     bool supported = false;
     bool failed = false;
+    std::uint64_t failed_cases = 0;
 };
 
 struct singlestep_opcode_result {
@@ -118,5 +119,8 @@ const char* memory_operation_name(singlestep_memory_operation operation);
 
 singlestep_summary summarize_singlestep_result(const singlestep_result& result);
 void print_singlestep_result(const singlestep_corpus& corpus, const singlestep_result& result);
+std::string default_singlestep_detail_log_path(const singlestep_result& result);
+void write_singlestep_detail_log(const singlestep_corpus& corpus, const singlestep_result& result, const std::string& path);
+std::string write_singlestep_detail_log(const singlestep_corpus& corpus, const singlestep_result& result);
 
 } // namespace benchmark6502
