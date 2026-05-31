@@ -661,9 +661,45 @@ uint8_t olc6502::ADC()
 	// Grab the data that we are adding to the accumulator
 	fetch();
 	
+	const uint8_t carry = GetFlag(C);
+
+	if (GetFlag(D))
+	{
+		// NMOS 6502 decimal ADC. Klaus' functional test checks decimal mode,
+		// while the original olcNES core treated D as unused for NES/2A03 use.
+		const uint8_t bin_result = static_cast<uint8_t>(a + fetched + carry);
+
+		uint8_t low = static_cast<uint8_t>((a & 0x0F) + (fetched & 0x0F) + carry);
+		uint8_t high = static_cast<uint8_t>((a >> 4) + (fetched >> 4));
+		if (low > 9)
+		{
+			low = static_cast<uint8_t>(low - 10);
+			high++;
+		}
+
+		uint8_t result = static_cast<uint8_t>((high << 4) | (low & 0x0F));
+
+		SetFlag(Z, bin_result == 0);
+		SetFlag(N, result & 0x80);
+		SetFlag(V, (~(a ^ fetched) & (a ^ result) & 0x80) != 0);
+
+		if (high > 9)
+		{
+			result = static_cast<uint8_t>(result - 0xA0);
+			SetFlag(C, true);
+		}
+		else
+		{
+			SetFlag(C, false);
+		}
+
+		a = result;
+		return 1;
+	}
+
 	// Add is performed in 16-bit domain for emulation to capture any
 	// carry bit, which will exist in bit 8 of the 16-bit word
-	temp = (uint16_t)a + (uint16_t)fetched + (uint16_t)GetFlag(C);
+	temp = (uint16_t)a + (uint16_t)fetched + (uint16_t)carry;
 	
 	// The carry flag out exists in the high byte bit 0
 	SetFlag(C, temp > 255);
@@ -715,13 +751,49 @@ uint8_t olc6502::SBC()
 {
 	fetch();
 	
+	const uint8_t carry = GetFlag(C);
+
+	if (GetFlag(D))
+	{
+		// NMOS 6502 decimal SBC. Carry remains the inverted borrow flag.
+		const uint8_t bin_result = static_cast<uint8_t>(a + (fetched ^ 0xFF) + carry);
+		const int borrow = carry ? 0 : 1;
+
+		int low = static_cast<int>(a & 0x0F) - static_cast<int>(fetched & 0x0F) - borrow;
+		int high = static_cast<int>(a >> 4) - static_cast<int>(fetched >> 4);
+		if (low < 0)
+		{
+			low += 10;
+			high--;
+		}
+
+		uint8_t result = static_cast<uint8_t>((static_cast<uint8_t>(high) << 4) | (low & 0x0F));
+
+		SetFlag(Z, bin_result == 0);
+		SetFlag(N, result & 0x80);
+		SetFlag(V, ((a ^ fetched) & (a ^ result) & 0x80) != 0);
+
+		if (high < 0)
+		{
+			result = static_cast<uint8_t>(result + 0xA0);
+			SetFlag(C, false);
+		}
+		else
+		{
+			SetFlag(C, true);
+		}
+
+		a = result;
+		return 1;
+	}
+
 	// Operating in 16-bit domain to capture carry out
 	
 	// We can invert the bottom 8 bits with bitwise xor
 	uint16_t value = ((uint16_t)fetched) ^ 0x00FF;
 	
 	// Notice this is exactly the same as addition from here!
-	temp = (uint16_t)a + value + (uint16_t)GetFlag(C);
+	temp = (uint16_t)a + value + (uint16_t)carry;
 	SetFlag(C, temp & 0xFF00);
 	SetFlag(Z, ((temp & 0x00FF) == 0));
 	SetFlag(V, (temp ^ (uint16_t)a) & (temp ^ value) & 0x0080);
@@ -892,18 +964,19 @@ uint8_t olc6502::BPL()
 // Function:    Program Sourced Interrupt
 uint8_t olc6502::BRK()
 {
-	pc++;
-	
-	SetFlag(I, 1);
+	// BRK uses the immediate addressing table entry, so pc already points
+	// at the instruction after the signature byte. Push that return address.
 	write(0x0100 + stkp, (pc >> 8) & 0x00FF);
 	stkp--;
 	write(0x0100 + stkp, pc & 0x00FF);
 	stkp--;
 
-	SetFlag(B, 1);
-	write(0x0100 + stkp, status);
+	// The stacked copy has B and U set, but preserves the pre-BRK I flag.
+	write(0x0100 + stkp, status | B | U);
 	stkp--;
+	SetFlag(I, 1);
 	SetFlag(B, 0);
+	SetFlag(U, 1);
 
 	pc = (uint16_t)read(0xFFFE) | ((uint16_t)read(0xFFFF) << 8);
 	return 0;
