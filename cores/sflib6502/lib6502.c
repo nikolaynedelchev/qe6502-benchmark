@@ -188,16 +188,17 @@ enum {
       }											\
     else										\
       {											\
-	int l, h, s;									\
+	int l, h, s, c;								\
 	/* inelegant & slow, but consistent with the hw for illegal digits */		\
 	l= (A & 0x0F) + (B & 0x0F) + getC();						\
 	h= (A & 0xF0) + (B & 0xF0);							\
 	if (l >= 0x0A) { l -= 0x0A;  h += 0x10; }					\
-	if (h >= 0xA0) { h -= 0xA0; }							\
+	c= h >= 0xA0;									\
+	if (c) { h -= 0xA0; }							\
 	fetch();									\
 	s= h | (l & 0x0F);								\
 	/* only C is valid on NMOS 6502 */						\
-	setNVZC(s & 0x80, !(((A ^ B) & 0x80) && ((A ^ s) & 0x80)), !s, !!(h & 0x80));	\
+	setNVZC(s & 0x80, !(((A ^ B) & 0x80) && ((A ^ s) & 0x80)), !s, c);	\
 	A= s;										\
 	tick(1, cpu);									\
 	next();										\
@@ -221,16 +222,17 @@ enum {
     else										\
       {											\
 	/* this is verbatim ADC, with a 10's complemented operand */			\
-	int l, h, s;									\
+	int l, h, s, c;								\
 	B= 0x99 - B;									\
 	l= (A & 0x0F) + (B & 0x0F) + getC();						\
 	h= (A & 0xF0) + (B & 0xF0);							\
 	if (l >= 0x0A) { l -= 0x0A;  h += 0x10; }					\
-	if (h >= 0xA0) { h -= 0xA0; }							\
+	c= h >= 0xA0;									\
+	if (c) { h -= 0xA0; }							\
 	fetch();									\
 	s= h | (l & 0x0F);								\
 	/* only C is valid on NMOS 6502 */						\
-	setNVZC(s & 0x80, !(((A ^ B) & 0x80) && ((A ^ s) & 0x80)), !s, !!(h & 0x80));	\
+	setNVZC(s & 0x80, !(((A ^ B) & 0x80) && ((A ^ s) & 0x80)), !s, c);	\
 	A= s;										\
 	tick(1, cpu);									\
 	next();										\
