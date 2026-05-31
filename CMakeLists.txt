@@ -103,6 +103,14 @@ target_link_libraries(gianlucag_mos6502_smoketest
     PRIVATE gianlucag_mos6502_toolbox
 )
 
+add_executable(gianlucag_mos6502_singlestep_nmos
+    gianlucag_mos6502_singlestep_nmos.cpp
+)
+
+target_link_libraries(gianlucag_mos6502_singlestep_nmos
+    PRIVATE gianlucag_mos6502_toolbox
+)
+
 add_executable(fake6502_smoketest
     fake6502_smoke_test.cpp
 )
@@ -340,6 +348,7 @@ if(MSVC)
     target_compile_options(floooh_chips_klaus_benchmark PRIVATE /W4)
     target_compile_options(gianlucag_mos6502_smoketest PRIVATE /W4)
     target_compile_options(gianlucag_mos6502_klaus_benchmark PRIVATE /W4)
+    target_compile_options(gianlucag_mos6502_singlestep_nmos PRIVATE /W4)
     target_compile_options(fake6502_smoketest PRIVATE /W4)
     target_compile_options(fake6502_klaus_benchmark PRIVATE /W4)
     target_compile_options(fake6502_singlestep_nmos PRIVATE /W4)
@@ -384,6 +393,7 @@ else()
     target_compile_options(floooh_chips_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(gianlucag_mos6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(gianlucag_mos6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(gianlucag_mos6502_singlestep_nmos PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(fake6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(fake6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(fake6502_singlestep_nmos PRIVATE -Wall -Wextra -Wpedantic)

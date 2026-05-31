@@ -261,6 +261,15 @@ int main(int argc, char** argv)
             if (fake6502_singlestep.harness_error) {
                 summary.record(false);
             }
+
+
+            std::cout << "\nStarting gianlucag/mos6502 NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result gianlucag_singlestep = gianlucag_mos6502_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, gianlucag_singlestep);
+            write_singlestep_log(corpus, gianlucag_singlestep, summary);
+            if (gianlucag_singlestep.harness_error) {
+                summary.record(false);
+            }
         } catch (const std::exception& e) {
             std::cout << "\nSingleStep NMOS harness error: " << e.what() << "\n";
             summary.record(false);
