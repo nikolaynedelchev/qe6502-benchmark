@@ -18,7 +18,9 @@ add_subdirectory(toolbox/qe6502)
 add_subdirectory(toolbox/floooh_chips)
 add_subdirectory(toolbox/gianlucag_mos6502)
 add_subdirectory(toolbox/fake6502)
+add_subdirectory(toolbox/fake65c02)
 add_subdirectory(toolbox/sflib6502)
+add_subdirectory(toolbox/sflib65c02)
 add_subdirectory(toolbox/olcNES)
 add_subdirectory(toolbox/chris_pikul_mos6502)
 
@@ -87,6 +89,22 @@ target_link_libraries(fake6502_klaus_benchmark
     PRIVATE fake6502_toolbox
 )
 
+add_executable(fake65c02_smoketest
+    fake65c02_smoke_test.cpp
+)
+
+target_link_libraries(fake65c02_smoketest
+    PRIVATE fake65c02_toolbox
+)
+
+add_executable(fake65c02_klaus_extended_benchmark
+    fake65c02_klaus_extended_benchmark.cpp
+)
+
+target_link_libraries(fake65c02_klaus_extended_benchmark
+    PRIVATE fake65c02_toolbox
+)
+
 add_executable(sflib6502_smoketest
     sflib6502_smoke_test.cpp
 )
@@ -102,6 +120,23 @@ add_executable(sflib6502_klaus_benchmark
 
 target_link_libraries(sflib6502_klaus_benchmark
     PRIVATE sflib6502_toolbox
+)
+
+
+add_executable(sflib65c02_smoketest
+    sflib65c02_smoke_test.cpp
+)
+
+target_link_libraries(sflib65c02_smoketest
+    PRIVATE sflib65c02_toolbox
+)
+
+add_executable(sflib65c02_klaus_extended_benchmark
+    sflib65c02_klaus_extended_benchmark.cpp
+)
+
+target_link_libraries(sflib65c02_klaus_extended_benchmark
+    PRIVATE sflib65c02_toolbox
 )
 
 add_executable(olcNES_smoketest
@@ -137,12 +172,40 @@ target_link_libraries(chris_pikul_mos6502_klaus_benchmark
     PRIVATE chris_pikul_mos6502_toolbox
 )
 
+add_executable(all_6502_tests
+    all_6502_tests.cpp
+)
+
+target_link_libraries(all_6502_tests
+    PRIVATE
+        qe6502_toolbox
+        floooh_chips_toolbox
+        gianlucag_mos6502_toolbox
+        fake6502_toolbox
+        sflib6502_toolbox
+        olcNES_toolbox
+        chris_pikul_mos6502_toolbox
+)
+
+add_executable(all_65c02_tests
+    all_65c02_tests.cpp
+)
+
+target_link_libraries(all_65c02_tests
+    PRIVATE
+        fake65c02_toolbox
+        sflib65c02_toolbox
+        qe6502_toolbox
+)
+
 if(MSVC)
     target_compile_options(qe6502_toolbox PRIVATE /W4)
     target_compile_options(floooh_chips_toolbox PRIVATE /W4)
     target_compile_options(gianlucag_mos6502_toolbox PRIVATE /W4)
     target_compile_options(fake6502_toolbox PRIVATE /W4)
+    target_compile_options(fake65c02_toolbox PRIVATE /W4)
     target_compile_options(sflib6502_toolbox PRIVATE /W4)
+    target_compile_options(sflib65c02_toolbox PRIVATE /W4)
     target_compile_options(olcNES_toolbox PRIVATE /W4)
     target_compile_options(chris_pikul_mos6502_toolbox PRIVATE /W4)
     target_compile_options(qe6502_benchmark_smoketest PRIVATE /W4)
@@ -153,18 +216,26 @@ if(MSVC)
     target_compile_options(gianlucag_mos6502_klaus_benchmark PRIVATE /W4)
     target_compile_options(fake6502_smoketest PRIVATE /W4)
     target_compile_options(fake6502_klaus_benchmark PRIVATE /W4)
+    target_compile_options(fake65c02_smoketest PRIVATE /W4)
+    target_compile_options(fake65c02_klaus_extended_benchmark PRIVATE /W4)
     target_compile_options(sflib6502_smoketest PRIVATE /W4)
     target_compile_options(sflib6502_klaus_benchmark PRIVATE /W4)
+    target_compile_options(sflib65c02_smoketest PRIVATE /W4)
+    target_compile_options(sflib65c02_klaus_extended_benchmark PRIVATE /W4)
     target_compile_options(olcNES_smoketest PRIVATE /W4)
     target_compile_options(olcNES_klaus_benchmark PRIVATE /W4)
     target_compile_options(chris_pikul_mos6502_smoketest PRIVATE /W4)
     target_compile_options(chris_pikul_mos6502_klaus_benchmark PRIVATE /W4)
+    target_compile_options(all_6502_tests PRIVATE /W4)
+    target_compile_options(all_65c02_tests PRIVATE /W4)
 else()
     target_compile_options(qe6502_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(floooh_chips_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(gianlucag_mos6502_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(fake6502_toolbox PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(fake65c02_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(sflib6502_toolbox PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(sflib65c02_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(olcNES_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(chris_pikul_mos6502_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(qe6502_benchmark_smoketest PRIVATE -Wall -Wextra -Wpedantic)
@@ -175,10 +246,16 @@ else()
     target_compile_options(gianlucag_mos6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(fake6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(fake6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(fake65c02_smoketest PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(fake65c02_klaus_extended_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(sflib6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(sflib6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(sflib65c02_smoketest PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(sflib65c02_klaus_extended_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(olcNES_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(olcNES_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(chris_pikul_mos6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(chris_pikul_mos6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(all_6502_tests PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(all_65c02_tests PRIVATE -Wall -Wextra -Wpedantic)
 endif()
