@@ -20,6 +20,7 @@ add_subdirectory(toolbox/gianlucag_mos6502)
 add_subdirectory(toolbox/fake6502)
 add_subdirectory(toolbox/sflib6502)
 add_subdirectory(toolbox/olcNES)
+add_subdirectory(toolbox/chris_pikul_mos6502)
 
 add_executable(qe6502_benchmark_smoketest
     smoke_test.cpp
@@ -85,6 +86,14 @@ target_link_libraries(olcNES_smoketest
     PRIVATE olcNES_toolbox
 )
 
+add_executable(chris_pikul_mos6502_smoketest
+    chris_pikul_mos6502_smoke_test.cpp
+)
+
+target_link_libraries(chris_pikul_mos6502_smoketest
+    PRIVATE chris_pikul_mos6502_toolbox
+)
+
 if(MSVC)
     target_compile_options(qe6502_toolbox PRIVATE /W4)
     target_compile_options(floooh_chips_toolbox PRIVATE /W4)
@@ -92,6 +101,7 @@ if(MSVC)
     target_compile_options(fake6502_toolbox PRIVATE /W4)
     target_compile_options(sflib6502_toolbox PRIVATE /W4)
     target_compile_options(olcNES_toolbox PRIVATE /W4)
+    target_compile_options(chris_pikul_mos6502_toolbox PRIVATE /W4)
     target_compile_options(qe6502_benchmark_smoketest PRIVATE /W4)
     target_compile_options(floooh_chips_smoketest PRIVATE /W4)
     target_compile_options(qe6502_klaus_benchmark PRIVATE /W4)
@@ -100,6 +110,7 @@ if(MSVC)
     target_compile_options(fake6502_smoketest PRIVATE /W4)
     target_compile_options(sflib6502_smoketest PRIVATE /W4)
     target_compile_options(olcNES_smoketest PRIVATE /W4)
+    target_compile_options(chris_pikul_mos6502_smoketest PRIVATE /W4)
 else()
     target_compile_options(qe6502_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(floooh_chips_toolbox PRIVATE -Wall -Wextra -Wpedantic)
@@ -107,6 +118,7 @@ else()
     target_compile_options(fake6502_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(sflib6502_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(olcNES_toolbox PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(chris_pikul_mos6502_toolbox PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(qe6502_benchmark_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(floooh_chips_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(qe6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
@@ -115,4 +127,5 @@ else()
     target_compile_options(fake6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(sflib6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(olcNES_smoketest PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(chris_pikul_mos6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
 endif()
