@@ -119,6 +119,14 @@ target_link_libraries(fake6502_klaus_benchmark
     PRIVATE fake6502_toolbox
 )
 
+add_executable(fake6502_singlestep_nmos
+    fake6502_singlestep_nmos.cpp
+)
+
+target_link_libraries(fake6502_singlestep_nmos
+    PRIVATE fake6502_toolbox
+)
+
 add_executable(fake65c02_smoketest
     fake65c02_smoke_test.cpp
 )
@@ -183,6 +191,14 @@ target_link_libraries(o2_klaus_benchmark
     PRIVATE o2_toolbox
 )
 
+add_executable(o2_singlestep_nmos
+    o2_singlestep_nmos.cpp
+)
+
+target_link_libraries(o2_singlestep_nmos
+    PRIVATE o2_toolbox
+)
+
 add_executable(peddle_smoketest
     peddle_smoke_test.cpp
 )
@@ -196,6 +212,14 @@ add_executable(peddle_klaus_benchmark
 )
 
 target_link_libraries(peddle_klaus_benchmark
+    PRIVATE peddle_toolbox
+)
+
+add_executable(peddle_singlestep_nmos
+    peddle_singlestep_nmos.cpp
+)
+
+target_link_libraries(peddle_singlestep_nmos
     PRIVATE peddle_toolbox
 )
 
@@ -318,6 +342,7 @@ if(MSVC)
     target_compile_options(gianlucag_mos6502_klaus_benchmark PRIVATE /W4)
     target_compile_options(fake6502_smoketest PRIVATE /W4)
     target_compile_options(fake6502_klaus_benchmark PRIVATE /W4)
+    target_compile_options(fake6502_singlestep_nmos PRIVATE /W4)
     target_compile_options(fake65c02_smoketest PRIVATE /W4)
     target_compile_options(fake65c02_klaus_extended_benchmark PRIVATE /W4)
     target_compile_options(vremu6502_smoketest PRIVATE /W4)
@@ -326,6 +351,7 @@ if(MSVC)
     target_compile_options(vremu6502_singlestep_nmos PRIVATE /W4)
     target_compile_options(o2_smoketest PRIVATE /W4)
     target_compile_options(o2_klaus_benchmark PRIVATE /W4)
+    target_compile_options(o2_singlestep_nmos PRIVATE /W4)
     target_compile_options(peddle_smoketest PRIVATE /W4)
     target_compile_options(peddle_klaus_benchmark PRIVATE /W4)
     target_compile_options(sflib6502_smoketest PRIVATE /W4)
@@ -360,6 +386,7 @@ else()
     target_compile_options(gianlucag_mos6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(fake6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(fake6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(fake6502_singlestep_nmos PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(fake65c02_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(fake65c02_klaus_extended_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(vremu6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
@@ -368,6 +395,7 @@ else()
     target_compile_options(vremu6502_singlestep_nmos PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(o2_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(o2_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(o2_singlestep_nmos PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(peddle_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(peddle_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(sflib6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)

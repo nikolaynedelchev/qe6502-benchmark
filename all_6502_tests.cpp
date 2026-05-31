@@ -237,6 +237,30 @@ int main(int argc, char** argv)
             if (vremu6502_singlestep.harness_error) {
                 summary.record(false);
             }
+
+            std::cout << "\nStarting O2 NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result o2_singlestep = o2_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, o2_singlestep);
+            write_singlestep_log(corpus, o2_singlestep, summary);
+            if (o2_singlestep.harness_error) {
+                summary.record(false);
+            }
+
+            std::cout << "\nStarting Peddle NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result peddle_singlestep = peddle_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, peddle_singlestep);
+            write_singlestep_log(corpus, peddle_singlestep, summary);
+            if (peddle_singlestep.harness_error) {
+                summary.record(false);
+            }
+
+            std::cout << "\nStarting fake6502 NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result fake6502_singlestep = fake6502_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, fake6502_singlestep);
+            write_singlestep_log(corpus, fake6502_singlestep, summary);
+            if (fake6502_singlestep.harness_error) {
+                summary.record(false);
+            }
         } catch (const std::exception& e) {
             std::cout << "\nSingleStep NMOS harness error: " << e.what() << "\n";
             summary.record(false);
