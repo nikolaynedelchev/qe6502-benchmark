@@ -159,6 +159,14 @@ target_link_libraries(vremu6502_klaus_65c02_benchmark
     PRIVATE vremu6502_toolbox
 )
 
+add_executable(vremu6502_singlestep_nmos
+    vremu6502_singlestep_nmos.cpp
+)
+
+target_link_libraries(vremu6502_singlestep_nmos
+    PRIVATE vremu6502_toolbox
+)
+
 add_executable(o2_smoketest
     o2_smoke_test.cpp
 )
@@ -315,6 +323,7 @@ if(MSVC)
     target_compile_options(vremu6502_smoketest PRIVATE /W4)
     target_compile_options(vremu6502_klaus_benchmark PRIVATE /W4)
     target_compile_options(vremu6502_klaus_65c02_benchmark PRIVATE /W4)
+    target_compile_options(vremu6502_singlestep_nmos PRIVATE /W4)
     target_compile_options(o2_smoketest PRIVATE /W4)
     target_compile_options(o2_klaus_benchmark PRIVATE /W4)
     target_compile_options(peddle_smoketest PRIVATE /W4)
@@ -356,6 +365,7 @@ else()
     target_compile_options(vremu6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(vremu6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(vremu6502_klaus_65c02_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(vremu6502_singlestep_nmos PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(o2_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(o2_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(peddle_smoketest PRIVATE -Wall -Wextra -Wpedantic)

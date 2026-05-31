@@ -1,6 +1,7 @@
 add_library(vremu6502_toolbox STATIC
     ${PROJECT_SOURCE_DIR}/cores/vremu6502/src/vrEmu6502.c
     src/klaus_benchmark.cpp
+    src/singlestep.cpp
     src/smoke.cpp
 )
 
@@ -13,6 +14,10 @@ target_include_directories(vremu6502_toolbox
 
 target_compile_definitions(vremu6502_toolbox
     PRIVATE VR_EMU_6502_STATIC
+)
+
+target_link_libraries(vremu6502_toolbox
+    PUBLIC benchmark6502_common
 )
 
 target_compile_features(vremu6502_toolbox PUBLIC cxx_std_17)

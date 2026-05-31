@@ -12,11 +12,58 @@
 #include <benchmark6502/results.hpp>
 #include <benchmark6502/singlestep.hpp>
 
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
 #include <string>
 
 namespace {
+
+
+struct all_6502_options {
+    bool run_smoke = true;
+    bool run_klaus = true;
+    bool run_singlestep = true;
+};
+
+void print_usage(const char* const program)
+{
+    std::cout << "Usage: " << program << " [options]\n"
+              << "\n"
+              << "Options:\n"
+              << "  --singlestep-only       Skip smoke and Klaus/performance tests; run NMOS SingleStep only.\n"
+              << "  --skip-klaus            Skip Klaus/performance tests.\n"
+              << "  --skip-smoke            Skip smoke tests.\n"
+              << "  --skip-singlestep       Skip NMOS SingleStep tests.\n"
+              << "  --singlestep-dir <dir>  Use an explicit SingleStepTests corpus root.\n"
+              << "  --path <dir>            Alias for --singlestep-dir.\n"
+              << "  --help                  Show this help.\n";
+}
+
+all_6502_options parse_all_6502_options(const int argc, char** argv)
+{
+    all_6502_options options;
+    for (int i = 1; i < argc; ++i) {
+        const std::string arg = argv[i];
+        if (arg == "--singlestep-only") {
+            options.run_smoke = false;
+            options.run_klaus = false;
+            options.run_singlestep = true;
+        } else if (arg == "--skip-klaus" || arg == "--no-klaus" || arg == "--skip-performance") {
+            options.run_klaus = false;
+        } else if (arg == "--skip-smoke" || arg == "--no-smoke") {
+            options.run_smoke = false;
+        } else if (arg == "--skip-singlestep" || arg == "--no-singlestep") {
+            options.run_singlestep = false;
+        } else if (arg == "--help" || arg == "-h") {
+            print_usage(argv[0]);
+            std::exit(0);
+        } else if ((arg == "--singlestep-dir" || arg == "--path") && i + 1 < argc) {
+            ++i;
+        }
+    }
+    return options;
+}
 
 struct test_summary {
     int passed = 0;
@@ -77,61 +124,123 @@ int main(int argc, char** argv)
     constexpr int measured_runs = 5;
     test_summary summary;
 
-    print_smoke_result("qe6502", qe6502_toolbox::run_smoke_test(), summary);
-    print_klaus_result("qe6502", qe6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    const all_6502_options options = parse_all_6502_options(argc, argv);
 
-    print_smoke_result("floooh/chips", floooh_chips_toolbox::run_smoke_test(), summary);
-    print_klaus_result("floooh/chips", floooh_chips_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    if (!options.run_smoke) {
+        std::cout << "Skipping smoke tests.\n";
+    }
+    if (!options.run_klaus) {
+        std::cout << "Skipping Klaus/performance tests.\n";
+    }
+    if (!options.run_singlestep) {
+        std::cout << "Skipping NMOS SingleStep tests.\n";
+    }
 
-    print_smoke_result("gianlucag/mos6502", gianlucag_mos6502_toolbox::run_smoke_test(), summary);
-    print_klaus_result("gianlucag/mos6502", gianlucag_mos6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    if (options.run_smoke) {
+        print_smoke_result("qe6502", qe6502_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("qe6502", qe6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
 
-    print_smoke_result("fake6502", fake6502_toolbox::run_smoke_test(), summary);
-    print_klaus_result("fake6502", fake6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    if (options.run_smoke) {
+        print_smoke_result("floooh/chips", floooh_chips_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("floooh/chips", floooh_chips_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
 
-    print_smoke_result("vrEmu6502", vremu6502_toolbox::run_smoke_test(), summary);
-    print_klaus_result("vrEmu6502", vremu6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    if (options.run_smoke) {
+        print_smoke_result("gianlucag/mos6502", gianlucag_mos6502_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("gianlucag/mos6502", gianlucag_mos6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
 
-    print_smoke_result("O2", o2_toolbox::run_smoke_test(), summary);
-    print_klaus_result("O2", o2_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    if (options.run_smoke) {
+        print_smoke_result("fake6502", fake6502_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("fake6502", fake6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
 
-    print_smoke_result("Peddle", peddle_toolbox::run_smoke_test(), summary);
-    print_klaus_result("Peddle", peddle_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    if (options.run_smoke) {
+        print_smoke_result("vrEmu6502", vremu6502_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("vrEmu6502", vremu6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
 
-    print_smoke_result("sflib6502", sflib6502_toolbox::run_smoke_test(), summary);
-    print_klaus_result("sflib6502", sflib6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    if (options.run_smoke) {
+        print_smoke_result("O2", o2_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("O2", o2_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
 
-    print_smoke_result("olcNES", olcNES_toolbox::run_smoke_test(), summary);
-    print_klaus_result("olcNES", olcNES_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    if (options.run_smoke) {
+        print_smoke_result("Peddle", peddle_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("Peddle", peddle_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
 
-    print_smoke_result("chris-pikul/mos6502", chris_pikul_mos6502_toolbox::run_smoke_test(), summary);
-    print_klaus_result("chris-pikul/mos6502", chris_pikul_mos6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    if (options.run_smoke) {
+        print_smoke_result("sflib6502", sflib6502_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("sflib6502", sflib6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
 
-    try {
-        const benchmark6502::singlestep_corpus_options corpus_options = benchmark6502::parse_singlestep_corpus_options(argc, argv);
-        std::cout << "\nLoading SingleStep NMOS corpus...\n";
-        const benchmark6502::singlestep_corpus corpus = benchmark6502::load_singlestep_corpus(benchmark6502::singlestep_model::nmos6502, corpus_options);
-        std::cout << "Loaded SingleStep NMOS corpus: " << corpus.model_path
-                  << "  cases=" << corpus.total_cases() << "\n\n";
+    if (options.run_smoke) {
+        print_smoke_result("olcNES", olcNES_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("olcNES", olcNES_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
 
-        std::cout << "Starting qe6502 NMOS SingleStep...\n";
-        const benchmark6502::singlestep_result qe6502_singlestep = qe6502_toolbox::run_singlestep_nmos(corpus);
-        benchmark6502::print_singlestep_result(corpus, qe6502_singlestep);
-        write_singlestep_log(corpus, qe6502_singlestep, summary);
-        if (qe6502_singlestep.harness_error) {
+    if (options.run_smoke) {
+        print_smoke_result("chris-pikul/mos6502", chris_pikul_mos6502_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("chris-pikul/mos6502", chris_pikul_mos6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
+
+    if (options.run_singlestep) {
+        try {
+            const benchmark6502::singlestep_corpus_options corpus_options = benchmark6502::parse_singlestep_corpus_options(argc, argv);
+            std::cout << "\nLoading SingleStep NMOS corpus...\n";
+            const benchmark6502::singlestep_corpus corpus = benchmark6502::load_singlestep_corpus(benchmark6502::singlestep_model::nmos6502, corpus_options);
+            std::cout << "Loaded SingleStep NMOS corpus: " << corpus.model_path
+                      << "  cases=" << corpus.total_cases() << "\n\n";
+
+            std::cout << "Starting qe6502 NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result qe6502_singlestep = qe6502_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, qe6502_singlestep);
+            write_singlestep_log(corpus, qe6502_singlestep, summary);
+            if (qe6502_singlestep.harness_error) {
+                summary.record(false);
+            }
+
+            std::cout << "\nStarting floooh/chips NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result floooh_singlestep = floooh_chips_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, floooh_singlestep);
+            write_singlestep_log(corpus, floooh_singlestep, summary);
+            if (floooh_singlestep.harness_error) {
+                summary.record(false);
+            }
+
+            std::cout << "\nStarting vrEmu6502 NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result vremu6502_singlestep = vremu6502_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, vremu6502_singlestep);
+            write_singlestep_log(corpus, vremu6502_singlestep, summary);
+            if (vremu6502_singlestep.harness_error) {
+                summary.record(false);
+            }
+        } catch (const std::exception& e) {
+            std::cout << "\nSingleStep NMOS harness error: " << e.what() << "\n";
             summary.record(false);
         }
-
-        std::cout << "\nStarting floooh/chips NMOS SingleStep...\n";
-        const benchmark6502::singlestep_result floooh_singlestep = floooh_chips_toolbox::run_singlestep_nmos(corpus);
-        benchmark6502::print_singlestep_result(corpus, floooh_singlestep);
-        write_singlestep_log(corpus, floooh_singlestep, summary);
-        if (floooh_singlestep.harness_error) {
-            summary.record(false);
-        }
-    } catch (const std::exception& e) {
-        std::cout << "\nSingleStep NMOS harness error: " << e.what() << "\n";
-        summary.record(false);
     }
 
     std::cout << "\nall_6502_tests summary: " << summary.passed << " passed, " << summary.failed << " failed\n";

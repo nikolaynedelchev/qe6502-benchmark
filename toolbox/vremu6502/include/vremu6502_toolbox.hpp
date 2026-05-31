@@ -1,6 +1,7 @@
 #pragma once
 
 #include <benchmark6502/results.hpp>
+#include <benchmark6502/singlestep.hpp>
 
 namespace vremu6502_toolbox {
 
@@ -22,5 +23,6 @@ benchmark6502::klaus_benchmark_result run_klaus_wdc_65c02_standard(int measured_
 benchmark6502::klaus_benchmark_result run_klaus_wdc_65c02_extended(int measured_runs = 5);
 benchmark6502::klaus_benchmark_result run_klaus_rockwell_65c02_standard(int measured_runs = 5);
 benchmark6502::klaus_benchmark_result run_klaus_rockwell_65c02_extended(int measured_runs = 5);
+benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus);
 
 } // namespace vremu6502_toolbox
