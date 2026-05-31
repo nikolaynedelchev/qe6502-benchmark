@@ -45,25 +45,17 @@ namespace mos6502 {
 		// emulation this is ok.
 		if (m_CyclesRem > 0) {
 			m_CyclesRem--;
-			std::cout << "Cycles remaining = " << Hex(m_CyclesRem) << std::endl;
 			return m_CyclesRem > 0;
 		}
 
-		std::cout << "Reading from PC " << Hex(m_PC) << std::endl;
-
 		// Read the next opcode from memory
 		const byte opcode = ReadByte(static_cast<address>(m_PC));
-
-		std::cout << "OpCode = " << Hex(opcode) << std::endl;
 
 		// Increase the program counter since something was read
 		m_PC++;
 
 		// Retrieve the instruction details
 		const InstructionDetail& instruction = InstructionDetails[opcode];
-
-		std::cout << "Executing Instruction \"" << GetInstructionMnmuemonic(instruction.instruction) 
-			<< "\", with addressing " << GetAddressMnmuemonic(instruction.addressing) << std::endl;
 
 		// Perform addressing
 		fast_byte countAddressing = 0;
@@ -74,8 +66,6 @@ namespace mos6502 {
 
 		// Add the cycle cost to the counter
 		m_CyclesRem += countAddressing + countInstruction;
-
-		std::cout << "Completed, remaining cycles = " << Hex(m_CyclesRem) << std::endl;
 
 		// Ensure the unused flag is true, just for historics.
 		SetStatusFlag(StatusFlag::UNUSED);
