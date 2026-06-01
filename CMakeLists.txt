@@ -32,6 +32,7 @@ add_subdirectory(toolbox/ares)
 add_subdirectory(toolbox/fceux)
 add_subdirectory(toolbox/altirrasdl)
 add_subdirectory(toolbox/applewin)
+add_subdirectory(toolbox/mame)
 
 
 
@@ -73,6 +74,15 @@ add_executable(applewin_smoketest
 
 target_link_libraries(applewin_smoketest
     PRIVATE applewin_toolbox
+)
+
+
+add_executable(mame_smoketest
+    mame_smoke_test.cpp
+)
+
+target_link_libraries(mame_smoketest
+    PRIVATE mame_toolbox
 )
 
 add_executable(opcode_metadata_smoketest
