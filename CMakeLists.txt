@@ -60,6 +60,14 @@ target_link_libraries(fceux_smoketest
     PRIVATE fceux_toolbox
 )
 
+add_executable(fceux_klaus_benchmark
+    fceux_klaus_benchmark.cpp
+)
+
+target_link_libraries(fceux_klaus_benchmark
+    PRIVATE fceux_toolbox
+)
+
 add_executable(altirrasdl_smoketest
     altirrasdl_smoke_test.cpp
 )
@@ -401,6 +409,7 @@ target_link_libraries(all_6502_tests
         sflib6502_toolbox
         olcNES_toolbox
         chris_pikul_mos6502_toolbox
+        fceux_toolbox
 )
 
 add_executable(all_65c02_tests
@@ -462,6 +471,7 @@ if(MSVC)
     target_compile_options(chris_pikul_mos6502_smoketest PRIVATE /W4)
     target_compile_options(chris_pikul_mos6502_klaus_benchmark PRIVATE /W4)
     target_compile_options(chris_pikul_mos6502_singlestep_nmos PRIVATE /W4)
+    target_compile_options(fceux_klaus_benchmark PRIVATE /W4)
     target_compile_options(all_6502_tests PRIVATE /W4)
     target_compile_options(all_65c02_tests PRIVATE /W4)
 else()
@@ -511,6 +521,7 @@ else()
     target_compile_options(chris_pikul_mos6502_smoketest PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(chris_pikul_mos6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(chris_pikul_mos6502_singlestep_nmos PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(fceux_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(all_6502_tests PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(all_65c02_tests PRIVATE -Wall -Wextra -Wpedantic)
 endif()

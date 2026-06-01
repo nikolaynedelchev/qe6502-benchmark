@@ -1,5 +1,6 @@
 #include <chris_pikul_mos6502_toolbox.hpp>
 #include <fake6502_toolbox.hpp>
+#include <fceux_toolbox.hpp>
 #include <floooh_chips_toolbox.hpp>
 #include <gianlucag_mos6502_toolbox.hpp>
 #include <o2_toolbox.hpp>
@@ -95,6 +96,20 @@ void print_klaus_result(const char* const name, const benchmark6502::klaus_bench
     summary.record(result.passed);
     std::cout << std::left << std::setw(28) << name
               << " Klaus NMOS        " << (result.passed ? "PASS" : "FAIL");
+    if (result.passed) {
+        std::cout << "  runs=" << result.measured_runs
+                  << "  cycles=" << result.bus_ticks
+                  << "  seconds=" << std::fixed << std::setprecision(6) << result.seconds
+                  << "  MHz=" << std::fixed << std::setprecision(2) << result.mhz();
+    }
+    std::cout << '\n';
+}
+
+void print_klaus_nes_result(const char* const name, const benchmark6502::klaus_benchmark_result& result, test_summary& summary)
+{
+    summary.record(result.passed);
+    std::cout << std::left << std::setw(28) << name
+              << " Klaus NES         " << (result.passed ? "PASS" : "FAIL");
     if (result.passed) {
         std::cout << "  runs=" << result.measured_runs
                   << "  cycles=" << result.bus_ticks
@@ -204,6 +219,13 @@ int main(int argc, char** argv)
     }
     if (options.run_klaus) {
         print_klaus_result("chris-pikul/mos6502", chris_pikul_mos6502_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
+
+    if (options.run_smoke) {
+        print_smoke_result("fceux", fceux_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_nes_result("fceux", fceux_toolbox::run_klaus_nes_standard(measured_runs), summary);
     }
 
     if (options.run_singlestep) {
