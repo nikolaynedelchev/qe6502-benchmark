@@ -177,6 +177,21 @@ int main(int argc, char** argv)
         print_klaus_result("qe6502 WDC 65C02", "Klaus extended", qe6502_toolbox::run_klaus_wdc_65c02_extended(measured_runs), summary);
         print_klaus_result("qe6502 RW 65C02", "Klaus standard", qe6502_toolbox::run_klaus_rockwell_65c02_standard(measured_runs), summary);
         print_klaus_result("qe6502 RW 65C02", "Klaus extended", qe6502_toolbox::run_klaus_rockwell_65c02_extended(measured_runs), summary);
+
+        print_klaus_result("clk WDC 65C02", "Klaus standard", clk_toolbox::run_klaus_wdc_65c02_standard(measured_runs), summary);
+        print_klaus_result("clk WDC 65C02", "Klaus extended", clk_toolbox::run_klaus_wdc_65c02_extended(measured_runs), summary);
+        print_klaus_result("clk RW 65C02", "Klaus standard", clk_toolbox::run_klaus_rockwell_65c02_standard(measured_runs), summary);
+        print_klaus_result("clk RW 65C02", "Klaus extended", clk_toolbox::run_klaus_rockwell_65c02_extended(measured_runs), summary);
+
+        print_klaus_result("AppleWin WDC 65C02", "Klaus standard", applewin_toolbox::run_klaus_wdc_65c02_standard(measured_runs), summary);
+        print_klaus_result("AppleWin WDC 65C02", "Klaus extended", applewin_toolbox::run_klaus_wdc_65c02_extended(measured_runs), summary);
+
+        print_klaus_result("MAME WDC 65C02", "Klaus standard", mame_toolbox::run_klaus_wdc_65c02_standard(measured_runs), summary);
+        print_klaus_result("MAME WDC 65C02", "Klaus extended", mame_toolbox::run_klaus_wdc_65c02_extended(measured_runs), summary);
+        print_klaus_result("MAME RW 65C02", "Klaus standard", mame_toolbox::run_klaus_rockwell_65c02_standard(measured_runs), summary);
+        print_klaus_result("MAME RW 65C02", "Klaus extended", mame_toolbox::run_klaus_rockwell_65c02_extended(measured_runs), summary);
+        print_klaus_result("MAME W65C02S", "Klaus standard", mame_toolbox::run_klaus_wdc65c02s_standard(measured_runs), summary);
+        print_klaus_result("MAME W65C02S", "Klaus extended", mame_toolbox::run_klaus_wdc65c02s_extended(measured_runs), summary);
     }
 
     if (options.run_singlestep) {

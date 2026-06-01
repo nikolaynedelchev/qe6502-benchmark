@@ -10,10 +10,14 @@
 static const std::uint8_t s_klaus_nmos_rom[0x10000] =
 #include "cores/qe6502/harness/klaus2m5/6502_functional_test.hex"
 
+static const std::uint8_t s_klaus_65c02_extended_rom[0x10000] =
+#include "cores/qe6502/harness/klaus2m5/65C02_extended_opcodes_test.hex"
+
 namespace {
 
 constexpr std::uint16_t klaus_start_address = 0x0400u;
-constexpr std::uint16_t klaus_success_address = 0x3469u;
+constexpr std::uint16_t klaus_nmos_success_address = 0x3469u;
+constexpr std::uint16_t klaus_65c02_extended_success_address = 0x24F1u;
 constexpr std::uint64_t max_cycles = 200000000ull;
 constexpr int run_slice_cycles = 10000;
 
@@ -25,13 +29,14 @@ public:
     std::uint64_t cycles = 0;
     bool success_reached = false;
     std::uint64_t success_cycles = 0;
+    std::uint16_t success_address = klaus_nmos_success_address;
 
     Cycles perform_bus_operation(const CPU::MOS6502::BusOperation operation,
                                  const AddressType address,
                                  std::uint8_t* const value)
     {
         ++cycles;
-        if (!success_reached && address == klaus_success_address && CPU::MOS6502Esque::is_read(operation)) {
+        if (!success_reached && address == success_address && CPU::MOS6502Esque::is_read(operation)) {
             success_reached = true;
             success_cycles = cycles - 1u;
         }
@@ -44,19 +49,22 @@ public:
     }
 };
 
-using processor_type = CPU::MOS6502::Processor<CPU::MOS6502::P6502, klaus_bus, false>;
+template <CPU::MOS6502::Personality personality>
+using processor_for = CPU::MOS6502::Processor<personality, klaus_bus, false>;
 
 struct run_result {
     bool passed;
     std::uint64_t cycles;
 };
 
-run_result run_klaus_once()
+template <CPU::MOS6502::Personality personality>
+run_result run_klaus_once(const std::uint8_t* const rom, const std::uint16_t success_address)
 {
     klaus_bus bus;
-    std::memcpy(bus.memory.data(), s_klaus_nmos_rom, bus.memory.size());
+    std::memcpy(bus.memory.data(), rom, bus.memory.size());
+    bus.success_address = success_address;
 
-    processor_type cpu(bus);
+    processor_for<personality> cpu(bus);
     cpu.set_power_on(false);
     cpu.set_reset_line(false);
     cpu.set_value_of(CPU::MOS6502::Register::ProgramCounter, klaus_start_address);
@@ -65,7 +73,7 @@ run_result run_klaus_once()
     cpu.restart_operation_fetch();
 
     while (bus.cycles < max_cycles) {
-        if (bus.success_reached || cpu.value_of(CPU::MOS6502::Register::ProgramCounter) == klaus_success_address) {
+        if (bus.success_reached || cpu.value_of(CPU::MOS6502::Register::ProgramCounter) == success_address) {
             return {true, bus.success_reached ? bus.success_cycles : bus.cycles};
         }
         if (cpu.is_jammed()) {
@@ -77,13 +85,12 @@ run_result run_klaus_once()
     return {false, bus.cycles};
 }
 
-} // namespace
-
-namespace clk_toolbox {
-
-benchmark6502::klaus_benchmark_result run_klaus_nmos_standard(const int measured_runs)
+template <CPU::MOS6502::Personality personality>
+benchmark6502::klaus_benchmark_result run_klaus_rom(const std::uint8_t* const rom,
+                                                    const std::uint16_t success_address,
+                                                    const int measured_runs)
 {
-    const run_result cold = run_klaus_once();
+    const run_result cold = run_klaus_once<personality>(rom, success_address);
     if (!cold.passed) {
         return {false, measured_runs, 0, 0.0};
     }
@@ -92,7 +99,7 @@ benchmark6502::klaus_benchmark_result run_klaus_nmos_standard(const int measured
     const auto start = std::chrono::steady_clock::now();
 
     for (int i = 0; i < measured_runs; ++i) {
-        const run_result result = run_klaus_once();
+        const run_result result = run_klaus_once<personality>(rom, success_address);
         if (!result.passed) {
             return {false, measured_runs, total_cycles, 0.0};
         }
@@ -103,6 +110,35 @@ benchmark6502::klaus_benchmark_result run_klaus_nmos_standard(const int measured
     const std::chrono::duration<double> elapsed = stop - start;
 
     return {true, measured_runs, total_cycles, elapsed.count()};
+}
+
+} // namespace
+
+namespace clk_toolbox {
+
+benchmark6502::klaus_benchmark_result run_klaus_nmos_standard(const int measured_runs)
+{
+    return run_klaus_rom<CPU::MOS6502::P6502>(s_klaus_nmos_rom, klaus_nmos_success_address, measured_runs);
+}
+
+benchmark6502::klaus_benchmark_result run_klaus_wdc_65c02_standard(const int measured_runs)
+{
+    return run_klaus_rom<CPU::MOS6502::PWDC65C02>(s_klaus_nmos_rom, klaus_nmos_success_address, measured_runs);
+}
+
+benchmark6502::klaus_benchmark_result run_klaus_wdc_65c02_extended(const int measured_runs)
+{
+    return run_klaus_rom<CPU::MOS6502::PWDC65C02>(s_klaus_65c02_extended_rom, klaus_65c02_extended_success_address, measured_runs);
+}
+
+benchmark6502::klaus_benchmark_result run_klaus_rockwell_65c02_standard(const int measured_runs)
+{
+    return run_klaus_rom<CPU::MOS6502::PRockwell65C02>(s_klaus_nmos_rom, klaus_nmos_success_address, measured_runs);
+}
+
+benchmark6502::klaus_benchmark_result run_klaus_rockwell_65c02_extended(const int measured_runs)
+{
+    return run_klaus_rom<CPU::MOS6502::PRockwell65C02>(s_klaus_65c02_extended_rom, klaus_65c02_extended_success_address, measured_runs);
 }
 
 } // namespace clk_toolbox
