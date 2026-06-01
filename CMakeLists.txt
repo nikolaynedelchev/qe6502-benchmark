@@ -28,6 +28,7 @@ add_subdirectory(toolbox/sflib65c02)
 add_subdirectory(toolbox/olcNES)
 add_subdirectory(toolbox/chris_pikul_mos6502)
 add_subdirectory(toolbox/clk)
+add_subdirectory(toolbox/ares)
 
 
 
@@ -37,6 +38,14 @@ add_executable(clk_smoketest
 
 target_link_libraries(clk_smoketest
     PRIVATE clk_toolbox
+)
+
+add_executable(ares_smoketest
+    ares_smoke_test.cpp
+)
+
+target_link_libraries(ares_smoketest
+    PRIVATE ares_toolbox
 )
 
 add_executable(opcode_metadata_smoketest
