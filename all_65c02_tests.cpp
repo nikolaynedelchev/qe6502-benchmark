@@ -1,8 +1,12 @@
+#include <applewin_toolbox.hpp>
+#include <clk_toolbox.hpp>
 #include <fake65c02_toolbox.hpp>
+#include <mame_toolbox.hpp>
 #include <qe6502_toolbox.hpp>
 #include <sflib65c02_toolbox.hpp>
 #include <vremu6502_toolbox.hpp>
 
+#include <benchmark6502/build_info.hpp>
 #include <benchmark6502/results.hpp>
 #include <benchmark6502/singlestep.hpp>
 
@@ -133,6 +137,8 @@ int main(int argc, char** argv)
     constexpr int measured_runs = 5;
     test_summary summary;
 
+    benchmark6502::print_current_build_runtime_info();
+
     const all_65c02_options options = parse_all_65c02_options(argc, argv);
 
     if (!options.run_smoke) {
@@ -197,6 +203,22 @@ int main(int argc, char** argv)
                                           sflib65c02_toolbox::run_singlestep_wdc65c02,
                                           "sflib65c02 WDC 65C02 SingleStep",
                                           summary);
+            run_65c02_singlestep_one(wdc_corpus,
+                                          clk_toolbox::run_singlestep_wdc65c02,
+                                          "clk WDC 65C02 SingleStep",
+                                          summary);
+            run_65c02_singlestep_one(wdc_corpus,
+                                          applewin_toolbox::run_singlestep_wdc65c02,
+                                          "AppleWin CMOS 65C02/WDC best-fit SingleStep",
+                                          summary);
+            run_65c02_singlestep_one(wdc_corpus,
+                                          mame_toolbox::run_singlestep_wdc65c02,
+                                          "MAME WDC 65C02 SingleStep",
+                                          summary);
+            run_65c02_singlestep_one(wdc_corpus,
+                                          mame_toolbox::run_singlestep_wdc65c02s,
+                                          "MAME WDC W65C02S SingleStep",
+                                          summary);
 
             std::cout << "\nLoading SingleStep Rockwell 65C02 corpus...\n";
             const benchmark6502::singlestep_corpus rockwell_corpus = benchmark6502::load_singlestep_corpus(benchmark6502::singlestep_model::rockwell65c02, corpus_options);
@@ -218,6 +240,14 @@ int main(int argc, char** argv)
                                           sflib65c02_toolbox::run_singlestep_rockwell65c02,
                                           "sflib65c02 Rockwell 65C02 SingleStep",
                                           summary);
+            run_65c02_singlestep_one(rockwell_corpus,
+                                          clk_toolbox::run_singlestep_rockwell65c02,
+                                          "clk Rockwell 65C02 SingleStep",
+                                          summary);
+            run_65c02_singlestep_one(rockwell_corpus,
+                                          mame_toolbox::run_singlestep_rockwell65c02,
+                                          "MAME Rockwell R65C02 SingleStep",
+                                          summary);
 
             std::cout << "\nLoading SingleStep Synertek 65C02 corpus...\n";
             const benchmark6502::singlestep_corpus synertek_corpus = benchmark6502::load_singlestep_corpus(benchmark6502::singlestep_model::synertek65c02, corpus_options);
@@ -238,6 +268,10 @@ int main(int argc, char** argv)
             run_65c02_singlestep_one(synertek_corpus,
                                           sflib65c02_toolbox::run_singlestep_synertek65c02,
                                           "sflib65c02 Synertek/ST 65C02 SingleStep",
+                                          summary);
+            run_65c02_singlestep_one(synertek_corpus,
+                                          clk_toolbox::run_singlestep_synertek65c02,
+                                          "clk Synertek/ST 65C02 SingleStep",
                                           summary);
         } catch (const std::exception& e) {
             std::cout << "\nSingleStep 65C02 harness error: " << e.what() << "\n";

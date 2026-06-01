@@ -15,6 +15,7 @@
 #include <sflib6502_toolbox.hpp>
 #include <vremu6502_toolbox.hpp>
 
+#include <benchmark6502/build_info.hpp>
 #include <benchmark6502/results.hpp>
 #include <benchmark6502/singlestep.hpp>
 
@@ -143,6 +144,8 @@ int main(int argc, char** argv)
 {
     constexpr int measured_runs = 5;
     test_summary summary;
+
+    benchmark6502::print_current_build_runtime_info();
 
     const all_6502_options options = parse_all_6502_options(argc, argv);
 
@@ -374,13 +377,7 @@ int main(int argc, char** argv)
                 summary.record(false);
             }
 
-            std::cout << "\nStarting altirrasdl NMOS SingleStep...\n";
-            const benchmark6502::singlestep_result altirrasdl_singlestep = altirrasdl_toolbox::run_singlestep_nmos(corpus);
-            benchmark6502::print_singlestep_result(corpus, altirrasdl_singlestep);
-            write_singlestep_log(corpus, altirrasdl_singlestep, summary);
-            if (altirrasdl_singlestep.harness_error) {
-                summary.record(false);
-            }
+            std::cout << "\nSkipping altirrasdl NMOS SingleStep: integration is intentionally excluded because the current adapter is too noisy for reliable SingleStep classification.\n";
 
             std::cout << "\nStarting applewin NMOS SingleStep...\n";
             const benchmark6502::singlestep_result applewin_singlestep = applewin_toolbox::run_singlestep_nmos(corpus);

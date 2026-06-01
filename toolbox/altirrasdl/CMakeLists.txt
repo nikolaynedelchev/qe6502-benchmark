@@ -1,7 +1,6 @@
 add_library(altirrasdl_toolbox STATIC
     src/smoke.cpp
     src/klaus_benchmark.cpp
-    src/singlestep.cpp
     src/stubs.cpp
     ${PROJECT_SOURCE_DIR}/cores/altirrasdl/src/ATCPU/source/co6502.cpp
     ${PROJECT_SOURCE_DIR}/cores/altirrasdl/src/ATCPU/source/co6502machine.cpp

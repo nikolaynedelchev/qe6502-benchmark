@@ -53,7 +53,10 @@ public:
     }
 };
 
-using processor_type = CPU::MOS6502::Processor<CPU::MOS6502::P6502, singlestep_bus, false>;
+template <CPU::MOS6502::Personality personality>
+using processor_for = CPU::MOS6502::Processor<personality, singlestep_bus, false>;
+
+using processor_type = processor_for<CPU::MOS6502::P6502>;
 
 void load_ram(std::array<std::uint8_t, 0x10000>& memory, const std::vector<benchmark6502::singlestep_memory_cell>& ram)
 {
@@ -62,7 +65,8 @@ void load_ram(std::array<std::uint8_t, 0x10000>& memory, const std::vector<bench
     }
 }
 
-void set_initial_state(processor_type& cpu, const benchmark6502::singlestep_cpu_state& state)
+template <typename Processor>
+void set_initial_state(Processor& cpu, const benchmark6502::singlestep_cpu_state& state)
 {
     cpu.set_power_on(false);
     cpu.set_reset_line(false);
@@ -75,7 +79,8 @@ void set_initial_state(processor_type& cpu, const benchmark6502::singlestep_cpu_
     cpu.restart_operation_fetch();
 }
 
-bool compare_final_state(processor_type& cpu,
+template <typename Processor>
+bool compare_final_state(Processor& cpu,
                          const std::array<std::uint8_t, 0x10000>& memory,
                          const benchmark6502::singlestep_cpu_state& expected,
                          const bool consumed_following_opcode_fetch)
@@ -104,14 +109,15 @@ bool compare_cycle(const benchmark6502::singlestep_cycle& actual, const benchmar
            actual.operation == expected.operation;
 }
 
-case_result run_case(const benchmark6502::singlestep_case& test_case, const std::uint8_t opcode)
+template <CPU::MOS6502::Personality personality>
+case_result run_case_for_model(const benchmark6502::singlestep_case& test_case, const std::uint8_t opcode)
 {
     singlestep_bus bus;
     load_ram(bus.memory, test_case.initial.ram);
-    processor_type cpu(bus);
+    processor_for<personality> cpu(bus);
     set_initial_state(cpu, test_case.initial);
 
-    const bool kil_opcode = is_nmos_kil_opcode(opcode);
+    const bool kil_opcode = personality == CPU::MOS6502::P6502 && is_nmos_kil_opcode(opcode);
     const std::size_t expected_cycles = kil_opcode && test_case.cycles.size() > 2u ? 2u : test_case.cycles.size();
     const bool consume_following_opcode_fetch = !kil_opcode;
     cpu.run_for(Cycles(static_cast<int>(expected_cycles + (consume_following_opcode_fetch ? 1u : 0u))));
@@ -138,12 +144,15 @@ case_result run_case(const benchmark6502::singlestep_case& test_case, const std:
 
 namespace clk_toolbox {
 
-benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus)
+template <CPU::MOS6502::Personality personality>
+benchmark6502::singlestep_result run_singlestep_model(const benchmark6502::singlestep_corpus& corpus,
+                                                       const char* const model_name,
+                                                       const char* const cpu_init_model)
 {
     benchmark6502::singlestep_result result;
     result.core_name = "clk";
-    result.model_name = "P6502 NMOS";
-    result.cpu_init_model = "CPU::MOS6502::P6502";
+    result.model_name = model_name;
+    result.cpu_init_model = cpu_init_model;
     result.corpus_model = corpus.model;
 
     for (unsigned opcode_value = 0; opcode_value <= 0xffu; ++opcode_value) {
@@ -157,13 +166,33 @@ benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::single
         opcode_result.bus_trace.supported = true;
 
         for (const auto& test_case : tests.cases) {
-            const case_result single = run_case(test_case, opcode);
+            const case_result single = run_case_for_model<personality>(test_case, opcode);
             if (!single.instruction_ok) { opcode_result.instruction.failed = true; opcode_result.instruction.failed_cases++; }
             if (!single.cycle_count_ok) { opcode_result.cycle_count.failed = true; opcode_result.cycle_count.failed_cases++; }
             if (!single.bus_trace_ok) { opcode_result.bus_trace.failed = true; opcode_result.bus_trace.failed_cases++; }
         }
     }
     return result;
+}
+
+benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_model<CPU::MOS6502::P6502>(corpus, "P6502 NMOS", "CPU::MOS6502::P6502");
+}
+
+benchmark6502::singlestep_result run_singlestep_wdc65c02(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_model<CPU::MOS6502::PWDC65C02>(corpus, "WDC 65C02", "CPU::MOS6502::PWDC65C02");
+}
+
+benchmark6502::singlestep_result run_singlestep_rockwell65c02(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_model<CPU::MOS6502::PRockwell65C02>(corpus, "Rockwell 65C02", "CPU::MOS6502::PRockwell65C02");
+}
+
+benchmark6502::singlestep_result run_singlestep_synertek65c02(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_model<CPU::MOS6502::PSynertek65C02>(corpus, "Synertek/ST 65C02", "CPU::MOS6502::PSynertek65C02");
 }
 
 } // namespace clk_toolbox

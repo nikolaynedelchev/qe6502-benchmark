@@ -116,22 +116,8 @@ target_link_libraries(altirrasdl_klaus_benchmark
     PRIVATE altirrasdl_toolbox
 )
 
-add_executable(altirrasdl_singlestep_nmos
-    altirrasdl_singlestep_nmos.cpp
-)
-
-target_link_libraries(altirrasdl_singlestep_nmos
-    PRIVATE altirrasdl_toolbox
-)
 
 
-add_executable(altirrasdl_singlestep_65c02_fit
-    altirrasdl_singlestep_65c02_fit.cpp
-)
-
-target_link_libraries(altirrasdl_singlestep_65c02_fit
-    PRIVATE altirrasdl_toolbox
-)
 
 add_executable(applewin_smoketest
     applewin_smoke_test.cpp
@@ -187,6 +173,62 @@ add_executable(mame_singlestep_nmos
 )
 
 target_link_libraries(mame_singlestep_nmos
+    PRIVATE mame_toolbox
+)
+
+add_executable(clk_singlestep_wdc65c02
+    clk_singlestep_wdc65c02.cpp
+)
+
+target_link_libraries(clk_singlestep_wdc65c02
+    PRIVATE clk_toolbox
+)
+
+add_executable(clk_singlestep_rockwell65c02
+    clk_singlestep_rockwell65c02.cpp
+)
+
+target_link_libraries(clk_singlestep_rockwell65c02
+    PRIVATE clk_toolbox
+)
+
+add_executable(clk_singlestep_synertek65c02
+    clk_singlestep_synertek65c02.cpp
+)
+
+target_link_libraries(clk_singlestep_synertek65c02
+    PRIVATE clk_toolbox
+)
+
+add_executable(applewin_singlestep_wdc65c02
+    applewin_singlestep_wdc65c02.cpp
+)
+
+target_link_libraries(applewin_singlestep_wdc65c02
+    PRIVATE applewin_toolbox
+)
+
+add_executable(mame_singlestep_wdc65c02
+    mame_singlestep_wdc65c02.cpp
+)
+
+target_link_libraries(mame_singlestep_wdc65c02
+    PRIVATE mame_toolbox
+)
+
+add_executable(mame_singlestep_rockwell65c02
+    mame_singlestep_rockwell65c02.cpp
+)
+
+target_link_libraries(mame_singlestep_rockwell65c02
+    PRIVATE mame_toolbox
+)
+
+add_executable(mame_singlestep_wdc65c02s
+    mame_singlestep_wdc65c02s.cpp
+)
+
+target_link_libraries(mame_singlestep_wdc65c02s
     PRIVATE mame_toolbox
 )
 
@@ -524,6 +566,9 @@ target_link_libraries(all_65c02_tests
         vremu6502_toolbox
         sflib65c02_toolbox
         qe6502_toolbox
+        clk_toolbox
+        applewin_toolbox
+        mame_toolbox
 )
 
 if(MSVC)

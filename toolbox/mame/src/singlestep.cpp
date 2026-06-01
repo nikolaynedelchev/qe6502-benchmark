@@ -43,9 +43,9 @@ bool compare_final_state(const benchmark6502::mame::Mame6502Cpu& cpu,
     return true;
 }
 
-case_result run_case(const benchmark6502::singlestep_case& test_case)
+case_result run_case(const benchmark6502::singlestep_case& test_case, const benchmark6502::mame::CpuMode mode)
 {
-    benchmark6502::mame::Mame6502Cpu cpu(benchmark6502::mame::CpuMode::nmos6502);
+    benchmark6502::mame::Mame6502Cpu cpu(mode);
     load_ram(cpu, test_case.initial.ram);
     set_initial_state(cpu, test_case.initial);
     const unsigned cycles = cpu.execute(static_cast<unsigned>(test_case.cycles.size()));
@@ -56,12 +56,15 @@ case_result run_case(const benchmark6502::singlestep_case& test_case)
 
 namespace mame_toolbox {
 
-benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus)
+benchmark6502::singlestep_result run_singlestep_model(const benchmark6502::singlestep_corpus& corpus,
+                                                       const benchmark6502::mame::CpuMode mode,
+                                                       const char* const model_name,
+                                                       const char* const cpu_init_model)
 {
     benchmark6502::singlestep_result result;
     result.core_name = "mame";
-    result.model_name = "NMOS 6502";
-    result.cpu_init_model = "CpuMode::nmos6502";
+    result.model_name = model_name;
+    result.cpu_init_model = cpu_init_model;
     result.corpus_model = corpus.model;
 
     for (unsigned opcode_value = 0; opcode_value <= 0xffu; ++opcode_value) {
@@ -73,12 +76,32 @@ benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::single
         opcode_result.cycle_count.supported = true;
         opcode_result.bus_trace.supported = false;
         for (const auto& test_case : tests.cases) {
-            const case_result single = run_case(test_case);
+            const case_result single = run_case(test_case, mode);
             if (!single.instruction_ok) { opcode_result.instruction.failed = true; opcode_result.instruction.failed_cases++; }
             if (!single.cycle_count_ok) { opcode_result.cycle_count.failed = true; opcode_result.cycle_count.failed_cases++; }
         }
     }
     return result;
+}
+
+benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_model(corpus, benchmark6502::mame::CpuMode::nmos6502, "NMOS 6502", "CpuMode::nmos6502");
+}
+
+benchmark6502::singlestep_result run_singlestep_wdc65c02(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_model(corpus, benchmark6502::mame::CpuMode::wdc65c02, "WDC 65C02", "CpuMode::wdc65c02");
+}
+
+benchmark6502::singlestep_result run_singlestep_rockwell65c02(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_model(corpus, benchmark6502::mame::CpuMode::rockwell65c02, "Rockwell R65C02", "CpuMode::rockwell65c02");
+}
+
+benchmark6502::singlestep_result run_singlestep_wdc65c02s(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_model(corpus, benchmark6502::mame::CpuMode::wdc65c02s, "WDC W65C02S", "CpuMode::wdc65c02s");
 }
 
 } // namespace mame_toolbox
