@@ -356,6 +356,47 @@ int main(int argc, char** argv)
             if (chris_pikul_singlestep.harness_error) {
                 summary.record(false);
             }
+
+
+            std::cout << "\nStarting clk NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result clk_singlestep = clk_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, clk_singlestep);
+            write_singlestep_log(corpus, clk_singlestep, summary);
+            if (clk_singlestep.harness_error) {
+                summary.record(false);
+            }
+
+            std::cout << "\nStarting ares NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result ares_singlestep = ares_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, ares_singlestep);
+            write_singlestep_log(corpus, ares_singlestep, summary);
+            if (ares_singlestep.harness_error) {
+                summary.record(false);
+            }
+
+            std::cout << "\nStarting altirrasdl NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result altirrasdl_singlestep = altirrasdl_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, altirrasdl_singlestep);
+            write_singlestep_log(corpus, altirrasdl_singlestep, summary);
+            if (altirrasdl_singlestep.harness_error) {
+                summary.record(false);
+            }
+
+            std::cout << "\nStarting applewin NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result applewin_singlestep = applewin_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, applewin_singlestep);
+            write_singlestep_log(corpus, applewin_singlestep, summary);
+            if (applewin_singlestep.harness_error) {
+                summary.record(false);
+            }
+
+            std::cout << "\nStarting mame NMOS SingleStep...\n";
+            const benchmark6502::singlestep_result mame_singlestep = mame_toolbox::run_singlestep_nmos(corpus);
+            benchmark6502::print_singlestep_result(corpus, mame_singlestep);
+            write_singlestep_log(corpus, mame_singlestep, summary);
+            if (mame_singlestep.harness_error) {
+                summary.record(false);
+            }
         } catch (const std::exception& e) {
             std::cout << "\nSingleStep NMOS harness error: " << e.what() << "\n";
             summary.record(false);

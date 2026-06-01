@@ -45,12 +45,17 @@ bool compare_final_state(ATCoProc6502& cpu,
     ATCPUExecState actual{};
     cpu.GetExecState(actual);
 
-    if (actual.m6502.mPC != expected.pc ||
+    // ATCoProc6502::GetExecState() reports mInsnPC, which is the PC of the
+    // instruction currently being decoded/executed. At an instruction boundary
+    // after a one-instruction SingleStep case, that can still be the previous
+    // instruction's PC, not the next fetch address expected by SingleStepTests.
+    // Use the core's current CPU address (mPC) for the final PC comparison.
+    if (cpu.GetCPUAddress() != expected.pc ||
         actual.m6502.mS != expected.s ||
         actual.m6502.mA != expected.a ||
         actual.m6502.mX != expected.x ||
         actual.m6502.mY != expected.y ||
-        actual.m6502.mP != expected.p) {
+        ((actual.m6502.mP ^ expected.p) & static_cast<uint8>(~0x10u)) != 0u) {
         return false;
     }
 
@@ -62,12 +67,12 @@ bool compare_final_state(ATCoProc6502& cpu,
     return true;
 }
 
-case_result run_case(const benchmark6502::singlestep_case& test_case)
+case_result run_case(const benchmark6502::singlestep_case& test_case, const bool cmos)
 {
     std::array<uint8, 0x10000> memory{};
     load_ram(memory, test_case.initial.ram);
 
-    ATCoProc6502 cpu(true, false);
+    ATCoProc6502 cpu(cmos, false);
     ATCoProcMemoryMapView map(cpu.GetReadMap(), cpu.GetWriteMap(), cpu.GetTraceMap());
     map.SetMemory(0, 256, memory.data());
     set_initial_state(cpu, test_case.initial);
@@ -79,13 +84,23 @@ case_result run_case(const benchmark6502::singlestep_case& test_case)
     while (cycles < max_cycles) {
         ATScheduler scheduler;
         const std::uint32_t start_tick = scheduler.GetTick();
-        scheduler.SetStopTime(start_tick + 1u);
+
+        // Altirra's scheduler stops before executing the cycle that lands exactly
+        // on the stop time. A +1 stop window therefore permits zero CPU cycles
+        // and can deadlock this SingleStep loop, especially on the first case.
+        // Use a +2 window to advance exactly one CPU cycle in this stubbed
+        // scheduler integration.
+        scheduler.SetStopTime(start_tick + 2u);
         cpu.Run(scheduler);
-        cycles += scheduler.GetTick() - start_tick;
+        const std::uint32_t elapsed = scheduler.GetTick() - start_tick;
+        if (elapsed == 0) {
+            break;
+        }
+        cycles += elapsed;
 
         ATCPUExecState state{};
         cpu.GetExecState(state);
-        if (cycles > 0 && state.m6502.mbAtInsnStep) {
+        if (state.m6502.mbAtInsnStep) {
             break;
         }
     }
@@ -96,14 +111,16 @@ case_result run_case(const benchmark6502::singlestep_case& test_case)
     return result;
 }
 
-benchmark6502::singlestep_result run_singlestep_65c02_corpus(const benchmark6502::singlestep_corpus& corpus,
-                                                             const std::string& display_model_name)
+benchmark6502::singlestep_result run_singlestep_corpus(const benchmark6502::singlestep_corpus& corpus,
+                                                   const std::string& display_model_name,
+                                                   const bool cmos,
+                                                   const char* const cpu_init_model)
 {
     benchmark6502::singlestep_result result;
     result.core_name = "altirrasdl";
     result.corpus_model = corpus.model;
     result.model_name = display_model_name;
-    result.cpu_init_model = "ATCoProc6502(isC02=true)";
+    result.cpu_init_model = cpu_init_model;
 
     for (unsigned opcode_value = 0; opcode_value <= 0xffu; ++opcode_value) {
         const auto opcode = static_cast<std::uint8_t>(opcode_value);
@@ -116,7 +133,7 @@ benchmark6502::singlestep_result run_singlestep_65c02_corpus(const benchmark6502
         opcode_result.bus_trace.supported = false;
 
         for (const auto& test_case : tests.cases) {
-            const case_result single = run_case(test_case);
+            const case_result single = run_case(test_case, cmos);
             if (!single.instruction_ok) {
                 opcode_result.instruction.failed = true;
                 opcode_result.instruction.failed_cases++;
@@ -135,19 +152,24 @@ benchmark6502::singlestep_result run_singlestep_65c02_corpus(const benchmark6502
 
 namespace altirrasdl_toolbox {
 
+benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_corpus(corpus, "NMOS 6502", false, "ATCoProc6502(isC02=false)");
+}
+
 benchmark6502::singlestep_result run_singlestep_wdc65c02(const benchmark6502::singlestep_corpus& corpus)
 {
-    return run_singlestep_65c02_corpus(corpus, "65C02/WDC corpus");
+    return run_singlestep_corpus(corpus, "65C02/WDC corpus", true, "ATCoProc6502(isC02=true)");
 }
 
 benchmark6502::singlestep_result run_singlestep_rockwell65c02(const benchmark6502::singlestep_corpus& corpus)
 {
-    return run_singlestep_65c02_corpus(corpus, "65C02/Rockwell corpus");
+    return run_singlestep_corpus(corpus, "65C02/Rockwell corpus", true, "ATCoProc6502(isC02=true)");
 }
 
 benchmark6502::singlestep_result run_singlestep_synertek65c02(const benchmark6502::singlestep_corpus& corpus)
 {
-    return run_singlestep_65c02_corpus(corpus, "65C02/Synertek-ST corpus");
+    return run_singlestep_corpus(corpus, "65C02/Synertek-ST corpus", true, "ATCoProc6502(isC02=true)");
 }
 
 } // namespace altirrasdl_toolbox

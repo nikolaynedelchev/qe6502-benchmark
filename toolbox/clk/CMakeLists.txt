@@ -1,5 +1,6 @@
 add_library(clk_toolbox STATIC
     src/klaus_benchmark.cpp
+    src/singlestep.cpp
     src/smoke.cpp
     ${PROJECT_SOURCE_DIR}/cores/clk/Processors/6502/Implementation/6502Storage.cpp
 )

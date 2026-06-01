@@ -2,6 +2,7 @@ add_library(mame_toolbox STATIC
     src/mame6502_cpu.cpp
     src/smoke.cpp
     src/klaus_benchmark.cpp
+    src/singlestep.cpp
 )
 
 target_include_directories(mame_toolbox

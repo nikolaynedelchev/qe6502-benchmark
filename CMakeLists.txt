@@ -52,6 +52,14 @@ target_link_libraries(clk_klaus_benchmark
     PRIVATE clk_toolbox
 )
 
+add_executable(clk_singlestep_nmos
+    clk_singlestep_nmos.cpp
+)
+
+target_link_libraries(clk_singlestep_nmos
+    PRIVATE clk_toolbox
+)
+
 add_executable(ares_smoketest
     ares_smoke_test.cpp
 )
@@ -65,6 +73,14 @@ add_executable(ares_klaus_benchmark
 )
 
 target_link_libraries(ares_klaus_benchmark
+    PRIVATE ares_toolbox
+)
+
+add_executable(ares_singlestep_nmos
+    ares_singlestep_nmos.cpp
+)
+
+target_link_libraries(ares_singlestep_nmos
     PRIVATE ares_toolbox
 )
 
@@ -100,6 +116,14 @@ target_link_libraries(altirrasdl_klaus_benchmark
     PRIVATE altirrasdl_toolbox
 )
 
+add_executable(altirrasdl_singlestep_nmos
+    altirrasdl_singlestep_nmos.cpp
+)
+
+target_link_libraries(altirrasdl_singlestep_nmos
+    PRIVATE altirrasdl_toolbox
+)
+
 
 add_executable(altirrasdl_singlestep_65c02_fit
     altirrasdl_singlestep_65c02_fit.cpp
@@ -125,6 +149,14 @@ target_link_libraries(applewin_klaus_benchmark
     PRIVATE applewin_toolbox
 )
 
+add_executable(applewin_singlestep_nmos
+    applewin_singlestep_nmos.cpp
+)
+
+target_link_libraries(applewin_singlestep_nmos
+    PRIVATE applewin_toolbox
+)
+
 add_executable(applewin_singlestep_65c02_fit
     applewin_singlestep_65c02_fit.cpp
 )
@@ -147,6 +179,14 @@ add_executable(mame_klaus_benchmark
 )
 
 target_link_libraries(mame_klaus_benchmark
+    PRIVATE mame_toolbox
+)
+
+add_executable(mame_singlestep_nmos
+    mame_singlestep_nmos.cpp
+)
+
+target_link_libraries(mame_singlestep_nmos
     PRIVATE mame_toolbox
 )
 

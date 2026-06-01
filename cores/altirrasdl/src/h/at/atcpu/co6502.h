@@ -51,6 +51,7 @@ public:
 	void Jump(uint16 addr);
 
 	uint16 GetPC() const { return mInsnPC; }
+	uint16 GetCPUAddress() const { return mPC; }
 	uint8 GetA() const { return mA; }
 	uint8 GetX() const { return mX; }
 	uint8 GetY() const { return mY; }

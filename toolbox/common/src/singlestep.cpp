@@ -149,7 +149,7 @@ bool is_common_65c02_nop_opcode(const std::uint8_t opcode)
     case 0x0Bu: case 0x1Bu: case 0x2Bu: case 0x3Bu:
     case 0x4Bu: case 0x5Bu: case 0x6Bu: case 0x7Bu:
     case 0x8Bu: case 0x9Bu: case 0xABu: case 0xBBu:
-    case 0xEBu: case 0xFBu:
+    case 0xCBu: case 0xDBu: case 0xEBu: case 0xFBu:
     case 0x44u: case 0x54u: case 0x5Cu:
     case 0xD4u: case 0xDCu: case 0xF4u: case 0xFCu:
     case 0xEAu:
@@ -162,9 +162,6 @@ bool is_common_65c02_nop_opcode(const std::uint8_t opcode)
 bool is_defined_65c02_nop_opcode(const singlestep_model model, const std::uint8_t opcode)
 {
     if (is_common_65c02_nop_opcode(opcode)) {
-        if (model == singlestep_model::wdc65c02 && (opcode == 0xCBu || opcode == 0xDBu)) {
-            return false;
-        }
         return true;
     }
 

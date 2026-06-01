@@ -19,7 +19,7 @@ void load_ram(std::array<std::uint8_t, 0x10000>& memory, const std::vector<bench
     }
 }
 
-void set_initial_state(const benchmark6502::singlestep_cpu_state& state)
+void set_initial_state(const benchmark6502::singlestep_cpu_state& state, const applewin_toolbox::CpuMode mode)
 {
     applewin_toolbox::set_state(applewin_toolbox::State{
         state.a,
@@ -29,7 +29,7 @@ void set_initial_state(const benchmark6502::singlestep_cpu_state& state)
         state.pc,
         static_cast<std::uint16_t>(0x0100u | state.s),
         false,
-        applewin_toolbox::CpuMode::cmos65c02,
+        mode,
     });
     applewin_toolbox::clear_interrupt_lines();
     applewin_toolbox::clear_cumulative_cycles();
@@ -55,12 +55,12 @@ bool compare_final_state(const std::array<std::uint8_t, 0x10000>& memory,
     return true;
 }
 
-case_result run_case(const benchmark6502::singlestep_case& test_case)
+case_result run_case(const benchmark6502::singlestep_case& test_case, const applewin_toolbox::CpuMode mode)
 {
     std::array<std::uint8_t, 0x10000> memory{};
     load_ram(memory, test_case.initial.ram);
     applewin_toolbox::attach_memory(memory.data(), static_cast<std::uint32_t>(memory.size()));
-    set_initial_state(test_case.initial);
+    set_initial_state(test_case.initial, mode);
 
     const std::uint32_t cycles = applewin_toolbox::execute(static_cast<std::uint32_t>(test_case.cycles.size()));
 
@@ -70,14 +70,16 @@ case_result run_case(const benchmark6502::singlestep_case& test_case)
     return result;
 }
 
-benchmark6502::singlestep_result run_singlestep_65c02_corpus(const benchmark6502::singlestep_corpus& corpus,
-                                                             const std::string& display_model_name)
+benchmark6502::singlestep_result run_singlestep_corpus(const benchmark6502::singlestep_corpus& corpus,
+                                                   const std::string& display_model_name,
+                                                   const applewin_toolbox::CpuMode mode,
+                                                   const char* const cpu_init_model)
 {
     benchmark6502::singlestep_result result;
     result.core_name = "applewin";
     result.corpus_model = corpus.model;
     result.model_name = display_model_name;
-    result.cpu_init_model = "CpuMode::cmos65c02";
+    result.cpu_init_model = cpu_init_model;
 
     for (unsigned opcode_value = 0; opcode_value <= 0xffu; ++opcode_value) {
         const auto opcode = static_cast<std::uint8_t>(opcode_value);
@@ -90,7 +92,7 @@ benchmark6502::singlestep_result run_singlestep_65c02_corpus(const benchmark6502
         opcode_result.bus_trace.supported = false;
 
         for (const auto& test_case : tests.cases) {
-            const case_result single = run_case(test_case);
+            const case_result single = run_case(test_case, mode);
             if (!single.instruction_ok) {
                 opcode_result.instruction.failed = true;
                 opcode_result.instruction.failed_cases++;
@@ -109,19 +111,24 @@ benchmark6502::singlestep_result run_singlestep_65c02_corpus(const benchmark6502
 
 namespace applewin_toolbox {
 
+benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_corpus(corpus, "NMOS 6502", CpuMode::nmos6502, "CpuMode::nmos6502");
+}
+
 benchmark6502::singlestep_result run_singlestep_wdc65c02(const benchmark6502::singlestep_corpus& corpus)
 {
-    return run_singlestep_65c02_corpus(corpus, "CMOS 65C02/WDC corpus");
+    return run_singlestep_corpus(corpus, "CMOS 65C02/WDC corpus", CpuMode::cmos65c02, "CpuMode::cmos65c02");
 }
 
 benchmark6502::singlestep_result run_singlestep_rockwell65c02(const benchmark6502::singlestep_corpus& corpus)
 {
-    return run_singlestep_65c02_corpus(corpus, "CMOS 65C02/Rockwell corpus");
+    return run_singlestep_corpus(corpus, "CMOS 65C02/Rockwell corpus", CpuMode::cmos65c02, "CpuMode::cmos65c02");
 }
 
 benchmark6502::singlestep_result run_singlestep_synertek65c02(const benchmark6502::singlestep_corpus& corpus)
 {
-    return run_singlestep_65c02_corpus(corpus, "CMOS 65C02/Synertek-ST corpus");
+    return run_singlestep_corpus(corpus, "CMOS 65C02/Synertek-ST corpus", CpuMode::cmos65c02, "CpuMode::cmos65c02");
 }
 
 } // namespace applewin_toolbox
