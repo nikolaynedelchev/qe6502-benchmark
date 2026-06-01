@@ -1,13 +1,16 @@
 #include <cstdio>
+#include <array>
+#include <cstdint>
 #include "applewin_toolbox/applewin_cpu.hpp"
 
 int main() {
-    applewin_toolbox::reset_memory();
-    auto* mem = applewin_toolbox::memory();
-    mem[0x0200] = 0xa9; // LDA #$42
-    mem[0x0201] = 0x42;
-    mem[0x0202] = 0xaa; // TAX
-    mem[0x0203] = 0xea; // NOP
+    std::array<std::uint8_t, 65536> ram{};
+    applewin_toolbox::attach_memory(ram.data(), static_cast<std::uint32_t>(ram.size()));
+
+    ram[0x0200] = 0xa9; // LDA #$42
+    ram[0x0201] = 0x42;
+    ram[0x0202] = 0xaa; // TAX
+    ram[0x0203] = 0xea; // NOP
 
     applewin_toolbox::reset_cpu(0x0200);
     const auto cycles = applewin_toolbox::execute(6);

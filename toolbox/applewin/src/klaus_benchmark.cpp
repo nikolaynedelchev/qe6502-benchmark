@@ -14,6 +14,19 @@ constexpr std::uint16_t klaus_start_address = 0x0400u;
 constexpr std::uint16_t klaus_success_address = 0x3469u;
 constexpr std::uint64_t max_cycles = 200000000ull;
 
+struct client_memory {
+    std::array<std::uint8_t, 65536> ram{};
+
+    void reset() {
+        ram.fill(0);
+        applewin_toolbox::attach_memory(ram.data(), static_cast<std::uint32_t>(ram.size()));
+    }
+
+    void load_rom(const std::uint8_t* data, const std::size_t size) {
+        std::memcpy(ram.data(), data, size);
+    }
+};
+
 struct run_result {
     bool passed;
     std::uint64_t cycles;
@@ -21,8 +34,9 @@ struct run_result {
 
 run_result run_klaus_once()
 {
-    applewin_toolbox::reset_memory();
-    std::memcpy(applewin_toolbox::memory(), s_klaus_nmos_rom, sizeof(s_klaus_nmos_rom));
+    client_memory memory;
+    memory.reset();
+    memory.load_rom(s_klaus_nmos_rom, sizeof(s_klaus_nmos_rom));
     applewin_toolbox::reset_cpu(klaus_start_address, applewin_toolbox::CpuMode::nmos6502);
 
     while (applewin_toolbox::cumulative_cycles() < max_cycles) {

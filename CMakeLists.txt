@@ -92,6 +92,14 @@ target_link_libraries(altirrasdl_smoketest
     PRIVATE altirrasdl_toolbox
 )
 
+add_executable(altirrasdl_klaus_benchmark
+    altirrasdl_klaus_benchmark.cpp
+)
+
+target_link_libraries(altirrasdl_klaus_benchmark
+    PRIVATE altirrasdl_toolbox
+)
+
 add_executable(applewin_smoketest
     applewin_smoke_test.cpp
 )
@@ -444,6 +452,7 @@ target_link_libraries(all_6502_tests
         fceux_toolbox
         clk_toolbox
         ares_toolbox
+        altirrasdl_toolbox
         applewin_toolbox
         mame_toolbox
 )
@@ -510,6 +519,7 @@ if(MSVC)
     target_compile_options(fceux_klaus_benchmark PRIVATE /W4)
     target_compile_options(clk_klaus_benchmark PRIVATE /W4)
     target_compile_options(ares_klaus_benchmark PRIVATE /W4)
+    target_compile_options(altirrasdl_klaus_benchmark PRIVATE /W4)
     target_compile_options(all_6502_tests PRIVATE /W4)
     target_compile_options(all_65c02_tests PRIVATE /W4)
 else()
@@ -562,6 +572,7 @@ else()
     target_compile_options(fceux_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(clk_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(ares_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(altirrasdl_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(all_6502_tests PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(all_65c02_tests PRIVATE -Wall -Wextra -Wpedantic)
 endif()

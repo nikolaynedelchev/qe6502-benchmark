@@ -40,35 +40,15 @@ extern Registers registers;
 extern CpuMode current_mode;
 extern bool irq_asserted;
 extern bool nmi_pending_flag;
-extern std::uint8_t ram[65536];
 extern std::uint64_t cumulative_cycles_counter;
 
 std::uint32_t execute_nmos6502(std::uint32_t cycles);
 std::uint32_t execute_cmos65c02(std::uint32_t cycles);
-void reset_memory_storage();
 
 } // namespace detail
 
-void reset_memory();
-inline std::uint8_t* memory() { return detail::ram; }
-inline const std::uint8_t* memory_data() { return detail::ram; }
-inline std::uint8_t read_memory(std::uint16_t address) { return detail::ram[address]; }
-inline void write_memory(std::uint16_t address, std::uint8_t value) { detail::ram[address] = value; }
-inline void load_program(std::uint16_t address, const std::uint8_t* data, std::uint32_t size) {
-    for(std::uint32_t i = 0; i < size; ++i) {
-        detail::ram[(address + i) & 0xffffu] = data[i];
-    }
-}
-inline std::uint16_t read_word(std::uint16_t address) {
-    return static_cast<std::uint16_t>(detail::ram[address] | (static_cast<std::uint16_t>(detail::ram[(address + 1u) & 0xffffu]) << 8));
-}
-inline void set_vector(std::uint16_t vector_address, std::uint16_t target_address) {
-    detail::ram[vector_address] = static_cast<std::uint8_t>(target_address & 0xffu);
-    detail::ram[(vector_address + 1u) & 0xffffu] = static_cast<std::uint8_t>(target_address >> 8);
-}
-inline void set_reset_vector(std::uint16_t target_address) { set_vector(reset_vector, target_address); }
-inline void set_nmi_vector(std::uint16_t target_address) { set_vector(nmi_vector, target_address); }
-inline void set_irq_brk_vector(std::uint16_t target_address) { set_vector(irq_brk_vector, target_address); }
+void attach_memory(std::uint8_t* memory, std::uint32_t size = 65536);
+std::uint16_t read_word(std::uint16_t address);
 
 inline void reset_cpu(std::uint16_t pc, CpuMode mode = CpuMode::nmos6502) {
     detail::current_mode = mode;

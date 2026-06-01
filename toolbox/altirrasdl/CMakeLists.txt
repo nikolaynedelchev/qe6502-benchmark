@@ -1,5 +1,6 @@
 add_library(altirrasdl_toolbox STATIC
     src/smoke.cpp
+    src/klaus_benchmark.cpp
     src/stubs.cpp
     ${PROJECT_SOURCE_DIR}/cores/altirrasdl/src/ATCPU/source/co6502.cpp
     ${PROJECT_SOURCE_DIR}/cores/altirrasdl/src/ATCPU/source/co6502machine.cpp
@@ -12,6 +13,7 @@ target_include_directories(altirrasdl_toolbox
     PUBLIC include
     PUBLIC ${PROJECT_SOURCE_DIR}/toolbox/common/include
     PUBLIC ${PROJECT_SOURCE_DIR}/cores/altirrasdl/src/h
+    PRIVATE ${PROJECT_SOURCE_DIR}
     PRIVATE ${PROJECT_SOURCE_DIR}/cores/altirrasdl/src/ATCPU/h
     PRIVATE ${PROJECT_SOURCE_DIR}/cores/altirrasdl/src/ATCore/h
     PRIVATE ${PROJECT_SOURCE_DIR}/cores/altirrasdl/src/system/h

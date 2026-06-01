@@ -41,15 +41,13 @@ Registers registers{};
 CpuMode current_mode = CpuMode::nmos6502;
 bool irq_asserted = false;
 bool nmi_pending_flag = false;
-std::uint8_t ram[65536]{};
 std::uint64_t cumulative_cycles_counter = 0;
 } // namespace applewin_toolbox::detail
 
 using regsrec = applewin_toolbox::detail::Registers;
 regsrec& regs = applewin_toolbox::detail::registers;
-std::uint8_t (&ram)[65536] = applewin_toolbox::detail::ram;
 static BYTE dirty[256];
-LPBYTE mem = ram;
+LPBYTE mem = nullptr;
 LPBYTE memdirty = dirty;
 LPBYTE memVidHD = nullptr;
 LPBYTE memshadow[0x100];
@@ -59,14 +57,14 @@ iofunction IORead[256];
 iofunction IOWrite[256];
 
 static BYTE __stdcall io_stub(WORD, WORD address, BYTE write, BYTE value, ULONG) {
-    if(write) ram[address] = value;
-    return ram[address];
+    if(write) mem[address] = value;
+    return mem[address];
 }
 
 static void initialise_pages() {
     for(unsigned i = 0; i < 0x100; ++i) {
-        memshadow[i] = ram + (i << 8);
-        memwrite[i] = ram + (i << 8);
+        memshadow[i] = mem + (i << 8);
+        memwrite[i] = mem + (i << 8);
         memreadPageType[i] = MEM_Normal;
         IORead[i] = io_stub;
         IOWrite[i] = io_stub;
@@ -75,11 +73,11 @@ static void initialise_pages() {
 }
 
 static __forceinline WORD read_word(WORD address) {
-    return static_cast<WORD>(ram[address] | (static_cast<WORD>(ram[(address + 1u) & 0xffffu]) << 8));
+    return static_cast<WORD>(mem[address] | (static_cast<WORD>(mem[(address + 1u) & 0xffffu]) << 8));
 }
 
 static __forceinline void Fetch(BYTE& iOpcode, ULONG) {
-    iOpcode = ram[regs.pc++];
+    iOpcode = mem[regs.pc++];
 }
 
 static eCpuType to_cpu_type(applewin_toolbox::CpuMode mode) { return mode == applewin_toolbox::CpuMode::cmos65c02 ? CPU_65C02 : CPU_6502; }
@@ -146,16 +144,22 @@ static __forceinline void NTSC_VideoUpdateCycles(ULONG) {}
 
 namespace applewin_toolbox {
 
-void reset_memory() {
-    detail::reset_memory_storage();
+void attach_memory(std::uint8_t* memory, std::uint32_t size) {
+    assert(memory != nullptr);
+    assert(size >= 65536u);
+    (void)size;
+    mem = memory;
+    initialise_pages();
+}
+
+std::uint16_t read_word(std::uint16_t address) {
+    assert(mem != nullptr);
+    return static_cast<std::uint16_t>(
+        mem[address] |
+        (static_cast<std::uint16_t>(mem[(address + 1u) & 0xffffu]) << 8));
 }
 
 namespace detail {
-
-void reset_memory_storage() {
-    std::memset(ram, 0, 65536u);
-    initialise_pages();
-}
 
 std::uint32_t execute_nmos6502(std::uint32_t cycles) {
     return Cpu6502(cycles, false);

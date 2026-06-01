@@ -1,16 +1,20 @@
 #include <applewin_toolbox.hpp>
 
+#include <array>
+#include <cstdint>
+
 namespace applewin_toolbox {
 
 benchmark6502::smoke_result run_smoke_test()
 {
-    reset_memory();
-    auto* const mem = memory();
+    std::array<std::uint8_t, 65536> ram{};
+    attach_memory(ram.data(), static_cast<std::uint32_t>(ram.size()));
+
     constexpr std::uint16_t program_address = 0x0200u;
-    mem[program_address + 0u] = 0xa9u; // LDA #$42
-    mem[program_address + 1u] = 0x42u;
-    mem[program_address + 2u] = 0xaau; // TAX
-    mem[program_address + 3u] = 0xeau; // NOP
+    ram[program_address + 0u] = 0xa9u; // LDA #$42
+    ram[program_address + 1u] = 0x42u;
+    ram[program_address + 2u] = 0xaau; // TAX
+    ram[program_address + 3u] = 0xeau; // NOP
 
     reset_cpu(program_address);
     const auto cycles = execute(6);

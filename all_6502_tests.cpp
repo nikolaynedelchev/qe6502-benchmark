@@ -1,3 +1,4 @@
+#include <altirrasdl_toolbox.hpp>
 #include <applewin_toolbox.hpp>
 #include <ares_toolbox.hpp>
 #include <chris_pikul_mos6502_toolbox.hpp>
@@ -244,6 +245,13 @@ int main(int argc, char** argv)
     }
     if (options.run_klaus) {
         print_klaus_result("ares", ares_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
+
+    if (options.run_smoke) {
+        print_smoke_result("altirrasdl", altirrasdl_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("altirrasdl", altirrasdl_toolbox::run_klaus_nmos_standard(measured_runs), summary);
     }
 
     if (options.run_smoke) {
