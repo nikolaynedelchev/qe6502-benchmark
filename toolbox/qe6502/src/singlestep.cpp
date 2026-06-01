@@ -82,15 +82,21 @@ bool compare_cycle(const benchmark6502::singlestep_cycle& actual, const benchmar
            actual.operation == expected.operation;
 }
 
-case_result run_case(const benchmark6502::singlestep_case& test_case, const std::uint8_t opcode)
+bool is_wdc_stop_opcode(const qe6502::model cpu_model, const std::uint8_t opcode)
+{
+    return cpu_model == qe6502::model::wdc && (opcode == 0xCBu || opcode == 0xDBu);
+}
+
+case_result run_case(const benchmark6502::singlestep_case& test_case, const std::uint8_t opcode, const qe6502::model cpu_model)
 {
     std::array<std::uint8_t, 0x10000> memory{};
     load_ram(memory, test_case.initial.ram);
 
-    qe6502::cpu cpu{qe6502::model::nmos};
+    qe6502::cpu cpu{cpu_model};
     set_initial_state(cpu, test_case.initial);
 
-    const bool kil_opcode = is_nmos_kil_opcode(opcode);
+    const bool kil_opcode = cpu_model == qe6502::model::nmos && is_nmos_kil_opcode(opcode);
+    const bool wdc_stop_opcode = is_wdc_stop_opcode(cpu_model, opcode);
     const std::size_t expected_cycle_count = kil_opcode && test_case.cycles.size() > 2u
         ? 2u
         : test_case.cycles.size();
@@ -114,10 +120,10 @@ case_result run_case(const benchmark6502::singlestep_case& test_case, const std:
 
         cpu.tick(bus_value);
 
-        if (kil_opcode && actual_cycles.size() >= expected_cycle_count) {
+        if ((kil_opcode || wdc_stop_opcode) && actual_cycles.size() >= expected_cycle_count) {
             break;
         }
-        if (!kil_opcode && cpu.is_opcode_fetch()) {
+        if (!kil_opcode && !wdc_stop_opcode && cpu.is_opcode_fetch()) {
             break;
         }
     }
@@ -158,7 +164,7 @@ benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::single
         opcode_result.bus_trace.supported = true;
 
         for (const auto& test_case : tests.cases) {
-            const case_result single = run_case(test_case, opcode);
+            const case_result single = run_case(test_case, opcode, qe6502::model::nmos);
             if (!single.instruction_ok) {
                 opcode_result.instruction.failed = true;
                 opcode_result.instruction.failed_cases++;
@@ -175,6 +181,62 @@ benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::single
     }
 
     return result;
+}
+
+benchmark6502::singlestep_result run_singlestep_65c02_model(const benchmark6502::singlestep_corpus& corpus,
+                                                            const qe6502::model cpu_model,
+                                                            const char* const cpu_model_name,
+                                                            const std::string& display_model_name)
+{
+    benchmark6502::singlestep_result result;
+    result.core_name = "qe6502";
+    result.corpus_model = corpus.model;
+    result.model_name = display_model_name;
+    result.cpu_init_model = cpu_model_name;
+
+    for (unsigned opcode_value = 0; opcode_value <= 0xffu; ++opcode_value) {
+        const auto opcode = static_cast<std::uint8_t>(opcode_value);
+        const benchmark6502::singlestep_opcode_tests& tests = corpus.opcodes[opcode_value];
+        benchmark6502::singlestep_opcode_result& opcode_result = result.opcodes[opcode_value];
+        opcode_result.opcode = opcode;
+        opcode_result.cases_run = static_cast<std::uint64_t>(tests.cases.size());
+        opcode_result.instruction.supported = true;
+        opcode_result.cycle_count.supported = true;
+        opcode_result.bus_trace.supported = true;
+
+        for (const auto& test_case : tests.cases) {
+            const case_result single = run_case(test_case, opcode, cpu_model);
+            if (!single.instruction_ok) {
+                opcode_result.instruction.failed = true;
+                opcode_result.instruction.failed_cases++;
+            }
+            if (!single.cycle_count_ok) {
+                opcode_result.cycle_count.failed = true;
+                opcode_result.cycle_count.failed_cases++;
+            }
+            if (!single.bus_trace_ok) {
+                opcode_result.bus_trace.failed = true;
+                opcode_result.bus_trace.failed_cases++;
+            }
+        }
+    }
+
+    return result;
+}
+
+benchmark6502::singlestep_result run_singlestep_wdc65c02(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_65c02_model(corpus, qe6502::model::wdc, "qe6502_model_wdc", "WDC 65C02");
+}
+
+benchmark6502::singlestep_result run_singlestep_rockwell65c02(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_65c02_model(corpus, qe6502::model::rw, "qe6502_model_rw", "Rockwell 65C02");
+}
+
+benchmark6502::singlestep_result run_singlestep_synertek65c02(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_65c02_model(corpus, qe6502::model::st, "qe6502_model_st", "Synertek/ST 65C02");
 }
 
 } // namespace qe6502_toolbox

@@ -4,6 +4,7 @@
 
 #include <array>
 #include <cstdint>
+#include <string>
 #include <vector>
 
 struct vrEmu6502Opcode;
@@ -112,7 +113,7 @@ bool compare_final_state(VrEmu6502* cpu,
     return true;
 }
 
-case_result run_case(const benchmark6502::singlestep_case& test_case)
+case_result run_case(const benchmark6502::singlestep_case& test_case, const vrEmu6502Model model)
 {
     std::array<std::uint8_t, 0x10000> memory{};
     load_ram(memory, test_case.initial.ram);
@@ -120,7 +121,7 @@ case_result run_case(const benchmark6502::singlestep_case& test_case)
     memory_context context{&memory};
     g_context = &context;
 
-    VrEmu6502* cpu = vrEmu6502New(CPU_6502U, memory_read, memory_write);
+    VrEmu6502* cpu = vrEmu6502New(model, memory_read, memory_write);
     if (cpu == nullptr) {
         g_context = nullptr;
         return {};
@@ -159,7 +160,7 @@ benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::single
         opcode_result.bus_trace.supported = false;
 
         for (const auto& test_case : tests.cases) {
-            const case_result single = run_case(test_case);
+            const case_result single = run_case(test_case, CPU_6502U);
             if (!single.instruction_ok) {
                 opcode_result.instruction.failed = true;
                 opcode_result.instruction.failed_cases++;
@@ -172,6 +173,66 @@ benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::single
     }
 
     return result;
+}
+
+benchmark6502::singlestep_result run_singlestep_65c02_model(const benchmark6502::singlestep_corpus& corpus,
+                                                                 const vrEmu6502Model cpu_model,
+                                                                 const char* const cpu_model_name,
+                                                                 const std::string& display_model_name)
+{
+    benchmark6502::singlestep_result result;
+    result.core_name = "vrEmu6502";
+    result.corpus_model = corpus.model;
+    result.model_name = display_model_name;
+    result.cpu_init_model = cpu_model_name;
+
+    for (unsigned opcode_value = 0; opcode_value <= 0xffu; ++opcode_value) {
+        const auto opcode = static_cast<std::uint8_t>(opcode_value);
+        const benchmark6502::singlestep_opcode_tests& tests = corpus.opcodes[opcode_value];
+        benchmark6502::singlestep_opcode_result& opcode_result = result.opcodes[opcode_value];
+        opcode_result.opcode = opcode;
+        opcode_result.cases_run = static_cast<std::uint64_t>(tests.cases.size());
+        opcode_result.instruction.supported = true;
+        opcode_result.cycle_count.supported = true;
+        opcode_result.bus_trace.supported = false;
+
+        for (const auto& test_case : tests.cases) {
+            const case_result single = run_case(test_case, cpu_model);
+            if (!single.instruction_ok) {
+                opcode_result.instruction.failed = true;
+                opcode_result.instruction.failed_cases++;
+            }
+            if (!single.cycle_count_ok) {
+                opcode_result.cycle_count.failed = true;
+                opcode_result.cycle_count.failed_cases++;
+            }
+        }
+    }
+
+    return result;
+}
+
+benchmark6502::singlestep_result run_singlestep_cpu65c02(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_65c02_model(corpus,
+                                      CPU_65C02,
+                                      "CPU_65C02",
+                                      std::string{"CPU_65C02/"} + benchmark6502::singlestep_model_name(corpus.model) + " corpus");
+}
+
+benchmark6502::singlestep_result run_singlestep_wdc65c02(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_65c02_model(corpus, CPU_W65C02, "CPU_W65C02", "WDC 65C02");
+}
+
+benchmark6502::singlestep_result run_singlestep_rockwell65c02(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_65c02_model(corpus, CPU_R65C02, "CPU_R65C02", "Rockwell 65C02");
+}
+
+benchmark6502::singlestep_result run_singlestep_synertek65c02(const benchmark6502::singlestep_corpus& corpus)
+{
+    return run_singlestep_65c02_model(corpus, CPU_65C02, "CPU_65C02", "Synertek/ST 65C02");
 }
 
 } // namespace vremu6502_toolbox

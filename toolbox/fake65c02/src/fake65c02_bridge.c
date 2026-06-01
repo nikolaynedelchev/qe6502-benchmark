@@ -91,3 +91,68 @@ int fake65c02_klaus_extended_run_once(unsigned long long* cycles_out)
         cycles += step6502();
     }
 }
+
+void fake65c02_singlestep_clear_memory(void)
+{
+    memset(memory, 0, sizeof(memory));
+}
+
+void fake65c02_singlestep_write_memory(unsigned short address, unsigned char value)
+{
+    memory[address] = value;
+}
+
+unsigned char fake65c02_singlestep_read_memory(unsigned short address)
+{
+    return memory[address];
+}
+
+void fake65c02_singlestep_set_state(unsigned short state_pc,
+                                    unsigned char state_s,
+                                    unsigned char state_a,
+                                    unsigned char state_x,
+                                    unsigned char state_y,
+                                    unsigned char state_p)
+{
+    pc = state_pc;
+    sp = state_s;
+    a = state_a;
+    x = state_x;
+    y = state_y;
+    status = state_p;
+    clockticks6502 = 0;
+    instructions = 0;
+    waiting6502 = 0;
+}
+
+void fake65c02_singlestep_get_state(unsigned short* state_pc,
+                                    unsigned char* state_s,
+                                    unsigned char* state_a,
+                                    unsigned char* state_x,
+                                    unsigned char* state_y,
+                                    unsigned char* state_p)
+{
+    if (state_pc != 0) {
+        *state_pc = pc;
+    }
+    if (state_s != 0) {
+        *state_s = sp;
+    }
+    if (state_a != 0) {
+        *state_a = a;
+    }
+    if (state_x != 0) {
+        *state_x = x;
+    }
+    if (state_y != 0) {
+        *state_y = y;
+    }
+    if (state_p != 0) {
+        *state_p = status;
+    }
+}
+
+unsigned int fake65c02_singlestep_step(void)
+{
+    return step6502();
+}

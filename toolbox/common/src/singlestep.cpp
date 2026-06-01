@@ -107,6 +107,12 @@ std::string model_relative_path(const singlestep_model model)
     switch (model) {
     case singlestep_model::nmos6502:
         return "6502/v1";
+    case singlestep_model::wdc65c02:
+        return "wdc65c02/v1";
+    case singlestep_model::rockwell65c02:
+        return "rockwell65c02/v1";
+    case singlestep_model::synertek65c02:
+        return "synertek65c02/v1";
     }
     return "6502/v1";
 }
@@ -124,18 +130,100 @@ std::string select_model_path(const singlestep_model model, const std::string& r
     throw std::runtime_error("SingleStep corpus not found under '" + root + "' for model " + singlestep_model_name(model));
 }
 
-void record_level(singlestep_level_summary& summary, const singlestep_opcode_result& opcode, const singlestep_opcode_level_result& level)
+bool is_65c02_model(const singlestep_model model)
+{
+    return model == singlestep_model::wdc65c02 ||
+           model == singlestep_model::rockwell65c02 ||
+           model == singlestep_model::synertek65c02;
+}
+
+bool is_common_65c02_nop_opcode(const std::uint8_t opcode)
+{
+    switch (opcode) {
+    case 0x02u: case 0x22u: case 0x42u: case 0x62u:
+    case 0x82u: case 0xC2u: case 0xE2u:
+    case 0x03u: case 0x13u: case 0x23u: case 0x33u:
+    case 0x43u: case 0x53u: case 0x63u: case 0x73u:
+    case 0x83u: case 0x93u: case 0xA3u: case 0xB3u:
+    case 0xC3u: case 0xD3u: case 0xE3u: case 0xF3u:
+    case 0x0Bu: case 0x1Bu: case 0x2Bu: case 0x3Bu:
+    case 0x4Bu: case 0x5Bu: case 0x6Bu: case 0x7Bu:
+    case 0x8Bu: case 0x9Bu: case 0xABu: case 0xBBu:
+    case 0xEBu: case 0xFBu:
+    case 0x44u: case 0x54u: case 0x5Cu:
+    case 0xD4u: case 0xDCu: case 0xF4u: case 0xFCu:
+    case 0xEAu:
+        return true;
+    default:
+        return false;
+    }
+}
+
+bool is_defined_65c02_nop_opcode(const singlestep_model model, const std::uint8_t opcode)
+{
+    if (is_common_65c02_nop_opcode(opcode)) {
+        if (model == singlestep_model::wdc65c02 && (opcode == 0xCBu || opcode == 0xDBu)) {
+            return false;
+        }
+        return true;
+    }
+
+    if (model == singlestep_model::synertek65c02) {
+        switch (opcode) {
+        case 0x07u: case 0x17u: case 0x27u: case 0x37u:
+        case 0x47u: case 0x57u: case 0x67u: case 0x77u:
+        case 0x87u: case 0x97u: case 0xA7u: case 0xB7u:
+        case 0xC7u: case 0xD7u: case 0xE7u: case 0xF7u:
+        case 0x0Fu: case 0x1Fu: case 0x2Fu: case 0x3Fu:
+        case 0x4Fu: case 0x5Fu: case 0x6Fu: case 0x7Fu:
+        case 0x8Fu: case 0x9Fu: case 0xAFu: case 0xBFu:
+        case 0xCFu: case 0xDFu: case 0xEFu: case 0xFFu:
+            return true;
+        default:
+            break;
+        }
+    }
+
+    return false;
+}
+
+const char* opcode_group_65c02_name(const singlestep_model model, const std::uint8_t opcode)
+{
+    return is_defined_65c02_nop_opcode(model, opcode) ? "nop" : "functional";
+}
+
+void record_level(singlestep_level_summary& summary,
+                  const singlestep_model model,
+                  const singlestep_opcode_result& opcode,
+                  const singlestep_opcode_level_result& level)
 {
     if (!level.supported || opcode.cases_run == 0u) {
         return;
     }
 
-    const bool legal = is_legal_nmos_opcode(opcode.opcode);
     summary.supported = true;
     summary.opcodes_total++;
     if (level.failed) {
         summary.opcodes_failed++;
     }
+
+    if (is_65c02_model(model)) {
+        const bool nop = is_defined_65c02_nop_opcode(model, opcode.opcode);
+        if (nop) {
+            summary.nop_total++;
+            if (level.failed) {
+                summary.nop_failed++;
+            }
+        } else {
+            summary.functional_total++;
+            if (level.failed) {
+                summary.functional_failed++;
+            }
+        }
+        return;
+    }
+
+    const bool legal = is_legal_nmos_opcode(opcode.opcode);
     if (legal) {
         summary.legal_total++;
         if (level.failed) {
@@ -197,8 +285,15 @@ void print_level(const char* name, const singlestep_level_summary& level)
     }
 
     std::cout << "total " << level.opcodes_failed << '/' << level.opcodes_total
-              << " failed, " << std::fixed << std::setprecision(2) << level.failed_percent() << "%"
-              << "  legal " << level.legal_failed << '/' << level.legal_total
+              << " failed, " << std::fixed << std::setprecision(2) << level.failed_percent() << "%";
+    if (level.functional_total != 0u || level.nop_total != 0u) {
+        std::cout << "  functional " << level.functional_failed << '/' << level.functional_total
+                  << ", " << std::fixed << std::setprecision(2) << level.functional_failed_percent() << "%"
+                  << "  nop " << level.nop_failed << '/' << level.nop_total
+                  << ", " << std::fixed << std::setprecision(2) << level.nop_failed_percent() << "%\n";
+        return;
+    }
+    std::cout << "  legal " << level.legal_failed << '/' << level.legal_total
               << ", " << std::fixed << std::setprecision(2) << level.legal_failed_percent() << "%"
               << "  illegal " << level.illegal_failed << '/' << level.illegal_total
               << ", " << std::fixed << std::setprecision(2) << level.illegal_failed_percent() << "%\n";
@@ -237,6 +332,16 @@ double singlestep_level_summary::legal_failed_percent() const
 double singlestep_level_summary::illegal_failed_percent() const
 {
     return illegal_total == 0u ? 0.0 : 100.0 * static_cast<double>(illegal_failed) / static_cast<double>(illegal_total);
+}
+
+double singlestep_level_summary::functional_failed_percent() const
+{
+    return functional_total == 0u ? 0.0 : 100.0 * static_cast<double>(functional_failed) / static_cast<double>(functional_total);
+}
+
+double singlestep_level_summary::nop_failed_percent() const
+{
+    return nop_total == 0u ? 0.0 : 100.0 * static_cast<double>(nop_failed) / static_cast<double>(nop_total);
 }
 
 std::string join_path(const std::string& dir, const std::string& child)
@@ -307,6 +412,9 @@ singlestep_corpus load_singlestep_corpus(const singlestep_model model, const sin
         const std::string filename = join_path(out.model_path, opcode_json_filename(opcode));
         std::ifstream in{filename};
         if (!in) {
+            if (is_65c02_model(model)) {
+                continue;
+            }
             throw std::runtime_error("failed to open SingleStep JSON file: " + filename);
         }
 
@@ -333,6 +441,12 @@ const char* singlestep_model_name(const singlestep_model model)
     switch (model) {
     case singlestep_model::nmos6502:
         return "6502 NMOS";
+    case singlestep_model::wdc65c02:
+        return "WDC 65C02";
+    case singlestep_model::rockwell65c02:
+        return "Rockwell 65C02";
+    case singlestep_model::synertek65c02:
+        return "Synertek 65C02";
     }
     return "unknown";
 }
@@ -352,9 +466,9 @@ singlestep_summary summarize_singlestep_result(const singlestep_result& result)
 {
     singlestep_summary summary;
     for (const auto& opcode : result.opcodes) {
-        record_level(summary.instruction, opcode, opcode.instruction);
-        record_level(summary.cycle_count, opcode, opcode.cycle_count);
-        record_level(summary.bus_trace, opcode, opcode.bus_trace);
+        record_level(summary.instruction, result.corpus_model, opcode, opcode.instruction);
+        record_level(summary.cycle_count, result.corpus_model, opcode, opcode.cycle_count);
+        record_level(summary.bus_trace, result.corpus_model, opcode, opcode.bus_trace);
     }
     return summary;
 }
@@ -363,6 +477,9 @@ void print_singlestep_result(const singlestep_corpus& corpus, const singlestep_r
 {
     std::cout << result.core_name << ' ' << result.model_name << " SingleStep:\n";
     std::cout << "  corpus: " << (corpus.external ? "external " : "bundled light ") << corpus.model_path << "\n";
+    if (!result.cpu_init_model.empty()) {
+        std::cout << "  cpu init model: " << result.cpu_init_model << "\n";
+    }
     std::cout << "  cases:  " << result.cases_run() << "\n";
 
     if (result.harness_error) {
@@ -391,7 +508,9 @@ void write_singlestep_detail_log(const singlestep_corpus& corpus,
         throw std::runtime_error("failed to open SingleStep detail log for writing: " + path);
     }
 
-    out << "core\tmodel\tcorpus\topcode\tmnemonic\taddressing_mode\tlegal_nmos\tcases_run\t"
+    const bool cmos65c02 = is_65c02_model(corpus.model);
+    out << "core\tmodel\tcorpus\topcode\tmnemonic\taddressing_mode\t"
+        << (cmos65c02 ? "opcode_group_65c02" : "legal_nmos") << "\tcases_run\t"
         << "instruction_status\tinstruction_failed_opcode\tinstruction_failed_cases\t"
         << "cycle_count_status\tcycle_count_failed_opcode\tcycle_count_failed_cases\t"
         << "bus_trace_status\tbus_trace_failed_opcode\tbus_trace_failed_cases\n";
@@ -402,10 +521,14 @@ void write_singlestep_detail_log(const singlestep_corpus& corpus,
             << result.model_name << '\t'
             << corpus.model_path << '\t'
             << hex_opcode(opcode_result.opcode) << '\t'
-            << metadata.mnemonic << '\t'
-            << addressing_mode_name(metadata.mode) << '\t'
-            << (metadata.legal_nmos ? "yes" : "no") << '\t'
-            << opcode_result.cases_run << '\t';
+            << (cmos65c02 && is_defined_65c02_nop_opcode(corpus.model, opcode_result.opcode) ? "NOP" : metadata.mnemonic) << '\t'
+            << addressing_mode_name(metadata.mode) << '\t';
+        if (cmos65c02) {
+            out << opcode_group_65c02_name(corpus.model, opcode_result.opcode) << '\t';
+        } else {
+            out << (metadata.legal_nmos ? "yes" : "no") << '\t';
+        }
+        out << opcode_result.cases_run << '\t';
         write_level_columns(out, opcode_result.instruction);
         out << '\t';
         write_level_columns(out, opcode_result.cycle_count);

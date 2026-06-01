@@ -9,6 +9,9 @@ namespace benchmark6502 {
 
 enum class singlestep_model {
     nmos6502,
+    wdc65c02,
+    rockwell65c02,
+    synertek65c02,
 };
 
 enum class singlestep_memory_operation {
@@ -80,6 +83,8 @@ struct singlestep_opcode_result {
 struct singlestep_result {
     std::string core_name;
     std::string model_name;
+    std::string cpu_init_model;
+    singlestep_model corpus_model = singlestep_model::nmos6502;
     std::array<singlestep_opcode_result, 256> opcodes{};
     bool harness_error = false;
     std::string error_message;
@@ -95,10 +100,16 @@ struct singlestep_level_summary {
     std::uint32_t legal_failed = 0;
     std::uint32_t illegal_total = 0;
     std::uint32_t illegal_failed = 0;
+    std::uint32_t functional_total = 0;
+    std::uint32_t functional_failed = 0;
+    std::uint32_t nop_total = 0;
+    std::uint32_t nop_failed = 0;
 
     double failed_percent() const;
     double legal_failed_percent() const;
     double illegal_failed_percent() const;
+    double functional_failed_percent() const;
+    double nop_failed_percent() const;
 };
 
 struct singlestep_summary {
