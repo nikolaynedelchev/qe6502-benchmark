@@ -63,25 +63,24 @@ run_result run_klaus_once(const qe6502_toolbox::klaus_model model, const qe6502_
     cpu.restart();
     cpu.jump_to(klaus_start_address);
 
-    const qe6502_tick_t* tick = &cpu.raw_tick();
     std::uint64_t bus_ticks = 0;
 
     for (;;) {
-        const std::uint16_t address = tick->address;
+        const std::uint16_t address = cpu.bus_address();
 
         if (address == success_address) {
             return {true, bus_ticks};
         }
 
         std::uint8_t data;
-        if ((tick->status & qe6502_status_writing) != 0u) {
-            data = tick->bus;
+        if (cpu.is_write()) {
+            data = cpu.bus_data();
             memory[address] = data;
         } else {
             data = memory[address];
         }
 
-        tick = &cpu.tick(data);
+        cpu.tick(data);
         ++bus_ticks;
     }
 }

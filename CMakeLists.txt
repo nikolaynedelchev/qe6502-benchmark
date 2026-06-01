@@ -100,12 +100,28 @@ target_link_libraries(applewin_smoketest
     PRIVATE applewin_toolbox
 )
 
+add_executable(applewin_klaus_benchmark
+    applewin_klaus_benchmark.cpp
+)
+
+target_link_libraries(applewin_klaus_benchmark
+    PRIVATE applewin_toolbox
+)
+
 
 add_executable(mame_smoketest
     mame_smoke_test.cpp
 )
 
 target_link_libraries(mame_smoketest
+    PRIVATE mame_toolbox
+)
+
+add_executable(mame_klaus_benchmark
+    mame_klaus_benchmark.cpp
+)
+
+target_link_libraries(mame_klaus_benchmark
     PRIVATE mame_toolbox
 )
 
@@ -428,6 +444,8 @@ target_link_libraries(all_6502_tests
         fceux_toolbox
         clk_toolbox
         ares_toolbox
+        applewin_toolbox
+        mame_toolbox
 )
 
 add_executable(all_65c02_tests

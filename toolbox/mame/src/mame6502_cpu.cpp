@@ -499,6 +499,9 @@ std::uint8_t Mame6502Cpu::read_sync(std::uint16_t address)
 {
     ++sync_read_count_;
     ++read_count_;
+    if(sync_watch_enabled_ && address == sync_watch_address_) {
+        sync_watch_seen_ = true;
+    }
     return memory_[address];
 }
 

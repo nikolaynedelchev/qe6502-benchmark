@@ -53,7 +53,9 @@ int test_save_load_mid_instruction()
     failures += expect_bool(cpu.is_opcode_fetch(), true);
 
     qe6502::cpu restored_cpu(snapshot);
-    failures += expect_tick(restored_cpu.raw_tick(), operand_tick);
+    failures += expect_u16(restored_cpu.bus_address(), operand_tick.address);
+    failures += expect_u8(restored_cpu.bus_data(), operand_tick.bus);
+    failures += expect_u8(restored_cpu.bus_status(), operand_tick.status);
     failures += expect_u16(restored_cpu.bus_address(), 0x8001u);
     failures += expect_u8(restored_cpu.x(), 0x00u);
     failures += expect_u16(restored_cpu.pc(), 0x8002u);

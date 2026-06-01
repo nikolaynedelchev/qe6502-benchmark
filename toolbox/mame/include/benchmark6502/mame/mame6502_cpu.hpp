@@ -76,6 +76,9 @@ public:
     unsigned read_count() const { return read_count_; }
     unsigned write_count() const { return write_count_; }
     unsigned sync_read_count() const { return sync_read_count_; }
+    void watch_sync_address(std::uint16_t address) { sync_watch_address_ = address; sync_watch_enabled_ = true; sync_watch_seen_ = false; }
+    void clear_sync_watch() { sync_watch_enabled_ = false; sync_watch_seen_ = false; }
+    bool sync_watch_seen() const { return sync_watch_seen_; }
 
 private:
     friend class mame6502_cpu_device;
@@ -113,6 +116,9 @@ private:
     bool sync_ = false;
     bool inhibit_interrupts_ = false;
     bool jammed_ = false;
+    std::uint16_t sync_watch_address_ = 0;
+    bool sync_watch_enabled_ = false;
+    bool sync_watch_seen_ = false;
 
     std::uint8_t read(std::uint16_t address);
     std::uint8_t read_sync(std::uint16_t address);

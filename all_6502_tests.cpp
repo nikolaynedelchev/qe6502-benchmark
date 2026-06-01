@@ -1,3 +1,4 @@
+#include <applewin_toolbox.hpp>
 #include <ares_toolbox.hpp>
 #include <chris_pikul_mos6502_toolbox.hpp>
 #include <clk_toolbox.hpp>
@@ -5,6 +6,7 @@
 #include <fceux_toolbox.hpp>
 #include <floooh_chips_toolbox.hpp>
 #include <gianlucag_mos6502_toolbox.hpp>
+#include <mame_toolbox.hpp>
 #include <o2_toolbox.hpp>
 #include <olcNES_toolbox.hpp>
 #include <peddle_toolbox.hpp>
@@ -242,6 +244,20 @@ int main(int argc, char** argv)
     }
     if (options.run_klaus) {
         print_klaus_result("ares", ares_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
+
+    if (options.run_smoke) {
+        print_smoke_result("applewin", applewin_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("applewin", applewin_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
+
+    if (options.run_smoke) {
+        print_smoke_result("mame", mame_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("mame", mame_toolbox::run_klaus_nmos_standard(measured_runs), summary);
     }
 
     if (options.run_singlestep) {

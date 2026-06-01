@@ -1,6 +1,4 @@
 #include <qe6502/cpu.hpp>
-#include <qe6502/qe6502.h>
-
 #include <array>
 #include <cstdint>
 #include <cstdio>
@@ -31,23 +29,16 @@ struct run_result {
     memory_t memory{};
 };
 
-bool tick_is_write(const qe6502_tick_t& tick) noexcept
+std::uint8_t cpu_bus_data(const qe6502::cpu& cpu, const memory_t& memory) noexcept
 {
-    return (tick.status & qe6502_status_writing) != 0u;
-}
-
-bool tick_is_opcode_fetch(const qe6502_tick_t& tick) noexcept
-{
-    return (tick.status & qe6502_status_opcode_fetch) != 0u;
-}
-
-std::uint8_t tick_bus_data(const qe6502_tick_t& tick, const memory_t& memory) noexcept
-{
-    return tick_is_write(tick) ? tick.bus : memory[tick.address];
+    return cpu.is_write() ? cpu.bus_data() : memory[cpu.bus_address()];
 }
 
 void poison_cpu(qe6502::cpu& cpu) noexcept
 {
+    // Deliberately reaches into raw wrapper storage: this test validates that
+    // load() restores a snapshot after the wrapper-owned CPU/tick state is
+    // clobbered, and the C++ wrapper has no public state-poisoning hook.
     std::memset(&cpu.raw_cpu(), 0xa5, sizeof(cpu.raw_cpu()));
     std::memset(&cpu.raw_tick(), 0xa5, sizeof(cpu.raw_tick()));
 }
@@ -120,12 +111,11 @@ int compare_results(const run_result& expected, const run_result& actual)
     return failures;
 }
 
-void checkpoint_reload(qe6502::cpu& cpu, qe6502_tick_t& tick)
+void checkpoint_reload(qe6502::cpu& cpu)
 {
     const qe6502::cpu_snapshot snapshot = cpu.save();
     poison_cpu(cpu);
     cpu.load(snapshot);
-    tick = cpu.raw_tick();
 }
 
 void install_nes_functional_program(memory_t& memory)
@@ -171,32 +161,32 @@ run_result run_until_success(qe6502::model model,
 
     cpu.restart();
     cpu.jump_to(start_address);
-    qe6502_tick_t tick = cpu.raw_tick();
 
     for (;;) {
-        std::uint8_t data = tick_bus_data(tick, result.memory);
+        std::uint8_t data = cpu_bus_data(cpu, result.memory);
+        const std::uint16_t address = cpu.bus_address();
 
-        if (tick.address == success_address) {
+        if (address == success_address) {
             result.pass = true;
             result.message = "OK";
             break;
         }
 
-        if (tick_is_write(tick)) {
-            result.memory[tick.address] = data;
+        if (cpu.is_write()) {
+            result.memory[address] = data;
         } else {
-            data = result.memory[tick.address];
+            data = result.memory[address];
         }
 
-        tick = cpu.tick(data);
+        cpu.tick(data);
         ++result.bus_ticks;
 
         if (checkpointed && checkpoint_interval != 0u &&
             (result.bus_ticks % checkpoint_interval) == 0u) {
-            checkpoint_reload(cpu, tick);
+            checkpoint_reload(cpu);
         }
 
-        if (tick_is_opcode_fetch(tick)) {
+        if (cpu.is_opcode_fetch()) {
             ++result.opcode_cycles;
             if (result.opcode_cycles > max_opcode_cycles) {
                 result.message = "Test fail, takes too many cycles!";
