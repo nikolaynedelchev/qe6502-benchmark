@@ -11,4 +11,4 @@ target_compile_definitions(benchmark6502_common
     PUBLIC BENCHMARK6502_SINGLESTEP_LIGHT_ROOT="${PROJECT_SOURCE_DIR}/toolbox/common/SingleStepTestsLight"
 )
 
-target_compile_features(benchmark6502_common PUBLIC cxx_std_17)
+target_compile_features(benchmark6502_common PUBLIC cxx_std_20)

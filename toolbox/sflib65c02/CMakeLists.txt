@@ -12,7 +12,7 @@ target_include_directories(sflib65c02_toolbox
     PRIVATE ${PROJECT_SOURCE_DIR}
 )
 
-target_compile_features(sflib65c02_toolbox PUBLIC cxx_std_17)
+target_compile_features(sflib65c02_toolbox PUBLIC cxx_std_20)
 
 
 target_link_libraries(sflib65c02_toolbox

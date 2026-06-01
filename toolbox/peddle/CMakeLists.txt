@@ -19,4 +19,4 @@ target_link_libraries(peddle_toolbox
     PUBLIC benchmark6502_common
 )
 
-target_compile_features(peddle_toolbox PUBLIC cxx_std_17)
+target_compile_features(peddle_toolbox PUBLIC cxx_std_20)

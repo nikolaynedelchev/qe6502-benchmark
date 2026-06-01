@@ -16,4 +16,4 @@ target_link_libraries(o2_toolbox
     PUBLIC benchmark6502_common
 )
 
-target_compile_features(o2_toolbox PUBLIC cxx_std_17)
+target_compile_features(o2_toolbox PUBLIC cxx_std_20)

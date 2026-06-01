@@ -23,4 +23,4 @@ target_link_libraries(chris_pikul_mos6502_toolbox
 )
 
 
-target_compile_features(chris_pikul_mos6502_toolbox PUBLIC cxx_std_17)
+target_compile_features(chris_pikul_mos6502_toolbox PUBLIC cxx_std_20)

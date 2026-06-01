@@ -18,4 +18,4 @@ target_link_libraries(olcNES_toolbox
     PUBLIC benchmark6502_common
 )
 
-target_compile_features(olcNES_toolbox PUBLIC cxx_std_17)
+target_compile_features(olcNES_toolbox PUBLIC cxx_std_20)

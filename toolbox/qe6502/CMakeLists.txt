@@ -15,4 +15,4 @@ target_link_libraries(qe6502_toolbox
     PUBLIC benchmark6502_common
 )
 
-target_compile_features(qe6502_toolbox PUBLIC cxx_std_17)
+target_compile_features(qe6502_toolbox PUBLIC cxx_std_20)

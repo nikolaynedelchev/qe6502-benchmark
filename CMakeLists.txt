@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(qe6502-benchmark VERSION 0.1.0 LANGUAGES C CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -27,7 +27,17 @@ add_subdirectory(toolbox/sflib6502)
 add_subdirectory(toolbox/sflib65c02)
 add_subdirectory(toolbox/olcNES)
 add_subdirectory(toolbox/chris_pikul_mos6502)
+add_subdirectory(toolbox/clk)
 
+
+
+add_executable(clk_smoketest
+    clk_smoke_test.cpp
+)
+
+target_link_libraries(clk_smoketest
+    PRIVATE clk_toolbox
+)
 
 add_executable(opcode_metadata_smoketest
     opcode_metadata_smoke_test.cpp

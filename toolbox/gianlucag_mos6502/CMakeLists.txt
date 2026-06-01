@@ -16,7 +16,7 @@ target_link_libraries(gianlucag_mos6502_toolbox
     PUBLIC benchmark6502_common
 )
 
-target_compile_features(gianlucag_mos6502_toolbox PUBLIC cxx_std_17)
+target_compile_features(gianlucag_mos6502_toolbox PUBLIC cxx_std_20)
 
 # Enable the core's optional NMOS undocumented opcode table for SingleStepTests.
 target_compile_definitions(gianlucag_mos6502_toolbox PRIVATE ILLEGAL_OPCODES)

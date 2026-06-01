@@ -20,4 +20,4 @@ target_link_libraries(vremu6502_toolbox
     PUBLIC benchmark6502_common
 )
 
-target_compile_features(vremu6502_toolbox PUBLIC cxx_std_17)
+target_compile_features(vremu6502_toolbox PUBLIC cxx_std_20)

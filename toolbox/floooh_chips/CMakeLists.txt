@@ -16,4 +16,4 @@ target_link_libraries(floooh_chips_toolbox
     PUBLIC benchmark6502_common
 )
 
-target_compile_features(floooh_chips_toolbox PUBLIC cxx_std_17)
+target_compile_features(floooh_chips_toolbox PUBLIC cxx_std_20)
