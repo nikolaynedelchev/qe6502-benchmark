@@ -31,6 +31,7 @@ add_subdirectory(toolbox/clk)
 add_subdirectory(toolbox/ares)
 add_subdirectory(toolbox/fceux)
 add_subdirectory(toolbox/altirrasdl)
+add_subdirectory(toolbox/applewin)
 
 
 
@@ -64,6 +65,14 @@ add_executable(altirrasdl_smoketest
 
 target_link_libraries(altirrasdl_smoketest
     PRIVATE altirrasdl_toolbox
+)
+
+add_executable(applewin_smoketest
+    applewin_smoke_test.cpp
+)
+
+target_link_libraries(applewin_smoketest
+    PRIVATE applewin_toolbox
 )
 
 add_executable(opcode_metadata_smoketest
