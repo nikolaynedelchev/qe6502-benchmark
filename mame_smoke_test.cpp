@@ -68,6 +68,23 @@ int main()
         }
     }
 
+    {
+        benchmark6502::mame::Mame6502Cpu w65s_cpu(benchmark6502::mame::CpuMode::wdc65c02s);
+        w65s_cpu.clear_memory();
+        constexpr std::uint16_t w65s_start = 0x0500;
+        const std::array<std::uint8_t, 5> w65s_program = {0x64, 0x40, 0x07, 0x40, 0xea}; // STZ $40; RMB0 $40; NOP
+        w65s_cpu.write_memory(0x0040, 0xff);
+        w65s_cpu.load_program(w65s_start, w65s_program.data(), w65s_program.size());
+        w65s_cpu.set_reset_vector(w65s_start);
+        w65s_cpu.reset_from_vector();
+        const unsigned w65s_executed = w65s_cpu.execute(10);
+        if(w65s_executed != 10 || w65s_cpu.read_memory(0x0040) != 0x00 || w65s_cpu.pc() != 0x0505) {
+            std::fprintf(stderr, "unexpected W65C02S state: cycles=%u mem40=%02x PC=%04x\n",
+                w65s_executed, w65s_cpu.read_memory(0x0040), w65s_cpu.pc());
+            return EXIT_FAILURE;
+        }
+    }
+
     std::puts("mame smoke test passed");
     return EXIT_SUCCESS;
 }

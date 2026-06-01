@@ -9,6 +9,7 @@ enum class CpuMode {
     nmos6502,
     wdc65c02,
     rockwell65c02,
+    wdc65c02s,
 };
 
 struct CpuState {
@@ -80,6 +81,7 @@ private:
     friend class mame6502_cpu_device;
     friend class mamew65c02_cpu_device;
     friend class mamer65c02_cpu_device;
+    friend class mamew65c02s_cpu_device;
 
     CpuMode mode_ = CpuMode::nmos6502;
     std::array<std::uint8_t, 65536> memory_{};

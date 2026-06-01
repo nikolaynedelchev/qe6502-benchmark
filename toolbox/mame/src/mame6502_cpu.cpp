@@ -142,6 +142,14 @@ DECLARE_MAME_6502_DEVICE_CLASS_BEGIN(mamew65c02_cpu_device)
 #include "m6502_w65c02_declarations.inc"
 DECLARE_MAME_6502_DEVICE_CLASS_END()
 
+class mamew65c02s_cpu_device : public mamew65c02_cpu_device {
+public:
+    explicit mamew65c02s_cpu_device(Mame6502Cpu& owner) : mamew65c02_cpu_device(owner) {}
+    void execute_run();
+private:
+#include "m6502_w65c02s_declarations.inc"
+};
+
 class mamer65c02_cpu_device : public mamew65c02_cpu_device {
 public:
     explicit mamer65c02_cpu_device(Mame6502Cpu& owner) : mamew65c02_cpu_device(owner) {}
@@ -319,6 +327,19 @@ void CLASS_NAME::execute_run() \
 DEFINE_MAME_6502_COMMON_METHODS(mame6502_cpu_device)
 DEFINE_MAME_6502_COMMON_METHODS(mamew65c02_cpu_device)
 
+void mamew65c02s_cpu_device::execute_run()
+{
+    if(m_inst_substate)
+        do_exec_partial();
+    while(m_icount > 0) {
+        if(m_inst_state < 0xff00) {
+            m_PPC = m_NPC;
+            m_inst_state = m_IR | m_inst_state_base;
+        }
+        do_exec_full();
+    }
+}
+
 void mamer65c02_cpu_device::execute_run()
 {
     if(m_inst_substate)
@@ -337,6 +358,7 @@ void mamer65c02_cpu_device::execute_run()
 #include "m6502_nmos_base_for_mamew65c02_generated.hxx"
 #include "m6502_w65c02_generated.hxx"
 #include "m6502_r65c02_dispatch_generated.hxx"
+#include "m6502_w65c02s_generated.hxx"
 
 Mame6502Cpu::Mame6502Cpu(CpuMode mode) :
     mode_(mode)
@@ -400,6 +422,7 @@ void Mame6502Cpu::reset_from_vector()
     case CpuMode::nmos6502: { mame6502_cpu_device device(*this); device.execute_run(); break; }
     case CpuMode::wdc65c02: { mamew65c02_cpu_device device(*this); device.execute_run(); break; }
     case CpuMode::rockwell65c02: { mamer65c02_cpu_device device(*this); device.execute_run(); break; }
+    case CpuMode::wdc65c02s: { mamew65c02s_cpu_device device(*this); device.execute_run(); break; }
     }
     total_cycles_ = 0;
 }
@@ -429,6 +452,7 @@ unsigned Mame6502Cpu::execute(unsigned cycles)
     case CpuMode::nmos6502: { mame6502_cpu_device device(*this); device.execute_run(); break; }
     case CpuMode::wdc65c02: { mamew65c02_cpu_device device(*this); device.execute_run(); break; }
     case CpuMode::rockwell65c02: { mamer65c02_cpu_device device(*this); device.execute_run(); break; }
+    case CpuMode::wdc65c02s: { mamew65c02s_cpu_device device(*this); device.execute_run(); break; }
     }
     const unsigned executed = static_cast<unsigned>(before - icount_);
     total_cycles_ += executed;
