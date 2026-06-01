@@ -1,4 +1,6 @@
+#include <ares_toolbox.hpp>
 #include <chris_pikul_mos6502_toolbox.hpp>
+#include <clk_toolbox.hpp>
 #include <fake6502_toolbox.hpp>
 #include <fceux_toolbox.hpp>
 #include <floooh_chips_toolbox.hpp>
@@ -226,6 +228,20 @@ int main(int argc, char** argv)
     }
     if (options.run_klaus) {
         print_klaus_nes_result("fceux", fceux_toolbox::run_klaus_nes_standard(measured_runs), summary);
+    }
+
+    if (options.run_smoke) {
+        print_smoke_result("clk", clk_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("clk", clk_toolbox::run_klaus_nmos_standard(measured_runs), summary);
+    }
+
+    if (options.run_smoke) {
+        print_smoke_result("ares", ares_toolbox::run_smoke_test(), summary);
+    }
+    if (options.run_klaus) {
+        print_klaus_result("ares", ares_toolbox::run_klaus_nmos_standard(measured_runs), summary);
     }
 
     if (options.run_singlestep) {

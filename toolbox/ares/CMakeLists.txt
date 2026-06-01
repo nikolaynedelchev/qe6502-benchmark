@@ -1,4 +1,5 @@
 add_library(ares_toolbox STATIC
+    src/klaus_benchmark.cpp
     src/smoke.cpp
     ${PROJECT_SOURCE_DIR}/cores/ares/ares/component/processor/mos6502/mos6502.cpp
 )
@@ -8,6 +9,7 @@ target_include_directories(ares_toolbox
     PUBLIC ${PROJECT_SOURCE_DIR}/toolbox/common/include
     PRIVATE ${PROJECT_SOURCE_DIR}/cores/ares/ares
     PRIVATE ${PROJECT_SOURCE_DIR}/cores/ares/nall
+    PRIVATE ${PROJECT_SOURCE_DIR}
 )
 
 target_link_libraries(ares_toolbox

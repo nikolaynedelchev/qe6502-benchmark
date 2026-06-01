@@ -44,11 +44,27 @@ target_link_libraries(clk_smoketest
     PRIVATE clk_toolbox
 )
 
+add_executable(clk_klaus_benchmark
+    clk_klaus_benchmark.cpp
+)
+
+target_link_libraries(clk_klaus_benchmark
+    PRIVATE clk_toolbox
+)
+
 add_executable(ares_smoketest
     ares_smoke_test.cpp
 )
 
 target_link_libraries(ares_smoketest
+    PRIVATE ares_toolbox
+)
+
+add_executable(ares_klaus_benchmark
+    ares_klaus_benchmark.cpp
+)
+
+target_link_libraries(ares_klaus_benchmark
     PRIVATE ares_toolbox
 )
 
@@ -410,6 +426,8 @@ target_link_libraries(all_6502_tests
         olcNES_toolbox
         chris_pikul_mos6502_toolbox
         fceux_toolbox
+        clk_toolbox
+        ares_toolbox
 )
 
 add_executable(all_65c02_tests
@@ -472,6 +490,8 @@ if(MSVC)
     target_compile_options(chris_pikul_mos6502_klaus_benchmark PRIVATE /W4)
     target_compile_options(chris_pikul_mos6502_singlestep_nmos PRIVATE /W4)
     target_compile_options(fceux_klaus_benchmark PRIVATE /W4)
+    target_compile_options(clk_klaus_benchmark PRIVATE /W4)
+    target_compile_options(ares_klaus_benchmark PRIVATE /W4)
     target_compile_options(all_6502_tests PRIVATE /W4)
     target_compile_options(all_65c02_tests PRIVATE /W4)
 else()
@@ -522,6 +542,8 @@ else()
     target_compile_options(chris_pikul_mos6502_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(chris_pikul_mos6502_singlestep_nmos PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(fceux_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(clk_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
+    target_compile_options(ares_klaus_benchmark PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(all_6502_tests PRIVATE -Wall -Wextra -Wpedantic)
     target_compile_options(all_65c02_tests PRIVATE -Wall -Wextra -Wpedantic)
 endif()
