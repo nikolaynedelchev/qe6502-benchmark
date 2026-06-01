@@ -30,6 +30,7 @@ add_subdirectory(toolbox/chris_pikul_mos6502)
 add_subdirectory(toolbox/clk)
 add_subdirectory(toolbox/ares)
 add_subdirectory(toolbox/fceux)
+add_subdirectory(toolbox/altirrasdl)
 
 
 
@@ -55,6 +56,14 @@ add_executable(fceux_smoketest
 
 target_link_libraries(fceux_smoketest
     PRIVATE fceux_toolbox
+)
+
+add_executable(altirrasdl_smoketest
+    altirrasdl_smoke_test.cpp
+)
+
+target_link_libraries(altirrasdl_smoketest
+    PRIVATE altirrasdl_toolbox
 )
 
 add_executable(opcode_metadata_smoketest
