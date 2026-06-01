@@ -1,0 +1,907 @@
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/CMakeLists.txt v89_new_for_diff/qe6502-benchmark-main/CMakeLists.txt
+--- v88_clean_for_diff/qe6502-benchmark-main/CMakeLists.txt	2026-06-01 18:27:08.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/CMakeLists.txt	2026-06-01 18:36:40.098153632 +0000
+@@ -52,6 +52,14 @@
+     PRIVATE clk_toolbox
+ )
+ 
++add_executable(clk_singlestep_nmos
++    clk_singlestep_nmos.cpp
++)
++
++target_link_libraries(clk_singlestep_nmos
++    PRIVATE clk_toolbox
++)
++
+ add_executable(ares_smoketest
+     ares_smoke_test.cpp
+ )
+@@ -68,6 +76,14 @@
+     PRIVATE ares_toolbox
+ )
+ 
++add_executable(ares_singlestep_nmos
++    ares_singlestep_nmos.cpp
++)
++
++target_link_libraries(ares_singlestep_nmos
++    PRIVATE ares_toolbox
++)
++
+ add_executable(fceux_smoketest
+     fceux_smoke_test.cpp
+ )
+@@ -100,6 +116,14 @@
+     PRIVATE altirrasdl_toolbox
+ )
+ 
++add_executable(altirrasdl_singlestep_nmos
++    altirrasdl_singlestep_nmos.cpp
++)
++
++target_link_libraries(altirrasdl_singlestep_nmos
++    PRIVATE altirrasdl_toolbox
++)
++
+ 
+ add_executable(altirrasdl_singlestep_65c02_fit
+     altirrasdl_singlestep_65c02_fit.cpp
+@@ -125,6 +149,14 @@
+     PRIVATE applewin_toolbox
+ )
+ 
++add_executable(applewin_singlestep_nmos
++    applewin_singlestep_nmos.cpp
++)
++
++target_link_libraries(applewin_singlestep_nmos
++    PRIVATE applewin_toolbox
++)
++
+ add_executable(applewin_singlestep_65c02_fit
+     applewin_singlestep_65c02_fit.cpp
+ )
+@@ -150,6 +182,14 @@
+     PRIVATE mame_toolbox
+ )
+ 
++add_executable(mame_singlestep_nmos
++    mame_singlestep_nmos.cpp
++)
++
++target_link_libraries(mame_singlestep_nmos
++    PRIVATE mame_toolbox
++)
++
+ add_executable(opcode_metadata_smoketest
+     opcode_metadata_smoke_test.cpp
+ )
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/all_6502_tests.cpp v89_new_for_diff/qe6502-benchmark-main/all_6502_tests.cpp
+--- v88_clean_for_diff/qe6502-benchmark-main/all_6502_tests.cpp	2026-06-01 17:36:40.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/all_6502_tests.cpp	2026-06-01 18:36:53.985043544 +0000
+@@ -356,6 +356,47 @@
+             if (chris_pikul_singlestep.harness_error) {
+                 summary.record(false);
+             }
++
++
++            std::cout << "\nStarting clk NMOS SingleStep...\n";
++            const benchmark6502::singlestep_result clk_singlestep = clk_toolbox::run_singlestep_nmos(corpus);
++            benchmark6502::print_singlestep_result(corpus, clk_singlestep);
++            write_singlestep_log(corpus, clk_singlestep, summary);
++            if (clk_singlestep.harness_error) {
++                summary.record(false);
++            }
++
++            std::cout << "\nStarting ares NMOS SingleStep...\n";
++            const benchmark6502::singlestep_result ares_singlestep = ares_toolbox::run_singlestep_nmos(corpus);
++            benchmark6502::print_singlestep_result(corpus, ares_singlestep);
++            write_singlestep_log(corpus, ares_singlestep, summary);
++            if (ares_singlestep.harness_error) {
++                summary.record(false);
++            }
++
++            std::cout << "\nStarting altirrasdl NMOS SingleStep...\n";
++            const benchmark6502::singlestep_result altirrasdl_singlestep = altirrasdl_toolbox::run_singlestep_nmos(corpus);
++            benchmark6502::print_singlestep_result(corpus, altirrasdl_singlestep);
++            write_singlestep_log(corpus, altirrasdl_singlestep, summary);
++            if (altirrasdl_singlestep.harness_error) {
++                summary.record(false);
++            }
++
++            std::cout << "\nStarting applewin NMOS SingleStep...\n";
++            const benchmark6502::singlestep_result applewin_singlestep = applewin_toolbox::run_singlestep_nmos(corpus);
++            benchmark6502::print_singlestep_result(corpus, applewin_singlestep);
++            write_singlestep_log(corpus, applewin_singlestep, summary);
++            if (applewin_singlestep.harness_error) {
++                summary.record(false);
++            }
++
++            std::cout << "\nStarting mame NMOS SingleStep...\n";
++            const benchmark6502::singlestep_result mame_singlestep = mame_toolbox::run_singlestep_nmos(corpus);
++            benchmark6502::print_singlestep_result(corpus, mame_singlestep);
++            write_singlestep_log(corpus, mame_singlestep, summary);
++            if (mame_singlestep.harness_error) {
++                summary.record(false);
++            }
+         } catch (const std::exception& e) {
+             std::cout << "\nSingleStep NMOS harness error: " << e.what() << "\n";
+             summary.record(false);
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/altirrasdl_singlestep_nmos.cpp v89_new_for_diff/qe6502-benchmark-main/altirrasdl_singlestep_nmos.cpp
+--- v88_clean_for_diff/qe6502-benchmark-main/altirrasdl_singlestep_nmos.cpp	1970-01-01 00:00:00.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/altirrasdl_singlestep_nmos.cpp	2026-06-01 18:36:40.097130570 +0000
+@@ -0,0 +1,26 @@
++#include <altirrasdl_toolbox.hpp>
++
++#include <benchmark6502/singlestep.hpp>
++
++#include <exception>
++#include <iostream>
++
++int main(int argc, char** argv)
++{
++    try {
++        const benchmark6502::singlestep_corpus_options options = benchmark6502::parse_singlestep_corpus_options(argc, argv);
++        std::cout << "Loading SingleStep NMOS corpus...\n";
++        const benchmark6502::singlestep_corpus corpus = benchmark6502::load_singlestep_corpus(benchmark6502::singlestep_model::nmos6502, options);
++        std::cout << "Loaded SingleStep NMOS corpus: " << corpus.model_path
++                  << "  cases=" << corpus.total_cases() << "\n";
++        std::cout << "Starting altirrasdl NMOS SingleStep...\n";
++        const benchmark6502::singlestep_result result = altirrasdl_toolbox::run_singlestep_nmos(corpus);
++        benchmark6502::print_singlestep_result(corpus, result);
++        const std::string log_path = benchmark6502::write_singlestep_detail_log(corpus, result);
++        std::cout << "Wrote SingleStep detail log: " << log_path << "\n";
++        return result.harness_error ? 1 : 0;
++    } catch (const std::exception& e) {
++        std::cerr << "SingleStep error: " << e.what() << '\n';
++        return 1;
++    }
++}
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/applewin_singlestep_nmos.cpp v89_new_for_diff/qe6502-benchmark-main/applewin_singlestep_nmos.cpp
+--- v88_clean_for_diff/qe6502-benchmark-main/applewin_singlestep_nmos.cpp	1970-01-01 00:00:00.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/applewin_singlestep_nmos.cpp	2026-06-01 18:36:40.097267443 +0000
+@@ -0,0 +1,26 @@
++#include <applewin_toolbox.hpp>
++
++#include <benchmark6502/singlestep.hpp>
++
++#include <exception>
++#include <iostream>
++
++int main(int argc, char** argv)
++{
++    try {
++        const benchmark6502::singlestep_corpus_options options = benchmark6502::parse_singlestep_corpus_options(argc, argv);
++        std::cout << "Loading SingleStep NMOS corpus...\n";
++        const benchmark6502::singlestep_corpus corpus = benchmark6502::load_singlestep_corpus(benchmark6502::singlestep_model::nmos6502, options);
++        std::cout << "Loaded SingleStep NMOS corpus: " << corpus.model_path
++                  << "  cases=" << corpus.total_cases() << "\n";
++        std::cout << "Starting applewin NMOS SingleStep...\n";
++        const benchmark6502::singlestep_result result = applewin_toolbox::run_singlestep_nmos(corpus);
++        benchmark6502::print_singlestep_result(corpus, result);
++        const std::string log_path = benchmark6502::write_singlestep_detail_log(corpus, result);
++        std::cout << "Wrote SingleStep detail log: " << log_path << "\n";
++        return result.harness_error ? 1 : 0;
++    } catch (const std::exception& e) {
++        std::cerr << "SingleStep error: " << e.what() << '\n';
++        return 1;
++    }
++}
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/ares_singlestep_nmos.cpp v89_new_for_diff/qe6502-benchmark-main/ares_singlestep_nmos.cpp
+--- v88_clean_for_diff/qe6502-benchmark-main/ares_singlestep_nmos.cpp	1970-01-01 00:00:00.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/ares_singlestep_nmos.cpp	2026-06-01 18:36:40.096932837 +0000
+@@ -0,0 +1,26 @@
++#include <ares_toolbox.hpp>
++
++#include <benchmark6502/singlestep.hpp>
++
++#include <exception>
++#include <iostream>
++
++int main(int argc, char** argv)
++{
++    try {
++        const benchmark6502::singlestep_corpus_options options = benchmark6502::parse_singlestep_corpus_options(argc, argv);
++        std::cout << "Loading SingleStep NMOS corpus...\n";
++        const benchmark6502::singlestep_corpus corpus = benchmark6502::load_singlestep_corpus(benchmark6502::singlestep_model::nmos6502, options);
++        std::cout << "Loaded SingleStep NMOS corpus: " << corpus.model_path
++                  << "  cases=" << corpus.total_cases() << "\n";
++        std::cout << "Starting ares NMOS SingleStep...\n";
++        const benchmark6502::singlestep_result result = ares_toolbox::run_singlestep_nmos(corpus);
++        benchmark6502::print_singlestep_result(corpus, result);
++        const std::string log_path = benchmark6502::write_singlestep_detail_log(corpus, result);
++        std::cout << "Wrote SingleStep detail log: " << log_path << "\n";
++        return result.harness_error ? 1 : 0;
++    } catch (const std::exception& e) {
++        std::cerr << "SingleStep error: " << e.what() << '\n';
++        return 1;
++    }
++}
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/clk_singlestep_nmos.cpp v89_new_for_diff/qe6502-benchmark-main/clk_singlestep_nmos.cpp
+--- v88_clean_for_diff/qe6502-benchmark-main/clk_singlestep_nmos.cpp	1970-01-01 00:00:00.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/clk_singlestep_nmos.cpp	2026-06-01 18:36:40.096847795 +0000
+@@ -0,0 +1,26 @@
++#include <clk_toolbox.hpp>
++
++#include <benchmark6502/singlestep.hpp>
++
++#include <exception>
++#include <iostream>
++
++int main(int argc, char** argv)
++{
++    try {
++        const benchmark6502::singlestep_corpus_options options = benchmark6502::parse_singlestep_corpus_options(argc, argv);
++        std::cout << "Loading SingleStep NMOS corpus...\n";
++        const benchmark6502::singlestep_corpus corpus = benchmark6502::load_singlestep_corpus(benchmark6502::singlestep_model::nmos6502, options);
++        std::cout << "Loaded SingleStep NMOS corpus: " << corpus.model_path
++                  << "  cases=" << corpus.total_cases() << "\n";
++        std::cout << "Starting clk NMOS SingleStep...\n";
++        const benchmark6502::singlestep_result result = clk_toolbox::run_singlestep_nmos(corpus);
++        benchmark6502::print_singlestep_result(corpus, result);
++        const std::string log_path = benchmark6502::write_singlestep_detail_log(corpus, result);
++        std::cout << "Wrote SingleStep detail log: " << log_path << "\n";
++        return result.harness_error ? 1 : 0;
++    } catch (const std::exception& e) {
++        std::cerr << "SingleStep error: " << e.what() << '\n';
++        return 1;
++    }
++}
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/mame_singlestep_nmos.cpp v89_new_for_diff/qe6502-benchmark-main/mame_singlestep_nmos.cpp
+--- v88_clean_for_diff/qe6502-benchmark-main/mame_singlestep_nmos.cpp	1970-01-01 00:00:00.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/mame_singlestep_nmos.cpp	2026-06-01 18:36:40.097358636 +0000
+@@ -0,0 +1,26 @@
++#include <mame_toolbox.hpp>
++
++#include <benchmark6502/singlestep.hpp>
++
++#include <exception>
++#include <iostream>
++
++int main(int argc, char** argv)
++{
++    try {
++        const benchmark6502::singlestep_corpus_options options = benchmark6502::parse_singlestep_corpus_options(argc, argv);
++        std::cout << "Loading SingleStep NMOS corpus...\n";
++        const benchmark6502::singlestep_corpus corpus = benchmark6502::load_singlestep_corpus(benchmark6502::singlestep_model::nmos6502, options);
++        std::cout << "Loaded SingleStep NMOS corpus: " << corpus.model_path
++                  << "  cases=" << corpus.total_cases() << "\n";
++        std::cout << "Starting mame NMOS SingleStep...\n";
++        const benchmark6502::singlestep_result result = mame_toolbox::run_singlestep_nmos(corpus);
++        benchmark6502::print_singlestep_result(corpus, result);
++        const std::string log_path = benchmark6502::write_singlestep_detail_log(corpus, result);
++        std::cout << "Wrote SingleStep detail log: " << log_path << "\n";
++        return result.harness_error ? 1 : 0;
++    } catch (const std::exception& e) {
++        std::cerr << "SingleStep error: " << e.what() << '\n';
++        return 1;
++    }
++}
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/altirrasdl/include/altirrasdl_toolbox.hpp v89_new_for_diff/qe6502-benchmark-main/toolbox/altirrasdl/include/altirrasdl_toolbox.hpp
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/altirrasdl/include/altirrasdl_toolbox.hpp	2026-06-01 18:25:57.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/altirrasdl/include/altirrasdl_toolbox.hpp	2026-06-01 18:35:11.903707951 +0000
+@@ -4,6 +4,7 @@
+ namespace altirrasdl_toolbox {
+ benchmark6502::smoke_result run_smoke_test();
+ benchmark6502::klaus_benchmark_result run_klaus_nmos_standard(int measured_runs);
++benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus);
+ benchmark6502::singlestep_result run_singlestep_wdc65c02(const benchmark6502::singlestep_corpus& corpus);
+ benchmark6502::singlestep_result run_singlestep_rockwell65c02(const benchmark6502::singlestep_corpus& corpus);
+ benchmark6502::singlestep_result run_singlestep_synertek65c02(const benchmark6502::singlestep_corpus& corpus);
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/altirrasdl/src/singlestep.cpp v89_new_for_diff/qe6502-benchmark-main/toolbox/altirrasdl/src/singlestep.cpp
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/altirrasdl/src/singlestep.cpp	2026-06-01 18:25:42.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/altirrasdl/src/singlestep.cpp	2026-06-01 18:36:22.206965772 +0000
+@@ -62,12 +62,12 @@
+     return true;
+ }
+ 
+-case_result run_case(const benchmark6502::singlestep_case& test_case)
++case_result run_case(const benchmark6502::singlestep_case& test_case, const bool cmos)
+ {
+     std::array<uint8, 0x10000> memory{};
+     load_ram(memory, test_case.initial.ram);
+ 
+-    ATCoProc6502 cpu(true, false);
++    ATCoProc6502 cpu(cmos, false);
+     ATCoProcMemoryMapView map(cpu.GetReadMap(), cpu.GetWriteMap(), cpu.GetTraceMap());
+     map.SetMemory(0, 256, memory.data());
+     set_initial_state(cpu, test_case.initial);
+@@ -96,14 +96,16 @@
+     return result;
+ }
+ 
+-benchmark6502::singlestep_result run_singlestep_65c02_corpus(const benchmark6502::singlestep_corpus& corpus,
+-                                                             const std::string& display_model_name)
++benchmark6502::singlestep_result run_singlestep_corpus(const benchmark6502::singlestep_corpus& corpus,
++                                                   const std::string& display_model_name,
++                                                   const bool cmos,
++                                                   const char* const cpu_init_model)
+ {
+     benchmark6502::singlestep_result result;
+     result.core_name = "altirrasdl";
+     result.corpus_model = corpus.model;
+     result.model_name = display_model_name;
+-    result.cpu_init_model = "ATCoProc6502(isC02=true)";
++    result.cpu_init_model = cpu_init_model;
+ 
+     for (unsigned opcode_value = 0; opcode_value <= 0xffu; ++opcode_value) {
+         const auto opcode = static_cast<std::uint8_t>(opcode_value);
+@@ -116,7 +118,7 @@
+         opcode_result.bus_trace.supported = false;
+ 
+         for (const auto& test_case : tests.cases) {
+-            const case_result single = run_case(test_case);
++            const case_result single = run_case(test_case, cmos);
+             if (!single.instruction_ok) {
+                 opcode_result.instruction.failed = true;
+                 opcode_result.instruction.failed_cases++;
+@@ -135,19 +137,24 @@
+ 
+ namespace altirrasdl_toolbox {
+ 
++benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus)
++{
++    return run_singlestep_corpus(corpus, "NMOS 6502", false, "ATCoProc6502(isC02=false)");
++}
++
+ benchmark6502::singlestep_result run_singlestep_wdc65c02(const benchmark6502::singlestep_corpus& corpus)
+ {
+-    return run_singlestep_65c02_corpus(corpus, "65C02/WDC corpus");
++    return run_singlestep_corpus(corpus, "65C02/WDC corpus", true, "ATCoProc6502(isC02=true)");
+ }
+ 
+ benchmark6502::singlestep_result run_singlestep_rockwell65c02(const benchmark6502::singlestep_corpus& corpus)
+ {
+-    return run_singlestep_65c02_corpus(corpus, "65C02/Rockwell corpus");
++    return run_singlestep_corpus(corpus, "65C02/Rockwell corpus", true, "ATCoProc6502(isC02=true)");
+ }
+ 
+ benchmark6502::singlestep_result run_singlestep_synertek65c02(const benchmark6502::singlestep_corpus& corpus)
+ {
+-    return run_singlestep_65c02_corpus(corpus, "65C02/Synertek-ST corpus");
++    return run_singlestep_corpus(corpus, "65C02/Synertek-ST corpus", true, "ATCoProc6502(isC02=true)");
+ }
+ 
+ } // namespace altirrasdl_toolbox
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/applewin/include/applewin_toolbox.hpp v89_new_for_diff/qe6502-benchmark-main/toolbox/applewin/include/applewin_toolbox.hpp
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/applewin/include/applewin_toolbox.hpp	2026-06-01 18:25:57.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/applewin/include/applewin_toolbox.hpp	2026-06-01 18:35:11.903101320 +0000
+@@ -8,6 +8,7 @@
+ 
+ benchmark6502::smoke_result run_smoke_test();
+ benchmark6502::klaus_benchmark_result run_klaus_nmos_standard(int measured_runs = 5);
++benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus);
+ benchmark6502::singlestep_result run_singlestep_wdc65c02(const benchmark6502::singlestep_corpus& corpus);
+ benchmark6502::singlestep_result run_singlestep_rockwell65c02(const benchmark6502::singlestep_corpus& corpus);
+ benchmark6502::singlestep_result run_singlestep_synertek65c02(const benchmark6502::singlestep_corpus& corpus);
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/applewin/src/singlestep.cpp v89_new_for_diff/qe6502-benchmark-main/toolbox/applewin/src/singlestep.cpp
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/applewin/src/singlestep.cpp	2026-06-01 18:29:32.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/applewin/src/singlestep.cpp	2026-06-01 18:35:54.412567448 +0000
+@@ -19,7 +19,7 @@
+     }
+ }
+ 
+-void set_initial_state(const benchmark6502::singlestep_cpu_state& state)
++void set_initial_state(const benchmark6502::singlestep_cpu_state& state, const applewin_toolbox::CpuMode mode)
+ {
+     applewin_toolbox::set_state(applewin_toolbox::State{
+         state.a,
+@@ -29,7 +29,7 @@
+         state.pc,
+         static_cast<std::uint16_t>(0x0100u | state.s),
+         false,
+-        applewin_toolbox::CpuMode::cmos65c02,
++        mode,
+     });
+     applewin_toolbox::clear_interrupt_lines();
+     applewin_toolbox::clear_cumulative_cycles();
+@@ -55,12 +55,12 @@
+     return true;
+ }
+ 
+-case_result run_case(const benchmark6502::singlestep_case& test_case)
++case_result run_case(const benchmark6502::singlestep_case& test_case, const applewin_toolbox::CpuMode mode)
+ {
+     std::array<std::uint8_t, 0x10000> memory{};
+     load_ram(memory, test_case.initial.ram);
+     applewin_toolbox::attach_memory(memory.data(), static_cast<std::uint32_t>(memory.size()));
+-    set_initial_state(test_case.initial);
++    set_initial_state(test_case.initial, mode);
+ 
+     const std::uint32_t cycles = applewin_toolbox::execute(static_cast<std::uint32_t>(test_case.cycles.size()));
+ 
+@@ -70,14 +70,16 @@
+     return result;
+ }
+ 
+-benchmark6502::singlestep_result run_singlestep_65c02_corpus(const benchmark6502::singlestep_corpus& corpus,
+-                                                             const std::string& display_model_name)
++benchmark6502::singlestep_result run_singlestep_corpus(const benchmark6502::singlestep_corpus& corpus,
++                                                   const std::string& display_model_name,
++                                                   const applewin_toolbox::CpuMode mode,
++                                                   const char* const cpu_init_model)
+ {
+     benchmark6502::singlestep_result result;
+     result.core_name = "applewin";
+     result.corpus_model = corpus.model;
+     result.model_name = display_model_name;
+-    result.cpu_init_model = "CpuMode::cmos65c02";
++    result.cpu_init_model = cpu_init_model;
+ 
+     for (unsigned opcode_value = 0; opcode_value <= 0xffu; ++opcode_value) {
+         const auto opcode = static_cast<std::uint8_t>(opcode_value);
+@@ -90,7 +92,7 @@
+         opcode_result.bus_trace.supported = false;
+ 
+         for (const auto& test_case : tests.cases) {
+-            const case_result single = run_case(test_case);
++            const case_result single = run_case(test_case, mode);
+             if (!single.instruction_ok) {
+                 opcode_result.instruction.failed = true;
+                 opcode_result.instruction.failed_cases++;
+@@ -109,19 +111,24 @@
+ 
+ namespace applewin_toolbox {
+ 
++benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus)
++{
++    return run_singlestep_corpus(corpus, "NMOS 6502", CpuMode::nmos6502, "CpuMode::nmos6502");
++}
++
+ benchmark6502::singlestep_result run_singlestep_wdc65c02(const benchmark6502::singlestep_corpus& corpus)
+ {
+-    return run_singlestep_65c02_corpus(corpus, "CMOS 65C02/WDC corpus");
++    return run_singlestep_corpus(corpus, "CMOS 65C02/WDC corpus", CpuMode::cmos65c02, "CpuMode::cmos65c02");
+ }
+ 
+ benchmark6502::singlestep_result run_singlestep_rockwell65c02(const benchmark6502::singlestep_corpus& corpus)
+ {
+-    return run_singlestep_65c02_corpus(corpus, "CMOS 65C02/Rockwell corpus");
++    return run_singlestep_corpus(corpus, "CMOS 65C02/Rockwell corpus", CpuMode::cmos65c02, "CpuMode::cmos65c02");
+ }
+ 
+ benchmark6502::singlestep_result run_singlestep_synertek65c02(const benchmark6502::singlestep_corpus& corpus)
+ {
+-    return run_singlestep_65c02_corpus(corpus, "CMOS 65C02/Synertek-ST corpus");
++    return run_singlestep_corpus(corpus, "CMOS 65C02/Synertek-ST corpus", CpuMode::cmos65c02, "CpuMode::cmos65c02");
+ }
+ 
+ } // namespace applewin_toolbox
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/ares/CMakeLists.txt v89_new_for_diff/qe6502-benchmark-main/toolbox/ares/CMakeLists.txt
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/ares/CMakeLists.txt	2026-06-01 16:59:23.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/ares/CMakeLists.txt	2026-06-01 18:36:40.096469661 +0000
+@@ -1,5 +1,6 @@
+ add_library(ares_toolbox STATIC
+     src/klaus_benchmark.cpp
++    src/singlestep.cpp
+     src/smoke.cpp
+     ${PROJECT_SOURCE_DIR}/cores/ares/ares/component/processor/mos6502/mos6502.cpp
+ )
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/ares/include/ares_toolbox.hpp v89_new_for_diff/qe6502-benchmark-main/toolbox/ares/include/ares_toolbox.hpp
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/ares/include/ares_toolbox.hpp	2026-06-01 16:59:23.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/ares/include/ares_toolbox.hpp	2026-06-01 18:35:11.902009239 +0000
+@@ -1,10 +1,12 @@
+ #pragma once
+ 
+ #include <benchmark6502/results.hpp>
++#include <benchmark6502/singlestep.hpp>
+ 
+ namespace ares_toolbox {
+ 
+ benchmark6502::smoke_result run_smoke_test();
+ benchmark6502::klaus_benchmark_result run_klaus_nmos_standard(int measured_runs = 5);
++benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus);
+ 
+ } // namespace ares_toolbox
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/ares/src/singlestep.cpp v89_new_for_diff/qe6502-benchmark-main/toolbox/ares/src/singlestep.cpp
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/ares/src/singlestep.cpp	1970-01-01 00:00:00.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/ares/src/singlestep.cpp	2026-06-01 18:35:37.776414185 +0000
+@@ -0,0 +1,94 @@
++#include <ares_toolbox.hpp>
++
++#include <ares/ares.hpp>
++#include <component/processor/mos6502/mos6502.hpp>
++
++#include <array>
++#include <cstdint>
++#include <vector>
++
++namespace {
++
++struct case_result { bool instruction_ok = false; bool cycle_count_ok = false; };
++
++class singlestep_cpu final : public ares::MOS6502 {
++public:
++    std::array<std::uint8_t, 65536> memory{};
++    std::uint64_t bus_cycles = 0;
++
++    auto read(n16 address) -> n8 override { ++bus_cycles; return memory[static_cast<std::uint16_t>(address)]; }
++    auto write(n16 address, n8 data) -> void override { ++bus_cycles; memory[static_cast<std::uint16_t>(address)] = static_cast<std::uint8_t>(data); }
++};
++
++void load_ram(std::array<std::uint8_t, 0x10000>& memory, const std::vector<benchmark6502::singlestep_memory_cell>& ram)
++{
++    for (const auto& cell : ram) memory[cell.address] = cell.value;
++}
++
++void set_initial_state(singlestep_cpu& cpu, const benchmark6502::singlestep_cpu_state& state)
++{
++    cpu.power();
++    cpu.BCD = 1;
++    cpu.PC = state.pc;
++    cpu.S = state.s;
++    cpu.A = state.a;
++    cpu.X = state.x;
++    cpu.Y = state.y;
++    cpu.P = state.p;
++    cpu.bus_cycles = 0;
++}
++
++bool compare_final_state(const singlestep_cpu& cpu,
++                         const std::array<std::uint8_t, 0x10000>& memory,
++                         const benchmark6502::singlestep_cpu_state& expected)
++{
++    if (static_cast<std::uint16_t>(cpu.PC) != expected.pc ||
++        static_cast<std::uint8_t>(cpu.S) != expected.s ||
++        static_cast<std::uint8_t>(cpu.A) != expected.a ||
++        static_cast<std::uint8_t>(cpu.X) != expected.x ||
++        static_cast<std::uint8_t>(cpu.Y) != expected.y ||
++        static_cast<std::uint8_t>(cpu.P) != expected.p) return false;
++    for (const auto& cell : expected.ram) if (memory[cell.address] != cell.value) return false;
++    return true;
++}
++
++case_result run_case(const benchmark6502::singlestep_case& test_case)
++{
++    singlestep_cpu cpu;
++    load_ram(cpu.memory, test_case.initial.ram);
++    set_initial_state(cpu, test_case.initial);
++    cpu.instruction();
++    return {compare_final_state(cpu, cpu.memory, test_case.final), cpu.bus_cycles == test_case.cycles.size()};
++}
++
++} // namespace
++
++namespace ares_toolbox {
++
++benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus)
++{
++    benchmark6502::singlestep_result result;
++    result.core_name = "ares";
++    result.model_name = "MOS6502 NMOS/BCD";
++    result.cpu_init_model = "ares::MOS6502 BCD=1";
++    result.corpus_model = corpus.model;
++    for (unsigned opcode_value = 0; opcode_value <= 0xffu; ++opcode_value) {
++        const auto opcode = static_cast<std::uint8_t>(opcode_value);
++        (void)opcode;
++        const auto& tests = corpus.opcodes[opcode_value];
++        auto& opcode_result = result.opcodes[opcode_value];
++        opcode_result.opcode = static_cast<std::uint8_t>(opcode_value);
++        opcode_result.cases_run = static_cast<std::uint64_t>(tests.cases.size());
++        opcode_result.instruction.supported = true;
++        opcode_result.cycle_count.supported = true;
++        opcode_result.bus_trace.supported = false;
++        for (const auto& test_case : tests.cases) {
++            const case_result single = run_case(test_case);
++            if (!single.instruction_ok) { opcode_result.instruction.failed = true; opcode_result.instruction.failed_cases++; }
++            if (!single.cycle_count_ok) { opcode_result.cycle_count.failed = true; opcode_result.cycle_count.failed_cases++; }
++        }
++    }
++    return result;
++}
++
++} // namespace ares_toolbox
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/clk/CMakeLists.txt v89_new_for_diff/qe6502-benchmark-main/toolbox/clk/CMakeLists.txt
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/clk/CMakeLists.txt	2026-06-01 16:59:23.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/clk/CMakeLists.txt	2026-06-01 18:36:40.095969505 +0000
+@@ -1,5 +1,6 @@
+ add_library(clk_toolbox STATIC
+     src/klaus_benchmark.cpp
++    src/singlestep.cpp
+     src/smoke.cpp
+     ${PROJECT_SOURCE_DIR}/cores/clk/Processors/6502/Implementation/6502Storage.cpp
+ )
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/clk/include/clk_toolbox.hpp v89_new_for_diff/qe6502-benchmark-main/toolbox/clk/include/clk_toolbox.hpp
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/clk/include/clk_toolbox.hpp	2026-06-01 16:59:23.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/clk/include/clk_toolbox.hpp	2026-06-01 18:35:11.901417273 +0000
+@@ -1,10 +1,12 @@
+ #pragma once
+ 
+ #include <benchmark6502/results.hpp>
++#include <benchmark6502/singlestep.hpp>
+ 
+ namespace clk_toolbox {
+ 
+ benchmark6502::smoke_result run_smoke_test();
+ benchmark6502::klaus_benchmark_result run_klaus_nmos_standard(int measured_runs = 5);
++benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus);
+ 
+ } // namespace clk_toolbox
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/clk/src/singlestep.cpp v89_new_for_diff/qe6502-benchmark-main/toolbox/clk/src/singlestep.cpp
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/clk/src/singlestep.cpp	1970-01-01 00:00:00.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/clk/src/singlestep.cpp	2026-06-01 18:45:09.282030854 +0000
+@@ -0,0 +1,169 @@
++#include <clk_toolbox.hpp>
++
++#include <Processors/6502/6502.hpp>
++
++#include <array>
++#include <cstdint>
++#include <vector>
++
++namespace {
++
++bool is_nmos_kil_opcode(const std::uint8_t opcode)
++{
++    switch (opcode) {
++    case 0x02u: case 0x12u: case 0x22u: case 0x32u:
++    case 0x42u: case 0x52u: case 0x62u: case 0x72u:
++    case 0x92u: case 0xB2u: case 0xD2u: case 0xF2u:
++        return true;
++    default:
++        return false;
++    }
++}
++
++struct case_result {
++    bool instruction_ok = false;
++    bool cycle_count_ok = false;
++    bool bus_trace_ok = false;
++};
++
++class singlestep_bus : public CPU::MOS6502::BusHandler {
++public:
++    using AddressType = std::uint16_t;
++
++    std::array<std::uint8_t, 65536> memory{};
++    std::vector<benchmark6502::singlestep_cycle> cycles;
++
++    Cycles perform_bus_operation(const CPU::MOS6502::BusOperation operation,
++                                 const AddressType address,
++                                 std::uint8_t* const value)
++    {
++        const bool is_read = CPU::MOS6502Esque::is_read(operation);
++        const bool is_write = CPU::MOS6502Esque::is_write(operation);
++        if (is_read) {
++            *value = memory[address];
++        }
++        cycles.push_back({address,
++                          is_write ? *value : memory[address],
++                          is_write ? benchmark6502::singlestep_memory_operation::write
++                                   : benchmark6502::singlestep_memory_operation::read});
++        if (is_write) {
++            memory[address] = *value;
++        }
++        return Cycles(1);
++    }
++};
++
++using processor_type = CPU::MOS6502::Processor<CPU::MOS6502::P6502, singlestep_bus, false>;
++
++void load_ram(std::array<std::uint8_t, 0x10000>& memory, const std::vector<benchmark6502::singlestep_memory_cell>& ram)
++{
++    for (const auto& cell : ram) {
++        memory[cell.address] = cell.value;
++    }
++}
++
++void set_initial_state(processor_type& cpu, const benchmark6502::singlestep_cpu_state& state)
++{
++    cpu.set_power_on(false);
++    cpu.set_reset_line(false);
++    cpu.set_value_of(CPU::MOS6502::Register::ProgramCounter, state.pc);
++    cpu.set_value_of(CPU::MOS6502::Register::StackPointer, state.s);
++    cpu.set_value_of(CPU::MOS6502::Register::A, state.a);
++    cpu.set_value_of(CPU::MOS6502::Register::X, state.x);
++    cpu.set_value_of(CPU::MOS6502::Register::Y, state.y);
++    cpu.set_value_of(CPU::MOS6502::Register::Flags, state.p);
++    cpu.restart_operation_fetch();
++}
++
++bool compare_final_state(processor_type& cpu,
++                         const std::array<std::uint8_t, 0x10000>& memory,
++                         const benchmark6502::singlestep_cpu_state& expected,
++                         const bool consumed_following_opcode_fetch)
++{
++    const auto actual_pc = static_cast<std::uint16_t>(cpu.value_of(CPU::MOS6502::Register::ProgramCounter) - (consumed_following_opcode_fetch ? 1u : 0u));
++    if (actual_pc != expected.pc ||
++        cpu.value_of(CPU::MOS6502::Register::StackPointer) != expected.s ||
++        cpu.value_of(CPU::MOS6502::Register::A) != expected.a ||
++        cpu.value_of(CPU::MOS6502::Register::X) != expected.x ||
++        cpu.value_of(CPU::MOS6502::Register::Y) != expected.y ||
++        ((cpu.value_of(CPU::MOS6502::Register::Flags) ^ expected.p) & 0xefu) != 0u) {
++        return false;
++    }
++    for (const auto& cell : expected.ram) {
++        if (memory[cell.address] != cell.value) {
++            return false;
++        }
++    }
++    return true;
++}
++
++bool compare_cycle(const benchmark6502::singlestep_cycle& actual, const benchmark6502::singlestep_cycle& expected)
++{
++    return actual.address == expected.address &&
++           actual.value == expected.value &&
++           actual.operation == expected.operation;
++}
++
++case_result run_case(const benchmark6502::singlestep_case& test_case, const std::uint8_t opcode)
++{
++    singlestep_bus bus;
++    load_ram(bus.memory, test_case.initial.ram);
++    processor_type cpu(bus);
++    set_initial_state(cpu, test_case.initial);
++
++    const bool kil_opcode = is_nmos_kil_opcode(opcode);
++    const std::size_t expected_cycles = kil_opcode && test_case.cycles.size() > 2u ? 2u : test_case.cycles.size();
++    const bool consume_following_opcode_fetch = !kil_opcode;
++    cpu.run_for(Cycles(static_cast<int>(expected_cycles + (consume_following_opcode_fetch ? 1u : 0u))));
++    if (consume_following_opcode_fetch && bus.cycles.size() > expected_cycles) {
++        bus.cycles.resize(expected_cycles);
++    }
++
++    case_result result;
++    result.instruction_ok = compare_final_state(cpu, bus.memory, test_case.final, consume_following_opcode_fetch);
++    result.cycle_count_ok = bus.cycles.size() == expected_cycles;
++    result.bus_trace_ok = result.cycle_count_ok;
++    if (result.bus_trace_ok) {
++        for (std::size_t i = 0; i < expected_cycles; ++i) {
++            if (!compare_cycle(bus.cycles[i], test_case.cycles[i])) {
++                result.bus_trace_ok = false;
++                break;
++            }
++        }
++    }
++    return result;
++}
++
++} // namespace
++
++namespace clk_toolbox {
++
++benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus)
++{
++    benchmark6502::singlestep_result result;
++    result.core_name = "clk";
++    result.model_name = "P6502 NMOS";
++    result.cpu_init_model = "CPU::MOS6502::P6502";
++    result.corpus_model = corpus.model;
++
++    for (unsigned opcode_value = 0; opcode_value <= 0xffu; ++opcode_value) {
++        const auto opcode = static_cast<std::uint8_t>(opcode_value);
++        const benchmark6502::singlestep_opcode_tests& tests = corpus.opcodes[opcode_value];
++        benchmark6502::singlestep_opcode_result& opcode_result = result.opcodes[opcode_value];
++        opcode_result.opcode = opcode;
++        opcode_result.cases_run = static_cast<std::uint64_t>(tests.cases.size());
++        opcode_result.instruction.supported = true;
++        opcode_result.cycle_count.supported = true;
++        opcode_result.bus_trace.supported = true;
++
++        for (const auto& test_case : tests.cases) {
++            const case_result single = run_case(test_case, opcode);
++            if (!single.instruction_ok) { opcode_result.instruction.failed = true; opcode_result.instruction.failed_cases++; }
++            if (!single.cycle_count_ok) { opcode_result.cycle_count.failed = true; opcode_result.cycle_count.failed_cases++; }
++            if (!single.bus_trace_ok) { opcode_result.bus_trace.failed = true; opcode_result.bus_trace.failed_cases++; }
++        }
++    }
++    return result;
++}
++
++} // namespace clk_toolbox
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/mame/CMakeLists.txt v89_new_for_diff/qe6502-benchmark-main/toolbox/mame/CMakeLists.txt
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/mame/CMakeLists.txt	2026-06-01 17:08:21.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/mame/CMakeLists.txt	2026-06-01 18:36:40.096732824 +0000
+@@ -2,6 +2,7 @@
+     src/mame6502_cpu.cpp
+     src/smoke.cpp
+     src/klaus_benchmark.cpp
++    src/singlestep.cpp
+ )
+ 
+ target_include_directories(mame_toolbox
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/mame/include/mame_toolbox.hpp v89_new_for_diff/qe6502-benchmark-main/toolbox/mame/include/mame_toolbox.hpp
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/mame/include/mame_toolbox.hpp	2026-06-01 17:07:52.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/mame/include/mame_toolbox.hpp	2026-06-01 18:35:11.902497944 +0000
+@@ -2,10 +2,12 @@
+ 
+ #include <benchmark6502/mame/mame6502_cpu.hpp>
+ #include <benchmark6502/results.hpp>
++#include <benchmark6502/singlestep.hpp>
+ 
+ namespace mame_toolbox {
+ 
+ benchmark6502::smoke_result run_smoke_test();
+ benchmark6502::klaus_benchmark_result run_klaus_nmos_standard(int measured_runs = 5);
++benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus);
+ 
+ } // namespace mame_toolbox
+diff -ruN v88_clean_for_diff/qe6502-benchmark-main/toolbox/mame/src/singlestep.cpp v89_new_for_diff/qe6502-benchmark-main/toolbox/mame/src/singlestep.cpp
+--- v88_clean_for_diff/qe6502-benchmark-main/toolbox/mame/src/singlestep.cpp	1970-01-01 00:00:00.000000000 +0000
++++ v89_new_for_diff/qe6502-benchmark-main/toolbox/mame/src/singlestep.cpp	2026-06-01 18:36:06.809201072 +0000
+@@ -0,0 +1,84 @@
++#include <mame_toolbox.hpp>
++
++#include <array>
++#include <cstdint>
++#include <vector>
++
++namespace {
++
++struct case_result { bool instruction_ok = false; bool cycle_count_ok = false; };
++
++void load_ram(benchmark6502::mame::Mame6502Cpu& cpu, const std::vector<benchmark6502::singlestep_memory_cell>& ram)
++{
++    cpu.clear_memory(0);
++    for (const auto& cell : ram) {
++        cpu.write_memory(cell.address, cell.value);
++    }
++}
++
++void set_initial_state(benchmark6502::mame::Mame6502Cpu& cpu, const benchmark6502::singlestep_cpu_state& state)
++{
++    cpu.set_state(benchmark6502::mame::CpuState{state.a, state.x, state.y, state.p, state.s, state.pc, false});
++    cpu.reset_cycle_counter();
++    cpu.clear_irq_line();
++    cpu.set_nmi_line(false);
++}
++
++bool compare_final_state(const benchmark6502::mame::Mame6502Cpu& cpu,
++                         const benchmark6502::singlestep_cpu_state& expected)
++{
++    if (cpu.pc() != expected.pc ||
++        cpu.sp() != expected.s ||
++        cpu.a() != expected.a ||
++        cpu.x() != expected.x ||
++        cpu.y() != expected.y ||
++        cpu.p() != expected.p) {
++        return false;
++    }
++    for (const auto& cell : expected.ram) {
++        if (cpu.read_memory(cell.address) != cell.value) {
++            return false;
++        }
++    }
++    return true;
++}
++
++case_result run_case(const benchmark6502::singlestep_case& test_case)
++{
++    benchmark6502::mame::Mame6502Cpu cpu(benchmark6502::mame::CpuMode::nmos6502);
++    load_ram(cpu, test_case.initial.ram);
++    set_initial_state(cpu, test_case.initial);
++    const unsigned cycles = cpu.execute(static_cast<unsigned>(test_case.cycles.size()));
++    return {compare_final_state(cpu, test_case.final), cycles == test_case.cycles.size()};
++}
++
++} // namespace
++
++namespace mame_toolbox {
++
++benchmark6502::singlestep_result run_singlestep_nmos(const benchmark6502::singlestep_corpus& corpus)
++{
++    benchmark6502::singlestep_result result;
++    result.core_name = "mame";
++    result.model_name = "NMOS 6502";
++    result.cpu_init_model = "CpuMode::nmos6502";
++    result.corpus_model = corpus.model;
++
++    for (unsigned opcode_value = 0; opcode_value <= 0xffu; ++opcode_value) {
++        const auto& tests = corpus.opcodes[opcode_value];
++        auto& opcode_result = result.opcodes[opcode_value];
++        opcode_result.opcode = static_cast<std::uint8_t>(opcode_value);
++        opcode_result.cases_run = static_cast<std::uint64_t>(tests.cases.size());
++        opcode_result.instruction.supported = true;
++        opcode_result.cycle_count.supported = true;
++        opcode_result.bus_trace.supported = false;
++        for (const auto& test_case : tests.cases) {
++            const case_result single = run_case(test_case);
++            if (!single.instruction_ok) { opcode_result.instruction.failed = true; opcode_result.instruction.failed_cases++; }
++            if (!single.cycle_count_ok) { opcode_result.cycle_count.failed = true; opcode_result.cycle_count.failed_cases++; }
++        }
++    }
++    return result;
++}
++
++} // namespace mame_toolbox

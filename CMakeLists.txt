@@ -100,6 +100,15 @@ target_link_libraries(altirrasdl_klaus_benchmark
     PRIVATE altirrasdl_toolbox
 )
 
+
+add_executable(altirrasdl_singlestep_65c02_fit
+    altirrasdl_singlestep_65c02_fit.cpp
+)
+
+target_link_libraries(altirrasdl_singlestep_65c02_fit
+    PRIVATE altirrasdl_toolbox
+)
+
 add_executable(applewin_smoketest
     applewin_smoke_test.cpp
 )
@@ -113,6 +122,14 @@ add_executable(applewin_klaus_benchmark
 )
 
 target_link_libraries(applewin_klaus_benchmark
+    PRIVATE applewin_toolbox
+)
+
+add_executable(applewin_singlestep_65c02_fit
+    applewin_singlestep_65c02_fit.cpp
+)
+
+target_link_libraries(applewin_singlestep_65c02_fit
     PRIVATE applewin_toolbox
 )
 
