@@ -202,7 +202,7 @@ sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65
 sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xC8	INY	implied	functional	10000	passed	0	0	passed	0	0	unsupported	0	0
 sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xC9	CMP	immediate	functional	10000	passed	0	0	failed	1	10000	unsupported	0	0
 sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xCA	DEX	implied	functional	10000	passed	0	0	passed	0	0	unsupported	0	0
-sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xCB	???	illegal	functional	0	passed	0	0	passed	0	0	unsupported	0	0
+sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xCB	NOP	illegal	nop	0	passed	0	0	passed	0	0	unsupported	0	0
 sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xCC	CPY	absolute	functional	10000	passed	0	0	passed	0	0	unsupported	0	0
 sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xCD	CMP	absolute	functional	10000	passed	0	0	passed	0	0	unsupported	0	0
 sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xCE	DEC	absolute	functional	10000	passed	0	0	passed	0	0	unsupported	0	0
@@ -218,7 +218,7 @@ sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65
 sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xD8	CLD	implied	functional	10000	passed	0	0	passed	0	0	unsupported	0	0
 sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xD9	CMP	absolute,Y	functional	10000	passed	0	0	failed	1	4933	unsupported	0	0
 sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xDA	???	illegal	functional	10000	passed	0	0	passed	0	0	unsupported	0	0
-sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xDB	???	illegal	functional	0	passed	0	0	passed	0	0	unsupported	0	0
+sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xDB	NOP	illegal	nop	0	passed	0	0	passed	0	0	unsupported	0	0
 sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xDC	NOP	illegal	nop	10000	failed	1	10000	failed	1	10000	unsupported	0	0
 sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xDD	CMP	absolute,X	functional	10000	passed	0	0	failed	1	4998	unsupported	0	0
 sflib65c02	WDC 65C02	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/wdc65c02/v1	0xDE	DEC	absolute,X	functional	10000	passed	0	0	passed	0	0	unsupported	0	0
