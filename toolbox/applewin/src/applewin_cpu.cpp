@@ -61,6 +61,11 @@ static BYTE __stdcall io_stub(WORD, WORD address, BYTE write, BYTE value, ULONG)
     return mem[address];
 }
 
+// The benchmark extraction deliberately bypasses Apple II memory-mapped I/O
+// and ROM/soft-switch special cases for CPU correctness tests. The AppleWin
+// opcode core still inlines memory access through READ/WRITE macros, but these
+// definitions make those accesses a flat 64K RAM model.
+
 static void initialise_pages() {
     for(unsigned i = 0; i < 0x100; ++i) {
         memshadow[i] = mem + (i << 8);
@@ -88,8 +93,8 @@ static BYTE IO_F8xx(WORD, WORD address, BYTE write, BYTE value, ULONG) { return 
 static int z80_mainloop(int, int) { return 0; }
 
 #define HEATMAP_X(address)
-#define READ(addr) _READ_WITH_IO_F8xx(addr)
-#define WRITE(value) _WRITE_WITH_IO_F8xx(value)
+#define READ(addr) (mem[static_cast<WORD>(addr)])
+#define WRITE(value) do { mem[addr] = static_cast<BYTE>(value); dirty[addr >> 8] = 0xff; } while(0);
 
 #include "CPU/cpu_general.inl"
 #include "CPU/cpu_instructions.inl"
@@ -135,8 +140,8 @@ static __forceinline void NTSC_VideoUpdateCycles(ULONG) {}
 
 #include "CPU/cpu6502.h"
 
-#define READ(addr) _READ_WITH_IO_F8xx(addr)
-#define WRITE(value) _WRITE_WITH_IO_F8xx(value)
+#define READ(addr) (mem[static_cast<WORD>(addr)])
+#define WRITE(value) do { mem[addr] = static_cast<BYTE>(value); dirty[addr >> 8] = 0xff; } while(0);
 #include "CPU/cpu65C02.h"
 
 #undef HEATMAP_X
