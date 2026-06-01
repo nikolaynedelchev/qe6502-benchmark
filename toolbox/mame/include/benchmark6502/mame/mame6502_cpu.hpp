@@ -7,6 +7,8 @@ namespace benchmark6502::mame {
 
 enum class CpuMode {
     nmos6502,
+    wdc65c02,
+    rockwell65c02,
 };
 
 struct CpuState {
@@ -21,7 +23,10 @@ struct CpuState {
 
 class Mame6502Cpu {
 public:
-    Mame6502Cpu();
+    explicit Mame6502Cpu(CpuMode mode = CpuMode::nmos6502);
+
+    CpuMode mode() const { return mode_; }
+    void set_mode(CpuMode mode);
 
     void clear_memory(std::uint8_t value = 0);
     void load_program(std::uint16_t address, const std::uint8_t* data, std::size_t size);
@@ -37,6 +42,7 @@ public:
     void write_memory(std::uint16_t address, std::uint8_t value) { memory_[address] = value; }
 
     unsigned execute(unsigned cycles);
+    unsigned execute_one_instruction() { return execute(1); }
 
     CpuState state() const;
     void set_state(const CpuState& state);
@@ -56,12 +62,15 @@ public:
     void set_p(std::uint8_t value) { p_ = value; }
     void set_sp(std::uint8_t value) { sp_ = static_cast<std::uint16_t>(0x0100u | value); }
     void set_jammed(bool value) { jammed_ = value; }
+    void clear_jammed() { jammed_ = false; }
     void reset_cycle_counter() { total_cycles_ = 0; }
 
     void set_irq_line(bool asserted) { irq_state_ = asserted; }
+    void clear_irq_line() { set_irq_line(false); }
     void set_nmi_line(bool asserted);
     void pulse_nmi() { set_nmi_line(true); set_nmi_line(false); }
     void set_so_line(bool asserted);
+    bool interrupt_pending() const { return nmi_pending_ || (irq_state_ && !(p_ & 0x04)); }
 
     unsigned read_count() const { return read_count_; }
     unsigned write_count() const { return write_count_; }
@@ -69,7 +78,10 @@ public:
 
 private:
     friend class mame6502_cpu_device;
+    friend class mamew65c02_cpu_device;
+    friend class mamer65c02_cpu_device;
 
+    CpuMode mode_ = CpuMode::nmos6502;
     std::array<std::uint8_t, 65536> memory_{};
     unsigned total_cycles_ = 0;
     unsigned read_count_ = 0;

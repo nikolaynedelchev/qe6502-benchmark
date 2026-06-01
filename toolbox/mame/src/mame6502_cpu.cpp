@@ -26,299 +26,303 @@ inline std::uint16_t set_l(std::uint16_t base, std::uint8_t value) { return (bas
 inline std::uint16_t set_h(std::uint16_t base, std::uint8_t value) { return (base & 0x00ffu) | (static_cast<std::uint16_t>(value) << 8); }
 } // namespace
 
-class mame6502_cpu_device {
-public:
-    explicit mame6502_cpu_device(Mame6502Cpu& owner) :
-        owner_(owner),
-        m_PPC(owner.ppc_),
-        m_NPC(owner.npc_),
-        m_PC(owner.pc_),
-        m_SP(owner.sp_),
-        m_TMP(owner.tmp_),
-        m_TMP2(owner.tmp2_),
-        m_A(owner.a_),
-        m_X(owner.x_),
-        m_Y(owner.y_),
-        m_P(owner.p_),
-        m_IR(owner.ir_),
-        m_inst_state_base(owner.inst_state_base_),
-        m_inst_state(owner.inst_state_),
-        m_inst_substate(owner.inst_substate_),
-        m_icount(owner.icount_),
-        m_nmi_state(owner.nmi_state_),
-        m_irq_state(owner.irq_state_),
-        m_v_state(owner.v_state_),
-        m_nmi_pending(owner.nmi_pending_),
-        m_irq_taken(owner.irq_taken_),
-        m_sync(owner.sync_),
-        m_inhibit_interrupts(owner.inhibit_interrupts_)
-    {
-    }
 
-    void execute_run();
+#define DECLARE_MAME_6502_DEVICE_CLASS_BEGIN(CLASS_NAME) \
+class CLASS_NAME { \
+public: \
+    explicit CLASS_NAME(Mame6502Cpu& owner) : \
+        owner_(owner), \
+        m_PPC(owner.ppc_), \
+        m_NPC(owner.npc_), \
+        m_PC(owner.pc_), \
+        m_SP(owner.sp_), \
+        m_TMP(owner.tmp_), \
+        m_TMP2(owner.tmp2_), \
+        m_A(owner.a_), \
+        m_X(owner.x_), \
+        m_Y(owner.y_), \
+        m_P(owner.p_), \
+        m_IR(owner.ir_), \
+        m_inst_state_base(owner.inst_state_base_), \
+        m_inst_state(owner.inst_state_), \
+        m_inst_substate(owner.inst_substate_), \
+        m_icount(owner.icount_), \
+        m_nmi_state(owner.nmi_state_), \
+        m_irq_state(owner.irq_state_), \
+        m_v_state(owner.v_state_), \
+        m_nmi_pending(owner.nmi_pending_), \
+        m_irq_taken(owner.irq_taken_), \
+        m_sync(owner.sync_), \
+        m_inhibit_interrupts(owner.inhibit_interrupts_) {} \
+    void execute_run(); \
+protected: \
+    Mame6502Cpu& owner_; \
+    std::uint16_t& m_PPC; \
+    std::uint16_t& m_NPC; \
+    std::uint16_t& m_PC; \
+    std::uint16_t& m_SP; \
+    std::uint16_t& m_TMP; \
+    std::uint8_t& m_TMP2; \
+    std::uint8_t& m_A; \
+    std::uint8_t& m_X; \
+    std::uint8_t& m_Y; \
+    std::uint8_t& m_P; \
+    std::uint8_t& m_IR; \
+    int& m_inst_state_base; \
+    int& m_inst_state; \
+    int& m_inst_substate; \
+    int& m_icount; \
+    bool& m_nmi_state; \
+    bool& m_irq_state; \
+    bool& m_v_state; \
+    bool& m_nmi_pending; \
+    bool& m_irq_taken; \
+    bool& m_sync; \
+    bool& m_inhibit_interrupts; \
+    static constexpr std::uint8_t F_N = ::benchmark6502::mame::F_N; \
+    static constexpr std::uint8_t F_V = ::benchmark6502::mame::F_V; \
+    static constexpr std::uint8_t F_E = ::benchmark6502::mame::F_E; \
+    static constexpr std::uint8_t F_B = ::benchmark6502::mame::F_B; \
+    static constexpr std::uint8_t F_D = ::benchmark6502::mame::F_D; \
+    static constexpr std::uint8_t F_I = ::benchmark6502::mame::F_I; \
+    static constexpr std::uint8_t F_Z = ::benchmark6502::mame::F_Z; \
+    static constexpr std::uint8_t F_C = ::benchmark6502::mame::F_C; \
+    static constexpr int NMI_LINE = ::benchmark6502::mame::NMI_LINE; \
+    static constexpr int IRQ_LINE = ::benchmark6502::mame::IRQ_LINE; \
+    static constexpr int V_LINE = ::benchmark6502::mame::V_LINE; \
+    static constexpr int STATE_RESET = ::benchmark6502::mame::STATE_RESET; \
+    static bool page_changing(std::uint16_t base, int delta) { return ::benchmark6502::mame::page_changing(base, delta); } \
+    static std::uint16_t set_l(std::uint16_t base, std::uint8_t value) { return ::benchmark6502::mame::set_l(base, value); } \
+    static std::uint16_t set_h(std::uint16_t base, std::uint8_t value) { return ::benchmark6502::mame::set_h(base, value); } \
+    std::uint8_t read(std::uint16_t address) { return owner_.read(address); } \
+    std::uint8_t read_sync(std::uint16_t address) { return owner_.read_sync(address); } \
+    std::uint8_t read_arg(std::uint16_t address) { return owner_.read_arg(address); } \
+    std::uint8_t read_pc() { return read_arg(m_PC); } \
+    std::uint8_t read_vector(std::uint16_t address) { return owner_.read_arg(address); } \
+    void end_interrupt() {} \
+    void write(std::uint16_t address, std::uint8_t value) { owner_.write(address, value); } \
+    bool access_to_be_redone() const { return false; } \
+    void debugger_wait_hook() {} \
+    void standard_irq_callback(int, std::uint16_t) {} \
+    void prefetch_start() { m_sync = true; m_NPC = m_PC; } \
+    void prefetch_end() { m_sync = false; if((m_nmi_pending || (m_irq_state && !(m_P & F_I))) && !m_inhibit_interrupts) { m_irq_taken = true; m_IR = 0x00; } else { m_PC++; } } \
+    void prefetch_end_noirq() { m_sync = false; m_PC++; } \
+    void set_nz(std::uint8_t value) { m_P &= ~(F_Z | F_N); if(value & 0x80) m_P |= F_N; if(!value) m_P |= F_Z; } \
+    void dec_SP() { m_SP = set_l(m_SP, static_cast<std::uint8_t>(m_SP - 1)); } \
+    void inc_SP() { m_SP = set_l(m_SP, static_cast<std::uint8_t>(m_SP + 1)); } \
+    void do_adc_d(std::uint8_t val); \
+    void do_adc_nd(std::uint8_t val); \
+    void do_sbc_d(std::uint8_t val); \
+    void do_sbc_nd(std::uint8_t val); \
+    void do_sbc_cd(std::uint8_t val); \
+    void do_sbc_c(std::uint8_t val); \
+    void do_arr_d(); \
+    void do_arr_nd(); \
+    void do_adc(std::uint8_t val) { (m_P & F_D) ? do_adc_d(val) : do_adc_nd(val); } \
+    void do_sbc(std::uint8_t val) { (m_P & F_D) ? do_sbc_d(val) : do_sbc_nd(val); } \
+    void do_arr() { (m_P & F_D) ? do_arr_d() : do_arr_nd(); } \
+    void do_cmp(std::uint8_t lhs, std::uint8_t rhs); \
+    void do_bit(std::uint8_t val); \
+    std::uint8_t do_asl(std::uint8_t val); \
+    std::uint8_t do_lsr(std::uint8_t val); \
+    std::uint8_t do_ror(std::uint8_t val); \
+    std::uint8_t do_rol(std::uint8_t val); \
+    std::uint8_t do_asr(std::uint8_t val); \
+    void do_exec_full(); \
+    void do_exec_partial();
 
-private:
-    Mame6502Cpu& owner_;
-    std::uint16_t& m_PPC;
-    std::uint16_t& m_NPC;
-    std::uint16_t& m_PC;
-    std::uint16_t& m_SP;
-    std::uint16_t& m_TMP;
-    std::uint8_t& m_TMP2;
-    std::uint8_t& m_A;
-    std::uint8_t& m_X;
-    std::uint8_t& m_Y;
-    std::uint8_t& m_P;
-    std::uint8_t& m_IR;
-    int& m_inst_state_base;
-    int& m_inst_state;
-    int& m_inst_substate;
-    int& m_icount;
-    bool& m_nmi_state;
-    bool& m_irq_state;
-    bool& m_v_state;
-    bool& m_nmi_pending;
-    bool& m_irq_taken;
-    bool& m_sync;
-    bool& m_inhibit_interrupts;
-
-    static constexpr std::uint8_t F_N = ::benchmark6502::mame::F_N;
-    static constexpr std::uint8_t F_V = ::benchmark6502::mame::F_V;
-    static constexpr std::uint8_t F_E = ::benchmark6502::mame::F_E;
-    static constexpr std::uint8_t F_B = ::benchmark6502::mame::F_B;
-    static constexpr std::uint8_t F_D = ::benchmark6502::mame::F_D;
-    static constexpr std::uint8_t F_I = ::benchmark6502::mame::F_I;
-    static constexpr std::uint8_t F_Z = ::benchmark6502::mame::F_Z;
-    static constexpr std::uint8_t F_C = ::benchmark6502::mame::F_C;
-    static constexpr int NMI_LINE = ::benchmark6502::mame::NMI_LINE;
-    static constexpr int IRQ_LINE = ::benchmark6502::mame::IRQ_LINE;
-    static constexpr int V_LINE = ::benchmark6502::mame::V_LINE;
-    static constexpr int STATE_RESET = ::benchmark6502::mame::STATE_RESET;
-
-    static bool page_changing(std::uint16_t base, int delta) { return ::benchmark6502::mame::page_changing(base, delta); }
-    static std::uint16_t set_l(std::uint16_t base, std::uint8_t value) { return ::benchmark6502::mame::set_l(base, value); }
-    static std::uint16_t set_h(std::uint16_t base, std::uint8_t value) { return ::benchmark6502::mame::set_h(base, value); }
-
-    std::uint8_t read(std::uint16_t address) { return owner_.read(address); }
-    std::uint8_t read_sync(std::uint16_t address) { return owner_.read_sync(address); }
-    std::uint8_t read_arg(std::uint16_t address) { return owner_.read_arg(address); }
-    std::uint8_t read_pc() { return read_arg(m_PC); }
-    void write(std::uint16_t address, std::uint8_t value) { owner_.write(address, value); }
-
-    bool access_to_be_redone() const { return false; }
-    void debugger_wait_hook() {}
-    void standard_irq_callback(int, std::uint16_t) {}
-
-    void prefetch_start()
-    {
-        m_sync = true;
-        m_NPC = m_PC;
-    }
-
-    void prefetch_end()
-    {
-        m_sync = false;
-        if((m_nmi_pending || (m_irq_state && !(m_P & F_I))) && !m_inhibit_interrupts) {
-            m_irq_taken = true;
-            m_IR = 0x00;
-        } else {
-            m_PC++;
-        }
-    }
-
-    void prefetch_end_noirq()
-    {
-        m_sync = false;
-        m_PC++;
-    }
-
-    void set_nz(std::uint8_t value)
-    {
-        m_P &= ~(F_Z | F_N);
-        if(value & 0x80) m_P |= F_N;
-        if(!value) m_P |= F_Z;
-    }
-
-    void dec_SP() { m_SP = set_l(m_SP, static_cast<std::uint8_t>(m_SP - 1)); }
-    void inc_SP() { m_SP = set_l(m_SP, static_cast<std::uint8_t>(m_SP + 1)); }
-
-    void do_adc_d(std::uint8_t val);
-    void do_adc_nd(std::uint8_t val);
-    void do_sbc_d(std::uint8_t val);
-    void do_sbc_nd(std::uint8_t val);
-    void do_arr_d();
-    void do_arr_nd();
-    void do_adc(std::uint8_t val) { (m_P & F_D) ? do_adc_d(val) : do_adc_nd(val); }
-    void do_sbc(std::uint8_t val) { (m_P & F_D) ? do_sbc_d(val) : do_sbc_nd(val); }
-    void do_arr() { (m_P & F_D) ? do_arr_d() : do_arr_nd(); }
-    void do_cmp(std::uint8_t lhs, std::uint8_t rhs);
-    void do_bit(std::uint8_t val);
-    std::uint8_t do_asl(std::uint8_t val);
-    std::uint8_t do_lsr(std::uint8_t val);
-    std::uint8_t do_ror(std::uint8_t val);
-    std::uint8_t do_rol(std::uint8_t val);
-    std::uint8_t do_asr(std::uint8_t val);
-
-#include "m6502_nmos_declarations.inc"
+#define DECLARE_MAME_6502_DEVICE_CLASS_END() \
 };
 
-void mame6502_cpu_device::do_adc_d(std::uint8_t val)
-{
-    std::uint8_t c = (m_P & F_C) ? 1 : 0;
-    m_P &= ~(F_N | F_V | F_Z | F_C);
-    std::uint8_t al = (m_A & 15) + (val & 15) + c;
-    if(al > 9) al += 6;
-    std::uint8_t ah = (m_A >> 4) + (val >> 4) + (al > 15);
-    if(!std::uint8_t(m_A + val + c)) m_P |= F_Z;
-    else if(ah & 8) m_P |= F_N;
-    if(~(m_A ^ val) & (m_A ^ (ah << 4)) & 0x80) m_P |= F_V;
-    if(ah > 9) ah += 6;
-    if(ah > 15) m_P |= F_C;
-    m_A = (ah << 4) | (al & 15);
+DECLARE_MAME_6502_DEVICE_CLASS_BEGIN(mame6502_cpu_device)
+#include "m6502_nmos_declarations.inc"
+DECLARE_MAME_6502_DEVICE_CLASS_END()
+
+DECLARE_MAME_6502_DEVICE_CLASS_BEGIN(mamew65c02_cpu_device)
+#include "m6502_w65c02_declarations.inc"
+DECLARE_MAME_6502_DEVICE_CLASS_END()
+
+class mamer65c02_cpu_device : public mamew65c02_cpu_device {
+public:
+    explicit mamer65c02_cpu_device(Mame6502Cpu& owner) : mamew65c02_cpu_device(owner) {}
+    void execute_run();
+private:
+    void do_exec_full();
+    void do_exec_partial();
+};
+
+#define DEFINE_MAME_6502_COMMON_METHODS(CLASS_NAME) \
+void CLASS_NAME::do_adc_d(std::uint8_t val) \
+{ \
+    std::uint8_t c = (m_P & F_C) ? 1 : 0; \
+    m_P &= ~(F_N | F_V | F_Z | F_C); \
+    std::uint8_t al = (m_A & 15) + (val & 15) + c; \
+    if(al > 9) al += 6; \
+    std::uint8_t ah = (m_A >> 4) + (val >> 4) + (al > 15); \
+    if(!std::uint8_t(m_A + val + c)) m_P |= F_Z; \
+    else if(ah & 8) m_P |= F_N; \
+    if(~(m_A ^ val) & (m_A ^ (ah << 4)) & 0x80) m_P |= F_V; \
+    if(ah > 9) ah += 6; \
+    if(ah > 15) m_P |= F_C; \
+    m_A = (ah << 4) | (al & 15); \
+} \
+void CLASS_NAME::do_adc_nd(std::uint8_t val) \
+{ \
+    std::uint16_t sum = m_A + val + ((m_P & F_C) ? 1 : 0); \
+    m_P &= ~(F_N | F_V | F_Z | F_C); \
+    if(!std::uint8_t(sum)) m_P |= F_Z; \
+    else if(static_cast<std::int8_t>(sum) < 0) m_P |= F_N; \
+    if(~(m_A ^ val) & (m_A ^ sum) & 0x80) m_P |= F_V; \
+    if(sum & 0xff00) m_P |= F_C; \
+    m_A = sum; \
+} \
+void CLASS_NAME::do_sbc_d(std::uint8_t val) \
+{ \
+    std::uint8_t c = (m_P & F_C) ? 0 : 1; \
+    m_P &= ~(F_N | F_V | F_Z | F_C); \
+    std::uint16_t diff = m_A - val - c; \
+    std::uint8_t al = (m_A & 15) - (val & 15) - c; \
+    std::uint8_t ah = (m_A >> 4) - (val >> 4) - (static_cast<std::int8_t>(al) < 0); \
+    if(!std::uint8_t(diff)) m_P |= F_Z; \
+    else if(diff & 0x80) m_P |= F_N; \
+    if((m_A ^ val) & (m_A ^ diff) & 0x80) m_P |= F_V; \
+    if(!(diff & 0xff00)) m_P |= F_C; \
+    if(static_cast<std::int8_t>(al) < 0) al -= 6; \
+    if(static_cast<std::int8_t>(ah) < 0) ah -= 6; \
+    m_A = (ah << 4) | (al & 15); \
+} \
+void CLASS_NAME::do_sbc_nd(std::uint8_t val) \
+{ \
+    std::uint16_t diff = m_A - val - ((m_P & F_C) ? 0 : 1); \
+    m_P &= ~(F_N | F_V | F_Z | F_C); \
+    if(!std::uint8_t(diff)) m_P |= F_Z; \
+    else if(static_cast<std::int8_t>(diff) < 0) m_P |= F_N; \
+    if((m_A ^ val) & (m_A ^ diff) & 0x80) m_P |= F_V; \
+    if(!(diff & 0xff00)) m_P |= F_C; \
+    m_A = diff; \
+} \
+void CLASS_NAME::do_sbc_cd(std::uint8_t val) \
+{ \
+    std::uint8_t c = (m_P & F_C) ? 0 : 1; \
+    m_P &= ~(F_N | F_V | F_Z | F_C); \
+    std::uint16_t diff = m_A - val - c; \
+    std::uint8_t al = (m_A & 15) - (val & 15) - c; \
+    std::uint8_t ah = (m_A >> 4) - (val >> 4) - (static_cast<std::int8_t>(al) < 0); \
+    if((m_A ^ val) & (m_A ^ diff) & 0x80) m_P |= F_V; \
+    if(!(diff & 0xff00)) m_P |= F_C; \
+    m_A = (ah << 4) | (al & 15); \
+    if(static_cast<std::int8_t>(al) < 0) m_A -= 6; \
+    if(static_cast<std::int8_t>(ah) < 0) m_A -= 0x60; \
+} \
+void CLASS_NAME::do_sbc_c(std::uint8_t val) { (m_P & F_D) ? do_sbc_cd(val) : do_sbc_nd(val); } \
+void CLASS_NAME::do_arr_nd() \
+{ \
+    bool c = m_P & F_C; \
+    m_P &= ~(F_N | F_Z | F_C | F_V); \
+    m_A >>= 1; \
+    if(c) m_A |= 0x80; \
+    if(!m_A) m_P |= F_Z; \
+    else if(static_cast<std::int8_t>(m_A) < 0) m_P |= F_N; \
+    if(m_A & 0x40) m_P |= F_V | F_C; \
+    if(m_A & 0x20) m_P ^= F_V; \
+} \
+void CLASS_NAME::do_arr_d() \
+{ \
+    bool c = m_P & F_C; \
+    m_P &= ~(F_N | F_Z | F_C | F_V); \
+    std::uint8_t a = m_A >> 1; \
+    if(c) a |= 0x80; \
+    if(!a) m_P |= F_Z; \
+    else if(static_cast<std::int8_t>(a) < 0) m_P |= F_N; \
+    if((a ^ m_A) & 0x40) m_P |= F_V; \
+    if((m_A & 0x0f) >= 0x05) a = ((a + 6) & 0x0f) | (a & 0xf0); \
+    if((m_A & 0xf0) >= 0x50) { a += 0x60; m_P |= F_C; } \
+    m_A = a; \
+} \
+void CLASS_NAME::do_cmp(std::uint8_t lhs, std::uint8_t rhs) \
+{ \
+    m_P &= ~(F_N | F_Z | F_C); \
+    std::uint16_t r = lhs - rhs; \
+    if(!r) m_P |= F_Z; \
+    else if(static_cast<std::int8_t>(r) < 0) m_P |= F_N; \
+    if(!(r & 0xff00)) m_P |= F_C; \
+} \
+void CLASS_NAME::do_bit(std::uint8_t val) \
+{ \
+    m_P &= ~(F_N | F_Z | F_V); \
+    std::uint8_t r = m_A & val; \
+    if(!r) m_P |= F_Z; \
+    if(val & 0x80) m_P |= F_N; \
+    if(val & 0x40) m_P |= F_V; \
+} \
+std::uint8_t CLASS_NAME::do_asl(std::uint8_t v) \
+{ \
+    m_P &= ~(F_N | F_Z | F_C); \
+    std::uint8_t r = v << 1; \
+    if(!r) m_P |= F_Z; \
+    else if(static_cast<std::int8_t>(r) < 0) m_P |= F_N; \
+    if(v & 0x80) m_P |= F_C; \
+    return r; \
+} \
+std::uint8_t CLASS_NAME::do_lsr(std::uint8_t v) \
+{ \
+    m_P &= ~(F_N | F_Z | F_C); \
+    if(v & 1) m_P |= F_C; \
+    v >>= 1; \
+    if(!v) m_P |= F_Z; \
+    return v; \
+} \
+std::uint8_t CLASS_NAME::do_ror(std::uint8_t v) \
+{ \
+    bool c = m_P & F_C; \
+    m_P &= ~(F_N | F_Z | F_C); \
+    if(v & 1) m_P |= F_C; \
+    v >>= 1; \
+    if(c) v |= 0x80; \
+    if(!v) m_P |= F_Z; \
+    else if(static_cast<std::int8_t>(v) < 0) m_P |= F_N; \
+    return v; \
+} \
+std::uint8_t CLASS_NAME::do_rol(std::uint8_t v) \
+{ \
+    bool c = m_P & F_C; \
+    m_P &= ~(F_N | F_Z | F_C); \
+    if(v & 0x80) m_P |= F_C; \
+    v <<= 1; \
+    if(c) v |= 0x01; \
+    if(!v) m_P |= F_Z; \
+    else if(static_cast<std::int8_t>(v) < 0) m_P |= F_N; \
+    return v; \
+} \
+std::uint8_t CLASS_NAME::do_asr(std::uint8_t v) \
+{ \
+    m_P &= ~(F_N | F_Z | F_C); \
+    if(v & 1) m_P |= F_C; \
+    v >>= 1; \
+    if(!v) m_P |= F_Z; \
+    else if(v & 0x40) { m_P |= F_N; v |= 0x80; } \
+    return v; \
+} \
+void CLASS_NAME::execute_run() \
+{ \
+    if(m_inst_substate) \
+        do_exec_partial(); \
+    while(m_icount > 0) { \
+        if(m_inst_state < 0xff00) { \
+            m_PPC = m_NPC; \
+            m_inst_state = m_IR | m_inst_state_base; \
+        } \
+        do_exec_full(); \
+    } \
 }
 
-void mame6502_cpu_device::do_adc_nd(std::uint8_t val)
-{
-    std::uint16_t sum = m_A + val + ((m_P & F_C) ? 1 : 0);
-    m_P &= ~(F_N | F_V | F_Z | F_C);
-    if(!std::uint8_t(sum)) m_P |= F_Z;
-    else if(static_cast<std::int8_t>(sum) < 0) m_P |= F_N;
-    if(~(m_A ^ val) & (m_A ^ sum) & 0x80) m_P |= F_V;
-    if(sum & 0xff00) m_P |= F_C;
-    m_A = sum;
-}
+DEFINE_MAME_6502_COMMON_METHODS(mame6502_cpu_device)
+DEFINE_MAME_6502_COMMON_METHODS(mamew65c02_cpu_device)
 
-void mame6502_cpu_device::do_sbc_d(std::uint8_t val)
-{
-    std::uint8_t c = (m_P & F_C) ? 0 : 1;
-    m_P &= ~(F_N | F_V | F_Z | F_C);
-    std::uint16_t diff = m_A - val - c;
-    std::uint8_t al = (m_A & 15) - (val & 15) - c;
-    std::uint8_t ah = (m_A >> 4) - (val >> 4) - (static_cast<std::int8_t>(al) < 0);
-    if(!std::uint8_t(diff)) m_P |= F_Z;
-    else if(diff & 0x80) m_P |= F_N;
-    if((m_A ^ val) & (m_A ^ diff) & 0x80) m_P |= F_V;
-    if(!(diff & 0xff00)) m_P |= F_C;
-    if(static_cast<std::int8_t>(al) < 0) al -= 6;
-    if(static_cast<std::int8_t>(ah) < 0) ah -= 6;
-    m_A = (ah << 4) | (al & 15);
-}
-
-void mame6502_cpu_device::do_sbc_nd(std::uint8_t val)
-{
-    std::uint16_t diff = m_A - val - ((m_P & F_C) ? 0 : 1);
-    m_P &= ~(F_N | F_V | F_Z | F_C);
-    if(!std::uint8_t(diff)) m_P |= F_Z;
-    else if(static_cast<std::int8_t>(diff) < 0) m_P |= F_N;
-    if((m_A ^ val) & (m_A ^ diff) & 0x80) m_P |= F_V;
-    if(!(diff & 0xff00)) m_P |= F_C;
-    m_A = diff;
-}
-
-void mame6502_cpu_device::do_arr_nd()
-{
-    bool c = m_P & F_C;
-    m_P &= ~(F_N | F_Z | F_C | F_V);
-    m_A >>= 1;
-    if(c) m_A |= 0x80;
-    if(!m_A) m_P |= F_Z;
-    else if(static_cast<std::int8_t>(m_A) < 0) m_P |= F_N;
-    if(m_A & 0x40) m_P |= F_V | F_C;
-    if(m_A & 0x20) m_P ^= F_V;
-}
-
-void mame6502_cpu_device::do_arr_d()
-{
-    bool c = m_P & F_C;
-    m_P &= ~(F_N | F_Z | F_C | F_V);
-    std::uint8_t a = m_A >> 1;
-    if(c) a |= 0x80;
-    if(!a) m_P |= F_Z;
-    else if(static_cast<std::int8_t>(a) < 0) m_P |= F_N;
-    if((a ^ m_A) & 0x40) m_P |= F_V;
-    if((m_A & 0x0f) >= 0x05) a = ((a + 6) & 0x0f) | (a & 0xf0);
-    if((m_A & 0xf0) >= 0x50) { a += 0x60; m_P |= F_C; }
-    m_A = a;
-}
-
-void mame6502_cpu_device::do_cmp(std::uint8_t lhs, std::uint8_t rhs)
-{
-    m_P &= ~(F_N | F_Z | F_C);
-    std::uint16_t r = lhs - rhs;
-    if(!r) m_P |= F_Z;
-    else if(static_cast<std::int8_t>(r) < 0) m_P |= F_N;
-    if(!(r & 0xff00)) m_P |= F_C;
-}
-
-void mame6502_cpu_device::do_bit(std::uint8_t val)
-{
-    m_P &= ~(F_N | F_Z | F_V);
-    std::uint8_t r = m_A & val;
-    if(!r) m_P |= F_Z;
-    if(val & 0x80) m_P |= F_N;
-    if(val & 0x40) m_P |= F_V;
-}
-
-std::uint8_t mame6502_cpu_device::do_asl(std::uint8_t v)
-{
-    m_P &= ~(F_N | F_Z | F_C);
-    std::uint8_t r = v << 1;
-    if(!r) m_P |= F_Z;
-    else if(static_cast<std::int8_t>(r) < 0) m_P |= F_N;
-    if(v & 0x80) m_P |= F_C;
-    return r;
-}
-
-std::uint8_t mame6502_cpu_device::do_lsr(std::uint8_t v)
-{
-    m_P &= ~(F_N | F_Z | F_C);
-    if(v & 1) m_P |= F_C;
-    v >>= 1;
-    if(!v) m_P |= F_Z;
-    return v;
-}
-
-std::uint8_t mame6502_cpu_device::do_ror(std::uint8_t v)
-{
-    bool c = m_P & F_C;
-    m_P &= ~(F_N | F_Z | F_C);
-    if(v & 1) m_P |= F_C;
-    v >>= 1;
-    if(c) v |= 0x80;
-    if(!v) m_P |= F_Z;
-    else if(static_cast<std::int8_t>(v) < 0) m_P |= F_N;
-    return v;
-}
-
-std::uint8_t mame6502_cpu_device::do_rol(std::uint8_t v)
-{
-    bool c = m_P & F_C;
-    m_P &= ~(F_N | F_Z | F_C);
-    if(v & 0x80) m_P |= F_C;
-    v <<= 1;
-    if(c) v |= 0x01;
-    if(!v) m_P |= F_Z;
-    else if(static_cast<std::int8_t>(v) < 0) m_P |= F_N;
-    return v;
-}
-
-std::uint8_t mame6502_cpu_device::do_asr(std::uint8_t v)
-{
-    m_P &= ~(F_N | F_Z | F_C);
-    if(v & 1) m_P |= F_C;
-    v >>= 1;
-    if(!v) m_P |= F_Z;
-    else if(v & 0x40) { m_P |= F_N; v |= 0x80; }
-    return v;
-}
-
-#include "m6502_nmos_generated.hxx"
-
-void mame6502_cpu_device::execute_run()
+void mamer65c02_cpu_device::execute_run()
 {
     if(m_inst_substate)
         do_exec_partial();
-
     while(m_icount > 0) {
         if(m_inst_state < 0xff00) {
             m_PPC = m_NPC;
@@ -328,10 +332,26 @@ void mame6502_cpu_device::execute_run()
     }
 }
 
-Mame6502Cpu::Mame6502Cpu()
+
+#include "m6502_nmos_generated.hxx"
+#include "m6502_nmos_base_for_mamew65c02_generated.hxx"
+#include "m6502_w65c02_generated.hxx"
+#include "m6502_r65c02_dispatch_generated.hxx"
+
+Mame6502Cpu::Mame6502Cpu(CpuMode mode) :
+    mode_(mode)
 {
     clear_memory();
     reset_from_vector();
+}
+
+void Mame6502Cpu::set_mode(CpuMode mode)
+{
+    if(mode_ == mode)
+        return;
+    mode_ = mode;
+    inst_state_base_ = 0;
+    set_pc_and_prefetch(pc_);
 }
 
 void Mame6502Cpu::clear_memory(std::uint8_t value)
@@ -375,10 +395,12 @@ void Mame6502Cpu::reset_from_vector()
     inhibit_interrupts_ = false;
     jammed_ = false;
 
-    // Run the generated reset micro-operation to preserve MAME's reset sequencing.
     icount_ = 7;
-    mame6502_cpu_device device(*this);
-    device.execute_run();
+    switch(mode_) {
+    case CpuMode::nmos6502: { mame6502_cpu_device device(*this); device.execute_run(); break; }
+    case CpuMode::wdc65c02: { mamew65c02_cpu_device device(*this); device.execute_run(); break; }
+    case CpuMode::rockwell65c02: { mamer65c02_cpu_device device(*this); device.execute_run(); break; }
+    }
     total_cycles_ = 0;
 }
 
@@ -403,8 +425,11 @@ unsigned Mame6502Cpu::execute(unsigned cycles)
 
     const int before = static_cast<int>(cycles);
     icount_ = before;
-    mame6502_cpu_device device(*this);
-    device.execute_run();
+    switch(mode_) {
+    case CpuMode::nmos6502: { mame6502_cpu_device device(*this); device.execute_run(); break; }
+    case CpuMode::wdc65c02: { mamew65c02_cpu_device device(*this); device.execute_run(); break; }
+    case CpuMode::rockwell65c02: { mamer65c02_cpu_device device(*this); device.execute_run(); break; }
+    }
     const unsigned executed = static_cast<unsigned>(before - icount_);
     total_cycles_ += executed;
     return executed;
