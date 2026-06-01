@@ -36,23 +36,18 @@ enum eCpuType { CPU_UNKNOWN = 0, CPU_6502 = 1, CPU_65C02, CPU_Z80 };
 enum { MEM_Normal = 0, MEM_IORead, MEM_FloatingBus, MEM_NoSlotClock };
 using iofunction = BYTE (__stdcall *)(WORD nPC, WORD nAddr, BYTE nWriteFlag, BYTE nWriteValue, ULONG nExecutedCycles);
 
-struct regsrec {
-    BYTE a;
-    BYTE x;
-    BYTE y;
-    BYTE ps;
-    WORD pc;
-    WORD sp;
-    BYTE bJammed;
-};
+namespace applewin_toolbox::detail {
+Registers registers{};
+CpuMode current_mode = CpuMode::nmos6502;
+bool irq_asserted = false;
+bool nmi_pending_flag = false;
+std::uint8_t ram[65536]{};
+std::uint64_t cumulative_cycles_counter = 0;
+} // namespace applewin_toolbox::detail
 
-regsrec regs{};
-unsigned long long g_nCumulativeCycles = 0;
-static eCpuType g_main_cpu = CPU_6502;
-static eCpuType g_active_cpu = CPU_6502;
-static bool g_irq_asserted = false;
-static bool g_nmi_pending = false;
-static BYTE ram[65536];
+using regsrec = applewin_toolbox::detail::Registers;
+regsrec& regs = applewin_toolbox::detail::registers;
+std::uint8_t (&ram)[65536] = applewin_toolbox::detail::ram;
 static BYTE dirty[256];
 LPBYTE mem = ram;
 LPBYTE memdirty = dirty;
@@ -87,8 +82,9 @@ static __forceinline void Fetch(BYTE& iOpcode, ULONG) {
     iOpcode = ram[regs.pc++];
 }
 
-static eCpuType GetActiveCpu() { return g_active_cpu; }
-static eCpuType GetMainCpu() { return g_main_cpu; }
+static eCpuType to_cpu_type(applewin_toolbox::CpuMode mode) { return mode == applewin_toolbox::CpuMode::cmos65c02 ? CPU_65C02 : CPU_6502; }
+static eCpuType GetActiveCpu() { return to_cpu_type(applewin_toolbox::detail::current_mode); }
+static eCpuType GetMainCpu() { return to_cpu_type(applewin_toolbox::detail::current_mode); }
 static BYTE MemReadFloatingBus(const ULONG) { return 0; }
 static BYTE IO_F8xx(WORD, WORD address, BYTE write, BYTE value, ULONG) { return io_stub(0, address, write, value, 0); }
 static int z80_mainloop(int, int) { return 0; }
@@ -113,11 +109,11 @@ static __forceinline void push_interrupt_state(BOOL& flagc, BOOL& flagn, BOOL& f
 }
 
 static __forceinline bool NMI(ULONG& uExecutedCycles, BOOL& flagc, BOOL& flagn, BOOL& flagv, BOOL& flagz) {
-    if(!g_nmi_pending) {
+    if(!applewin_toolbox::detail::nmi_pending_flag) {
         return false;
     }
 
-    g_nmi_pending = false;
+    applewin_toolbox::detail::nmi_pending_flag = false;
     push_interrupt_state(flagc, flagn, flagv, flagz, _6502_NMI_VECTOR);
     UINT uExtraCycles = 0;
     CYC(7)
@@ -125,7 +121,7 @@ static __forceinline bool NMI(ULONG& uExecutedCycles, BOOL& flagc, BOOL& flagn, 
 }
 
 static __forceinline bool IRQ(ULONG& uExecutedCycles, BOOL& flagc, BOOL& flagn, BOOL& flagv, BOOL& flagz) {
-    if(!g_irq_asserted || (regs.ps & AF_INTERRUPT)) {
+    if(!applewin_toolbox::detail::irq_asserted || (regs.ps & AF_INTERRUPT)) {
         return false;
     }
 
@@ -147,145 +143,28 @@ static __forceinline void NTSC_VideoUpdateCycles(ULONG) {}
 
 #undef HEATMAP_X
 
+
 namespace applewin_toolbox {
-namespace {
-
-eCpuType to_cpu_type(CpuMode mode) {
-    return mode == CpuMode::cmos65c02 ? CPU_65C02 : CPU_6502;
-}
-
-CpuMode from_cpu_type(eCpuType type) {
-    return type == CPU_65C02 ? CpuMode::cmos65c02 : CpuMode::nmos6502;
-}
-
-void set_mode(CpuMode mode) {
-    g_main_cpu = to_cpu_type(mode);
-    g_active_cpu = g_main_cpu;
-}
-
-} // namespace
 
 void reset_memory() {
-    std::memset(ram, 0, sizeof(ram));
+    detail::reset_memory_storage();
+}
+
+namespace detail {
+
+void reset_memory_storage() {
+    std::memset(ram, 0, 65536u);
     initialise_pages();
 }
 
-std::uint8_t* memory() {
-    return ram;
+std::uint32_t execute_nmos6502(std::uint32_t cycles) {
+    return Cpu6502(cycles, false);
 }
 
-const std::uint8_t* memory_data() {
-    return ram;
+std::uint32_t execute_cmos65c02(std::uint32_t cycles) {
+    return Cpu65C02(cycles, false);
 }
 
-std::uint8_t read_memory(std::uint16_t address) {
-    return ram[address];
-}
-
-void write_memory(std::uint16_t address, std::uint8_t value) {
-    ram[address] = value;
-}
-
-void load_program(std::uint16_t address, const std::uint8_t* data, std::uint32_t size) {
-    for(std::uint32_t i = 0; i < size; ++i) {
-        ram[(address + i) & 0xffffu] = data[i];
-    }
-}
-
-void set_vector(std::uint16_t vector_address, std::uint16_t target_address) {
-    ram[vector_address] = static_cast<std::uint8_t>(target_address & 0xffu);
-    ram[(vector_address + 1u) & 0xffffu] = static_cast<std::uint8_t>(target_address >> 8);
-}
-
-void reset_cpu(std::uint16_t pc, CpuMode mode) {
-    set_mode(mode);
-    regs.a = 0;
-    regs.x = 0;
-    regs.y = 0;
-    regs.ps = AF_RESERVED | AF_INTERRUPT;
-    regs.pc = pc;
-    regs.sp = 0x01fd;
-    regs.bJammed = 0;
-    g_irq_asserted = false;
-    g_nmi_pending = false;
-    g_nCumulativeCycles = 0;
-}
-
-void reset_cpu(std::uint16_t pc, bool cmos) {
-    reset_cpu(pc, cmos ? CpuMode::cmos65c02 : CpuMode::nmos6502);
-}
-
-void reset_from_vector(CpuMode mode) {
-    reset_cpu(read_word(_6502_RESET_VECTOR), mode);
-}
-
-void set_state(const State& state) {
-    set_mode(state.mode);
-    regs.a = state.a;
-    regs.x = state.x;
-    regs.y = state.y;
-    regs.ps = state.p;
-    regs.pc = state.pc;
-    regs.sp = state.sp;
-    regs.bJammed = state.jammed ? 1 : 0;
-}
-
-State state() {
-    return State{regs.a, regs.x, regs.y, regs.ps, regs.pc, regs.sp, regs.bJammed != 0, from_cpu_type(g_main_cpu)};
-}
-
-void set_a(std::uint8_t value) { regs.a = value; }
-void set_x(std::uint8_t value) { regs.x = value; }
-void set_y(std::uint8_t value) { regs.y = value; }
-void set_p(std::uint8_t value) { regs.ps = value; }
-void set_pc(std::uint16_t value) { regs.pc = value; }
-void set_sp(std::uint16_t value) { regs.sp = value; }
-void set_jammed(bool value) { regs.bJammed = value ? 1 : 0; }
-
-std::uint8_t a() { return regs.a; }
-std::uint8_t x() { return regs.x; }
-std::uint8_t y() { return regs.y; }
-std::uint8_t p() { return regs.ps; }
-std::uint16_t pc() { return regs.pc; }
-std::uint16_t sp() { return regs.sp; }
-bool jammed() { return regs.bJammed != 0; }
-CpuMode mode() { return from_cpu_type(g_main_cpu); }
-
-void set_irq_line(bool asserted) {
-    g_irq_asserted = asserted;
-}
-
-void pulse_nmi() {
-    g_nmi_pending = true;
-}
-
-void clear_interrupt_lines() {
-    g_irq_asserted = false;
-    g_nmi_pending = false;
-}
-
-bool irq_line() {
-    return g_irq_asserted;
-}
-
-bool nmi_pending() {
-    return g_nmi_pending;
-}
-
-std::uint32_t execute(std::uint32_t cycles) {
-    const auto executed = (g_main_cpu == CPU_65C02)
-        ? Cpu65C02(cycles, false)
-        : Cpu6502(cycles, false);
-    g_nCumulativeCycles += executed;
-    return executed;
-}
-
-std::uint64_t cumulative_cycles() {
-    return g_nCumulativeCycles;
-}
-
-void clear_cumulative_cycles() {
-    g_nCumulativeCycles = 0;
-}
+} // namespace detail
 
 } // namespace applewin_toolbox
