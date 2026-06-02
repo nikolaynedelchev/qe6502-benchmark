@@ -37,7 +37,7 @@ add_subdirectory(toolbox/mame)
 
 
 add_executable(clk_smoketest
-    clk_smoke_test.cpp
+    tests/clk_smoke_test.cpp
 )
 
 target_link_libraries(clk_smoketest
@@ -45,7 +45,7 @@ target_link_libraries(clk_smoketest
 )
 
 add_executable(clk_klaus_benchmark
-    clk_klaus_benchmark.cpp
+    tests/clk_klaus_benchmark.cpp
 )
 
 target_link_libraries(clk_klaus_benchmark
@@ -53,7 +53,7 @@ target_link_libraries(clk_klaus_benchmark
 )
 
 add_executable(clk_singlestep_nmos
-    clk_singlestep_nmos.cpp
+    tests/clk_singlestep_nmos.cpp
 )
 
 target_link_libraries(clk_singlestep_nmos
@@ -61,7 +61,7 @@ target_link_libraries(clk_singlestep_nmos
 )
 
 add_executable(ares_smoketest
-    ares_smoke_test.cpp
+    tests/ares_smoke_test.cpp
 )
 
 target_link_libraries(ares_smoketest
@@ -69,7 +69,7 @@ target_link_libraries(ares_smoketest
 )
 
 add_executable(ares_klaus_benchmark
-    ares_klaus_benchmark.cpp
+    tests/ares_klaus_benchmark.cpp
 )
 
 target_link_libraries(ares_klaus_benchmark
@@ -77,7 +77,7 @@ target_link_libraries(ares_klaus_benchmark
 )
 
 add_executable(ares_singlestep_nmos
-    ares_singlestep_nmos.cpp
+    tests/ares_singlestep_nmos.cpp
 )
 
 target_link_libraries(ares_singlestep_nmos
@@ -85,7 +85,7 @@ target_link_libraries(ares_singlestep_nmos
 )
 
 add_executable(fceux_smoketest
-    fceux_smoke_test.cpp
+    tests/fceux_smoke_test.cpp
 )
 
 target_link_libraries(fceux_smoketest
@@ -93,7 +93,7 @@ target_link_libraries(fceux_smoketest
 )
 
 add_executable(fceux_klaus_benchmark
-    fceux_klaus_benchmark.cpp
+    tests/fceux_klaus_benchmark.cpp
 )
 
 target_link_libraries(fceux_klaus_benchmark
@@ -101,7 +101,7 @@ target_link_libraries(fceux_klaus_benchmark
 )
 
 add_executable(altirrasdl_smoketest
-    altirrasdl_smoke_test.cpp
+    tests/altirrasdl_smoke_test.cpp
 )
 
 target_link_libraries(altirrasdl_smoketest
@@ -109,7 +109,7 @@ target_link_libraries(altirrasdl_smoketest
 )
 
 add_executable(altirrasdl_klaus_benchmark
-    altirrasdl_klaus_benchmark.cpp
+    tests/altirrasdl_klaus_benchmark.cpp
 )
 
 target_link_libraries(altirrasdl_klaus_benchmark
@@ -120,7 +120,7 @@ target_link_libraries(altirrasdl_klaus_benchmark
 
 
 add_executable(applewin_smoketest
-    applewin_smoke_test.cpp
+    tests/applewin_smoke_test.cpp
 )
 
 target_link_libraries(applewin_smoketest
@@ -128,7 +128,7 @@ target_link_libraries(applewin_smoketest
 )
 
 add_executable(applewin_klaus_benchmark
-    applewin_klaus_benchmark.cpp
+    tests/applewin_klaus_benchmark.cpp
 )
 
 target_link_libraries(applewin_klaus_benchmark
@@ -136,7 +136,7 @@ target_link_libraries(applewin_klaus_benchmark
 )
 
 add_executable(applewin_singlestep_nmos
-    applewin_singlestep_nmos.cpp
+    tests/applewin_singlestep_nmos.cpp
 )
 
 target_link_libraries(applewin_singlestep_nmos
@@ -144,7 +144,7 @@ target_link_libraries(applewin_singlestep_nmos
 )
 
 add_executable(applewin_singlestep_65c02_fit
-    applewin_singlestep_65c02_fit.cpp
+    tests/applewin_singlestep_65c02_fit.cpp
 )
 
 target_link_libraries(applewin_singlestep_65c02_fit
@@ -153,7 +153,7 @@ target_link_libraries(applewin_singlestep_65c02_fit
 
 
 add_executable(mame_smoketest
-    mame_smoke_test.cpp
+    tests/mame_smoke_test.cpp
 )
 
 target_link_libraries(mame_smoketest
@@ -161,7 +161,7 @@ target_link_libraries(mame_smoketest
 )
 
 add_executable(mame_klaus_benchmark
-    mame_klaus_benchmark.cpp
+    tests/mame_klaus_benchmark.cpp
 )
 
 target_link_libraries(mame_klaus_benchmark
@@ -169,7 +169,7 @@ target_link_libraries(mame_klaus_benchmark
 )
 
 add_executable(mame_singlestep_nmos
-    mame_singlestep_nmos.cpp
+    tests/mame_singlestep_nmos.cpp
 )
 
 target_link_libraries(mame_singlestep_nmos
@@ -177,7 +177,7 @@ target_link_libraries(mame_singlestep_nmos
 )
 
 add_executable(clk_singlestep_wdc65c02
-    clk_singlestep_wdc65c02.cpp
+    tests/clk_singlestep_wdc65c02.cpp
 )
 
 target_link_libraries(clk_singlestep_wdc65c02
@@ -185,7 +185,7 @@ target_link_libraries(clk_singlestep_wdc65c02
 )
 
 add_executable(clk_singlestep_rockwell65c02
-    clk_singlestep_rockwell65c02.cpp
+    tests/clk_singlestep_rockwell65c02.cpp
 )
 
 target_link_libraries(clk_singlestep_rockwell65c02
@@ -193,7 +193,7 @@ target_link_libraries(clk_singlestep_rockwell65c02
 )
 
 add_executable(clk_singlestep_synertek65c02
-    clk_singlestep_synertek65c02.cpp
+    tests/clk_singlestep_synertek65c02.cpp
 )
 
 target_link_libraries(clk_singlestep_synertek65c02
@@ -201,7 +201,7 @@ target_link_libraries(clk_singlestep_synertek65c02
 )
 
 add_executable(applewin_singlestep_wdc65c02
-    applewin_singlestep_wdc65c02.cpp
+    tests/applewin_singlestep_wdc65c02.cpp
 )
 
 target_link_libraries(applewin_singlestep_wdc65c02
@@ -209,7 +209,7 @@ target_link_libraries(applewin_singlestep_wdc65c02
 )
 
 add_executable(mame_singlestep_wdc65c02
-    mame_singlestep_wdc65c02.cpp
+    tests/mame_singlestep_wdc65c02.cpp
 )
 
 target_link_libraries(mame_singlestep_wdc65c02
@@ -217,7 +217,7 @@ target_link_libraries(mame_singlestep_wdc65c02
 )
 
 add_executable(mame_singlestep_rockwell65c02
-    mame_singlestep_rockwell65c02.cpp
+    tests/mame_singlestep_rockwell65c02.cpp
 )
 
 target_link_libraries(mame_singlestep_rockwell65c02
@@ -225,7 +225,7 @@ target_link_libraries(mame_singlestep_rockwell65c02
 )
 
 add_executable(mame_singlestep_wdc65c02s
-    mame_singlestep_wdc65c02s.cpp
+    tests/mame_singlestep_wdc65c02s.cpp
 )
 
 target_link_libraries(mame_singlestep_wdc65c02s
@@ -233,7 +233,7 @@ target_link_libraries(mame_singlestep_wdc65c02s
 )
 
 add_executable(opcode_metadata_smoketest
-    opcode_metadata_smoke_test.cpp
+    tests/opcode_metadata_smoke_test.cpp
 )
 
 target_link_libraries(opcode_metadata_smoketest
@@ -241,7 +241,7 @@ target_link_libraries(opcode_metadata_smoketest
 )
 
 add_executable(qe6502_benchmark_smoketest
-    smoke_test.cpp
+    tests/smoke_test.cpp
 )
 
 target_link_libraries(qe6502_benchmark_smoketest
@@ -249,7 +249,7 @@ target_link_libraries(qe6502_benchmark_smoketest
 )
 
 add_executable(qe6502_klaus_benchmark
-    qe6502_klaus_benchmark.cpp
+    tests/qe6502_klaus_benchmark.cpp
 )
 
 target_link_libraries(qe6502_klaus_benchmark
@@ -258,7 +258,7 @@ target_link_libraries(qe6502_klaus_benchmark
 
 
 add_executable(qe6502_singlestep_nmos
-    qe6502_singlestep_nmos.cpp
+    tests/qe6502_singlestep_nmos.cpp
 )
 
 target_link_libraries(qe6502_singlestep_nmos
@@ -266,7 +266,7 @@ target_link_libraries(qe6502_singlestep_nmos
 )
 
 add_executable(floooh_chips_klaus_benchmark
-    flooh_klaus_benchmark.cpp
+    tests/flooh_klaus_benchmark.cpp
 )
 
 target_link_libraries(floooh_chips_klaus_benchmark
@@ -274,7 +274,7 @@ target_link_libraries(floooh_chips_klaus_benchmark
 )
 
 add_executable(floooh_chips_singlestep_nmos
-    floooh_chips_singlestep_nmos.cpp
+    tests/floooh_chips_singlestep_nmos.cpp
 )
 
 target_link_libraries(floooh_chips_singlestep_nmos
@@ -282,7 +282,7 @@ target_link_libraries(floooh_chips_singlestep_nmos
 )
 
 add_executable(floooh_chips_smoketest
-    flooh_smoke_test.cpp
+    tests/flooh_smoke_test.cpp
 )
 
 target_link_libraries(floooh_chips_smoketest
@@ -291,7 +291,7 @@ target_link_libraries(floooh_chips_smoketest
 
 
 add_executable(gianlucag_mos6502_klaus_benchmark
-    gianlucag_mos6502_klaus_benchmark.cpp
+    tests/gianlucag_mos6502_klaus_benchmark.cpp
 )
 
 target_link_libraries(gianlucag_mos6502_klaus_benchmark
@@ -299,7 +299,7 @@ target_link_libraries(gianlucag_mos6502_klaus_benchmark
 )
 
 add_executable(gianlucag_mos6502_smoketest
-    gianlucag_mos6502_smoke_test.cpp
+    tests/gianlucag_mos6502_smoke_test.cpp
 )
 
 target_link_libraries(gianlucag_mos6502_smoketest
@@ -307,7 +307,7 @@ target_link_libraries(gianlucag_mos6502_smoketest
 )
 
 add_executable(gianlucag_mos6502_singlestep_nmos
-    gianlucag_mos6502_singlestep_nmos.cpp
+    tests/gianlucag_mos6502_singlestep_nmos.cpp
 )
 
 target_link_libraries(gianlucag_mos6502_singlestep_nmos
@@ -315,7 +315,7 @@ target_link_libraries(gianlucag_mos6502_singlestep_nmos
 )
 
 add_executable(fake6502_smoketest
-    fake6502_smoke_test.cpp
+    tests/fake6502_smoke_test.cpp
 )
 
 target_link_libraries(fake6502_smoketest
@@ -323,7 +323,7 @@ target_link_libraries(fake6502_smoketest
 )
 
 add_executable(fake6502_klaus_benchmark
-    fake6502_klaus_benchmark.cpp
+    tests/fake6502_klaus_benchmark.cpp
 )
 
 target_link_libraries(fake6502_klaus_benchmark
@@ -331,7 +331,7 @@ target_link_libraries(fake6502_klaus_benchmark
 )
 
 add_executable(fake6502_singlestep_nmos
-    fake6502_singlestep_nmos.cpp
+    tests/fake6502_singlestep_nmos.cpp
 )
 
 target_link_libraries(fake6502_singlestep_nmos
@@ -339,7 +339,7 @@ target_link_libraries(fake6502_singlestep_nmos
 )
 
 add_executable(fake65c02_smoketest
-    fake65c02_smoke_test.cpp
+    tests/fake65c02_smoke_test.cpp
 )
 
 target_link_libraries(fake65c02_smoketest
@@ -347,7 +347,7 @@ target_link_libraries(fake65c02_smoketest
 )
 
 add_executable(fake65c02_klaus_extended_benchmark
-    fake65c02_klaus_extended_benchmark.cpp
+    tests/fake65c02_klaus_extended_benchmark.cpp
 )
 
 target_link_libraries(fake65c02_klaus_extended_benchmark
@@ -355,7 +355,7 @@ target_link_libraries(fake65c02_klaus_extended_benchmark
 )
 
 add_executable(vremu6502_smoketest
-    vremu6502_smoke_test.cpp
+    tests/vremu6502_smoke_test.cpp
 )
 
 target_link_libraries(vremu6502_smoketest
@@ -363,7 +363,7 @@ target_link_libraries(vremu6502_smoketest
 )
 
 add_executable(vremu6502_klaus_benchmark
-    vremu6502_klaus_benchmark.cpp
+    tests/vremu6502_klaus_benchmark.cpp
 )
 
 target_link_libraries(vremu6502_klaus_benchmark
@@ -371,7 +371,7 @@ target_link_libraries(vremu6502_klaus_benchmark
 )
 
 add_executable(vremu6502_klaus_65c02_benchmark
-    vremu6502_klaus_65c02_benchmark.cpp
+    tests/vremu6502_klaus_65c02_benchmark.cpp
 )
 
 target_link_libraries(vremu6502_klaus_65c02_benchmark
@@ -379,7 +379,7 @@ target_link_libraries(vremu6502_klaus_65c02_benchmark
 )
 
 add_executable(vremu6502_singlestep_nmos
-    vremu6502_singlestep_nmos.cpp
+    tests/vremu6502_singlestep_nmos.cpp
 )
 
 target_link_libraries(vremu6502_singlestep_nmos
@@ -387,7 +387,7 @@ target_link_libraries(vremu6502_singlestep_nmos
 )
 
 add_executable(vremu6502_singlestep_cpu65c02
-    vremu6502_singlestep_cpu65c02.cpp
+    tests/vremu6502_singlestep_cpu65c02.cpp
 )
 
 target_link_libraries(vremu6502_singlestep_cpu65c02
@@ -395,7 +395,7 @@ target_link_libraries(vremu6502_singlestep_cpu65c02
 )
 
 add_executable(o2_smoketest
-    o2_smoke_test.cpp
+    tests/o2_smoke_test.cpp
 )
 
 target_link_libraries(o2_smoketest
@@ -403,7 +403,7 @@ target_link_libraries(o2_smoketest
 )
 
 add_executable(o2_klaus_benchmark
-    o2_klaus_benchmark.cpp
+    tests/o2_klaus_benchmark.cpp
 )
 
 target_link_libraries(o2_klaus_benchmark
@@ -411,7 +411,7 @@ target_link_libraries(o2_klaus_benchmark
 )
 
 add_executable(o2_singlestep_nmos
-    o2_singlestep_nmos.cpp
+    tests/o2_singlestep_nmos.cpp
 )
 
 target_link_libraries(o2_singlestep_nmos
@@ -419,7 +419,7 @@ target_link_libraries(o2_singlestep_nmos
 )
 
 add_executable(peddle_smoketest
-    peddle_smoke_test.cpp
+    tests/peddle_smoke_test.cpp
 )
 
 target_link_libraries(peddle_smoketest
@@ -427,7 +427,7 @@ target_link_libraries(peddle_smoketest
 )
 
 add_executable(peddle_klaus_benchmark
-    peddle_klaus_benchmark.cpp
+    tests/peddle_klaus_benchmark.cpp
 )
 
 target_link_libraries(peddle_klaus_benchmark
@@ -435,7 +435,7 @@ target_link_libraries(peddle_klaus_benchmark
 )
 
 add_executable(peddle_singlestep_nmos
-    peddle_singlestep_nmos.cpp
+    tests/peddle_singlestep_nmos.cpp
 )
 
 target_link_libraries(peddle_singlestep_nmos
@@ -443,7 +443,7 @@ target_link_libraries(peddle_singlestep_nmos
 )
 
 add_executable(sflib6502_smoketest
-    sflib6502_smoke_test.cpp
+    tests/sflib6502_smoke_test.cpp
 )
 
 target_link_libraries(sflib6502_smoketest
@@ -452,7 +452,7 @@ target_link_libraries(sflib6502_smoketest
 
 
 add_executable(sflib6502_klaus_benchmark
-    sflib6502_klaus_benchmark.cpp
+    tests/sflib6502_klaus_benchmark.cpp
 )
 
 target_link_libraries(sflib6502_klaus_benchmark
@@ -460,7 +460,7 @@ target_link_libraries(sflib6502_klaus_benchmark
 )
 
 add_executable(sflib6502_singlestep_nmos
-    sflib6502_singlestep_nmos.cpp
+    tests/sflib6502_singlestep_nmos.cpp
 )
 
 target_link_libraries(sflib6502_singlestep_nmos
@@ -468,7 +468,7 @@ target_link_libraries(sflib6502_singlestep_nmos
 )
 
 add_executable(sflib65c02_smoketest
-    sflib65c02_smoke_test.cpp
+    tests/sflib65c02_smoke_test.cpp
 )
 
 target_link_libraries(sflib65c02_smoketest
@@ -476,7 +476,7 @@ target_link_libraries(sflib65c02_smoketest
 )
 
 add_executable(sflib65c02_klaus_extended_benchmark
-    sflib65c02_klaus_extended_benchmark.cpp
+    tests/sflib65c02_klaus_extended_benchmark.cpp
 )
 
 target_link_libraries(sflib65c02_klaus_extended_benchmark
@@ -484,7 +484,7 @@ target_link_libraries(sflib65c02_klaus_extended_benchmark
 )
 
 add_executable(olcNES_smoketest
-    olcNES_smoke_test.cpp
+    tests/olcNES_smoke_test.cpp
 )
 
 target_link_libraries(olcNES_smoketest
@@ -493,7 +493,7 @@ target_link_libraries(olcNES_smoketest
 
 
 add_executable(olcNES_klaus_benchmark
-    olcNES_klaus_benchmark.cpp
+    tests/olcNES_klaus_benchmark.cpp
 )
 
 target_link_libraries(olcNES_klaus_benchmark
@@ -501,7 +501,7 @@ target_link_libraries(olcNES_klaus_benchmark
 )
 
 add_executable(olcNES_singlestep_nmos
-    olcNES_singlestep_nmos.cpp
+    tests/olcNES_singlestep_nmos.cpp
 )
 
 target_link_libraries(olcNES_singlestep_nmos
@@ -509,7 +509,7 @@ target_link_libraries(olcNES_singlestep_nmos
 )
 
 add_executable(chris_pikul_mos6502_smoketest
-    chris_pikul_mos6502_smoke_test.cpp
+    tests/chris_pikul_mos6502_smoke_test.cpp
 )
 
 target_link_libraries(chris_pikul_mos6502_smoketest
@@ -517,7 +517,7 @@ target_link_libraries(chris_pikul_mos6502_smoketest
 )
 
 add_executable(chris_pikul_mos6502_klaus_benchmark
-    chris_pikul_mos6502_klaus_benchmark.cpp
+    tests/chris_pikul_mos6502_klaus_benchmark.cpp
 )
 
 target_link_libraries(chris_pikul_mos6502_klaus_benchmark
@@ -525,7 +525,7 @@ target_link_libraries(chris_pikul_mos6502_klaus_benchmark
 )
 
 add_executable(chris_pikul_mos6502_singlestep_nmos
-    chris_pikul_mos6502_singlestep_nmos.cpp
+    tests/chris_pikul_mos6502_singlestep_nmos.cpp
 )
 
 target_link_libraries(chris_pikul_mos6502_singlestep_nmos
@@ -533,7 +533,7 @@ target_link_libraries(chris_pikul_mos6502_singlestep_nmos
 )
 
 add_executable(all_6502_tests
-    all_6502_tests.cpp
+    tests/all_6502_tests.cpp
 )
 
 target_link_libraries(all_6502_tests
@@ -557,7 +557,7 @@ target_link_libraries(all_6502_tests
 )
 
 add_executable(all_65c02_tests
-    all_65c02_tests.cpp
+    tests/all_65c02_tests.cpp
 )
 
 target_link_libraries(all_65c02_tests
