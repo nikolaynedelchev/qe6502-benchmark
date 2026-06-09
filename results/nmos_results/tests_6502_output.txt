@@ -5,45 +5,45 @@ Build/runtime environment:
   operating system: macOS
   cpu model: Apple M5
 qe6502                       smoke             PASS
-qe6502                       Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=0.724633  MHz=664.07
+qe6502                       Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=0.710217  MHz=677.55
 floooh/chips                 smoke             PASS
-floooh/chips                 Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=1.345302  MHz=357.69
+floooh/chips                 Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=1.345241  MHz=357.71
 gianlucag/mos6502            smoke             PASS
-gianlucag/mos6502            Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=1.025470  MHz=469.25
+gianlucag/mos6502            Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=0.968527  MHz=496.84
 fake6502                     smoke             PASS
-fake6502                     Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=0.574402  MHz=837.75
+fake6502                     Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=0.582792  MHz=825.69
 vrEmu6502                    smoke             PASS
-vrEmu6502                    Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=0.797460  MHz=603.42
+vrEmu6502                    Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=0.799491  MHz=601.89
 O2                           smoke             PASS
-O2                           Klaus NMOS        PASS  runs=5  cycles=481206815  seconds=1.745543  MHz=275.68
+O2                           Klaus NMOS        PASS  runs=5  cycles=481206815  seconds=1.714400  MHz=280.69
 Peddle                       smoke             PASS
-Peddle                       Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=1.723943  MHz=279.13
+Peddle                       Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=1.729006  MHz=278.31
 sflib6502                    smoke             PASS
-sflib6502                    Klaus NMOS        PASS  runs=5  cycles=492149365  seconds=0.450866  MHz=1091.56
+sflib6502                    Klaus NMOS        PASS  runs=5  cycles=492149365  seconds=0.448355  MHz=1097.68
 olcNES                       smoke             PASS
-olcNES                       Klaus NMOS        PASS  runs=5  cycles=481206805  seconds=1.118972  MHz=430.04
+olcNES                       Klaus NMOS        PASS  runs=5  cycles=481206805  seconds=1.130884  MHz=425.51
 chris-pikul/mos6502          smoke             PASS
-chris-pikul/mos6502          Klaus NMOS        PASS  runs=5  cycles=635779875  seconds=1.892224  MHz=336.00
+chris-pikul/mos6502          Klaus NMOS        PASS  runs=5  cycles=635779875  seconds=1.883990  MHz=337.46
 fceux                        smoke             PASS
-fceux                        Klaus NES         PASS  runs=5  cycles=420152240  seconds=2.425514  MHz=173.22
+fceux                        Klaus NES         PASS  runs=5  cycles=420152240  seconds=2.402237  MHz=174.90
 clk                          smoke             PASS
-clk                          Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=1.333663  MHz=360.82
+clk                          Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=1.330651  MHz=361.63
 ares                         smoke             PASS
-ares                         Klaus NMOS        PASS  runs=5  cycles=482806835  seconds=0.776972  MHz=621.40
+ares                         Klaus NMOS        PASS  runs=5  cycles=482806835  seconds=0.779480  MHz=619.40
 altirrasdl                   smoke             PASS
-altirrasdl                   Klaus NMOS        PASS  runs=5  cycles=481206825  seconds=0.894215  MHz=538.13
+altirrasdl                   Klaus NMOS        PASS  runs=5  cycles=481206825  seconds=0.882988  MHz=544.98
 applewin                     smoke             PASS
-applewin                     Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=0.555950  MHz=865.56
+applewin                     Klaus NMOS        PASS  runs=5  cycles=481206820  seconds=0.553835  MHz=868.86
 mame                         smoke             PASS
-mame                         Klaus NMOS        PASS  runs=5  cycles=481250000  seconds=0.847608  MHz=567.77
+mame                         Klaus NMOS        PASS  runs=5  cycles=481250000  seconds=0.852085  MHz=564.79
 
 Loading SingleStep NMOS corpus...
-Loaded SingleStep NMOS corpus: xxxxx/SingleStepTests/6502/v1  cases=2560000
+Loaded SingleStep NMOS corpus: /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1  cases=2048
 
 Starting qe6502 NMOS SingleStep...
 qe6502 NMOS SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
-  cases:  2560000
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
+  cases:  2048
   instruction:      total 0/256 failed, 0.00%  legal 0/151, 0.00%  illegal 0/105, 0.00%
   cycle-count:      total 0/256 failed, 0.00%  legal 0/151, 0.00%  illegal 0/105, 0.00%
   bus-trace:        total 0/256 failed, 0.00%  legal 0/151, 0.00%  illegal 0/105, 0.00%
@@ -51,26 +51,26 @@ Wrote SingleStep detail log: singlestep_qe6502_nmos_detail.tsv
 
 Starting floooh/chips NMOS SingleStep...
 floooh/chips NMOS SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
-  cases:  2560000
-  instruction:      total 9/256 failed, 3.52%  legal 4/151, 2.65%  illegal 5/105, 4.76%
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
+  cases:  2048
+  instruction:      total 8/256 failed, 3.12%  legal 4/151, 2.65%  illegal 4/105, 3.81%
   cycle-count:      total 0/256 failed, 0.00%  legal 0/151, 0.00%  illegal 0/105, 0.00%
   bus-trace:        total 7/256 failed, 2.73%  legal 2/151, 1.32%  illegal 5/105, 4.76%
 Wrote SingleStep detail log: singlestep_floooh_chips_nmos_detail.tsv
 
 Starting vrEmu6502 NMOS SingleStep...
 vrEmu6502 NMOS SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
-  cases:  2560000
-  instruction:      total 54/256 failed, 21.09%  legal 20/151, 13.25%  illegal 34/105, 32.38%
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
+  cases:  2048
+  instruction:      total 52/256 failed, 20.31%  legal 18/151, 11.92%  illegal 34/105, 32.38%
   cycle-count:      total 12/256 failed, 4.69%  legal 0/151, 0.00%  illegal 12/105, 11.43%
   bus-trace:        unsupported
 Wrote SingleStep detail log: singlestep_vremu6502_nmos_detail.tsv
 
 Starting O2 NMOS SingleStep...
 O2 NMOS SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
-  cases:  2560000
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
+  cases:  2048
   instruction:      total 66/256 failed, 25.78%  legal 0/151, 0.00%  illegal 66/105, 62.86%
   cycle-count:      total 76/256 failed, 29.69%  legal 0/151, 0.00%  illegal 76/105, 72.38%
   bus-trace:        total 93/256 failed, 36.33%  legal 0/151, 0.00%  illegal 93/105, 88.57%
@@ -78,8 +78,8 @@ Wrote SingleStep detail log: singlestep_o2_nmos_detail.tsv
 
 Starting Peddle NMOS SingleStep...
 Peddle NMOS SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
-  cases:  2560000
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
+  cases:  2048
   instruction:      total 7/256 failed, 2.73%  legal 2/151, 1.32%  illegal 5/105, 4.76%
   cycle-count:      total 12/256 failed, 4.69%  legal 0/151, 0.00%  illegal 12/105, 11.43%
   bus-trace:        total 19/256 failed, 7.42%  legal 2/151, 1.32%  illegal 17/105, 16.19%
@@ -87,54 +87,54 @@ Wrote SingleStep detail log: singlestep_peddle_nmos_detail.tsv
 
 Starting fake6502 NMOS SingleStep...
 fake6502 NMOS SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
-  cases:  2560000
-  instruction:      total 31/256 failed, 12.11%  legal 11/151, 7.28%  illegal 20/105, 19.05%
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
+  cases:  2048
+  instruction:      total 30/256 failed, 11.72%  legal 10/151, 6.62%  illegal 20/105, 19.05%
   cycle-count:      total 12/256 failed, 4.69%  legal 0/151, 0.00%  illegal 12/105, 11.43%
   bus-trace:        unsupported
 Wrote SingleStep detail log: singlestep_fake6502_nmos_detail.tsv
 
 Starting gianlucag/mos6502 NMOS SingleStep...
 gianlucag_mos6502 NMOS SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
-  cases:  2560000
-  instruction:      total 6/256 failed, 2.34%  legal 0/151, 0.00%  illegal 6/105, 5.71%
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
+  cases:  2048
+  instruction:      total 4/256 failed, 1.56%  legal 0/151, 0.00%  illegal 4/105, 3.81%
   cycle-count:      total 12/256 failed, 4.69%  legal 0/151, 0.00%  illegal 12/105, 11.43%
   bus-trace:        unsupported
 Wrote SingleStep detail log: singlestep_gianlucag_mos6502_nmos_detail.tsv
 
 Starting sflib6502 NMOS SingleStep...
 sflib6502 NMOS SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
-  cases:  2560000
-  instruction:      total 148/256 failed, 57.81%  legal 43/151, 28.48%  illegal 105/105, 100.00%
-  cycle-count:      total 138/256 failed, 53.91%  legal 53/151, 35.10%  illegal 85/105, 80.95%
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
+  cases:  2048
+  instruction:      total 125/256 failed, 48.83%  legal 20/151, 13.25%  illegal 105/105, 100.00%
+  cycle-count:      total 134/256 failed, 52.34%  legal 49/151, 32.45%  illegal 85/105, 80.95%
   bus-trace:        unsupported
 Wrote SingleStep detail log: singlestep_sflib6502_nmos_detail.tsv
 
 Starting olcNES NMOS SingleStep...
 olcNES NMOS SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
-  cases:  2560000
-  instruction:      total 89/256 failed, 34.77%  legal 2/151, 1.32%  illegal 87/105, 82.86%
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
+  cases:  2048
+  instruction:      total 88/256 failed, 34.38%  legal 1/151, 0.66%  illegal 87/105, 82.86%
   cycle-count:      total 21/256 failed, 8.20%  legal 0/151, 0.00%  illegal 21/105, 20.00%
   bus-trace:        unsupported
 Wrote SingleStep detail log: singlestep_olcnes_nmos_detail.tsv
 
 Starting chris-pikul/mos6502 NMOS SingleStep...
 chris-pikul/mos6502 NMOS SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
-  cases:  2560000
-  instruction:      total 90/256 failed, 35.16%  legal 3/151, 1.99%  illegal 87/105, 82.86%
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
+  cases:  2048
+  instruction:      total 89/256 failed, 34.77%  legal 2/151, 1.32%  illegal 87/105, 82.86%
   cycle-count:      total 250/256 failed, 97.66%  legal 145/151, 96.03%  illegal 105/105, 100.00%
   bus-trace:        unsupported
 Wrote SingleStep detail log: singlestep_chris-pikul_mos6502_nmos_detail.tsv
 
 Starting clk NMOS SingleStep...
 clk P6502 NMOS SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
   cpu init model: CPU::MOS6502::P6502
-  cases:  2560000
+  cases:  2048
   instruction:      total 0/256 failed, 0.00%  legal 0/151, 0.00%  illegal 0/105, 0.00%
   cycle-count:      total 0/256 failed, 0.00%  legal 0/151, 0.00%  illegal 0/105, 0.00%
   bus-trace:        total 0/256 failed, 0.00%  legal 0/151, 0.00%  illegal 0/105, 0.00%
@@ -142,9 +142,9 @@ Wrote SingleStep detail log: singlestep_clk_p6502_nmos_detail.tsv
 
 Starting ares NMOS SingleStep...
 ares MOS6502 NMOS/BCD SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
   cpu init model: ares::MOS6502 BCD=1
-  cases:  2560000
+  cases:  2048
   instruction:      total 256/256 failed, 100.00%  legal 151/151, 100.00%  illegal 105/105, 100.00%
   cycle-count:      total 43/256 failed, 16.80%  legal 16/151, 10.60%  illegal 27/105, 25.71%
   bus-trace:        unsupported
@@ -154,19 +154,19 @@ Skipping altirrasdl NMOS SingleStep: integration is intentionally excluded becau
 
 Starting applewin NMOS SingleStep...
 applewin NMOS 6502 SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
   cpu init model: CpuMode::nmos6502
-  cases:  2560000
-  instruction:      total 30/256 failed, 11.72%  legal 6/151, 3.97%  illegal 24/105, 22.86%
+  cases:  2048
+  instruction:      total 14/256 failed, 5.47%  legal 0/151, 0.00%  illegal 14/105, 13.33%
   cycle-count:      total 12/256 failed, 4.69%  legal 0/151, 0.00%  illegal 12/105, 11.43%
   bus-trace:        unsupported
 Wrote SingleStep detail log: singlestep_applewin_nmos_6502_detail.tsv
 
 Starting mame NMOS SingleStep...
 mame NMOS 6502 SingleStep:
-  corpus: external xxxxx/SingleStepTests/6502/v1
+  corpus: bundled light /Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1
   cpu init model: CpuMode::nmos6502
-  cases:  2560000
+  cases:  2048
   instruction:      total 21/256 failed, 8.20%  legal 6/151, 3.97%  illegal 15/105, 14.29%
   cycle-count:      total 0/256 failed, 0.00%  legal 0/151, 0.00%  illegal 0/105, 0.00%
   bus-trace:        unsupported

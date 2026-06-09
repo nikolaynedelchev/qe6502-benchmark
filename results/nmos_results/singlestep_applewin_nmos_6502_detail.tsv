@@ -1,257 +1,257 @@
 core	model	corpus	opcode	mnemonic	addressing_mode	legal_nmos	cases_run	instruction_status	instruction_failed_opcode	instruction_failed_cases	cycle_count_status	cycle_count_failed_opcode	cycle_count_failed_cases	bus_trace_status	bus_trace_failed_opcode	bus_trace_failed_cases
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x00	BRK	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x01	ORA	(zero page,X)	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x02	???	illegal	no	10000	failed	1	10000	failed	1	10000	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x03	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x04	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x05	ORA	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x06	ASL	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x07	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x08	PHP	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x09	ORA	immediate	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x0A	ASL	accumulator	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x0B	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x0C	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x0D	ORA	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x0E	ASL	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x0F	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x10	BPL	relative	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x11	ORA	(zero page),Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x12	???	illegal	no	10000	failed	1	10000	failed	1	10000	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x13	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x14	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x15	ORA	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x16	ASL	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x17	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x18	CLC	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x19	ORA	absolute,Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x1A	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x1B	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x1C	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x1D	ORA	absolute,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x1E	ASL	absolute,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x1F	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x20	JSR	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x21	AND	(zero page,X)	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x22	???	illegal	no	10000	failed	1	10000	failed	1	10000	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x23	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x24	BIT	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x25	AND	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x26	ROL	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x27	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x28	PLP	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x29	AND	immediate	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x2A	ROL	accumulator	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x2B	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x2C	BIT	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x2D	AND	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x2E	ROL	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x2F	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x30	BMI	relative	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x31	AND	(zero page),Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x32	???	illegal	no	10000	failed	1	10000	failed	1	10000	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x33	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x34	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x35	AND	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x36	ROL	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x37	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x38	SEC	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x39	AND	absolute,Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x3A	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x3B	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x3C	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x3D	AND	absolute,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x3E	ROL	absolute,X	yes	10000	failed	1	1	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x3F	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x40	RTI	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x41	EOR	(zero page,X)	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x42	???	illegal	no	10000	failed	1	10000	failed	1	10000	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x43	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x44	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x45	EOR	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x46	LSR	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x47	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x48	PHA	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x49	EOR	immediate	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x4A	LSR	accumulator	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x4B	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x4C	JMP	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x4D	EOR	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x4E	LSR	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x4F	???	illegal	no	10000	failed	1	1	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x50	BVC	relative	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x51	EOR	(zero page),Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x52	???	illegal	no	10000	failed	1	10000	failed	1	10000	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x53	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x54	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x55	EOR	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x56	LSR	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x57	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x58	CLI	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x59	EOR	absolute,Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x5A	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x5B	???	illegal	no	10000	failed	1	1	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x5C	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x5D	EOR	absolute,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x5E	LSR	absolute,X	yes	10000	failed	1	1	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x5F	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x60	RTS	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x61	ADC	(zero page,X)	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x62	???	illegal	no	10000	failed	1	10000	failed	1	10000	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x63	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x64	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x65	ADC	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x66	ROR	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x67	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x68	PLA	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x69	ADC	immediate	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x6A	ROR	accumulator	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x6B	???	illegal	no	10000	failed	1	3158	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x6C	JMP	indirect	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x6D	ADC	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x6E	ROR	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x6F	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x70	BVS	relative	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x71	ADC	(zero page),Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x72	???	illegal	no	10000	failed	1	10000	failed	1	10000	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x73	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x74	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x75	ADC	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x76	ROR	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x77	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x78	SEI	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x79	ADC	absolute,Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x7A	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x7B	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x7C	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x7D	ADC	absolute,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x7E	ROR	absolute,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x7F	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x80	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x81	STA	(zero page,X)	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x82	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x83	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x84	STY	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x85	STA	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x86	STX	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x87	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x88	DEY	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x89	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x8A	TXA	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x8B	???	illegal	no	10000	failed	1	2379	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x8C	STY	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x8D	STA	absolute	yes	10000	failed	1	1	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x8E	STX	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x8F	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x90	BCC	relative	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x91	STA	(zero page),Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x92	???	illegal	no	10000	failed	1	10000	failed	1	10000	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x93	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x94	STY	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x95	STA	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x96	STX	zero page,Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x97	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x98	TYA	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x99	STA	absolute,Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x9A	TXS	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x9B	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x9C	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x9D	STA	absolute,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x9E	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0x9F	???	illegal	no	10000	failed	1	1	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xA0	LDY	immediate	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xA1	LDA	(zero page,X)	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xA2	LDX	immediate	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xA3	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xA4	LDY	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xA5	LDA	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xA6	LDX	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xA7	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xA8	TAY	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xA9	LDA	immediate	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xAA	TAX	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xAB	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xAC	LDY	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xAD	LDA	absolute	yes	10000	failed	1	1	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xAE	LDX	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xAF	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xB0	BCS	relative	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xB1	LDA	(zero page),Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xB2	???	illegal	no	10000	failed	1	10000	failed	1	10000	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xB3	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xB4	LDY	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xB5	LDA	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xB6	LDX	zero page,Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xB7	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xB8	CLV	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xB9	LDA	absolute,Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xBA	TSX	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xBB	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xBC	LDY	absolute,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xBD	LDA	absolute,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xBE	LDX	absolute,Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xBF	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xC0	CPY	immediate	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xC1	CMP	(zero page,X)	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xC2	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xC3	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xC4	CPY	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xC5	CMP	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xC6	DEC	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xC7	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xC8	INY	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xC9	CMP	immediate	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xCA	DEX	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xCB	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xCC	CPY	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xCD	CMP	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xCE	DEC	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xCF	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xD0	BNE	relative	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xD1	CMP	(zero page),Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xD2	???	illegal	no	10000	failed	1	10000	failed	1	10000	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xD3	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xD4	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xD5	CMP	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xD6	DEC	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xD7	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xD8	CLD	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xD9	CMP	absolute,Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xDA	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xDB	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xDC	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xDD	CMP	absolute,X	yes	10000	failed	1	1	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xDE	DEC	absolute,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xDF	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xE0	CPX	immediate	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xE1	SBC	(zero page,X)	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xE2	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xE3	???	illegal	no	10000	failed	1	37	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xE4	CPX	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xE5	SBC	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xE6	INC	zero page	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xE7	???	illegal	no	10000	failed	1	51	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xE8	INX	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xE9	SBC	immediate	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xEA	NOP	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xEB	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xEC	CPX	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xED	SBC	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xEE	INC	absolute	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xEF	???	illegal	no	10000	failed	1	37	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xF0	BEQ	relative	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xF1	SBC	(zero page),Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xF2	???	illegal	no	10000	failed	1	10000	failed	1	10000	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xF3	???	illegal	no	10000	failed	1	32	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xF4	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xF5	SBC	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xF6	INC	zero page,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xF7	???	illegal	no	10000	failed	1	46	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xF8	SED	implied	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xF9	SBC	absolute,Y	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xFA	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xFB	???	illegal	no	10000	failed	1	44	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xFC	???	illegal	no	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xFD	SBC	absolute,X	yes	10000	passed	0	0	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xFE	INC	absolute,X	yes	10000	failed	1	1	passed	0	0	unsupported	0	0
-applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/cpp-6502/tests/SingleStepTests/6502/v1	0xFF	???	illegal	no	10000	failed	1	35	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x00	BRK	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x01	ORA	(zero page,X)	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x02	???	illegal	no	8	failed	1	8	failed	1	8	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x03	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x04	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x05	ORA	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x06	ASL	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x07	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x08	PHP	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x09	ORA	immediate	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x0A	ASL	accumulator	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x0B	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x0C	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x0D	ORA	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x0E	ASL	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x0F	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x10	BPL	relative	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x11	ORA	(zero page),Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x12	???	illegal	no	8	failed	1	8	failed	1	8	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x13	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x14	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x15	ORA	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x16	ASL	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x17	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x18	CLC	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x19	ORA	absolute,Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x1A	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x1B	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x1C	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x1D	ORA	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x1E	ASL	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x1F	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x20	JSR	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x21	AND	(zero page,X)	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x22	???	illegal	no	8	failed	1	8	failed	1	8	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x23	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x24	BIT	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x25	AND	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x26	ROL	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x27	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x28	PLP	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x29	AND	immediate	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x2A	ROL	accumulator	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x2B	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x2C	BIT	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x2D	AND	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x2E	ROL	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x2F	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x30	BMI	relative	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x31	AND	(zero page),Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x32	???	illegal	no	8	failed	1	8	failed	1	8	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x33	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x34	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x35	AND	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x36	ROL	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x37	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x38	SEC	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x39	AND	absolute,Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x3A	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x3B	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x3C	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x3D	AND	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x3E	ROL	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x3F	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x40	RTI	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x41	EOR	(zero page,X)	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x42	???	illegal	no	8	failed	1	8	failed	1	8	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x43	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x44	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x45	EOR	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x46	LSR	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x47	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x48	PHA	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x49	EOR	immediate	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x4A	LSR	accumulator	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x4B	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x4C	JMP	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x4D	EOR	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x4E	LSR	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x4F	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x50	BVC	relative	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x51	EOR	(zero page),Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x52	???	illegal	no	8	failed	1	8	failed	1	8	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x53	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x54	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x55	EOR	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x56	LSR	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x57	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x58	CLI	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x59	EOR	absolute,Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x5A	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x5B	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x5C	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x5D	EOR	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x5E	LSR	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x5F	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x60	RTS	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x61	ADC	(zero page,X)	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x62	???	illegal	no	8	failed	1	8	failed	1	8	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x63	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x64	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x65	ADC	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x66	ROR	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x67	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x68	PLA	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x69	ADC	immediate	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x6A	ROR	accumulator	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x6B	???	illegal	no	8	failed	1	2	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x6C	JMP	indirect	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x6D	ADC	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x6E	ROR	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x6F	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x70	BVS	relative	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x71	ADC	(zero page),Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x72	???	illegal	no	8	failed	1	8	failed	1	8	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x73	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x74	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x75	ADC	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x76	ROR	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x77	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x78	SEI	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x79	ADC	absolute,Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x7A	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x7B	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x7C	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x7D	ADC	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x7E	ROR	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x7F	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x80	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x81	STA	(zero page,X)	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x82	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x83	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x84	STY	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x85	STA	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x86	STX	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x87	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x88	DEY	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x89	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x8A	TXA	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x8B	???	illegal	no	8	failed	1	2	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x8C	STY	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x8D	STA	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x8E	STX	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x8F	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x90	BCC	relative	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x91	STA	(zero page),Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x92	???	illegal	no	8	failed	1	8	failed	1	8	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x93	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x94	STY	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x95	STA	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x96	STX	zero page,Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x97	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x98	TYA	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x99	STA	absolute,Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x9A	TXS	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x9B	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x9C	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x9D	STA	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x9E	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0x9F	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xA0	LDY	immediate	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xA1	LDA	(zero page,X)	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xA2	LDX	immediate	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xA3	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xA4	LDY	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xA5	LDA	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xA6	LDX	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xA7	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xA8	TAY	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xA9	LDA	immediate	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xAA	TAX	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xAB	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xAC	LDY	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xAD	LDA	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xAE	LDX	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xAF	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xB0	BCS	relative	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xB1	LDA	(zero page),Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xB2	???	illegal	no	8	failed	1	8	failed	1	8	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xB3	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xB4	LDY	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xB5	LDA	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xB6	LDX	zero page,Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xB7	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xB8	CLV	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xB9	LDA	absolute,Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xBA	TSX	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xBB	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xBC	LDY	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xBD	LDA	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xBE	LDX	absolute,Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xBF	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xC0	CPY	immediate	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xC1	CMP	(zero page,X)	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xC2	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xC3	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xC4	CPY	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xC5	CMP	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xC6	DEC	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xC7	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xC8	INY	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xC9	CMP	immediate	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xCA	DEX	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xCB	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xCC	CPY	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xCD	CMP	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xCE	DEC	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xCF	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xD0	BNE	relative	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xD1	CMP	(zero page),Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xD2	???	illegal	no	8	failed	1	8	failed	1	8	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xD3	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xD4	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xD5	CMP	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xD6	DEC	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xD7	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xD8	CLD	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xD9	CMP	absolute,Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xDA	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xDB	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xDC	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xDD	CMP	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xDE	DEC	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xDF	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xE0	CPX	immediate	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xE1	SBC	(zero page,X)	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xE2	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xE3	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xE4	CPX	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xE5	SBC	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xE6	INC	zero page	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xE7	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xE8	INX	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xE9	SBC	immediate	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xEA	NOP	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xEB	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xEC	CPX	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xED	SBC	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xEE	INC	absolute	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xEF	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xF0	BEQ	relative	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xF1	SBC	(zero page),Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xF2	???	illegal	no	8	failed	1	8	failed	1	8	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xF3	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xF4	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xF5	SBC	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xF6	INC	zero page,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xF7	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xF8	SED	implied	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xF9	SBC	absolute,Y	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xFA	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xFB	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xFC	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xFD	SBC	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xFE	INC	absolute,X	yes	8	passed	0	0	passed	0	0	unsupported	0	0
+applewin	NMOS 6502	/Users/ndn/prv/cpp_prj/qe6502-benchmark/toolbox/common/SingleStepTestsLight/6502/v1	0xFF	???	illegal	no	8	passed	0	0	passed	0	0	unsupported	0	0
