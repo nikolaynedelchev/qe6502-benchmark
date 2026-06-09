@@ -1,4 +1,5 @@
 add_library(qe6502_toolbox STATIC
+    src/instruction_cpu.cpp
     src/klaus_benchmark.cpp
     src/smoke.cpp
     src/singlestep.cpp
