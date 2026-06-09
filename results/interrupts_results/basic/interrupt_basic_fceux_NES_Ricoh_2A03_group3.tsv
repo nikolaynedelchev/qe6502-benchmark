@@ -1,0 +1,5 @@
+suite	core	model	test	status	detail
+group3	fceux	NES/Ricoh 2A03	held IRQ does not retrigger when RTI restores I set	pass	
+group3	fceux	NES/Ricoh 2A03	short IRQ assertion expires before CLI	pass	
+group3	fceux	NES/Ricoh 2A03	long IRQ assertion survives until CLI	pass	
+group3	fceux	NES/Ricoh 2A03	short IRQ during NMI expires before unmask	pass	

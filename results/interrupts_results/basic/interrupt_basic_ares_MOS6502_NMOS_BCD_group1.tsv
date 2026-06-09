@@ -1,0 +1,18 @@
+suite	core	model	test	status	detail
+group1	ares	MOS6502 NMOS/BCD	reset vector routing	pass	
+group1	ares	MOS6502 NMOS/BCD	I flag after reset	pass	
+group1	ares	MOS6502 NMOS/BCD	IRQ masked after reset	pass	
+group1	ares	MOS6502 NMOS/BCD	NMI accepted after reset	pass	
+group1	ares	MOS6502 NMOS/BCD	IRQ masked when I=1	pass	
+group1	ares	MOS6502 NMOS/BCD	IRQ accepted when I=0	pass	
+group1	ares	MOS6502 NMOS/BCD	IRQ deasserted before unmask	pass	
+group1	ares	MOS6502 NMOS/BCD	NMI ignores I	pass	
+group1	ares	MOS6502 NMOS/BCD	NMI/IRQ RTI resumes	pass	
+group1	ares	MOS6502 NMOS/BCD	BRK vector and RTI	pass	
+group1	ares	MOS6502 NMOS/BCD	pushed B bits and live I	pass	
+group1	ares	MOS6502 NMOS/BCD	PLP changes IRQ mask	pass	
+group1	ares	MOS6502 NMOS/BCD	RTI restores PC and P	pass	
+group1	ares	MOS6502 NMOS/BCD	distinct vectors and endian	pass	
+group1	ares	MOS6502 NMOS/BCD	non-default SP interrupt stack	pass	
+group1	ares	MOS6502 NMOS/BCD	PHP vs interrupt B flag	pass	
+group1	ares	MOS6502 NMOS/BCD	decimal flag preserved	pass	

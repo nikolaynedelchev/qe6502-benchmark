@@ -1,0 +1,14 @@
+suite	core	model	test	status	detail
+group2	olcNES	NMOS/NES-style	IRQ held masked then CLI accepts	pass	
+group2	olcNES	NMOS/NES-style	SEI masks held IRQ	pass	
+group2	olcNES	NMOS/NES-style	RTI I variants with held IRQ	pass	
+group2	olcNES	NMOS/NES-style	second NMI assertion after RTI	pass	
+group2	olcNES	NMOS/NES-style	NMI priority over IRQ	pass	
+group2	olcNES	NMOS/NES-style	NMI then held IRQ after RTI	pass	
+group2	olcNES	NMOS/NES-style	NMI inside IRQ handler	pass	
+group2	olcNES	NMOS/NES-style	held IRQ does not enter inside NMI	pass	
+group2	olcNES	NMOS/NES-style	modified vectors are used	pass	
+group2	olcNES	NMOS/NES-style	pushed status pattern variants	pass	
+group2	olcNES	NMOS/NES-style	held NMI assertion generates single NMI	pass	
+group2	olcNES	NMOS/NES-style	held IRQ retriggers after RTI when I clear	pass	
+group2	olcNES	NMOS/NES-style	CLI pending IRQ observable delay	pass	

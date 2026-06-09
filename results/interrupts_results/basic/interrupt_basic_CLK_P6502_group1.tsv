@@ -1,0 +1,18 @@
+suite	core	model	test	status	detail
+group1	CLK	P6502	reset vector routing	pass	
+group1	CLK	P6502	I flag after reset	pass	
+group1	CLK	P6502	IRQ masked after reset	pass	
+group1	CLK	P6502	NMI accepted after reset	pass	
+group1	CLK	P6502	IRQ masked when I=1	pass	
+group1	CLK	P6502	IRQ accepted when I=0	pass	
+group1	CLK	P6502	IRQ deasserted before unmask	pass	
+group1	CLK	P6502	NMI ignores I	pass	
+group1	CLK	P6502	IRQ RTI resumes	fail	main did not resume after IRQ RTI
+group1	CLK	P6502	BRK vector and RTI	pass	
+group1	CLK	P6502	pushed B bits and live I	pass	
+group1	CLK	P6502	PLP changes IRQ mask	pass	
+group1	CLK	P6502	RTI restores PC and P	pass	
+group1	CLK	P6502	distinct vectors and endian	pass	
+group1	CLK	P6502	non-default SP interrupt stack	pass	
+group1	CLK	P6502	PHP vs interrupt B flag	pass	
+group1	CLK	P6502	decimal flag preserved	pass	

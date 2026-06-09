@@ -1,0 +1,14 @@
+suite	core	model	test	status	detail
+group2	fake6502	nmos	IRQ held masked then CLI accepts	pass	
+group2	fake6502	nmos	SEI masks held IRQ	pass	
+group2	fake6502	nmos	RTI I variants with held IRQ	pass	
+group2	fake6502	nmos	second NMI assertion after RTI	pass	
+group2	fake6502	nmos	NMI priority over IRQ	pass	
+group2	fake6502	nmos	NMI then held IRQ after RTI	pass	
+group2	fake6502	nmos	NMI inside IRQ handler	pass	
+group2	fake6502	nmos	held IRQ does not enter inside NMI	pass	
+group2	fake6502	nmos	modified vectors are used	pass	
+group2	fake6502	nmos	pushed status pattern variants	pass	
+group2	fake6502	nmos	held NMI assertion generates single NMI	pass	
+group2	fake6502	nmos	held IRQ retriggers after RTI when I clear	pass	
+group2	fake6502	nmos	CLI pending IRQ observable delay	pass	

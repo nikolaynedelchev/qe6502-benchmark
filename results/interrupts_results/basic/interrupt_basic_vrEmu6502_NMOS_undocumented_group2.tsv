@@ -1,0 +1,14 @@
+suite	core	model	test	status	detail
+group2	vrEmu6502	NMOS undocumented	IRQ held masked then CLI accepts	pass	
+group2	vrEmu6502	NMOS undocumented	SEI masks held IRQ	pass	
+group2	vrEmu6502	NMOS undocumented	RTI I variants with held IRQ	pass	
+group2	vrEmu6502	NMOS undocumented	second NMI assertion after RTI	pass	
+group2	vrEmu6502	NMOS undocumented	NMI priority over IRQ	pass	
+group2	vrEmu6502	NMOS undocumented	NMI then held IRQ after RTI	pass	
+group2	vrEmu6502	NMOS undocumented	NMI inside IRQ handler	pass	
+group2	vrEmu6502	NMOS undocumented	held IRQ does not enter inside NMI	pass	
+group2	vrEmu6502	NMOS undocumented	modified vectors are used	pass	
+group2	vrEmu6502	NMOS undocumented	pushed status pattern variants	pass	
+group2	vrEmu6502	NMOS undocumented	held NMI assertion generates single NMI	pass	
+group2	vrEmu6502	NMOS undocumented	held IRQ retriggers after RTI when I clear	pass	
+group2	vrEmu6502	NMOS undocumented	CLI pending IRQ observable delay	pass	

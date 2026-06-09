@@ -1,0 +1,18 @@
+suite	core	model	test	status	detail
+group1	fceux	NES/Ricoh 2A03	reset vector routing	pass	
+group1	fceux	NES/Ricoh 2A03	I flag after reset	pass	
+group1	fceux	NES/Ricoh 2A03	IRQ masked after reset	pass	
+group1	fceux	NES/Ricoh 2A03	NMI accepted after reset	pass	
+group1	fceux	NES/Ricoh 2A03	IRQ masked when I=1	pass	
+group1	fceux	NES/Ricoh 2A03	IRQ accepted when I=0	pass	
+group1	fceux	NES/Ricoh 2A03	IRQ deasserted before unmask	pass	
+group1	fceux	NES/Ricoh 2A03	NMI ignores I	pass	
+group1	fceux	NES/Ricoh 2A03	NMI/IRQ RTI resumes	pass	
+group1	fceux	NES/Ricoh 2A03	BRK vector and RTI	pass	
+group1	fceux	NES/Ricoh 2A03	pushed B bits and live I	pass	
+group1	fceux	NES/Ricoh 2A03	PLP changes IRQ mask	pass	
+group1	fceux	NES/Ricoh 2A03	RTI restores PC and P	pass	
+group1	fceux	NES/Ricoh 2A03	distinct vectors and endian	pass	
+group1	fceux	NES/Ricoh 2A03	non-default SP interrupt stack	pass	
+group1	fceux	NES/Ricoh 2A03	PHP vs interrupt B flag	pass	
+group1	fceux	NES/Ricoh 2A03	decimal flag preserved	pass	

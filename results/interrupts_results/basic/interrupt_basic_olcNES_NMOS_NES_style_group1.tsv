@@ -1,0 +1,18 @@
+suite	core	model	test	status	detail
+group1	olcNES	NMOS/NES-style	reset vector routing	pass	
+group1	olcNES	NMOS/NES-style	I flag after reset	pass	
+group1	olcNES	NMOS/NES-style	IRQ masked after reset	pass	
+group1	olcNES	NMOS/NES-style	NMI accepted after reset	pass	
+group1	olcNES	NMOS/NES-style	IRQ masked when I=1	pass	
+group1	olcNES	NMOS/NES-style	IRQ accepted when I=0	pass	
+group1	olcNES	NMOS/NES-style	IRQ deasserted before unmask	pass	
+group1	olcNES	NMOS/NES-style	NMI ignores I	pass	
+group1	olcNES	NMOS/NES-style	NMI/IRQ RTI resumes	pass	
+group1	olcNES	NMOS/NES-style	BRK vector and RTI	pass	
+group1	olcNES	NMOS/NES-style	pushed B bits and live I	pass	
+group1	olcNES	NMOS/NES-style	PLP changes IRQ mask	pass	
+group1	olcNES	NMOS/NES-style	RTI restores PC and P	pass	
+group1	olcNES	NMOS/NES-style	distinct vectors and endian	pass	
+group1	olcNES	NMOS/NES-style	non-default SP interrupt stack	pass	
+group1	olcNES	NMOS/NES-style	PHP vs interrupt B flag	pass	
+group1	olcNES	NMOS/NES-style	decimal flag preserved	pass	

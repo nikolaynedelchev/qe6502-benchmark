@@ -20,6 +20,7 @@ constexpr int NMI_LINE = 2;
 constexpr int IRQ_LINE = 0;
 constexpr int V_LINE = 16;
 constexpr int STATE_RESET = 0xff00;
+constexpr int STATE_FETCH = 0xff01;
 
 inline bool page_changing(std::uint16_t base, int delta) { return ((base + delta) ^ base) & 0xff00; }
 inline std::uint16_t set_l(std::uint16_t base, std::uint8_t value) { return (base & 0xff00u) | value; }
@@ -91,6 +92,7 @@ protected: \
     static constexpr int IRQ_LINE = ::benchmark6502::mame::IRQ_LINE; \
     static constexpr int V_LINE = ::benchmark6502::mame::V_LINE; \
     static constexpr int STATE_RESET = ::benchmark6502::mame::STATE_RESET; \
+    static constexpr int STATE_FETCH = ::benchmark6502::mame::STATE_FETCH; \
     static bool page_changing(std::uint16_t base, int delta) { return ::benchmark6502::mame::page_changing(base, delta); } \
     static std::uint16_t set_l(std::uint16_t base, std::uint8_t value) { return ::benchmark6502::mame::set_l(base, value); } \
     static std::uint16_t set_h(std::uint16_t base, std::uint8_t value) { return ::benchmark6502::mame::set_h(base, value); } \
@@ -105,7 +107,7 @@ protected: \
     void debugger_wait_hook() {} \
     void standard_irq_callback(int, std::uint16_t) {} \
     void prefetch_start() { m_sync = true; m_NPC = m_PC; } \
-    void prefetch_end() { m_sync = false; if((m_nmi_pending || (m_irq_state && !(m_P & F_I))) && !m_inhibit_interrupts) { m_irq_taken = true; m_IR = 0x00; } else { m_PC++; } } \
+    void prefetch_end() { m_sync = false; if((m_nmi_pending || (m_irq_state && !(m_P & F_I))) && !m_inhibit_interrupts) { m_irq_taken = true; m_IR = 0x00; } else { m_PC++; } owner_.on_prefetch_end(); } \
     void prefetch_end_noirq() { m_sync = false; m_PC++; } \
     void set_nz(std::uint8_t value) { m_P &= ~(F_Z | F_N); if(value & 0x80) m_P |= F_N; if(!value) m_P |= F_Z; } \
     void dec_SP() { m_SP = set_l(m_SP, static_cast<std::uint8_t>(m_SP - 1)); } \
@@ -316,6 +318,10 @@ void CLASS_NAME::execute_run() \
     if(m_inst_substate) \
         do_exec_partial(); \
     while(m_icount > 0) { \
+        if(m_inst_state == STATE_FETCH) { \
+            owner_.execute_fetch_state_cycle(); \
+            continue; \
+        } \
         if(m_inst_state < 0xff00) { \
             m_PPC = m_NPC; \
             m_inst_state = m_IR | m_inst_state_base; \
@@ -332,6 +338,10 @@ void mamew65c02s_cpu_device::execute_run()
     if(m_inst_substate)
         do_exec_partial();
     while(m_icount > 0) {
+        if(m_inst_state == STATE_FETCH) {
+            owner_.execute_fetch_state_cycle();
+            continue;
+        }
         if(m_inst_state < 0xff00) {
             m_PPC = m_NPC;
             m_inst_state = m_IR | m_inst_state_base;
@@ -345,6 +355,10 @@ void mamer65c02_cpu_device::execute_run()
     if(m_inst_substate)
         do_exec_partial();
     while(m_icount > 0) {
+        if(m_inst_state == STATE_FETCH) {
+            owner_.execute_fetch_state_cycle();
+            continue;
+        }
         if(m_inst_state < 0xff00) {
             m_PPC = m_NPC;
             m_inst_state = m_IR | m_inst_state_base;
@@ -427,6 +441,61 @@ void Mame6502Cpu::reset_from_vector()
     total_cycles_ = 0;
 }
 
+void Mame6502Cpu::set_pc_to_opcode_boundary(std::uint16_t pc)
+{
+    pc_ = pc;
+    npc_ = pc;
+    ppc_ = pc;
+    ir_ = 0;
+    inst_state_ = STATE_FETCH;
+    inst_substate_ = 0;
+    irq_taken_ = false;
+    sync_ = false;
+}
+
+void Mame6502Cpu::execute_fetch_state_cycle()
+{
+    ppc_ = npc_;
+    sync_ = true;
+    npc_ = pc_;
+    ir_ = read_sync(pc_);
+    --icount_;
+    sync_ = false;
+
+    if ((nmi_pending_ || (irq_state_ && !(p_ & F_I))) && !inhibit_interrupts_) {
+        irq_taken_ = true;
+        ir_ = 0x00;
+    } else {
+        ++pc_;
+    }
+    on_prefetch_end();
+
+    inst_state_ = -1;
+}
+
+void Mame6502Cpu::on_prefetch_end()
+{
+    if (prefetches_until_stop_ == 0)
+        return;
+    --prefetches_until_stop_;
+    if (prefetches_until_stop_ == 0)
+        icount_ = 0;
+}
+
+unsigned Mame6502Cpu::execute_one_instruction_from_opcode_boundary()
+{
+    if (jammed_)
+        return 0;
+
+    constexpr unsigned max_cycles = 64u;
+    prefetches_until_stop_ = 2;
+    const unsigned executed = execute(max_cycles);
+    prefetches_until_stop_ = 0;
+    if (!jammed_)
+        set_pc_to_opcode_boundary(state().pc);
+    return executed;
+}
+
 void Mame6502Cpu::set_pc_and_prefetch(std::uint16_t pc)
 {
     pc_ = pc;
@@ -477,7 +546,7 @@ void Mame6502Cpu::set_state(const CpuState& state)
 
 void Mame6502Cpu::set_nmi_line(bool asserted)
 {
-    if(!nmi_state_ && asserted && total_cycles_)
+    if(!nmi_state_ && asserted)
         nmi_pending_ = true;
     nmi_state_ = asserted;
 }

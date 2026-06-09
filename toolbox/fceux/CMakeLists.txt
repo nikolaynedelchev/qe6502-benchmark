@@ -1,6 +1,7 @@
 add_library(fceux_toolbox STATIC
     src/klaus_benchmark.cpp
     src/smoke.cpp
+    src/instruction_cpu.cpp
     src/stubs.cpp
     ${PROJECT_SOURCE_DIR}/cores/fceux/src/x6502.cpp
 )

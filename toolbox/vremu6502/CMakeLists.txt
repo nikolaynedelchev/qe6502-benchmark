@@ -1,5 +1,6 @@
 add_library(vremu6502_toolbox STATIC
     ${PROJECT_SOURCE_DIR}/cores/vremu6502/src/vrEmu6502.c
+    src/instruction_cpu.cpp
     src/klaus_benchmark.cpp
     src/singlestep.cpp
     src/smoke.cpp

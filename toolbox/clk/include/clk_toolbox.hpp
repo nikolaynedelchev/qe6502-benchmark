@@ -1,5 +1,6 @@
 #pragma once
 
+#include <benchmark6502/instruction_cpu.hpp>
 #include <benchmark6502/results.hpp>
 #include <benchmark6502/singlestep.hpp>
 
@@ -22,5 +23,7 @@ benchmark6502::singlestep_result run_singlestep_wdc65c02(const benchmark6502::si
 benchmark6502::singlestep_result run_singlestep_rockwell65c02(const benchmark6502::singlestep_corpus& corpus);
 benchmark6502::singlestep_result run_singlestep_synertek65c02(const benchmark6502::singlestep_corpus& corpus);
 std::unique_ptr<cpu6502_bridge::ICpu> make_clk_p6502_nmos_cpu();
+
+std::unique_ptr<benchmark6502::IInstructionCpu> make_clk_p6502_nmos_instruction_cpu();
 
 } // namespace clk_toolbox

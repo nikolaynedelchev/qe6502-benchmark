@@ -1,5 +1,6 @@
 add_library(fake6502_toolbox STATIC
     src/fake6502_bridge.c
+    src/instruction_cpu.cpp
     src/klaus_benchmark.cpp
     src/singlestep.cpp
     src/smoke.cpp

@@ -1,0 +1,5 @@
+suite	core	model	test	status	detail
+group3	O2	nmos	held IRQ does not retrigger when RTI restores I set	pass	
+group3	O2	nmos	short IRQ assertion expires before CLI	fail	main did not continue after expired IRQ assertion
+group3	O2	nmos	long IRQ assertion survives until CLI	pass	
+group3	O2	nmos	short IRQ during NMI expires before unmask	pass	

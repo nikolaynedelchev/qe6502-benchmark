@@ -3,6 +3,7 @@ add_library(gianlucag_mos6502_toolbox STATIC
     src/smoke.cpp
     src/klaus_benchmark.cpp
     src/singlestep.cpp
+    src/instruction_cpu.cpp
 )
 
 target_include_directories(gianlucag_mos6502_toolbox

@@ -1,0 +1,18 @@
+suite	core	model	test	status	detail
+group1	sflib65c02	65C02	reset vector routing	pass	
+group1	sflib65c02	65C02	I flag after reset	pass	
+group1	sflib65c02	65C02	IRQ masked after reset	pass	
+group1	sflib65c02	65C02	NMI accepted after reset	pass	
+group1	sflib65c02	65C02	IRQ masked when I=1	pass	
+group1	sflib65c02	65C02	IRQ accepted when I=0	pass	
+group1	sflib65c02	65C02	IRQ deasserted before unmask	pass	
+group1	sflib65c02	65C02	NMI ignores I	pass	
+group1	sflib65c02	65C02	NMI/IRQ RTI resumes	pass	
+group1	sflib65c02	65C02	BRK vector and RTI	pass	
+group1	sflib65c02	65C02	pushed B bits and live I	pass	
+group1	sflib65c02	65C02	PLP changes IRQ mask	pass	
+group1	sflib65c02	65C02	RTI restores PC and P	pass	
+group1	sflib65c02	65C02	distinct vectors and endian	pass	
+group1	sflib65c02	65C02	non-default SP interrupt stack	pass	
+group1	sflib65c02	65C02	PHP vs interrupt B flag	pass	
+group1	sflib65c02	65C02	decimal flag preserved	pass	

@@ -1,0 +1,14 @@
+suite	core	model	test	status	detail
+group2	floooh/chips	nmos	IRQ held masked then CLI accepts	pass	
+group2	floooh/chips	nmos	SEI masks held IRQ	pass	
+group2	floooh/chips	nmos	RTI I variants with held IRQ	pass	
+group2	floooh/chips	nmos	second NMI assertion after RTI	pass	
+group2	floooh/chips	nmos	NMI priority over IRQ	pass	
+group2	floooh/chips	nmos	NMI then held IRQ after RTI	pass	
+group2	floooh/chips	nmos	NMI inside IRQ handler	pass	
+group2	floooh/chips	nmos	held IRQ does not enter inside NMI	pass	
+group2	floooh/chips	nmos	modified vectors are used	pass	
+group2	floooh/chips	nmos	pushed status pattern variants	pass	
+group2	floooh/chips	nmos	held NMI assertion generates single NMI	pass	
+group2	floooh/chips	nmos	held IRQ retriggers after RTI when I clear	pass	
+group2	floooh/chips	nmos	CLI pending IRQ observable delay	pass	

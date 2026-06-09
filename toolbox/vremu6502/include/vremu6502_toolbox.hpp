@@ -1,7 +1,10 @@
 #pragma once
 
+#include <benchmark6502/instruction_cpu.hpp>
 #include <benchmark6502/results.hpp>
 #include <benchmark6502/singlestep.hpp>
+
+#include <memory>
 
 namespace vremu6502_toolbox {
 
@@ -28,5 +31,6 @@ benchmark6502::singlestep_result run_singlestep_cpu65c02(const benchmark6502::si
 benchmark6502::singlestep_result run_singlestep_wdc65c02(const benchmark6502::singlestep_corpus& corpus);
 benchmark6502::singlestep_result run_singlestep_rockwell65c02(const benchmark6502::singlestep_corpus& corpus);
 benchmark6502::singlestep_result run_singlestep_synertek65c02(const benchmark6502::singlestep_corpus& corpus);
+std::unique_ptr<benchmark6502::IInstructionCpu> make_vremu6502_nmos_instruction_cpu();
 
 } // namespace vremu6502_toolbox

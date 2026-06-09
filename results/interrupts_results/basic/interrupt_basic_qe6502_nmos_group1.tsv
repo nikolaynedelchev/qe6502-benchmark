@@ -1,0 +1,18 @@
+suite	core	model	test	status	detail
+group1	qe6502	nmos	reset vector routing	pass	
+group1	qe6502	nmos	I flag after reset	pass	
+group1	qe6502	nmos	IRQ masked after reset	pass	
+group1	qe6502	nmos	NMI accepted after reset	pass	
+group1	qe6502	nmos	IRQ masked when I=1	pass	
+group1	qe6502	nmos	IRQ accepted when I=0	pass	
+group1	qe6502	nmos	IRQ deasserted before unmask	pass	
+group1	qe6502	nmos	NMI ignores I	pass	
+group1	qe6502	nmos	NMI/IRQ RTI resumes	pass	
+group1	qe6502	nmos	BRK vector and RTI	pass	
+group1	qe6502	nmos	pushed B bits and live I	pass	
+group1	qe6502	nmos	PLP changes IRQ mask	pass	
+group1	qe6502	nmos	RTI restores PC and P	pass	
+group1	qe6502	nmos	distinct vectors and endian	pass	
+group1	qe6502	nmos	non-default SP interrupt stack	pass	
+group1	qe6502	nmos	PHP vs interrupt B flag	pass	
+group1	qe6502	nmos	decimal flag preserved	pass	

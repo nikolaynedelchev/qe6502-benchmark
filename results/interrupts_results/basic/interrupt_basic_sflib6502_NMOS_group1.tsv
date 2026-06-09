@@ -1,0 +1,18 @@
+suite	core	model	test	status	detail
+group1	sflib6502	NMOS	reset vector routing	pass	
+group1	sflib6502	NMOS	I flag after reset	pass	
+group1	sflib6502	NMOS	IRQ masked after reset	pass	
+group1	sflib6502	NMOS	NMI accepted after reset	pass	
+group1	sflib6502	NMOS	IRQ masked when I=1	pass	
+group1	sflib6502	NMOS	IRQ accepted when I=0	pass	
+group1	sflib6502	NMOS	IRQ deasserted before unmask	pass	
+group1	sflib6502	NMOS	NMI ignores I	pass	
+group1	sflib6502	NMOS	NMI/IRQ RTI resumes	pass	
+group1	sflib6502	NMOS	BRK vector and RTI	pass	
+group1	sflib6502	NMOS	pushed B bits and live I	pass	
+group1	sflib6502	NMOS	PLP changes IRQ mask	pass	
+group1	sflib6502	NMOS	RTI restores PC and P	pass	
+group1	sflib6502	NMOS	distinct vectors and endian	pass	
+group1	sflib6502	NMOS	non-default SP interrupt stack	pass	
+group1	sflib6502	NMOS	PHP vs interrupt B flag	pass	
+group1	sflib6502	NMOS	decimal flag preserved	pass	

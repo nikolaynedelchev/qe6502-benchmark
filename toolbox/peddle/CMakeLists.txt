@@ -5,6 +5,7 @@ add_library(peddle_toolbox STATIC
     ${PROJECT_SOURCE_DIR}/cores/peddle/Peddle/StrWriter.cpp
     src/smoke.cpp
     src/icpu.cpp
+    src/instruction_cpu.cpp
     src/klaus_benchmark.cpp
     src/singlestep.cpp
 )

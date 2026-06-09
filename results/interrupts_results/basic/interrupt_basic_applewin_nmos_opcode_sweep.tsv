@@ -1,0 +1,1537 @@
+suite	core	model	case	opcode	mnemonic	mode	legality	status	detail
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$00	BRK	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$01	ORA	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$02	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$03	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$04	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$05	ORA	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$06	ASL	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$07	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$08	PHP	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$09	ORA	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$0A	ASL	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$0B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$0C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$0D	ORA	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$0E	ASL	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$0F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$10	BPL	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$11	ORA	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$12	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$13	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$14	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$15	ORA	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$16	ASL	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$17	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$18	CLC	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$19	ORA	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$1A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$1B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$1C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$1D	ORA	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$1E	ASL	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$1F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$20	JSR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$21	AND	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$22	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$23	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$24	BIT	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$25	AND	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$26	ROL	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$27	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$28	PLP	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$29	AND	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$2A	ROL	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$2B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$2C	BIT	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$2D	AND	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$2E	ROL	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$2F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$30	BMI	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$31	AND	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$32	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$33	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$34	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$35	AND	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$36	ROL	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$37	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$38	SEC	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$39	AND	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$3A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$3B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$3C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$3D	AND	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$3E	ROL	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$3F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$40	RTI	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$41	EOR	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$42	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$43	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$44	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$45	EOR	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$46	LSR	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$47	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$48	PHA	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$49	EOR	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$4A	LSR	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$4B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$4C	JMP	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$4D	EOR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$4E	LSR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$4F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$50	BVC	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$51	EOR	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$52	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$53	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$54	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$55	EOR	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$56	LSR	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$57	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$58	CLI	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$59	EOR	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$5A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$5B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$5C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$5D	EOR	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$5E	LSR	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$5F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$60	RTS	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$61	ADC	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$62	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$63	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$64	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$65	ADC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$66	ROR	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$67	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$68	PLA	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$69	ADC	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$6A	ROR	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$6B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$6C	JMP	indirect	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$6D	ADC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$6E	ROR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$6F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$70	BVS	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$71	ADC	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$72	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$73	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$74	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$75	ADC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$76	ROR	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$77	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$78	SEI	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$79	ADC	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$7A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$7B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$7C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$7D	ADC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$7E	ROR	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$7F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$80	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$81	STA	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$82	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$83	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$84	STY	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$85	STA	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$86	STX	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$87	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$88	DEY	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$89	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$8A	TXA	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$8B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$8C	STY	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$8D	STA	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$8E	STX	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$8F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$90	BCC	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$91	STA	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$92	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$93	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$94	STY	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$95	STA	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$96	STX	zero page,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$97	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$98	TYA	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$99	STA	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$9A	TXS	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$9B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$9C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$9D	STA	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$9E	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$9F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$A0	LDY	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$A1	LDA	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$A2	LDX	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$A3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$A4	LDY	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$A5	LDA	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$A6	LDX	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$A7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$A8	TAY	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$A9	LDA	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$AA	TAX	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$AB	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$AC	LDY	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$AD	LDA	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$AE	LDX	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$AF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$B0	BCS	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$B1	LDA	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$B2	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$B3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$B4	LDY	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$B5	LDA	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$B6	LDX	zero page,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$B7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$B8	CLV	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$B9	LDA	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$BA	TSX	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$BB	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$BC	LDY	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$BD	LDA	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$BE	LDX	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$BF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$C0	CPY	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$C1	CMP	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$C2	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$C3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$C4	CPY	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$C5	CMP	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$C6	DEC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$C7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$C8	INY	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$C9	CMP	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$CA	DEX	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$CB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$CC	CPY	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$CD	CMP	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$CE	DEC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$CF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$D0	BNE	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$D1	CMP	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$D2	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$D3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$D4	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$D5	CMP	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$D6	DEC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$D7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$D8	CLD	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$D9	CMP	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$DA	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$DB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$DC	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$DD	CMP	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$DE	DEC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$DF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$E0	CPX	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$E1	SBC	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$E2	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$E3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$E4	CPX	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$E5	SBC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$E6	INC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$E7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$E8	INX	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$E9	SBC	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$EA	NOP	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$EB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$EC	CPX	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$ED	SBC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$EE	INC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$EF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$F0	BEQ	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$F1	SBC	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$F2	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$F3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$F4	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$F5	SBC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$F6	INC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$F7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$F8	SED	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$F9	SBC	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$FA	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$FB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$FC	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$FD	SBC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$FE	INC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_nmi_before_opcode	$FF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$00	BRK	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$01	ORA	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$02	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$03	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$04	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$05	ORA	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$06	ASL	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$07	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$08	PHP	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$09	ORA	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$0A	ASL	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$0B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$0C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$0D	ORA	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$0E	ASL	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$0F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$10	BPL	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$11	ORA	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$12	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$13	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$14	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$15	ORA	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$16	ASL	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$17	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$18	CLC	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$19	ORA	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$1A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$1B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$1C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$1D	ORA	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$1E	ASL	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$1F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$20	JSR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$21	AND	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$22	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$23	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$24	BIT	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$25	AND	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$26	ROL	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$27	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$28	PLP	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$29	AND	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$2A	ROL	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$2B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$2C	BIT	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$2D	AND	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$2E	ROL	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$2F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$30	BMI	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$31	AND	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$32	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$33	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$34	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$35	AND	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$36	ROL	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$37	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$38	SEC	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$39	AND	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$3A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$3B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$3C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$3D	AND	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$3E	ROL	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$3F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$40	RTI	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$41	EOR	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$42	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$43	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$44	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$45	EOR	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$46	LSR	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$47	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$48	PHA	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$49	EOR	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$4A	LSR	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$4B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$4C	JMP	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$4D	EOR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$4E	LSR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$4F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$50	BVC	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$51	EOR	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$52	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$53	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$54	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$55	EOR	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$56	LSR	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$57	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$58	CLI	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$59	EOR	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$5A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$5B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$5C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$5D	EOR	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$5E	LSR	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$5F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$60	RTS	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$61	ADC	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$62	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$63	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$64	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$65	ADC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$66	ROR	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$67	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$68	PLA	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$69	ADC	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$6A	ROR	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$6B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$6C	JMP	indirect	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$6D	ADC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$6E	ROR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$6F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$70	BVS	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$71	ADC	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$72	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$73	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$74	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$75	ADC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$76	ROR	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$77	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$78	SEI	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$79	ADC	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$7A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$7B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$7C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$7D	ADC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$7E	ROR	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$7F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$80	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$81	STA	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$82	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$83	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$84	STY	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$85	STA	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$86	STX	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$87	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$88	DEY	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$89	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$8A	TXA	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$8B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$8C	STY	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$8D	STA	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$8E	STX	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$8F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$90	BCC	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$91	STA	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$92	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$93	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$94	STY	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$95	STA	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$96	STX	zero page,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$97	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$98	TYA	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$99	STA	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$9A	TXS	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$9B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$9C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$9D	STA	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$9E	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$9F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$A0	LDY	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$A1	LDA	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$A2	LDX	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$A3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$A4	LDY	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$A5	LDA	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$A6	LDX	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$A7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$A8	TAY	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$A9	LDA	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$AA	TAX	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$AB	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$AC	LDY	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$AD	LDA	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$AE	LDX	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$AF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$B0	BCS	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$B1	LDA	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$B2	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$B3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$B4	LDY	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$B5	LDA	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$B6	LDX	zero page,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$B7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$B8	CLV	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$B9	LDA	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$BA	TSX	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$BB	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$BC	LDY	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$BD	LDA	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$BE	LDX	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$BF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$C0	CPY	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$C1	CMP	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$C2	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$C3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$C4	CPY	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$C5	CMP	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$C6	DEC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$C7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$C8	INY	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$C9	CMP	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$CA	DEX	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$CB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$CC	CPY	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$CD	CMP	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$CE	DEC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$CF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$D0	BNE	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$D1	CMP	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$D2	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$D3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$D4	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$D5	CMP	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$D6	DEC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$D7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$D8	CLD	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$D9	CMP	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$DA	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$DB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$DC	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$DD	CMP	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$DE	DEC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$DF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$E0	CPX	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$E1	SBC	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$E2	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$E3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$E4	CPX	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$E5	SBC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$E6	INC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$E7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$E8	INX	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$E9	SBC	immediate	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$EA	NOP	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$EB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$EC	CPX	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$ED	SBC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$EE	INC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$EF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$F0	BEQ	relative	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$F1	SBC	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$F2	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$F3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$F4	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$F5	SBC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$F6	INC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$F7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$F8	SED	implied	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$F9	SBC	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$FA	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$FB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$FC	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$FD	SBC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$FE	INC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	first_reset_irq_masked_opcode_executes	$FF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$00	BRK	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$01	ORA	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$02	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$03	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$04	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$05	ORA	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$06	ASL	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$07	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$08	PHP	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$09	ORA	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$0A	ASL	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$0B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$0C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$0D	ORA	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$0E	ASL	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$0F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$10	BPL	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$11	ORA	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$12	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$13	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$14	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$15	ORA	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$16	ASL	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$17	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$18	CLC	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$19	ORA	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$1A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$1B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$1C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$1D	ORA	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$1E	ASL	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$1F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$20	JSR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$21	AND	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$22	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$23	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$24	BIT	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$25	AND	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$26	ROL	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$27	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$28	PLP	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$29	AND	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$2A	ROL	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$2B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$2C	BIT	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$2D	AND	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$2E	ROL	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$2F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$30	BMI	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$31	AND	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$32	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$33	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$34	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$35	AND	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$36	ROL	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$37	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$38	SEC	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$39	AND	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$3A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$3B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$3C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$3D	AND	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$3E	ROL	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$3F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$40	RTI	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$41	EOR	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$42	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$43	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$44	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$45	EOR	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$46	LSR	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$47	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$48	PHA	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$49	EOR	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$4A	LSR	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$4B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$4C	JMP	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$4D	EOR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$4E	LSR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$4F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$50	BVC	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$51	EOR	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$52	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$53	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$54	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$55	EOR	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$56	LSR	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$57	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$58	CLI	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$59	EOR	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$5A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$5B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$5C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$5D	EOR	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$5E	LSR	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$5F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$60	RTS	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$61	ADC	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$62	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$63	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$64	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$65	ADC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$66	ROR	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$67	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$68	PLA	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$69	ADC	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$6A	ROR	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$6B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$6C	JMP	indirect	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$6D	ADC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$6E	ROR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$6F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$70	BVS	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$71	ADC	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$72	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$73	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$74	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$75	ADC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$76	ROR	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$77	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$78	SEI	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$79	ADC	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$7A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$7B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$7C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$7D	ADC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$7E	ROR	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$7F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$80	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$81	STA	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$82	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$83	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$84	STY	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$85	STA	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$86	STX	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$87	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$88	DEY	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$89	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$8A	TXA	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$8B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$8C	STY	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$8D	STA	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$8E	STX	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$8F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$90	BCC	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$91	STA	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$92	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$93	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$94	STY	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$95	STA	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$96	STX	zero page,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$97	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$98	TYA	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$99	STA	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$9A	TXS	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$9B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$9C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$9D	STA	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$9E	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$9F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$A0	LDY	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$A1	LDA	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$A2	LDX	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$A3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$A4	LDY	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$A5	LDA	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$A6	LDX	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$A7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$A8	TAY	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$A9	LDA	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$AA	TAX	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$AB	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$AC	LDY	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$AD	LDA	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$AE	LDX	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$AF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$B0	BCS	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$B1	LDA	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$B2	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$B3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$B4	LDY	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$B5	LDA	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$B6	LDX	zero page,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$B7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$B8	CLV	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$B9	LDA	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$BA	TSX	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$BB	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$BC	LDY	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$BD	LDA	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$BE	LDX	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$BF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$C0	CPY	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$C1	CMP	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$C2	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$C3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$C4	CPY	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$C5	CMP	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$C6	DEC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$C7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$C8	INY	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$C9	CMP	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$CA	DEX	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$CB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$CC	CPY	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$CD	CMP	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$CE	DEC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$CF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$D0	BNE	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$D1	CMP	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$D2	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$D3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$D4	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$D5	CMP	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$D6	DEC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$D7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$D8	CLD	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$D9	CMP	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$DA	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$DB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$DC	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$DD	CMP	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$DE	DEC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$DF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$E0	CPX	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$E1	SBC	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$E2	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$E3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$E4	CPX	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$E5	SBC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$E6	INC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$E7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$E8	INX	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$E9	SBC	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$EA	NOP	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$EB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$EC	CPX	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$ED	SBC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$EE	INC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$EF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$F0	BEQ	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$F1	SBC	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$F2	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$F3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$F4	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$F5	SBC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$F6	INC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$F7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$F8	SED	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$F9	SBC	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$FA	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$FB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$FC	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$FD	SBC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$FE	INC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_nmi_before_target	$FF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$00	BRK	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$01	ORA	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$02	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$03	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$04	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$05	ORA	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$06	ASL	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$07	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$08	PHP	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$09	ORA	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$0A	ASL	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$0B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$0C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$0D	ORA	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$0E	ASL	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$0F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$10	BPL	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$11	ORA	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$12	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$13	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$14	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$15	ORA	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$16	ASL	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$17	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$18	CLC	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$19	ORA	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$1A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$1B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$1C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$1D	ORA	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$1E	ASL	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$1F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$20	JSR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$21	AND	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$22	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$23	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$24	BIT	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$25	AND	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$26	ROL	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$27	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$28	PLP	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$29	AND	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$2A	ROL	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$2B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$2C	BIT	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$2D	AND	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$2E	ROL	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$2F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$30	BMI	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$31	AND	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$32	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$33	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$34	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$35	AND	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$36	ROL	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$37	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$38	SEC	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$39	AND	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$3A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$3B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$3C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$3D	AND	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$3E	ROL	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$3F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$40	RTI	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$41	EOR	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$42	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$43	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$44	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$45	EOR	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$46	LSR	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$47	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$48	PHA	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$49	EOR	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$4A	LSR	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$4B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$4C	JMP	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$4D	EOR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$4E	LSR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$4F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$50	BVC	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$51	EOR	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$52	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$53	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$54	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$55	EOR	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$56	LSR	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$57	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$58	CLI	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$59	EOR	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$5A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$5B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$5C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$5D	EOR	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$5E	LSR	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$5F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$60	RTS	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$61	ADC	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$62	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$63	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$64	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$65	ADC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$66	ROR	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$67	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$68	PLA	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$69	ADC	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$6A	ROR	accumulator	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$6B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$6C	JMP	indirect	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$6D	ADC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$6E	ROR	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$6F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$70	BVS	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$71	ADC	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$72	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$73	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$74	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$75	ADC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$76	ROR	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$77	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$78	SEI	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$79	ADC	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$7A	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$7B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$7C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$7D	ADC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$7E	ROR	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$7F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$80	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$81	STA	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$82	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$83	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$84	STY	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$85	STA	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$86	STX	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$87	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$88	DEY	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$89	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$8A	TXA	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$8B	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$8C	STY	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$8D	STA	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$8E	STX	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$8F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$90	BCC	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$91	STA	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$92	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$93	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$94	STY	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$95	STA	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$96	STX	zero page,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$97	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$98	TYA	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$99	STA	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$9A	TXS	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$9B	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$9C	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$9D	STA	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$9E	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$9F	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$A0	LDY	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$A1	LDA	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$A2	LDX	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$A3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$A4	LDY	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$A5	LDA	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$A6	LDX	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$A7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$A8	TAY	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$A9	LDA	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$AA	TAX	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$AB	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$AC	LDY	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$AD	LDA	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$AE	LDX	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$AF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$B0	BCS	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$B1	LDA	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$B2	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$B3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$B4	LDY	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$B5	LDA	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$B6	LDX	zero page,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$B7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$B8	CLV	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$B9	LDA	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$BA	TSX	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$BB	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$BC	LDY	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$BD	LDA	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$BE	LDX	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$BF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$C0	CPY	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$C1	CMP	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$C2	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$C3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$C4	CPY	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$C5	CMP	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$C6	DEC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$C7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$C8	INY	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$C9	CMP	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$CA	DEX	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$CB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$CC	CPY	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$CD	CMP	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$CE	DEC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$CF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$D0	BNE	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$D1	CMP	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$D2	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$D3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$D4	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$D5	CMP	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$D6	DEC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$D7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$D8	CLD	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$D9	CMP	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$DA	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$DB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$DC	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$DD	CMP	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$DE	DEC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$DF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$E0	CPX	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$E1	SBC	(zero page,X)	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$E2	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$E3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$E4	CPX	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$E5	SBC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$E6	INC	zero page	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$E7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$E8	INX	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$E9	SBC	immediate	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$EA	NOP	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$EB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$EC	CPX	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$ED	SBC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$EE	INC	absolute	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$EF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$F0	BEQ	relative	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$F1	SBC	(zero page),Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$F2	???	illegal	illegal	skip	opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$F3	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$F4	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$F5	SBC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$F6	INC	zero page,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$F7	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$F8	SED	implied	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$F9	SBC	absolute,Y	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$FA	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$FB	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$FC	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$FD	SBC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$FE	INC	absolute,X	legal	pass	
+opcode_sweep	applewin	nmos	prefixed_irq_before_target	$FF	???	illegal	illegal	pass	
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$00	BRK	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$01	ORA	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$02	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$03	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$04	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$05	ORA	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$06	ASL	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$07	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$08	PHP	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$09	ORA	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$0A	ASL	accumulator	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$0B	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$0C	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$0D	ORA	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$0E	ASL	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$0F	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$10	BPL	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$11	ORA	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$12	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$13	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$14	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$15	ORA	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$16	ASL	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$17	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$18	CLC	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$19	ORA	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$1A	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$1B	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$1C	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$1D	ORA	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$1E	ASL	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$1F	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$20	JSR	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$21	AND	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$22	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$23	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$24	BIT	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$25	AND	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$26	ROL	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$27	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$28	PLP	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$29	AND	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$2A	ROL	accumulator	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$2B	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$2C	BIT	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$2D	AND	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$2E	ROL	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$2F	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$30	BMI	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$31	AND	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$32	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$33	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$34	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$35	AND	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$36	ROL	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$37	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$38	SEC	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$39	AND	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$3A	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$3B	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$3C	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$3D	AND	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$3E	ROL	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$3F	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$40	RTI	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$41	EOR	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$42	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$43	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$44	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$45	EOR	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$46	LSR	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$47	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$48	PHA	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$49	EOR	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$4A	LSR	accumulator	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$4B	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$4C	JMP	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$4D	EOR	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$4E	LSR	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$4F	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$50	BVC	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$51	EOR	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$52	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$53	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$54	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$55	EOR	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$56	LSR	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$57	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$58	CLI	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$59	EOR	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$5A	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$5B	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$5C	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$5D	EOR	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$5E	LSR	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$5F	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$60	RTS	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$61	ADC	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$62	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$63	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$64	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$65	ADC	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$66	ROR	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$67	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$68	PLA	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$69	ADC	immediate	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$6A	ROR	accumulator	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$6B	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$6C	JMP	indirect	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$6D	ADC	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$6E	ROR	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$6F	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$70	BVS	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$71	ADC	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$72	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$73	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$74	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$75	ADC	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$76	ROR	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$77	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$78	SEI	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$79	ADC	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$7A	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$7B	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$7C	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$7D	ADC	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$7E	ROR	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$7F	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$80	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$81	STA	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$82	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$83	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$84	STY	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$85	STA	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$86	STX	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$87	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$88	DEY	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$89	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$8A	TXA	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$8B	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$8C	STY	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$8D	STA	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$8E	STX	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$8F	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$90	BCC	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$91	STA	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$92	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$93	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$94	STY	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$95	STA	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$96	STX	zero page,Y	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$97	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$98	TYA	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$99	STA	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$9A	TXS	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$9B	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$9C	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$9D	STA	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$9E	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$9F	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$A0	LDY	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$A1	LDA	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$A2	LDX	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$A3	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$A4	LDY	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$A5	LDA	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$A6	LDX	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$A7	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$A8	TAY	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$A9	LDA	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$AA	TAX	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$AB	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$AC	LDY	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$AD	LDA	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$AE	LDX	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$AF	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$B0	BCS	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$B1	LDA	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$B2	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$B3	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$B4	LDY	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$B5	LDA	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$B6	LDX	zero page,Y	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$B7	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$B8	CLV	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$B9	LDA	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$BA	TSX	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$BB	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=2
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$BC	LDY	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$BD	LDA	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$BE	LDX	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$BF	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$C0	CPY	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$C1	CMP	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$C2	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$C3	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$C4	CPY	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$C5	CMP	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$C6	DEC	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$C7	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$C8	INY	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$C9	CMP	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$CA	DEX	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$CB	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$CC	CPY	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$CD	CMP	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$CE	DEC	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$CF	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$D0	BNE	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$D1	CMP	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$D2	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$D3	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$D4	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$D5	CMP	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$D6	DEC	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$D7	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$D8	CLD	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$D9	CMP	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$DA	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$DB	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$DC	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$DD	CMP	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$DE	DEC	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$DF	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$E0	CPX	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$E1	SBC	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$E2	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$E3	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$E4	CPX	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$E5	SBC	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$E6	INC	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$E7	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$E8	INX	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$E9	SBC	immediate	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$EA	NOP	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$EB	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$EC	CPX	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$ED	SBC	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$EE	INC	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$EF	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$F0	BEQ	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$F1	SBC	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$F2	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$F3	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$F4	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$F5	SBC	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$F6	INC	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$F7	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$F8	SED	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$F9	SBC	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$FA	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$FB	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$FC	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$FD	SBC	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$FE	INC	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_nmi	$FF	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$00	BRK	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$01	ORA	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$02	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$03	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$04	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$05	ORA	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$06	ASL	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$07	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$08	PHP	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$09	ORA	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$0A	ASL	accumulator	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$0B	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$0C	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$0D	ORA	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$0E	ASL	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$0F	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$10	BPL	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$11	ORA	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$12	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$13	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$14	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$15	ORA	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$16	ASL	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$17	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$18	CLC	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$19	ORA	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$1A	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$1B	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$1C	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$1D	ORA	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$1E	ASL	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$1F	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$20	JSR	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$21	AND	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$22	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$23	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$24	BIT	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$25	AND	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$26	ROL	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$27	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$28	PLP	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$29	AND	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$2A	ROL	accumulator	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$2B	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$2C	BIT	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$2D	AND	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$2E	ROL	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$2F	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$30	BMI	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$31	AND	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$32	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$33	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$34	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$35	AND	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$36	ROL	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$37	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$38	SEC	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$39	AND	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$3A	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$3B	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$3C	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$3D	AND	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$3E	ROL	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$3F	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$40	RTI	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$41	EOR	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$42	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$43	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$44	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$45	EOR	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$46	LSR	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$47	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$48	PHA	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$49	EOR	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$4A	LSR	accumulator	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$4B	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$4C	JMP	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$4D	EOR	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$4E	LSR	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$4F	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$50	BVC	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$51	EOR	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$52	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$53	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$54	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$55	EOR	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$56	LSR	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$57	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$58	CLI	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$59	EOR	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$5A	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$5B	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$5C	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$5D	EOR	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$5E	LSR	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$5F	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$60	RTS	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$61	ADC	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$62	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$63	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$64	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$65	ADC	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$66	ROR	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$67	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$68	PLA	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$69	ADC	immediate	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$6A	ROR	accumulator	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$6B	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$6C	JMP	indirect	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$6D	ADC	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$6E	ROR	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$6F	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$70	BVS	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$71	ADC	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$72	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$73	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$74	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$75	ADC	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$76	ROR	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$77	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$78	SEI	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$79	ADC	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$7A	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$7B	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$7C	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$7D	ADC	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$7E	ROR	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$7F	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$80	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$81	STA	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$82	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$83	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$84	STY	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$85	STA	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$86	STX	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$87	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$88	DEY	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$89	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$8A	TXA	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$8B	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$8C	STY	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$8D	STA	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$8E	STX	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$8F	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$90	BCC	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$91	STA	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$92	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$93	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$94	STY	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$95	STA	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$96	STX	zero page,Y	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$97	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$98	TYA	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$99	STA	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$9A	TXS	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$9B	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$9C	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$9D	STA	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$9E	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$9F	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$A0	LDY	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$A1	LDA	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$A2	LDX	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$A3	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$A4	LDY	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$A5	LDA	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$A6	LDX	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$A7	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$A8	TAY	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$A9	LDA	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$AA	TAX	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$AB	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$AC	LDY	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$AD	LDA	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$AE	LDX	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$AF	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$B0	BCS	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$B1	LDA	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$B2	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$B3	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$B4	LDY	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$B5	LDA	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$B6	LDX	zero page,Y	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$B7	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$B8	CLV	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$B9	LDA	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$BA	TSX	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$BB	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=2
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$BC	LDY	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$BD	LDA	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$BE	LDX	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$BF	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$C0	CPY	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$C1	CMP	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$C2	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$C3	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$C4	CPY	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$C5	CMP	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$C6	DEC	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$C7	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$C8	INY	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$C9	CMP	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$CA	DEX	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$CB	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$CC	CPY	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$CD	CMP	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$CE	DEC	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$CF	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$D0	BNE	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$D1	CMP	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$D2	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$D3	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$D4	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$D5	CMP	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$D6	DEC	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$D7	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$D8	CLD	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$D9	CMP	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$DA	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$DB	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$DC	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$DD	CMP	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$DE	DEC	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$DF	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$E0	CPX	immediate	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$E1	SBC	(zero page,X)	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$E2	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$E3	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$E4	CPX	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$E5	SBC	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$E6	INC	zero page	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$E7	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$E8	INX	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$E9	SBC	immediate	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$EA	NOP	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$EB	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$EC	CPX	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$ED	SBC	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$EE	INC	absolute	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$EF	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$F0	BEQ	relative	legal	pass	testcases pass=3 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$F1	SBC	(zero page),Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$F2	???	illegal	illegal	skip	testcases pass=0 fail=0 skip=1
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$F3	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$F4	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$F5	SBC	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$F6	INC	zero page,X	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$F7	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$F8	SED	implied	legal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$F9	SBC	absolute,Y	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$FA	???	illegal	illegal	pass	testcases pass=1 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$FB	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$FC	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$FD	SBC	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$FE	INC	absolute,X	legal	pass	testcases pass=2 fail=0 skip=0
+opcode_sweep	applewin	nmos	testcase_opcode_then_irq	$FF	???	illegal	illegal	pass	testcases pass=2 fail=0 skip=0

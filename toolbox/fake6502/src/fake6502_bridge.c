@@ -160,3 +160,81 @@ unsigned char fake6502_singlestep_memory(unsigned short address)
 {
     return memory[address];
 }
+
+void fake6502_instruction_clear_memory(unsigned char fill)
+{
+    memset(memory, fill, sizeof(memory));
+}
+
+void fake6502_instruction_write_memory(unsigned short address, unsigned char value)
+{
+    memory[address] = value;
+}
+
+unsigned char fake6502_instruction_read_memory(unsigned short address)
+{
+    return memory[address];
+}
+
+void fake6502_instruction_reset(void)
+{
+    reset6502();
+    instructions = 0;
+    clockticks6502 = 0;
+    clockgoal6502 = 0;
+    oldpc = 0;
+    ea = 0;
+    reladdr = 0;
+    value = 0;
+    result = 0;
+    opcode = 0;
+    oldstatus = 0;
+    penaltyop = 0;
+    penaltyaddr = 0;
+    hookexternal(0);
+}
+
+unsigned int fake6502_instruction_step(void)
+{
+    return step6502();
+}
+
+void fake6502_instruction_irq(void)
+{
+    irq6502();
+}
+
+void fake6502_instruction_nmi(void)
+{
+    nmi6502();
+}
+
+unsigned short fake6502_instruction_pc(void)
+{
+    return pc;
+}
+
+unsigned char fake6502_instruction_s(void)
+{
+    return sp;
+}
+
+unsigned char fake6502_instruction_a(void)
+{
+    return a;
+}
+
+unsigned char fake6502_instruction_x(void)
+{
+    return x;
+}
+
+unsigned char fake6502_instruction_y(void)
+{
+    return y;
+}
+
+unsigned char fake6502_instruction_p(void)
+{
+    return status;
+}

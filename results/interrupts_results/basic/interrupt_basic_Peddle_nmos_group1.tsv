@@ -1,0 +1,18 @@
+suite	core	model	test	status	detail
+group1	Peddle	nmos	reset vector routing	pass	
+group1	Peddle	nmos	I flag after reset	pass	
+group1	Peddle	nmos	IRQ masked after reset	pass	
+group1	Peddle	nmos	NMI accepted after reset	fail	NMI handler did not run
+group1	Peddle	nmos	IRQ masked when I=1	pass	
+group1	Peddle	nmos	IRQ accepted when I=0	fail	IRQ handler did not run with I clear
+group1	Peddle	nmos	IRQ deasserted before unmask	pass	
+group1	Peddle	nmos	NMI ignores I	fail	NMI did not run with I set
+group1	Peddle	nmos	NMI RTI resumes	fail	NMI handler did not run
+group1	Peddle	nmos	BRK vector and RTI	fail	BRK did not push high byte of PC+2
+group1	Peddle	nmos	NMI pushed B=0 and live I=1	fail	NMI handler live I clear
+group1	Peddle	nmos	PLP clears I and enables IRQ	fail	IRQ did not run after PLP cleared I
+group1	Peddle	nmos	RTI restores PC and P	pass	
+group1	Peddle	nmos	distinct vectors and endian	fail	NMI vector wrong
+group1	Peddle	nmos	non-default SP interrupt stack	fail	SP was not decremented by 3 on interrupt entry
+group1	Peddle	nmos	PHP vs interrupt B flag	pass	
+group1	Peddle	nmos	decimal flag preserved	pass	

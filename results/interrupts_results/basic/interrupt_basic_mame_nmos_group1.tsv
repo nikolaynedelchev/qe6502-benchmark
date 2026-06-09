@@ -1,0 +1,18 @@
+suite	core	model	test	status	detail
+group1	mame	nmos	reset vector routing	pass	
+group1	mame	nmos	I flag after reset	pass	
+group1	mame	nmos	IRQ masked after reset	pass	
+group1	mame	nmos	NMI accepted after reset	pass	
+group1	mame	nmos	IRQ masked when I=1	pass	
+group1	mame	nmos	IRQ accepted when I=0	pass	
+group1	mame	nmos	IRQ deasserted before unmask	pass	
+group1	mame	nmos	NMI ignores I	pass	
+group1	mame	nmos	NMI/IRQ RTI resumes	pass	
+group1	mame	nmos	BRK vector and RTI	pass	
+group1	mame	nmos	pushed B bits and live I	pass	
+group1	mame	nmos	PLP changes IRQ mask	pass	
+group1	mame	nmos	RTI restores PC and P	pass	
+group1	mame	nmos	distinct vectors and endian	pass	
+group1	mame	nmos	non-default SP interrupt stack	pass	
+group1	mame	nmos	PHP vs interrupt B flag	pass	
+group1	mame	nmos	decimal flag preserved	pass	

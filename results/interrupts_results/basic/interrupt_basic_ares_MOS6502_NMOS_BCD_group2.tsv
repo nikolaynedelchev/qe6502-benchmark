@@ -1,0 +1,14 @@
+suite	core	model	test	status	detail
+group2	ares	MOS6502 NMOS/BCD	IRQ held masked then CLI accepts	pass	
+group2	ares	MOS6502 NMOS/BCD	SEI masks held IRQ	pass	
+group2	ares	MOS6502 NMOS/BCD	RTI I variants with held IRQ	pass	
+group2	ares	MOS6502 NMOS/BCD	second NMI assertion after RTI	pass	
+group2	ares	MOS6502 NMOS/BCD	NMI priority over IRQ	pass	
+group2	ares	MOS6502 NMOS/BCD	NMI then held IRQ after RTI	pass	
+group2	ares	MOS6502 NMOS/BCD	NMI inside IRQ handler	pass	
+group2	ares	MOS6502 NMOS/BCD	held IRQ does not enter inside NMI	pass	
+group2	ares	MOS6502 NMOS/BCD	modified vectors are used	pass	
+group2	ares	MOS6502 NMOS/BCD	pushed status pattern variants	pass	
+group2	ares	MOS6502 NMOS/BCD	held NMI assertion generates single NMI	pass	
+group2	ares	MOS6502 NMOS/BCD	held IRQ retriggers after RTI when I clear	pass	
+group2	ares	MOS6502 NMOS/BCD	CLI pending IRQ observable delay	pass	

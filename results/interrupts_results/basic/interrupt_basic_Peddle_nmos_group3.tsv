@@ -1,0 +1,5 @@
+suite	core	model	test	status	detail
+group3	Peddle	nmos	held IRQ does not retrigger when RTI restores I set	fail	first IRQ did not run
+group3	Peddle	nmos	short IRQ assertion expires before CLI	pass	
+group3	Peddle	nmos	long IRQ assertion survives until CLI	fail	long IRQ assertion was not accepted after CLI
+group3	Peddle	nmos	short IRQ during NMI expires before unmask	fail	NMI did not run before IRQ duration check

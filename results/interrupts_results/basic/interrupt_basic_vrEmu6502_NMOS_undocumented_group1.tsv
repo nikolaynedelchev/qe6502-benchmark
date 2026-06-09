@@ -1,0 +1,18 @@
+suite	core	model	test	status	detail
+group1	vrEmu6502	NMOS undocumented	reset vector routing	pass	
+group1	vrEmu6502	NMOS undocumented	I flag after reset	pass	
+group1	vrEmu6502	NMOS undocumented	IRQ masked after reset	pass	
+group1	vrEmu6502	NMOS undocumented	NMI accepted after reset	pass	
+group1	vrEmu6502	NMOS undocumented	IRQ masked when I=1	pass	
+group1	vrEmu6502	NMOS undocumented	IRQ accepted when I=0	pass	
+group1	vrEmu6502	NMOS undocumented	IRQ deasserted before unmask	pass	
+group1	vrEmu6502	NMOS undocumented	NMI ignores I	pass	
+group1	vrEmu6502	NMOS undocumented	NMI/IRQ RTI resumes	pass	
+group1	vrEmu6502	NMOS undocumented	BRK vector and RTI	pass	
+group1	vrEmu6502	NMOS undocumented	pushed B bits and live I	pass	
+group1	vrEmu6502	NMOS undocumented	PLP changes IRQ mask	pass	
+group1	vrEmu6502	NMOS undocumented	RTI restores PC and P	pass	
+group1	vrEmu6502	NMOS undocumented	distinct vectors and endian	pass	
+group1	vrEmu6502	NMOS undocumented	non-default SP interrupt stack	pass	
+group1	vrEmu6502	NMOS undocumented	PHP vs interrupt B flag	pass	
+group1	vrEmu6502	NMOS undocumented	decimal flag preserved	pass	

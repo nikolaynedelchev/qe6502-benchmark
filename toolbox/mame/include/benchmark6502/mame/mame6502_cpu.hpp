@@ -37,7 +37,9 @@ public:
     void set_irq_brk_vector(std::uint16_t target) { set_vector(0xfffe, target); }
 
     void reset_from_vector();
+    void set_pc_to_opcode_boundary(std::uint16_t pc);
     void set_pc_and_prefetch(std::uint16_t pc);
+    unsigned execute_one_instruction_from_opcode_boundary();
 
     std::uint8_t read_memory(std::uint16_t address) const { return memory_[address]; }
     void write_memory(std::uint16_t address, std::uint8_t value) { memory_[address] = value; }
@@ -119,11 +121,14 @@ private:
     std::uint16_t sync_watch_address_ = 0;
     bool sync_watch_enabled_ = false;
     bool sync_watch_seen_ = false;
+    unsigned prefetches_until_stop_ = 0;
 
     std::uint8_t read(std::uint16_t address);
     std::uint8_t read_sync(std::uint16_t address);
     std::uint8_t read_arg(std::uint16_t address);
     void write(std::uint16_t address, std::uint8_t value);
+    void execute_fetch_state_cycle();
+    void on_prefetch_end();
 };
 
 } // namespace benchmark6502::mame

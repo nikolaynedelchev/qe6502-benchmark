@@ -1,0 +1,5 @@
+suite	core	model	test	status	detail
+group3	chris_pikul_mos6502	NMOS	held IRQ does not retrigger when RTI restores I set	pass	
+group3	chris_pikul_mos6502	NMOS	short IRQ assertion expires before CLI	pass	
+group3	chris_pikul_mos6502	NMOS	long IRQ assertion survives until CLI	pass	
+group3	chris_pikul_mos6502	NMOS	short IRQ during NMI expires before unmask	pass	

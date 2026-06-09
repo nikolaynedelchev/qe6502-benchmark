@@ -1,5 +1,6 @@
 add_library(clk_toolbox STATIC
     src/icpu.cpp
+    src/instruction_cpu.cpp
     src/klaus_benchmark.cpp
     src/singlestep.cpp
     src/smoke.cpp

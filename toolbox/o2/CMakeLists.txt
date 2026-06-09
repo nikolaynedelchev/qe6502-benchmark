@@ -1,6 +1,7 @@
 add_library(o2_toolbox STATIC
     ${PROJECT_SOURCE_DIR}/cores/o2/O2.cpp
     src/icpu.cpp
+    src/instruction_cpu.cpp
     src/klaus_benchmark.cpp
     src/singlestep.cpp
     src/smoke.cpp

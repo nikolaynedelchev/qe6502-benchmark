@@ -1,0 +1,14 @@
+suite	core	model	test	status	detail
+group2	CLK	P6502	IRQ held masked then CLI accepts	pass	
+group2	CLK	P6502	SEI masks held IRQ	pass	
+group2	CLK	P6502	RTI I variants with held IRQ	pass	
+group2	CLK	P6502	second NMI assertion after RTI	pass	
+group2	CLK	P6502	NMI priority over IRQ	pass	
+group2	CLK	P6502	NMI then held IRQ after RTI	pass	
+group2	CLK	P6502	NMI inside IRQ handler	pass	
+group2	CLK	P6502	held IRQ does not enter inside NMI	pass	
+group2	CLK	P6502	modified vectors are used	pass	
+group2	CLK	P6502	pushed status pattern variants	pass	
+group2	CLK	P6502	held NMI assertion generates single NMI	pass	
+group2	CLK	P6502	held IRQ retriggers after RTI when I clear	pass	
+group2	CLK	P6502	CLI pending IRQ observable delay	pass	

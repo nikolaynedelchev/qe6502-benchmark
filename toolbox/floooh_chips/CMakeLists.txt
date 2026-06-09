@@ -1,6 +1,7 @@
 add_library(floooh_chips_toolbox STATIC
     src/chips_impl.cpp
     src/icpu.cpp
+    src/instruction_cpu.cpp
     src/klaus_benchmark.cpp
     src/singlestep.cpp
     src/smoke.cpp

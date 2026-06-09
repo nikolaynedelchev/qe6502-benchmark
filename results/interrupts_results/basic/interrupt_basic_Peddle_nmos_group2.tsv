@@ -1,0 +1,14 @@
+suite	core	model	test	status	detail
+group2	Peddle	nmos	IRQ held masked then CLI accepts	fail	held IRQ was not accepted after CLI
+group2	Peddle	nmos	SEI masks held IRQ	pass	
+group2	Peddle	nmos	RTI clears I then held IRQ accepts	fail	held IRQ was not accepted after RTI restored I clear
+group2	Peddle	nmos	second NMI assertion after RTI	fail	first NMI assertion was not accepted
+group2	Peddle	nmos	NMI priority over IRQ	fail	NMI did not run first when IRQ was also pending
+group2	Peddle	nmos	NMI then held IRQ after RTI	fail	NMI did not run first
+group2	Peddle	nmos	NMI inside IRQ handler	fail	IRQ handler did not run
+group2	Peddle	nmos	held IRQ does not enter inside NMI	fail	NMI handler did not run
+group2	Peddle	nmos	modified IRQ vector is used	fail	IRQ did not use modified vector
+group2	Peddle	nmos	pushed status pattern variants	fail	IRQ did not record pushed status pattern
+group2	Peddle	nmos	held NMI assertion generates single NMI	fail	held NMI assertion was not accepted
+group2	Peddle	nmos	held IRQ retriggers after RTI when I clear	fail	first IRQ did not run
+group2	Peddle	nmos	CLI pending IRQ observable delay	fail	pending IRQ was not accepted after CLI completed

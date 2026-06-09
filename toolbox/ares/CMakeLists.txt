@@ -1,6 +1,7 @@
 add_library(ares_toolbox STATIC
     src/klaus_benchmark.cpp
     src/singlestep.cpp
+    src/instruction_cpu.cpp
     src/smoke.cpp
     ${PROJECT_SOURCE_DIR}/cores/ares/ares/component/processor/mos6502/mos6502.cpp
 )
