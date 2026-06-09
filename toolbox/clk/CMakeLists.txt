@@ -1,4 +1,5 @@
 add_library(clk_toolbox STATIC
+    src/icpu.cpp
     src/klaus_benchmark.cpp
     src/singlestep.cpp
     src/smoke.cpp
@@ -14,6 +15,7 @@ target_include_directories(clk_toolbox
 
 target_link_libraries(clk_toolbox
     PUBLIC benchmark6502_common
+    PRIVATE tools6502::tools6502
 )
 
 target_compile_features(clk_toolbox PUBLIC cxx_std_20)

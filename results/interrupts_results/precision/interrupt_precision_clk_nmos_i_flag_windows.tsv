@@ -1,0 +1,7 @@
+core	model	suite	group	opcode	mnemonic	addressing_mode	legal_nmos	scenarios	failures	status
+clk	nmos	i_flag_windows	CLI IRQ window	0x58	CLI	implied	yes	35	34	failed
+clk	nmos	i_flag_windows	SEI IRQ window	0x78	SEI	implied	yes	35	8	failed
+clk	nmos	i_flag_windows	PLP IRQ window I=0	0x28	PLP	implied	yes	35	29	failed
+clk	nmos	i_flag_windows	PLP IRQ window I=1	0x28	PLP	implied	yes	35	0	passed
+clk	nmos	i_flag_windows	RTI IRQ window I=0	0x40	RTI	implied	yes	35	29	failed
+clk	nmos	i_flag_windows	RTI IRQ window I=1	0x40	RTI	implied	yes	35	0	passed

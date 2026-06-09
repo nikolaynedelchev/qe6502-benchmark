@@ -33,6 +33,7 @@ add_subdirectory(toolbox/fceux)
 add_subdirectory(toolbox/altirrasdl)
 add_subdirectory(toolbox/applewin)
 add_subdirectory(toolbox/mame)
+add_subdirectory(interrupts)
 
 
 

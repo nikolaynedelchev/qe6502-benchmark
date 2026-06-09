@@ -1,0 +1,7 @@
+core	model	suite	group	root_opcode	mnemonic	addressing_mode	legal_nmos	scenarios	failures	nmi_first_handler_fetches	brk_irq_first_handler_fetches	nmi_handler_fetches	brk_irq_handler_fetches	hijacks	status
+peddle	nmos	interrupt_arbitration	BRK + NMI hijack windows	0x00	BRK	implied	yes	54	24	30	0	150	0	30	failed
+peddle	nmos	interrupt_arbitration	BRK + IRQ windows	0x00	BRK	implied	yes	54	0	0	54	0	270	0	passed
+peddle	nmos	interrupt_arbitration	IRQ/NMI overlap priority	0xEA	NOP	implied	yes	7	7	0	0	0	0	0	failed
+peddle	nmos	interrupt_arbitration	NMI continuous-low vs re-edge	0xEA	NOP	implied	yes	2	2	0	0	0	0	0	failed
+peddle	nmos	interrupt_arbitration	NMI during NMI service / lost windows	0xEA	NOP	implied	yes	13	13	0	0	0	0	0	failed
+peddle	nmos	interrupt_arbitration	IRQ held during NMI service	0xEA	NOP	implied	yes	2	2	0	0	0	0	0	failed
