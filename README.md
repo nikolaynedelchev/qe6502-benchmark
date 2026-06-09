@@ -1,11 +1,11 @@
 # qe6502-benchmark CPU Core Evaluation Report
 
-This report summarizes the CPU-core benchmark data present in this repository snapshot. It is intended to be read from the project root on GitHub and to give a practical overview of what the provided test outputs, detail logs, session reports, and benchmark integration code show about each integrated 6502-family core.
+This report summarizes the CPU-core benchmark data present in this repository snapshot. It is intended to be read from the project root on GitHub and to give a practical overview of what the provided test outputs, detail logs, methodology notes, and benchmark integration code show about each integrated 6502-family core.
 
 The report is divided into two parts:
 
 1. **Objective data and statistics** — test results, failure counts, measured speeds, supported validation levels, and factual integration notes.
-2. **Interpretation and overall ranking** — a reasoned reading of the data and session reports, including tradeoffs by core.
+2. **Interpretation and overall ranking** — a reasoned reading of the data and integration tradeoffs by core.
 
 
 ## Source material used
@@ -18,7 +18,6 @@ The report is based on the repository contents in this snapshot, especially:
 | `results/cmos_results/tests_65c02_output.txt` | Printed 65C02 smoke, Klaus, and SingleStep summary output. |
 | `results/nmos_results/*.tsv` | Per-opcode NMOS SingleStep detail logs. |
 | `results/cmos_results/*.tsv` | Per-opcode 65C02 SingleStep detail logs. |
-| `results/session reports/*.md` | Integration notes from the seven AI sessions that worked on the benchmark. |
 | `qe6502-benchmark_test_methodology.md` | Methodology and interpretation rules for smoke, Klaus, and SingleStep results. |
 | `toolbox/*` and top-level aggregate runners | Current benchmark integration shape, supported runners, and adoption/integration implications. |
 
@@ -63,22 +62,22 @@ The 65C02 aggregate includes candidate/core failures as measured results. In the
 
 | Rank by MHz | Core | Test | Status | Cycles | Seconds | MHz | Factual note |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | sflib6502 | Klaus NMOS | PASS | 492,149,365 | 0.450866 | 1,091.56 | Highest measured MHz; direct-memory/callback-coverage caveat in methodology and code |
-| 2 | applewin | Klaus NMOS | PASS | 481,206,820 | 0.555950 | 865.56 | Direct flat-memory Apple II extraction; similar high-speed integration caveat |
-| 3 | fake6502 | Klaus NMOS | PASS | 481,206,820 | 0.574402 | 837.75 |  |
-| 4 | qe6502 | Klaus NMOS | PASS | 481,206,820 | 0.724633 | 664.07 |  |
-| 5 | ares | Klaus NMOS | PASS | 482,806,835 | 0.776972 | 621.40 | Reported slightly different cycle total |
-| 6 | vrEmu6502 | Klaus NMOS | PASS | 481,206,820 | 0.797460 | 603.42 |  |
-| 7 | mame | Klaus NMOS | PASS | 481,250,000 | 0.847608 | 567.77 | MAME adapter reports rounded/different cycle total |
-| 8 | altirrasdl | Klaus NMOS | PASS | 481,206,825 | 0.894215 | 538.13 |  |
-| 9 | gianlucag/mos6502 | Klaus NMOS | PASS | 481,206,820 | 1.025470 | 469.25 |  |
-| 10 | olcNES | Klaus NMOS | PASS | 481,206,805 | 1.118972 | 430.04 |  |
-| 11 | clk | Klaus NMOS | PASS | 481,206,820 | 1.333663 | 360.82 |  |
-| 12 | floooh/chips | Klaus NMOS | PASS | 481,206,820 | 1.345302 | 357.69 |  |
-| 13 | chris-pikul/mos6502 | Klaus NMOS | PASS | 635,779,875 | 1.892224 | 336.00 | Different reported cycle total than the common Klaus-NMOS count |
-| 14 | Peddle | Klaus NMOS | PASS | 481,206,820 | 1.723943 | 279.13 |  |
-| 15 | O2 | Klaus NMOS | PASS | 481,206,815 | 1.745543 | 275.68 | Reported five fewer cycles than common Klaus-NMOS count |
-| 16 | fceux | Klaus NES | PASS | 420,152,240 | 2.425514 | 173.22 | NES Klaus ROM, not full generic NMOS |
+| 1 | sflib6502 | Klaus NMOS | PASS | 492,149,365 | 0.450108 | 1,093.40 | Highest measured MHz; direct-memory/callback-coverage caveat in methodology and code |
+| 2 | applewin | Klaus NMOS | PASS | 481,206,820 | 0.563016 | 854.70 | Direct flat-memory Apple II extraction; similar high-speed integration caveat |
+| 3 | fake6502 | Klaus NMOS | PASS | 481,206,820 | 0.574722 | 837.29 |  |
+| 4 | qe6502 | Klaus NMOS | PASS | 481,206,820 | 0.708310 | 679.37 |  |
+| 5 | vrEmu6502 | Klaus NMOS | PASS | 481,206,820 | 0.792116 | 607.50 |  |
+| 6 | ares | Klaus NMOS | PASS | 482,806,835 | 0.794999 | 607.30 | Reported slightly different cycle total |
+| 7 | mame | Klaus NMOS | PASS | 481,250,000 | 0.854248 | 563.36 | MAME adapter reports rounded/different cycle total |
+| 8 | altirrasdl | Klaus NMOS | PASS | 481,206,825 | 0.901467 | 533.80 |  |
+| 9 | gianlucag/mos6502 | Klaus NMOS | PASS | 481,206,820 | 0.913712 | 526.65 |  |
+| 10 | olcNES | Klaus NMOS | PASS | 481,206,805 | 1.124893 | 427.78 |  |
+| 11 | floooh/chips | Klaus NMOS | PASS | 481,206,820 | 1.338296 | 359.57 |  |
+| 12 | clk | Klaus NMOS | PASS | 481,206,820 | 1.345292 | 357.70 |  |
+| 13 | chris-pikul/mos6502 | Klaus NMOS | PASS | 635,779,875 | 1.894789 | 335.54 | Different reported cycle total than the common Klaus-NMOS count |
+| 14 | O2 | Klaus NMOS | PASS | 481,206,815 | 1.700880 | 282.92 | Reported five fewer cycles than common Klaus-NMOS count |
+| 15 | Peddle | Klaus NMOS | PASS | 481,206,820 | 1.702652 | 282.62 |  |
+| 16 | fceux | Klaus NES | PASS | 420,152,240 | 2.426736 | 173.13 | NES Klaus ROM, not full generic NMOS |
 
 Factual note: `fceux` is intentionally listed as a NES/2A03-style result because the printed test is `Klaus NES`, not the generic full-NMOS Klaus path. `sflib6502` and `AppleWin` are the two highest MHz rows and both have memory-model caveats relevant to speed interpretation. `sflib6502` installs callbacks in the benchmark path, but the core still performs important fetch/operand/stack work through internal memory paths. AppleWin's adapter attaches a flat 64K RAM array and stubs/flattens Apple II page/IO structures while the opcode core still fetches operands and stack data directly from `mem`. These are valid benchmark results for those integration shapes, but they are not the same integration model as a fully host-visible per-cycle bus core.
 
@@ -87,27 +86,27 @@ Factual note: `fceux` is intentionally listed as a NES/2A03-style result because
 | Core/model | Test | Status | Cycles | Seconds | MHz |
 | --- | --- | --- | --- | --- | --- |
 | fake65c02 | Klaus 65C02 ext | FAIL |  |  |  |
-| vrEmu6502 WDC 65C02 | Klaus standard | PASS | 482,806,605 | 0.787852 | 612.81 |
-| vrEmu6502 WDC 65C02 | Klaus extended | PASS | 334,525,005 | 0.521217 | 641.82 |
-| vrEmu6502 RW 65C02 | Klaus standard | PASS | 482,806,605 | 0.809451 | 596.46 |
-| vrEmu6502 RW 65C02 | Klaus extended | PASS | 334,525,005 | 0.545027 | 613.78 |
+| vrEmu6502 WDC 65C02 | Klaus standard | PASS | 482,806,605 | 0.767009 | 629.47 |
+| vrEmu6502 WDC 65C02 | Klaus extended | PASS | 334,525,005 | 0.505187 | 662.18 |
+| vrEmu6502 RW 65C02 | Klaus standard | PASS | 482,806,605 | 0.763318 | 632.51 |
+| vrEmu6502 RW 65C02 | Klaus extended | PASS | 334,525,005 | 0.515308 | 649.17 |
 | sflib65c02 | Klaus 65C02 ext | FAIL |  |  |  |
-| qe6502 WDC 65C02 | Klaus standard | PASS | 482,806,605 | 0.737185 | 654.93 |
-| qe6502 WDC 65C02 | Klaus extended | PASS | 334,535,345 | 0.453136 | 738.27 |
-| qe6502 RW 65C02 | Klaus standard | PASS | 482,806,605 | 0.738688 | 653.60 |
-| qe6502 RW 65C02 | Klaus extended | PASS | 334,535,345 | 0.456928 | 732.14 |
-| clk WDC 65C02 | Klaus standard | PASS | 482,806,605 | 1.408949 | 342.67 |
-| clk WDC 65C02 | Klaus extended | PASS | 334,535,345 | 0.954876 | 350.34 |
-| clk RW 65C02 | Klaus standard | PASS | 482,806,605 | 1.346323 | 358.61 |
-| clk RW 65C02 | Klaus extended | PASS | 334,535,345 | 0.915580 | 365.38 |
-| AppleWin WDC 65C02 | Klaus standard | PASS | 482,806,605 | 0.574080 | 841.01 |
+| qe6502 WDC 65C02 | Klaus standard | PASS | 482,806,605 | 0.715223 | 675.04 |
+| qe6502 WDC 65C02 | Klaus extended | PASS | 334,535,345 | 0.440143 | 760.06 |
+| qe6502 RW 65C02 | Klaus standard | PASS | 482,806,605 | 0.716390 | 673.94 |
+| qe6502 RW 65C02 | Klaus extended | PASS | 334,535,345 | 0.441943 | 756.96 |
+| clk WDC 65C02 | Klaus standard | PASS | 482,806,605 | 1.383056 | 349.09 |
+| clk WDC 65C02 | Klaus extended | PASS | 334,535,345 | 0.940285 | 355.78 |
+| clk RW 65C02 | Klaus standard | PASS | 482,806,605 | 1.331417 | 362.63 |
+| clk RW 65C02 | Klaus extended | PASS | 334,535,345 | 0.909891 | 367.67 |
+| AppleWin WDC 65C02 | Klaus standard | PASS | 482,806,605 | 0.552077 | 874.53 |
 | AppleWin WDC 65C02 | Klaus extended | FAIL |  |  |  |
-| MAME WDC 65C02 | Klaus standard | PASS | 482,850,000 | 0.866881 | 557.00 |
+| MAME WDC 65C02 | Klaus standard | PASS | 482,850,000 | 0.851886 | 566.80 |
 | MAME WDC 65C02 | Klaus extended | FAIL |  |  |  |
-| MAME RW 65C02 | Klaus standard | PASS | 482,850,000 | 0.860850 | 560.90 |
-| MAME RW 65C02 | Klaus extended | PASS | 334,550,000 | 0.623795 | 536.31 |
-| MAME W65C02S | Klaus standard | PASS | 482,850,000 | 0.873138 | 553.01 |
-| MAME W65C02S | Klaus extended | PASS | 334,550,000 | 0.624753 | 535.49 |
+| MAME RW 65C02 | Klaus standard | PASS | 482,850,000 | 0.854423 | 565.12 |
+| MAME RW 65C02 | Klaus extended | PASS | 334,550,000 | 0.618970 | 540.49 |
+| MAME W65C02S | Klaus standard | PASS | 482,850,000 | 0.867403 | 556.66 |
+| MAME W65C02S | Klaus extended | PASS | 334,550,000 | 0.622427 | 537.49 |
 
 Factual note: `vrEmu6502`, `qe6502`, and `clk` have passing WDC and Rockwell standard/extended Klaus entries in the supplied output. AppleWin and MAME both pass WDC standard but fail the WDC extended entry in the printed aggregate; MAME passes Rockwell and W65C02S standard/extended entries. AppleWin's high WDC-standard speed should be read with the same flat-memory extraction caveat noted in the NMOS Klaus table.
 
@@ -218,14 +217,14 @@ For 65C02, the output uses `functional` and `nop` opcode groups. WDC has `254` p
 
 ## Supported validation levels and integration facts
 
-This table is factual, based on the current benchmark runners, methodology file, session reports, and observed output.
+This table is factual, based on the current benchmark runners, methodology file, wrappers, and observed output.
 
 | Core/family | Models represented in this benchmark snapshot | Instruction | Cycle count | Bus trace | Integration fact |
 | --- | --- | --- | --- | --- | --- |
 | qe6502 | NMOS, WDC 65C02, Rockwell 65C02, Synertek/ST 65C02; NES/2A03-style mode exists in project context | yes | yes | yes | Small explicit C API plus C++ wrapper; host-driven tick/bus state and model selection are exposed. |
 | clk / Clock Signal | NMOS P6502, WDC 65C02, Rockwell 65C02, Synertek/ST 65C02; PNES6502 exists but not used in main NES policy | yes | yes | yes | C++ template/personality CPU with host bus handler; reusable CPU-component extraction. |
-| floooh/chips | NMOS tested; session notes also identify 6510 and NES-like capability | yes | yes | yes | Pin/tick API exposes address/data/RW pins closely enough for bus-trace comparison. |
-| Peddle | NMOS tested; session notes mention 6502/6507/6510/8502-style support | yes | yes | yes | C++ bus abstraction; host serves memory through read/write methods. |
+| floooh/chips | NMOS tested; vendored core also indicates 6510 and NES-like capability | yes | yes | yes | Pin/tick API exposes address/data/RW pins closely enough for bus-trace comparison. |
+| Peddle | NMOS tested; vendored project also indicates 6502/6507/6510/8502-style support | yes | yes | yes | C++ bus abstraction; host serves memory through read/write methods. |
 | O2 | NMOS only in this benchmark | yes | yes | yes | Host read/write functions; bus-trace attempted and measured, with many illegal-opcode/timing mismatches. |
 | vrEmu6502 | NMOS, WDC 65C02, Rockwell 65C02, generic CPU_65C02 mapped to Synertek/ST best-fit | yes | yes | no | C API with callbacks and runtime model selection; tick path does not expose an authoritative per-cycle bus stream in this harness. |
 | MAME adapter | NMOS, WDC 65C02, Rockwell R65C02, WDC W65C02S | yes | yes | no | Generated opcode/state implementation adapted outside full MAME device framework; the adapter owns its test memory and does not expose a host bus callback stream. |
@@ -238,7 +237,7 @@ This table is factual, based on the current benchmark runners, methodology file,
 | olcNES | NMOS in current aggregate | yes | yes | no | Educational/tutorial-style CPU with Bus object; whole-instruction style for this harness. |
 | chris-pikul/mos6502 | NMOS | yes | yes | no | C++ bus/device abstraction; current path gives poor cycle-count fit. |
 | Ares | NMOS; BCD toggle present, no extracted 65C02 model in current integration | yes | yes | no | MOS6502 component extracted through shim; framework assumptions remain. |
-| AltirraSDL / ATCPU | NMOS Klaus; SingleStep excluded in final matrix | not scored | not scored | not scored | Coprocessor/scheduler style integration; session notes mark SingleStep adapter result too noisy. |
+| AltirraSDL / ATCPU | NMOS Klaus; SingleStep excluded in final matrix | not scored | not scored | not scored | Coprocessor/scheduler style integration; the supplied output marks SingleStep as intentionally excluded because the adapter was too noisy. |
 | FCEUX | NES/2A03-style Klaus only | not in matrix | not in matrix | not in matrix | NES emulator CPU with globals/stubs; listed separately from full generic NMOS candidates. |
 
 ## Integration/adoption implications visible in the current code
@@ -273,7 +272,7 @@ This section is still factual: it describes the integration surface visible in t
 | `olcNES` | Educational Bus object plus CPU `clock()`/`complete()` pattern; instruction work is largely computed up front and then cycles count down. | Familiar and easy to understand, but not a strong exact bus-integration candidate in this harness. |
 | `chris-pikul/mos6502` | Heavier C++ bus/device architecture; wrapper suppresses diagnostics and performs state access through test scaffolding. | Demonstrates a richer object model, but current cycle-count fit and integration burden are poor. |
 | `Ares` | Framework MOS6502 component with virtual read/write and dummy-access concepts, wrapped through a shim. | Potentially valuable framework code, but current adapter result is weak and not scored as a bus-trace provider. |
-| `AltirraSDL / ATCPU` | Coprocessor/scheduler and page-map style integration. | Useful Klaus-level evidence, but the supplied session reports exclude SingleStep because the state/scheduler adapter was too noisy. |
+| `AltirraSDL / ATCPU` | Coprocessor/scheduler and page-map style integration. | Useful Klaus-level evidence, but the supplied aggregate output excludes SingleStep because the state/scheduler adapter was too noisy. |
 | `FCEUX` | NES/2A03 emulator CPU path with globals and stubs. | Listed as a NES-specific Klaus entry rather than a generic full-NMOS CPU candidate. |
 
 ### FFI and language-boundary considerations
@@ -337,7 +336,7 @@ Every full-NMOS Klaus row in the supplied table passes, but SingleStep results v
 
 ### 4. 65C02 model identity matters
 
-The 65C02 results show why a generic `65C02` label is not enough. WDC, Rockwell, Synertek/ST, and W65C02S differ in opcode maps and NOP behavior. `qe6502`, `clk`, `vrEmu6502`, and `MAME` expose multiple useful model paths. AppleWin exposes a generic CMOS path that was mapped to WDC for aggregate reporting because its overall WDC opcode/NOP fit was better in the session data.
+The 65C02 results show why a generic `65C02` label is not enough. WDC, Rockwell, Synertek/ST, and W65C02S differ in opcode maps and NOP behavior. `qe6502`, `clk`, `vrEmu6502`, and `MAME` expose multiple useful model paths. AppleWin exposes a generic CMOS path that was mapped to WDC for aggregate reporting because its overall WDC opcode/NOP fit is better in the current result data.
 
 ### 5. Speed is meaningful only with the integration model attached
 
@@ -379,13 +378,13 @@ The following ranking is a qualitative overall suitability ranking for this benc
 | 1 | qe6502 | Broadest exact result set in this data: zero NMOS and 65C02 SingleStep failures at instruction, cycle-count, and bus-trace levels; high Klaus speed; explicit model selection; small C API plus C++ wrapper; host-visible bus operation. | Not the top raw MHz in the Klaus table; the API is cycle/bus-oriented rather than instruction-oriented, so the host must wire memory and I/O into each tick. | Ranked first here because it combines exact NMOS/65C02 SingleStep results, bus-trace support, high throughput, explicit model coverage, and an FFI-friendly C boundary. |
 | 2 | clk / Clock Signal | Strong reusable C++ CPU-component shape; zero NMOS SingleStep failures; direct WDC/Rockwell/Synertek personalities; 65C02 cycle-count failures are zero. | Requires adopting its C++ personality/bus-handler model; FFI use needs an extra C-compatible wrapper; 65C02 instruction mismatches are mostly NOP-space; bus-trace mismatches remain in WDC/Rockwell/Synertek; raw speed is mid-pack. | Best C++ personality/bus-handler fit in this ranking; strongest when that interface style matches the target project. |
 | 3 | floooh/chips | Genuine pin/tick model, perfect NMOS cycle-count result, small SingleStep mismatch set, and strong host-visible bus behavior. | No 65C02 coverage in this benchmark; a few BRK/PHP/stack-status and unstable undocumented-store mismatches. | Strong NMOS bus-level comparison core. |
-| 4 | vrEmu6502 | Broad useful model support, no recorded semantic patch requirement in the session notes, strong Klaus NMOS/65C02 results, and good WDC/Rockwell 65C02 instruction-level fit. | No bus-trace support in this harness; CPU_65C02/Synertek mapping has many NOP mismatches; API ergonomics have state/callback-userdata limitations. | Strong practical multi-model C candidate. |
+| 4 | vrEmu6502 | Broad useful model support, strong Klaus NMOS/65C02 results, and good WDC/Rockwell 65C02 instruction-level fit. | No bus-trace support in this harness; CPU_65C02/Synertek mapping has many NOP mismatches; API ergonomics have state/callback-userdata limitations. | Strong practical multi-model C candidate. |
 | 5 | MAME adapter | Broadest 65C02-family coverage among the tested adapters; zero cycle-count failures in the SingleStep rows where tested; valuable WDC/Rockwell/W65C02S modes. | Framework-coupled and adapter-heavy; no bus trace; WDC 65C02 instruction mismatches are significant. | High-coverage reference-style candidate, not lightweight. |
 | 6 | AppleWin adapter | Very fast in Klaus; useful NMOS and CMOS 65C02 coverage; practical after extraction and flat-memory cleanup. | No true host-observable bus model; direct flat-memory Apple II extraction; generic CMOS mode is best-fit rather than explicit WDC/Rockwell/ST; WDC extended Klaus fails. | Treat speed as flat-memory emulator-extraction speed, not as a generic bus-core result. |
 | 7 | Peddle | Host-visible C++ bus abstraction, bus-trace-capable in NMOS matrix, low instruction failure count, and exact common Klaus cycle total. | Slower Klaus result; cycle/bus mismatches remain; heavier object model than small C cores. | Good integration-model comparator. |
 | 8 | fake6502 | Very fast NMOS Klaus result; simple C baseline; passes smoke and Klaus. | Global/static style, no bus trace, and moderate NMOS SingleStep instruction failures including decimal/status and undocumented areas. | Useful speed baseline with limitations. |
 | 9 | gianlucag/mos6502 | Low NMOS instruction-failure count and strong legal-opcode instruction result; reasonable Klaus speed. | No bus trace; illegal-opcode cycle-count failures; narrower model coverage. | Good compact NMOS functional comparator. |
-| 10 | O2 | Small and readable; legal NMOS instruction/cycle/bus columns have zero failures in the SingleStep summary; supports bus-trace measurement. | Undocumented opcode behavior dominates failures; Klaus speed is low; needed a decimal-mode fix per session notes. | Good documented-NMOS comparator, weak undocumented/timing comparator. |
+| 10 | O2 | Small and readable; legal NMOS instruction/cycle/bus columns have zero failures in the SingleStep summary; supports bus-trace measurement. | Undocumented opcode behavior dominates failures; Klaus speed is low; decimal-mode behavior needed benchmark-tree attention. | Good documented-NMOS comparator, weak undocumented/timing comparator. |
 | 11 | sflib6502 | Fastest measured Klaus-NMOS MHz and useful as a throughput baseline. | Poor SingleStep fit; no bus trace; callbacks do not cover all fetch/operand/stack paths, so speed is not directly comparable to fully host-mediated cores. | Fast but heavily caveated. |
 | 12 | fake65c02 | Easy 65C02 comparison candidate with materially better 65C02 SingleStep results than sflib65c02. | Klaus extended fails; no bus trace; NOP/opcode-table behavior differs across corpora. | Useful partial CMOS baseline. |
 | 13 | olcNES | Recognizable educational comparator; Klaus NMOS passes; documented legal-opcode SingleStep failures are low compared with its total. | No bus trace; many undocumented-opcode mismatches; limited model coverage. | Useful context, not a strong exactness/integration candidate. |
@@ -393,7 +392,7 @@ The following ranking is a qualitative overall suitability ranking for this benc
 | 15 | AltirraSDL / ATCPU | Klaus NMOS passes and the underlying emulator CPU is capable. | SingleStep excluded because adapter/state/scheduler integration was too noisy; heavy framework concepts. | Keep for Klaus-level data, not current SingleStep scoring. |
 | 16 | FCEUX | Useful NES/2A03-style benchmark entry; correct to keep it separate from full generic NMOS. | Slowest Klaus row in the current table; no SingleStep matrix data; emulator-global integration. | Special-purpose NES candidate. |
 | 17 | sflib65c02 | Shows the behavior of a weak/partial 65C02 candidate and remains useful as negative evidence. | Klaus extended fails; 130+ failed instruction opcodes across 65C02 corpora; no bus trace and same memory visibility caveat as sflib6502. | Weak 65C02 candidate. |
-| 18 | chris-pikul/mos6502 | Klaus NMOS passes and it represents a heavier C++ bus/device design. | Very poor cycle-count SingleStep result, high patch/diagnostic burden in session reports, and no bus trace. | Least compelling current candidate overall. |
+| 18 | chris-pikul/mos6502 | Klaus NMOS passes and it represents a heavier C++ bus/device design. | Very poor cycle-count SingleStep result, high adapter/diagnostic burden visible in the benchmark scaffolding, and no bus trace. | Least compelling current candidate overall. |
 
 ## Ranking summary by tier
 
