@@ -30,8 +30,12 @@ public:
 
     virtual void step_instruction() = 0;
 
-    virtual void irq(bool asserted) = 0;
-    virtual void nmi(bool asserted) = 0;
+    // Assert the IRQ or NMI input line immediately and keep it asserted through the
+    // next instruction_count completed step_instruction() calls. The implementation
+    // deasserts the line immediately after that many step_instruction() calls finish.
+    // Passing a non-positive count leaves the line deasserted.
+    virtual void assert_irq_for(int instruction_count) = 0;
+    virtual void assert_nmi_for(int instruction_count) = 0;
 
     virtual std::uint8_t read(std::uint16_t address) const = 0;
     virtual void write(std::uint16_t address, std::uint8_t value) = 0;

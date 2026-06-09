@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include <array>
+#include <cstdint>
 #include <memory>
 
 namespace qe6502_toolbox {
@@ -37,6 +38,12 @@ public:
         const std::uint16_t start_address = static_cast<std::uint16_t>(memory_[0xfffcu])
             | static_cast<std::uint16_t>(static_cast<std::uint16_t>(memory_[0xfffdu]) << 8u);
 
+        instruction_count_ = 0;
+        clear_scheduled_irq_deassert();
+        clear_scheduled_nmi_deassert();
+        qe6502_irq_assert(&cpu_, 0u);
+        qe6502_nmi_assert(&cpu_, 0u);
+
         tick_ = qe6502_restart(&cpu_);
 
         constexpr unsigned max_reset_cycles = 64u;
@@ -58,16 +65,35 @@ public:
 
         step_cycle();
         step_until_opcode_fetch();
+
+        ++instruction_count_;
+        apply_scheduled_interrupt_deasserts();
     }
 
-    void irq(bool asserted) override
+    void assert_irq_for(int instruction_count) override
     {
-        qe6502_irq_assert(&cpu_, asserted ? 1u : 0u);
+        if (instruction_count <= 0) {
+            qe6502_irq_assert(&cpu_, 0u);
+            clear_scheduled_irq_deassert();
+            return;
+        }
+
+        qe6502_irq_assert(&cpu_, 1u);
+        irq_deassert_at_ = instruction_count_ + static_cast<std::uint64_t>(instruction_count);
+        has_irq_deassert_at_ = true;
     }
 
-    void nmi(bool asserted) override
+    void assert_nmi_for(int instruction_count) override
     {
-        qe6502_nmi_assert(&cpu_, asserted ? 1u : 0u);
+        if (instruction_count <= 0) {
+            qe6502_nmi_assert(&cpu_, 0u);
+            clear_scheduled_nmi_deassert();
+            return;
+        }
+
+        qe6502_nmi_assert(&cpu_, 1u);
+        nmi_deassert_at_ = instruction_count_ + static_cast<std::uint64_t>(instruction_count);
+        has_nmi_deassert_at_ = true;
     }
 
     std::uint8_t read(std::uint16_t address) const override
@@ -132,9 +158,39 @@ private:
         }
     }
 
+    void clear_scheduled_irq_deassert()
+    {
+        has_irq_deassert_at_ = false;
+        irq_deassert_at_ = 0;
+    }
+
+    void clear_scheduled_nmi_deassert()
+    {
+        has_nmi_deassert_at_ = false;
+        nmi_deassert_at_ = 0;
+    }
+
+    void apply_scheduled_interrupt_deasserts()
+    {
+        if (has_irq_deassert_at_ && instruction_count_ >= irq_deassert_at_) {
+            qe6502_irq_assert(&cpu_, 0u);
+            clear_scheduled_irq_deassert();
+        }
+
+        if (has_nmi_deassert_at_ && instruction_count_ >= nmi_deassert_at_) {
+            qe6502_nmi_assert(&cpu_, 0u);
+            clear_scheduled_nmi_deassert();
+        }
+    }
+
     qe6502_t cpu_{};
     qe6502_tick_t tick_{};
     std::array<std::uint8_t, 65536> memory_{};
+    std::uint64_t instruction_count_ = 0;
+    std::uint64_t irq_deassert_at_ = 0;
+    std::uint64_t nmi_deassert_at_ = 0;
+    bool has_irq_deassert_at_ = false;
+    bool has_nmi_deassert_at_ = false;
 };
 
 } // namespace
