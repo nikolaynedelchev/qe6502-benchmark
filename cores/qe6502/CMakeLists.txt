@@ -79,6 +79,10 @@ message(STATUS "  QE6502_INSTALL           = ${QE6502_INSTALL}")
 add_subdirectory(cpu)
 add_subdirectory(binds)
 
+if(NOT QE6502_BUILD_WASM)
+    add_subdirectory(tools)
+endif()
+
 if(QE6502_BUILD_TESTS)
     enable_testing()
     add_subdirectory(harness)
