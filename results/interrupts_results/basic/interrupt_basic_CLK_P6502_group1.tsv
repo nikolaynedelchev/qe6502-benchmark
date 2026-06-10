@@ -3,6 +3,8 @@ group1	CLK	P6502	reset vector routing	pass
 group1	CLK	P6502	I flag after reset	pass	
 group1	CLK	P6502	IRQ masked after reset	pass	
 group1	CLK	P6502	NMI accepted after reset	pass	
+group1	CLK	P6502	assert_nmi_for is not synchronous	pass	
+group1	CLK	P6502	assert_irq_for is not synchronous	pass	
 group1	CLK	P6502	IRQ masked when I=1	pass	
 group1	CLK	P6502	IRQ accepted when I=0	pass	
 group1	CLK	P6502	IRQ deasserted before unmask	pass	

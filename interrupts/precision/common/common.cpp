@@ -81,6 +81,47 @@ const char* pass_fail(bool passed) noexcept
     return passed ? "passed" : "failed";
 }
 
+
+namespace {
+
+bool same_public_bus(const tools6502::CpuTraceEntry& left,
+                     const tools6502::CpuTraceEntry& right) noexcept
+{
+    return left.write == right.write
+        && left.address == right.address
+        && left.data == right.data;
+}
+
+void add_secondary_from_entry_pair(SecondaryMismatchStats& stats,
+                                   const tools6502::CpuTraceEntry& left,
+                                   const tools6502::CpuTraceEntry& right) noexcept
+{
+    // Only classify secondary/metadata differences after the public bus identity
+    // has matched. If rw/address/data differ, that is a primary bus mismatch.
+    if (!same_public_bus(left, right)) {
+        return;
+    }
+
+    bool any = false;
+    if (left.opcode_fetch != right.opcode_fetch) {
+        ++stats.opcode_fetch;
+        any = true;
+    }
+    if (left.irq_asserted != right.irq_asserted) {
+        ++stats.irq_line;
+        any = true;
+    }
+    if (left.nmi_asserted != right.nmi_asserted) {
+        ++stats.nmi_line;
+        any = true;
+    }
+    if (any) {
+        ++stats.total;
+    }
+}
+
+} // namespace
+
 namespace {
 
 void print_entry(std::ostream& out,
@@ -96,6 +137,35 @@ void print_entry(std::ostream& out,
 }
 
 } // namespace
+
+
+SecondaryMismatchStats count_secondary_mismatches(const tools6502::LockstepRunResult& result)
+{
+    SecondaryMismatchStats stats{};
+    const std::size_t trace_size = std::min(result.left_trace.size(), result.right_trace.size());
+    for (std::size_t index = 0u; index < trace_size; ++index) {
+        add_secondary_from_entry_pair(stats, result.left_trace[index], result.right_trace[index]);
+    }
+    return stats;
+}
+
+SecondaryMismatchStats count_secondary_mismatches(const tools6502::LockstepScenarioResult& result)
+{
+    SecondaryMismatchStats stats{};
+    for (const auto& command_result : result.results) {
+        add_secondary_mismatches(stats, count_secondary_mismatches(command_result));
+    }
+    return stats;
+}
+
+void add_secondary_mismatches(SecondaryMismatchStats& destination,
+                              const SecondaryMismatchStats& source) noexcept
+{
+    destination.total += source.total;
+    destination.opcode_fetch += source.opcode_fetch;
+    destination.irq_line += source.irq_line;
+    destination.nmi_line += source.nmi_line;
+}
 
 void print_failure_trace(std::ostream& out,
                          const tools6502::LockstepRunResult& result,

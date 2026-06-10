@@ -1,257 +1,257 @@
-core	model	suite	mode	opcode	mnemonic	addressing_mode	legal_nmos	testcases	scenarios	failures	nmi_scenarios	nmi_failures	irq_scenarios	irq_failures	status
-clk	nmos	nmi_irq_pulse_sweep	full	0x00	BRK	implied	yes	1	108	20	54	20	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x01	ORA	(zero page,X)	yes	1	108	54	54	54	54	0	failed
+core	model	suite	mode	opcode	mnemonic	addressing_mode	legal_nmos	testcases	scenarios	failures	nmi_scenarios	nmi_failures	irq_scenarios	irq_failures	secondary_mismatches	secondary_fetch_tag	secondary_irq_line	secondary_nmi_line	status
+clk	nmos	nmi_irq_pulse_sweep	full	0x00	BRK	implied	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x01	ORA	(zero page,X)	yes	1	108	7	54	7	54	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x02	???	illegal	no	1	108	0	54	0	54	0	passed
-clk	nmos	nmi_irq_pulse_sweep	full	0x03	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x04	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x05	ORA	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x06	ASL	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x07	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x08	PHP	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x09	ORA	immediate	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x0A	ASL	accumulator	yes	1	108	54	54	54	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x03	???	illegal	no	1	108	3	54	3	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x04	???	illegal	no	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x05	ORA	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x06	ASL	zero page	yes	1	108	9	54	9	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x07	???	illegal	no	1	108	9	54	9	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x08	PHP	implied	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x09	ORA	immediate	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x0A	ASL	accumulator	yes	1	108	18	54	18	54	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x0B	???	illegal	no	1	0	0	0	0	0	0	skipped_unstable
-clk	nmos	nmi_irq_pulse_sweep	full	0x0C	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x0D	ORA	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x0E	ASL	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x0F	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x10	BPL	relative	yes	3	324	162	162	162	162	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x11	ORA	(zero page),Y	yes	2	216	108	108	108	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x0C	???	illegal	no	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x0D	ORA	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x0E	ASL	absolute	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x0F	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x10	BPL	relative	yes	3	324	53	162	53	162	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x11	ORA	(zero page),Y	yes	2	216	16	108	16	108	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x12	???	illegal	no	1	108	0	54	0	54	0	passed
-clk	nmos	nmi_irq_pulse_sweep	full	0x13	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x14	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x15	ORA	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x16	ASL	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x17	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x18	CLC	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x19	ORA	absolute,Y	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x1A	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x1B	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x1C	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x1D	ORA	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x1E	ASL	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x1F	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x20	JSR	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x21	AND	(zero page,X)	yes	1	108	54	54	54	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x13	???	illegal	no	2	216	6	108	6	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x14	???	illegal	no	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x15	ORA	zero page,X	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x16	ASL	zero page,X	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x17	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x18	CLC	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x19	ORA	absolute,Y	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x1A	???	illegal	no	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x1B	???	illegal	no	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x1C	???	illegal	no	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x1D	ORA	absolute,X	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x1E	ASL	absolute,X	yes	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x1F	???	illegal	no	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x20	JSR	absolute	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x21	AND	(zero page,X)	yes	1	108	7	54	7	54	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x22	???	illegal	no	1	108	0	54	0	54	0	passed
-clk	nmos	nmi_irq_pulse_sweep	full	0x23	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x24	BIT	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x25	AND	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x26	ROL	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x27	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x28	PLP	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x29	AND	immediate	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x2A	ROL	accumulator	yes	1	108	54	54	54	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x23	???	illegal	no	1	108	3	54	3	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x24	BIT	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x25	AND	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x26	ROL	zero page	yes	1	108	9	54	9	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x27	???	illegal	no	1	108	9	54	9	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x28	PLP	implied	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x29	AND	immediate	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x2A	ROL	accumulator	yes	1	108	18	54	18	54	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x2B	???	illegal	no	1	0	0	0	0	0	0	skipped_unstable
-clk	nmos	nmi_irq_pulse_sweep	full	0x2C	BIT	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x2D	AND	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x2E	ROL	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x2F	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x30	BMI	relative	yes	3	324	162	162	162	162	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x31	AND	(zero page),Y	yes	2	216	108	108	108	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x2C	BIT	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x2D	AND	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x2E	ROL	absolute	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x2F	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x30	BMI	relative	yes	3	324	53	162	53	162	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x31	AND	(zero page),Y	yes	2	216	16	108	16	108	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x32	???	illegal	no	1	108	0	54	0	54	0	passed
-clk	nmos	nmi_irq_pulse_sweep	full	0x33	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x34	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x35	AND	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x36	ROL	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x37	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x38	SEC	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x39	AND	absolute,Y	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x3A	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x3B	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x3C	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x3D	AND	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x3E	ROL	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x3F	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x40	RTI	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x41	EOR	(zero page,X)	yes	1	108	54	54	54	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x33	???	illegal	no	2	216	6	108	6	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x34	???	illegal	no	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x35	AND	zero page,X	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x36	ROL	zero page,X	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x37	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x38	SEC	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x39	AND	absolute,Y	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x3A	???	illegal	no	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x3B	???	illegal	no	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x3C	???	illegal	no	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x3D	AND	absolute,X	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x3E	ROL	absolute,X	yes	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x3F	???	illegal	no	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x40	RTI	implied	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x41	EOR	(zero page,X)	yes	1	108	7	54	7	54	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x42	???	illegal	no	1	108	0	54	0	54	0	passed
-clk	nmos	nmi_irq_pulse_sweep	full	0x43	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x44	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x45	EOR	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x46	LSR	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x47	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x48	PHA	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x49	EOR	immediate	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x4A	LSR	accumulator	yes	1	108	54	54	54	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x43	???	illegal	no	1	108	3	54	3	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x44	???	illegal	no	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x45	EOR	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x46	LSR	zero page	yes	1	108	9	54	9	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x47	???	illegal	no	1	108	9	54	9	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x48	PHA	implied	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x49	EOR	immediate	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x4A	LSR	accumulator	yes	1	108	18	54	18	54	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x4B	???	illegal	no	1	0	0	0	0	0	0	skipped_unstable
-clk	nmos	nmi_irq_pulse_sweep	full	0x4C	JMP	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x4D	EOR	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x4E	LSR	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x4F	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x50	BVC	relative	yes	3	324	162	162	162	162	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x51	EOR	(zero page),Y	yes	2	216	108	108	108	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x4C	JMP	absolute	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x4D	EOR	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x4E	LSR	absolute	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x4F	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x50	BVC	relative	yes	3	324	53	162	53	162	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x51	EOR	(zero page),Y	yes	2	216	16	108	16	108	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x52	???	illegal	no	1	108	0	54	0	54	0	passed
-clk	nmos	nmi_irq_pulse_sweep	full	0x53	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x54	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x55	EOR	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x56	LSR	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x57	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x58	CLI	implied	yes	1	108	103	54	54	54	49	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x59	EOR	absolute,Y	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x5A	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x5B	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x5C	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x5D	EOR	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x5E	LSR	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x5F	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x60	RTS	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x61	ADC	(zero page,X)	yes	1	108	54	54	54	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x53	???	illegal	no	2	216	6	108	6	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x54	???	illegal	no	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x55	EOR	zero page,X	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x56	LSR	zero page,X	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x57	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x58	CLI	implied	yes	1	108	36	54	18	54	18	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x59	EOR	absolute,Y	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x5A	???	illegal	no	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x5B	???	illegal	no	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x5C	???	illegal	no	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x5D	EOR	absolute,X	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x5E	LSR	absolute,X	yes	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x5F	???	illegal	no	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x60	RTS	implied	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x61	ADC	(zero page,X)	yes	1	108	7	54	7	54	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x62	???	illegal	no	1	108	0	54	0	54	0	passed
-clk	nmos	nmi_irq_pulse_sweep	full	0x63	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x64	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x65	ADC	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x66	ROR	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x67	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x68	PLA	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x69	ADC	immediate	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x6A	ROR	accumulator	yes	1	108	54	54	54	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x63	???	illegal	no	1	108	3	54	3	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x64	???	illegal	no	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x65	ADC	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x66	ROR	zero page	yes	1	108	9	54	9	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x67	???	illegal	no	1	108	9	54	9	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x68	PLA	implied	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x69	ADC	immediate	yes	2	216	36	108	36	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x6A	ROR	accumulator	yes	1	108	18	54	18	54	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x6B	???	illegal	no	1	0	0	0	0	0	0	skipped_unstable
-clk	nmos	nmi_irq_pulse_sweep	full	0x6C	JMP	indirect	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x6D	ADC	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x6E	ROR	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x6F	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x70	BVS	relative	yes	3	324	162	162	162	162	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x71	ADC	(zero page),Y	yes	2	216	108	108	108	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x6C	JMP	indirect	yes	2	216	18	108	18	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x6D	ADC	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x6E	ROR	absolute	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x6F	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x70	BVS	relative	yes	3	324	53	162	53	162	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x71	ADC	(zero page),Y	yes	2	216	16	108	16	108	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x72	???	illegal	no	1	108	0	54	0	54	0	passed
-clk	nmos	nmi_irq_pulse_sweep	full	0x73	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x74	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x75	ADC	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x76	ROR	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x77	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x78	SEI	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x79	ADC	absolute,Y	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x7A	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x7B	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x7C	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x7D	ADC	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x7E	ROR	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x7F	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x80	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x81	STA	(zero page,X)	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x82	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x83	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x84	STY	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x85	STA	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x86	STX	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x87	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x88	DEY	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x89	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x8A	TXA	implied	yes	1	108	54	54	54	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x73	???	illegal	no	2	216	6	108	6	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x74	???	illegal	no	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x75	ADC	zero page,X	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x76	ROR	zero page,X	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x77	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x78	SEI	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x79	ADC	absolute,Y	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x7A	???	illegal	no	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x7B	???	illegal	no	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x7C	???	illegal	no	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x7D	ADC	absolute,X	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x7E	ROR	absolute,X	yes	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x7F	???	illegal	no	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x80	???	illegal	no	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x81	STA	(zero page,X)	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x82	???	illegal	no	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x83	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x84	STY	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x85	STA	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x86	STX	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x87	???	illegal	no	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x88	DEY	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x89	???	illegal	no	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x8A	TXA	implied	yes	1	108	18	54	18	54	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x8B	???	illegal	no	1	0	0	0	0	0	0	skipped_unstable
-clk	nmos	nmi_irq_pulse_sweep	full	0x8C	STY	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x8D	STA	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x8E	STX	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x8F	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x90	BCC	relative	yes	3	324	162	162	162	162	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x91	STA	(zero page),Y	yes	2	216	108	108	108	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x8C	STY	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x8D	STA	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x8E	STX	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x8F	???	illegal	no	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x90	BCC	relative	yes	3	324	53	162	53	162	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x91	STA	(zero page),Y	yes	2	216	14	108	14	108	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0x92	???	illegal	no	1	108	0	54	0	54	0	passed
-clk	nmos	nmi_irq_pulse_sweep	full	0x93	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x94	STY	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x95	STA	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x96	STX	zero page,Y	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x97	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x98	TYA	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x99	STA	absolute,Y	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x9A	TXS	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x9B	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x9C	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x9D	STA	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x9E	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0x9F	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xA0	LDY	immediate	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xA1	LDA	(zero page,X)	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xA2	LDX	immediate	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xA3	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xA4	LDY	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xA5	LDA	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xA6	LDX	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xA7	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xA8	TAY	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xA9	LDA	immediate	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xAA	TAX	implied	yes	1	108	54	54	54	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x93	???	illegal	no	2	216	14	108	14	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x94	STY	zero page,X	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x95	STA	zero page,X	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x96	STX	zero page,Y	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x97	???	illegal	no	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x98	TYA	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x99	STA	absolute,Y	yes	2	216	18	108	18	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x9A	TXS	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x9B	???	illegal	no	2	216	18	108	18	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x9C	???	illegal	no	2	216	18	108	18	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x9D	STA	absolute,X	yes	2	216	18	108	18	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x9E	???	illegal	no	2	216	18	108	18	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0x9F	???	illegal	no	2	216	18	108	18	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xA0	LDY	immediate	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xA1	LDA	(zero page,X)	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xA2	LDX	immediate	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xA3	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xA4	LDY	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xA5	LDA	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xA6	LDX	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xA7	???	illegal	no	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xA8	TAY	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xA9	LDA	immediate	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xAA	TAX	implied	yes	1	108	18	54	18	54	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0xAB	???	illegal	no	1	0	0	0	0	0	0	skipped_unstable
-clk	nmos	nmi_irq_pulse_sweep	full	0xAC	LDY	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xAD	LDA	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xAE	LDX	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xAF	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xB0	BCS	relative	yes	3	324	162	162	162	162	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xB1	LDA	(zero page),Y	yes	2	216	108	108	108	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xAC	LDY	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xAD	LDA	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xAE	LDX	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xAF	???	illegal	no	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xB0	BCS	relative	yes	3	324	53	162	53	162	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xB1	LDA	(zero page),Y	yes	2	216	16	108	16	108	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0xB2	???	illegal	no	1	108	0	54	0	54	0	passed
-clk	nmos	nmi_irq_pulse_sweep	full	0xB3	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xB4	LDY	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xB5	LDA	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xB6	LDX	zero page,Y	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xB7	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xB8	CLV	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xB9	LDA	absolute,Y	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xBA	TSX	implied	yes	1	108	54	54	54	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xB3	???	illegal	no	2	216	16	108	16	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xB4	LDY	zero page,X	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xB5	LDA	zero page,X	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xB6	LDX	zero page,Y	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xB7	???	illegal	no	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xB8	CLV	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xB9	LDA	absolute,Y	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xBA	TSX	implied	yes	1	108	18	54	18	54	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0xBB	???	illegal	no	2	0	0	0	0	0	0	skipped_unstable
-clk	nmos	nmi_irq_pulse_sweep	full	0xBC	LDY	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xBD	LDA	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xBE	LDX	absolute,Y	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xBF	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xC0	CPY	immediate	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xC1	CMP	(zero page,X)	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xC2	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xC3	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xC4	CPY	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xC5	CMP	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xC6	DEC	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xC7	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xC8	INY	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xC9	CMP	immediate	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xCA	DEX	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xCB	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xCC	CPY	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xCD	CMP	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xCE	DEC	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xCF	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xD0	BNE	relative	yes	3	324	162	162	162	162	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xD1	CMP	(zero page),Y	yes	2	216	108	108	108	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xBC	LDY	absolute,X	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xBD	LDA	absolute,X	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xBE	LDX	absolute,Y	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xBF	???	illegal	no	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xC0	CPY	immediate	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xC1	CMP	(zero page,X)	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xC2	???	illegal	no	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xC3	???	illegal	no	1	108	3	54	3	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xC4	CPY	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xC5	CMP	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xC6	DEC	zero page	yes	1	108	9	54	9	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xC7	???	illegal	no	1	108	9	54	9	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xC8	INY	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xC9	CMP	immediate	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xCA	DEX	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xCB	???	illegal	no	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xCC	CPY	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xCD	CMP	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xCE	DEC	absolute	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xCF	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xD0	BNE	relative	yes	3	324	53	162	53	162	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xD1	CMP	(zero page),Y	yes	2	216	16	108	16	108	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0xD2	???	illegal	no	1	108	0	54	0	54	0	passed
-clk	nmos	nmi_irq_pulse_sweep	full	0xD3	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xD4	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xD5	CMP	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xD6	DEC	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xD7	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xD8	CLD	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xD9	CMP	absolute,Y	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xDA	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xDB	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xDC	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xDD	CMP	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xDE	DEC	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xDF	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xE0	CPX	immediate	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xE1	SBC	(zero page,X)	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xE2	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xE3	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xE4	CPX	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xE5	SBC	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xE6	INC	zero page	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xE7	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xE8	INX	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xE9	SBC	immediate	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xEA	NOP	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xEB	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xEC	CPX	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xED	SBC	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xEE	INC	absolute	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xEF	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xF0	BEQ	relative	yes	3	324	162	162	162	162	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xF1	SBC	(zero page),Y	yes	2	216	108	108	108	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xD3	???	illegal	no	2	216	6	108	6	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xD4	???	illegal	no	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xD5	CMP	zero page,X	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xD6	DEC	zero page,X	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xD7	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xD8	CLD	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xD9	CMP	absolute,Y	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xDA	???	illegal	no	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xDB	???	illegal	no	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xDC	???	illegal	no	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xDD	CMP	absolute,X	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xDE	DEC	absolute,X	yes	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xDF	???	illegal	no	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xE0	CPX	immediate	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xE1	SBC	(zero page,X)	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xE2	???	illegal	no	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xE3	???	illegal	no	1	108	3	54	3	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xE4	CPX	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xE5	SBC	zero page	yes	1	108	15	54	15	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xE6	INC	zero page	yes	1	108	9	54	9	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xE7	???	illegal	no	1	108	9	54	9	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xE8	INX	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xE9	SBC	immediate	yes	2	216	36	108	36	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xEA	NOP	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xEB	???	illegal	no	2	216	36	108	36	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xEC	CPX	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xED	SBC	absolute	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xEE	INC	absolute	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xEF	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xF0	BEQ	relative	yes	3	324	53	162	53	162	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xF1	SBC	(zero page),Y	yes	2	216	16	108	16	108	0	failed
 clk	nmos	nmi_irq_pulse_sweep	full	0xF2	???	illegal	no	1	108	0	54	0	54	0	passed
-clk	nmos	nmi_irq_pulse_sweep	full	0xF3	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xF4	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xF5	SBC	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xF6	INC	zero page,X	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xF7	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xF8	SED	implied	yes	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xF9	SBC	absolute,Y	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xFA	???	illegal	no	1	108	54	54	54	54	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xFB	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xFC	???	illegal	no	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xFD	SBC	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xFE	INC	absolute,X	yes	2	216	108	108	108	108	0	failed
-clk	nmos	nmi_irq_pulse_sweep	full	0xFF	???	illegal	no	2	216	108	108	108	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xF3	???	illegal	no	2	216	6	108	6	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xF4	???	illegal	no	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xF5	SBC	zero page,X	yes	1	108	11	54	11	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xF6	INC	zero page,X	yes	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xF7	???	illegal	no	1	108	7	54	7	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xF8	SED	implied	yes	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xF9	SBC	absolute,Y	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xFA	???	illegal	no	1	108	18	54	18	54	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xFB	???	illegal	no	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xFC	???	illegal	no	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xFD	SBC	absolute,X	yes	2	216	20	108	20	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xFE	INC	absolute,X	yes	2	216	8	108	8	108	0	failed
+clk	nmos	nmi_irq_pulse_sweep	full	0xFF	???	illegal	no	2	216	8	108	8	108	0	failed

@@ -10,9 +10,11 @@
 #include <cstdio>
 #include <exception>
 #include <fstream>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 namespace benchmark6502::interrupts::basic {
@@ -26,12 +28,56 @@ constexpr std::uint16_t marker = 0x0200u;
 constexpr std::uint16_t irq_count = 0x0201u;
 constexpr std::uint16_t nmi_count = 0x0202u;
 constexpr std::uint16_t continuation = 0x0203u;
+constexpr std::uint16_t pushed_pcl = 0x0204u;
+constexpr std::uint16_t pushed_pch = 0x0205u;
 constexpr std::uint16_t testcase_irq_count = 0x7f00u;
 constexpr std::uint16_t testcase_nmi_count = 0x7f01u;
 
+enum class FailureClass {
+    none,
+    skipped_opcode,
+    synthetic_boundary,
+    synthetic_irq_mask,
+    testcase_setup,
+    testcase_precondition,
+    post_opcode_nmi,
+    post_opcode_irq,
+    other,
+};
+
+const char* failure_class_name(FailureClass failure_class) noexcept
+{
+    switch (failure_class) {
+    case FailureClass::none: return "none";
+    case FailureClass::skipped_opcode: return "skipped_opcode";
+    case FailureClass::synthetic_boundary: return "synthetic_boundary";
+    case FailureClass::synthetic_irq_mask: return "synthetic_irq_mask";
+    case FailureClass::testcase_setup: return "testcase_setup";
+    case FailureClass::testcase_precondition: return "testcase_precondition";
+    case FailureClass::post_opcode_nmi: return "post_opcode_nmi";
+    case FailureClass::post_opcode_irq: return "post_opcode_irq";
+    case FailureClass::other: return "other";
+    }
+    return "other";
+}
+
+bool is_skip_failure(FailureClass failure_class) noexcept
+{
+    return failure_class == FailureClass::skipped_opcode;
+}
+
 class TestFailure : public std::runtime_error {
 public:
-    TestFailure(std::string message) : std::runtime_error(std::move(message)) {}
+    TestFailure(FailureClass failure_class, std::string message)
+        : std::runtime_error(std::move(message))
+        , failure_class_(failure_class)
+    {
+    }
+
+    FailureClass failure_class() const noexcept { return failure_class_; }
+
+private:
+    FailureClass failure_class_ = FailureClass::other;
 };
 
 std::string sanitize_filename_part(std::string_view text)
@@ -89,6 +135,8 @@ std::unique_ptr<IInstructionCpu> make_loaded_cpu(
     cpu->write(irq_count, 0u);
     cpu->write(nmi_count, 0u);
     cpu->write(continuation, 0u);
+    cpu->write(pushed_pcl, 0u);
+    cpu->write(pushed_pch, 0u);
     return cpu;
 }
 
@@ -246,6 +294,23 @@ bool is_self_jump_trap_at(const IInstructionCpu& cpu, std::uint16_t pc)
         && cpu.read(static_cast<std::uint16_t>(pc + 2u)) == static_cast<std::uint8_t>(pc >> 8u);
 }
 
+std::uint16_t recorded_pushed_pc(const IInstructionCpu& cpu)
+{
+    return static_cast<std::uint16_t>(cpu.read(pushed_pcl))
+        | static_cast<std::uint16_t>(static_cast<std::uint16_t>(cpu.read(pushed_pch)) << 8u);
+}
+
+void require_recorded_pushed_pc_is_one_of(const IInstructionCpu& cpu,
+                                          std::uint16_t expected_a,
+                                          std::uint16_t expected_b,
+                                          std::string_view message)
+{
+    const auto pushed_pc = recorded_pushed_pc(cpu);
+    if (pushed_pc != expected_a && pushed_pc != expected_b) {
+        throw TestFailure(FailureClass::synthetic_boundary, std::string(message));
+    }
+}
+
 void patch_current_pc_with_cli_probe(IInstructionCpu& cpu)
 {
     const auto pc = cpu.state().pc;
@@ -262,34 +327,39 @@ void run_full_testcase_then_interrupt_case(
     bool nmi)
 {
     if (is_skipped_opcode(test.opcode)) {
-        throw TestFailure("opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes");
+        throw TestFailure(FailureClass::skipped_opcode,
+            "opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes");
     }
 
     auto cpu = make_loaded_testcase_cpu(factory, test);
     constexpr unsigned max_bootstrap_steps = 16u;
     if (!step_until_pc(*cpu, test.start_at, max_bootstrap_steps)) {
-        throw TestFailure("testcase bootstrap did not reach opcode start address");
+        throw TestFailure(FailureClass::testcase_setup,
+            "testcase bootstrap did not reach opcode start address");
     }
     point_vectors_to_testcase(*cpu, test);
 
     cpu->step_instruction(); // Execute the opcode under test using its existing mini-program.
     const auto trap_pc = cpu->state().pc;
     if (!is_self_jump_trap_at(*cpu, trap_pc)) {
-        throw TestFailure("testcase opcode did not reach its terminal self-jump trap before interrupt probe");
+        throw TestFailure(FailureClass::testcase_precondition,
+            "testcase opcode did not reach its terminal self-jump trap before interrupt probe");
     }
     point_vectors_to_probe_handlers(*cpu);
 
     if (nmi) {
         cpu->assert_nmi_for(1);
         if (!step_until(*cpu, testcase_nmi_count, 1u, 12u)) {
-            throw TestFailure("NMI was not accepted after executing testcase opcode");
+            throw TestFailure(FailureClass::post_opcode_nmi,
+                "NMI was not accepted after executing testcase opcode");
         }
     } else {
         patch_current_pc_with_cli_probe(*cpu);
         cpu->step_instruction(); // CLI at the current post-opcode fetch address.
         cpu->assert_irq_for(1);
         if (!step_until(*cpu, testcase_irq_count, 1u, 12u)) {
-            throw TestFailure("IRQ was not accepted after executing testcase opcode and clearing I");
+            throw TestFailure(FailureClass::post_opcode_irq,
+                "IRQ was not accepted after executing testcase opcode and clearing I");
         }
     }
 }
@@ -306,7 +376,7 @@ enum class SweepCase {
 std::string case_name(SweepCase c)
 {
     switch (c) {
-    case SweepCase::first_reset_nmi: return "first_reset_nmi_before_opcode";
+    case SweepCase::first_reset_nmi: return "first_reset_nmi_reaches_handler";
     case SweepCase::first_reset_irq_masked: return "first_reset_irq_masked_opcode_executes";
     case SweepCase::prefixed_nmi: return "prefixed_nmi_before_target";
     case SweepCase::prefixed_irq: return "prefixed_irq_before_target";
@@ -347,9 +417,19 @@ std::vector<asm6502::mem_value> compile_sweep_program(const opcode_metadata& met
      .org(0x8040u, "done")
         .jmp("done")
      .org(nmi_addr, "nmi_handler")
+        .tsx()
+        .lda(asm6502::abx, 0x0102u)
+        .sta(asm6502::absolute, pushed_pcl)
+        .lda(asm6502::abx, 0x0103u)
+        .sta(asm6502::absolute, pushed_pch)
         .inc(asm6502::absolute, nmi_count)
         .rti()
      .org(irq_addr, "irq_handler")
+        .tsx()
+        .lda(asm6502::abx, 0x0102u)
+        .sta(asm6502::absolute, pushed_pcl)
+        .lda(asm6502::abx, 0x0103u)
+        .sta(asm6502::absolute, pushed_pch)
         .inc(asm6502::absolute, irq_count)
         .rti()
      .org(0x0080u)
@@ -362,7 +442,8 @@ std::vector<asm6502::mem_value> compile_sweep_program(const opcode_metadata& met
 void run_sweep_case(const InstructionCpuFactory& factory, const opcode_metadata& metadata, SweepCase c)
 {
     if (is_skipped_opcode(metadata.opcode)) {
-        throw TestFailure("opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes");
+        throw TestFailure(FailureClass::skipped_opcode,
+            "opcode skipped because it is KIL/JAM or one of the seven known unstable NMOS opcodes");
     }
 
     auto cpu = make_loaded_cpu(factory, compile_sweep_program(metadata, c));
@@ -370,51 +451,69 @@ void run_sweep_case(const InstructionCpuFactory& factory, const opcode_metadata&
     case SweepCase::first_reset_nmi:
         cpu->assert_nmi_for(1);
         if (!step_until(*cpu, nmi_count, 1u, 8u)) {
-            throw TestFailure("NMI was not accepted before first opcode after reset");
+            throw TestFailure(FailureClass::synthetic_boundary,
+                "NMI was not accepted before first opcode after reset");
         }
         if (cpu->read(continuation) != 0u) {
-            throw TestFailure("target opcode continuation ran before NMI handler");
+            throw TestFailure(FailureClass::synthetic_boundary,
+                "target opcode continuation ran before NMI handler");
         }
         break;
     case SweepCase::first_reset_irq_masked:
         cpu->assert_irq_for(1);
         cpu->step_instruction();
         if (cpu->read(irq_count) != 0u) {
-            throw TestFailure("IRQ handler instruction ran even though reset I should mask IRQ");
+            throw TestFailure(FailureClass::synthetic_irq_mask,
+                "IRQ handler instruction ran even though reset I should mask IRQ");
         }
         if (cpu->state().pc == irq_addr && metadata.opcode != 0x00u) {
-            throw TestFailure("CPU entered IRQ/BRK vector while external IRQ should be masked");
+            throw TestFailure(FailureClass::synthetic_irq_mask,
+                "CPU entered IRQ/BRK vector while external IRQ should be masked");
         }
         if (metadata.opcode == 0x00u && cpu->state().pc == irq_addr) {
             const std::uint8_t pushed_p = cpu->read(static_cast<std::uint16_t>(0x0100u + cpu->state().s + 1u));
             if ((pushed_p & 0x10u) == 0u) {
-                throw TestFailure("BRK reached IRQ/BRK vector but pushed status did not mark BRK; external IRQ may have preempted it");
+                throw TestFailure(FailureClass::synthetic_irq_mask,
+                    "BRK reached IRQ/BRK vector but pushed status did not mark BRK; external IRQ may have preempted it");
             }
         }
         break;
     case SweepCase::prefixed_nmi:
-        step(*cpu); // NOP prefix.
+        step(*cpu); // NOP prefix. The following JMP is a harmless latency absorber before the target opcode.
         cpu->assert_nmi_for(1);
         if (!step_until(*cpu, nmi_count, 1u, 8u)) {
-            throw TestFailure("NMI was not accepted before prefixed target opcode");
+            throw TestFailure(FailureClass::synthetic_boundary,
+                "NMI was not accepted before prefixed target opcode");
         }
+        require_recorded_pushed_pc_is_one_of(*cpu,
+                                             static_cast<std::uint16_t>(main_addr + 1u),
+                                             target_addr,
+                                             "NMI stack frame was not at the prefix JMP or target fetch; target opcode may have run before NMI");
         if (cpu->read(continuation) != 0u) {
-            throw TestFailure("target opcode continuation ran before prefixed NMI handler");
+            throw TestFailure(FailureClass::synthetic_boundary,
+                "target opcode continuation ran before prefixed NMI handler");
         }
         break;
     case SweepCase::prefixed_irq:
-        step(*cpu, 2u); // CLI, NOP. IRQ is asserted only after CLI has completed.
+        step(*cpu, 2u); // CLI, NOP. The following JMP is a harmless latency absorber before the target opcode.
         cpu->assert_irq_for(1);
         if (!step_until(*cpu, irq_count, 1u, 8u)) {
-            throw TestFailure("IRQ was not accepted before prefixed target opcode with I clear");
+            throw TestFailure(FailureClass::synthetic_boundary,
+                "IRQ was not accepted before prefixed target opcode with I clear");
         }
+        require_recorded_pushed_pc_is_one_of(*cpu,
+                                             static_cast<std::uint16_t>(main_addr + 2u),
+                                             target_addr,
+                                             "IRQ stack frame was not at the prefix JMP or target fetch; target opcode may have run before IRQ");
         if (cpu->read(continuation) != 0u) {
-            throw TestFailure("target opcode continuation ran before prefixed IRQ handler");
+            throw TestFailure(FailureClass::synthetic_boundary,
+                "target opcode continuation ran before prefixed IRQ handler");
         }
         break;
     case SweepCase::testcase_then_nmi:
     case SweepCase::testcase_then_irq:
-        throw TestFailure("internal error: testcase sweep case used with synthetic runner");
+        throw TestFailure(FailureClass::other,
+            "internal error: testcase sweep case used with synthetic runner");
     }
 }
 
@@ -428,6 +527,13 @@ struct SweepStats {
     unsigned illegal_passed = 0;
     unsigned illegal_failed = 0;
     unsigned illegal_skipped = 0;
+    unsigned synthetic_boundary_failed = 0;
+    unsigned synthetic_irq_mask_failed = 0;
+    unsigned testcase_setup_failed = 0;
+    unsigned testcase_precondition_failed = 0;
+    unsigned post_opcode_nmi_failed = 0;
+    unsigned post_opcode_irq_failed = 0;
+    unsigned other_failed = 0;
 };
 
 void count_pass(SweepStats& stats, bool legal)
@@ -436,10 +542,40 @@ void count_pass(SweepStats& stats, bool legal)
     legal ? ++stats.legal_passed : ++stats.illegal_passed;
 }
 
-void count_fail(SweepStats& stats, bool legal)
+void count_failure_class(SweepStats& stats, FailureClass failure_class)
+{
+    switch (failure_class) {
+    case FailureClass::synthetic_boundary:
+        ++stats.synthetic_boundary_failed;
+        break;
+    case FailureClass::synthetic_irq_mask:
+        ++stats.synthetic_irq_mask_failed;
+        break;
+    case FailureClass::testcase_setup:
+        ++stats.testcase_setup_failed;
+        break;
+    case FailureClass::testcase_precondition:
+        ++stats.testcase_precondition_failed;
+        break;
+    case FailureClass::post_opcode_nmi:
+        ++stats.post_opcode_nmi_failed;
+        break;
+    case FailureClass::post_opcode_irq:
+        ++stats.post_opcode_irq_failed;
+        break;
+    case FailureClass::none:
+    case FailureClass::skipped_opcode:
+    case FailureClass::other:
+        ++stats.other_failed;
+        break;
+    }
+}
+
+void count_fail(SweepStats& stats, bool legal, FailureClass failure_class)
 {
     ++stats.failed;
     legal ? ++stats.legal_failed : ++stats.illegal_failed;
+    count_failure_class(stats, failure_class);
 }
 
 void count_skip(SweepStats& stats, bool legal)
@@ -447,6 +583,48 @@ void count_skip(SweepStats& stats, bool legal)
     ++stats.skipped;
     legal ? ++stats.legal_skipped : ++stats.illegal_skipped;
 }
+
+struct TestcaseFailureCounts {
+    unsigned setup = 0;
+    unsigned precondition = 0;
+    unsigned post_nmi = 0;
+    unsigned post_irq = 0;
+    unsigned other = 0;
+
+    void add(FailureClass failure_class)
+    {
+        switch (failure_class) {
+        case FailureClass::testcase_setup:
+            ++setup;
+            break;
+        case FailureClass::testcase_precondition:
+            ++precondition;
+            break;
+        case FailureClass::post_opcode_nmi:
+            ++post_nmi;
+            break;
+        case FailureClass::post_opcode_irq:
+            ++post_irq;
+            break;
+        case FailureClass::none:
+        case FailureClass::skipped_opcode:
+        case FailureClass::synthetic_boundary:
+        case FailureClass::synthetic_irq_mask:
+        case FailureClass::other:
+            ++other;
+            break;
+        }
+    }
+
+    std::string detail() const
+    {
+        return " failure_classes setup=" + std::to_string(setup)
+            + " precondition=" + std::to_string(precondition)
+            + " post_nmi=" + std::to_string(post_nmi)
+            + " post_irq=" + std::to_string(post_irq)
+            + " other=" + std::to_string(other);
+    }
+};
 
 } // namespace
 
@@ -463,7 +641,7 @@ int run_instruction_interrupt_opcode_sweep(const InstructionCpuFactory& factory)
         std::fprintf(stderr, "failed to open %s for writing\n", log_path.c_str());
         return 1;
     }
-    log << "suite\tcore\tmodel\tcase\topcode\tmnemonic\tmode\tlegality\tstatus\tdetail\n";
+    log << "suite\tcore\tmodel\tcase\topcode\tmnemonic\tmode\tlegality\tstatus\tdetail\tfailure_class\n";
 
     const SweepCase cases[] = {
         SweepCase::first_reset_nmi,
@@ -490,7 +668,7 @@ int run_instruction_interrupt_opcode_sweep(const InstructionCpuFactory& factory)
                     log << "opcode_sweep\t" << tsv_cell(core_name) << "\t" << tsv_cell(model_name) << "\t"
                         << cn << "\t" << op << "\t" << metadata.mnemonic << "\t"
                         << addressing_mode_name(metadata.mode) << "\t" << (legal ? "legal" : "illegal")
-                        << "\tskip\tno testcase programs available\n";
+                        << "\tskip\tno testcase programs available\tno_testcase\n";
                     continue;
                 }
 
@@ -500,6 +678,8 @@ int run_instruction_interrupt_opcode_sweep(const InstructionCpuFactory& factory)
                 unsigned testcase_passed = 0;
                 unsigned testcase_failed = 0;
                 unsigned testcase_skipped = 0;
+                FailureClass first_failure_class = FailureClass::none;
+                TestcaseFailureCounts failure_counts{};
 
                 for (const auto& test : found->second) {
                     try {
@@ -508,23 +688,26 @@ int run_instruction_interrupt_opcode_sweep(const InstructionCpuFactory& factory)
                         opcode_skipped_all = false;
                     } catch (const TestFailure& e) {
                         const std::string detail(e.what());
-                        const bool skip = detail.find("skipped") != std::string::npos;
-                        if (skip) {
+                        if (is_skip_failure(e.failure_class())) {
                             ++testcase_skipped;
                         } else {
                             ++testcase_failed;
                             opcode_failed = true;
                             opcode_skipped_all = false;
+                            failure_counts.add(e.failure_class());
                             if (first_failure.empty()) {
                                 first_failure = detail + "; testcase: " + test.description;
+                                first_failure_class = e.failure_class();
                             }
                         }
                     } catch (const std::exception& e) {
                         ++testcase_failed;
                         opcode_failed = true;
                         opcode_skipped_all = false;
+                        failure_counts.add(FailureClass::other);
                         if (first_failure.empty()) {
                             first_failure = std::string(e.what()) + "; testcase: " + test.description;
+                            first_failure_class = FailureClass::other;
                         }
                     }
                 }
@@ -532,27 +715,28 @@ int run_instruction_interrupt_opcode_sweep(const InstructionCpuFactory& factory)
                 const std::string detail = "testcases pass=" + std::to_string(testcase_passed)
                     + " fail=" + std::to_string(testcase_failed)
                     + " skip=" + std::to_string(testcase_skipped)
+                    + failure_counts.detail()
                     + (first_failure.empty() ? std::string{} : std::string{"; first_failure="} + first_failure);
 
                 if (opcode_failed) {
-                    count_fail(stats, legal);
+                    count_fail(stats, legal, first_failure_class);
                     std::fprintf(stderr, "FAIL %-34s %s %s %s\n", cn.c_str(), op.c_str(), metadata.mnemonic, first_failure.c_str());
                     log << "opcode_sweep\t" << tsv_cell(core_name) << "\t" << tsv_cell(model_name) << "\t"
                         << cn << "\t" << op << "\t" << metadata.mnemonic << "\t"
                         << addressing_mode_name(metadata.mode) << "\t" << (legal ? "legal" : "illegal")
-                        << "\tfail\t" << tsv_cell(detail) << "\n";
+                        << "\tfail\t" << tsv_cell(detail) << "\t" << failure_class_name(first_failure_class) << "\n";
                 } else if (opcode_skipped_all) {
                     count_skip(stats, legal);
                     log << "opcode_sweep\t" << tsv_cell(core_name) << "\t" << tsv_cell(model_name) << "\t"
                         << cn << "\t" << op << "\t" << metadata.mnemonic << "\t"
                         << addressing_mode_name(metadata.mode) << "\t" << (legal ? "legal" : "illegal")
-                        << "\tskip\t" << tsv_cell(detail) << "\n";
+                        << "\tskip\t" << tsv_cell(detail) << "\t" << failure_class_name(FailureClass::skipped_opcode) << "\n";
                 } else {
                     count_pass(stats, legal);
                     log << "opcode_sweep\t" << tsv_cell(core_name) << "\t" << tsv_cell(model_name) << "\t"
                         << cn << "\t" << op << "\t" << metadata.mnemonic << "\t"
                         << addressing_mode_name(metadata.mode) << "\t" << (legal ? "legal" : "illegal")
-                        << "\tpass\t" << tsv_cell(detail) << "\n";
+                        << "\tpass\t" << tsv_cell(detail) << "\t" << failure_class_name(FailureClass::none) << "\n";
                 }
                 continue;
             }
@@ -563,31 +747,30 @@ int run_instruction_interrupt_opcode_sweep(const InstructionCpuFactory& factory)
                 log << "opcode_sweep\t" << tsv_cell(core_name) << "\t" << tsv_cell(model_name) << "\t"
                     << cn << "\t" << op << "\t" << metadata.mnemonic << "\t"
                     << addressing_mode_name(metadata.mode) << "\t" << (legal ? "legal" : "illegal")
-                    << "\tpass\t\n";
+                    << "\tpass\t\t" << failure_class_name(FailureClass::none) << "\n";
             } catch (const TestFailure& e) {
                 const std::string detail(e.what());
-                const bool skip = detail.find("skipped") != std::string::npos;
-                if (skip) {
+                if (is_skip_failure(e.failure_class())) {
                     count_skip(stats, legal);
                     log << "opcode_sweep\t" << tsv_cell(core_name) << "\t" << tsv_cell(model_name) << "\t"
                         << cn << "\t" << op << "\t" << metadata.mnemonic << "\t"
                         << addressing_mode_name(metadata.mode) << "\t" << (legal ? "legal" : "illegal")
-                        << "\tskip\t" << tsv_cell(detail) << "\n";
+                        << "\tskip\t" << tsv_cell(detail) << "\t" << failure_class_name(e.failure_class()) << "\n";
                 } else {
-                    count_fail(stats, legal);
+                    count_fail(stats, legal, e.failure_class());
                     std::fprintf(stderr, "FAIL %-34s %s %s %s\n", cn.c_str(), op.c_str(), metadata.mnemonic, e.what());
                     log << "opcode_sweep\t" << tsv_cell(core_name) << "\t" << tsv_cell(model_name) << "\t"
                         << cn << "\t" << op << "\t" << metadata.mnemonic << "\t"
                         << addressing_mode_name(metadata.mode) << "\t" << (legal ? "legal" : "illegal")
-                        << "\tfail\t" << tsv_cell(detail) << "\n";
+                        << "\tfail\t" << tsv_cell(detail) << "\t" << failure_class_name(e.failure_class()) << "\n";
                 }
             } catch (const std::exception& e) {
-                count_fail(stats, legal);
+                count_fail(stats, legal, FailureClass::other);
                 std::fprintf(stderr, "FAIL %-34s %s %s %s\n", cn.c_str(), op.c_str(), metadata.mnemonic, e.what());
                 log << "opcode_sweep\t" << tsv_cell(core_name) << "\t" << tsv_cell(model_name) << "\t"
                     << cn << "\t" << op << "\t" << metadata.mnemonic << "\t"
                     << addressing_mode_name(metadata.mode) << "\t" << (legal ? "legal" : "illegal")
-                    << "\tfail\t" << tsv_cell(e.what()) << "\n";
+                    << "\tfail\t" << tsv_cell(e.what()) << "\t" << failure_class_name(FailureClass::other) << "\n";
             }
         }
     }
@@ -598,6 +781,14 @@ int run_instruction_interrupt_opcode_sweep(const InstructionCpuFactory& factory)
         stats.legal_passed, stats.legal_skipped, stats.legal_failed);
     std::printf("instruction interrupt opcode sweep illegal: %u passed, %u skipped, %u failed\n",
         stats.illegal_passed, stats.illegal_skipped, stats.illegal_failed);
+    std::printf("instruction interrupt opcode sweep failure classes: synthetic_boundary=%u synthetic_irq_mask=%u testcase_setup=%u testcase_precondition=%u post_opcode_nmi=%u post_opcode_irq=%u other=%u\n",
+        stats.synthetic_boundary_failed,
+        stats.synthetic_irq_mask_failed,
+        stats.testcase_setup_failed,
+        stats.testcase_precondition_failed,
+        stats.post_opcode_nmi_failed,
+        stats.post_opcode_irq_failed,
+        stats.other_failed);
     std::printf("instruction interrupt opcode sweep log: %s\n", log_path.c_str());
     return stats.failed == 0u ? 0 : 1;
 }

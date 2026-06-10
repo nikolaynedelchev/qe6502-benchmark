@@ -3,6 +3,8 @@ group1	applewin	nmos	reset vector routing	pass
 group1	applewin	nmos	I flag after reset	pass	
 group1	applewin	nmos	IRQ masked after reset	pass	
 group1	applewin	nmos	NMI accepted after reset	pass	
+group1	applewin	nmos	assert_nmi_for is not synchronous	pass	
+group1	applewin	nmos	assert_irq_for is not synchronous	pass	
 group1	applewin	nmos	IRQ masked when I=1	pass	
 group1	applewin	nmos	IRQ accepted when I=0	pass	
 group1	applewin	nmos	IRQ deasserted before unmask	pass	

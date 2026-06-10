@@ -3,6 +3,8 @@ group1	floooh/chips	nmos	reset vector routing	pass
 group1	floooh/chips	nmos	I flag after reset	pass	
 group1	floooh/chips	nmos	IRQ masked after reset	pass	
 group1	floooh/chips	nmos	NMI accepted after reset	pass	
+group1	floooh/chips	nmos	assert_nmi_for is not synchronous	pass	
+group1	floooh/chips	nmos	assert_irq_for is not synchronous	pass	
 group1	floooh/chips	nmos	IRQ masked when I=1	pass	
 group1	floooh/chips	nmos	IRQ accepted when I=0	pass	
 group1	floooh/chips	nmos	IRQ deasserted before unmask	pass	

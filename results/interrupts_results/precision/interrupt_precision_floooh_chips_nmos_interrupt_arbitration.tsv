@@ -1,7 +1,7 @@
-core	model	suite	group	root_opcode	mnemonic	addressing_mode	legal_nmos	scenarios	failures	nmi_first_handler_fetches	brk_irq_first_handler_fetches	nmi_handler_fetches	brk_irq_handler_fetches	hijacks	status
-floooh_chips	nmos	interrupt_arbitration	BRK + NMI hijack windows	0x00	BRK	implied	yes	54	45	0	20	25	22	0	failed
-floooh_chips	nmos	interrupt_arbitration	BRK + IRQ windows	0x00	BRK	implied	yes	54	0	0	54	0	270	0	passed
-floooh_chips	nmos	interrupt_arbitration	IRQ/NMI overlap priority	0xEA	NOP	implied	yes	7	2	5	0	20	0	5	failed
-floooh_chips	nmos	interrupt_arbitration	NMI continuous-low vs re-edge	0xEA	NOP	implied	yes	2	0	2	0	3	0	2	passed
-floooh_chips	nmos	interrupt_arbitration	NMI during NMI service / lost windows	0xEA	NOP	implied	yes	13	6	13	0	18	0	13	failed
-floooh_chips	nmos	interrupt_arbitration	IRQ held during NMI service	0xEA	NOP	implied	yes	2	0	2	0	2	14	0	passed
+core	model	suite	group	root_opcode	mnemonic	addressing_mode	legal_nmos	scenarios	failures	secondary_mismatches	secondary_fetch_tag	secondary_irq_line	secondary_nmi_line	expected_left_nmi_first_handler_fetches	expected_left_brk_irq_first_handler_fetches	expected_left_nmi_handler_fetches	expected_left_brk_irq_handler_fetches	hijacks	status
+floooh_chips	nmos	interrupt_arbitration	BRK + NMI hijack windows	0x00	BRK	implied	yes	54	45	0	0	0	0	0	20	25	22	0	failed
+floooh_chips	nmos	interrupt_arbitration	BRK + IRQ windows	0x00	BRK	implied	yes	54	0	0	0	0	0	0	54	0	270	0	passed
+floooh_chips	nmos	interrupt_arbitration	IRQ/NMI overlap priority	0xEA	NOP	implied	yes	7	2	0	0	0	0	5	0	20	0	5	failed
+floooh_chips	nmos	interrupt_arbitration	NMI continuous-low vs re-edge	0xEA	NOP	implied	yes	2	0	0	0	0	0	2	0	3	0	2	passed
+floooh_chips	nmos	interrupt_arbitration	NMI during NMI service / lost windows	0xEA	NOP	implied	yes	13	6	0	0	0	0	13	0	18	0	13	failed
+floooh_chips	nmos	interrupt_arbitration	IRQ held during NMI service	0xEA	NOP	implied	yes	2	0	0	0	0	0	2	0	2	14	0	passed

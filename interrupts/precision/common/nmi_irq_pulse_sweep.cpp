@@ -45,6 +45,8 @@ struct SweepStats
     std::size_t nmi_scenarios_failed = 0u;
     std::size_t irq_scenarios_total = 0u;
     std::size_t irq_scenarios_failed = 0u;
+    std::size_t failure_recovery_memory_clears = 0u;
+    interrupt_precision::SecondaryMismatchStats secondary{};
 };
 
 struct OpcodeStats
@@ -56,6 +58,7 @@ struct OpcodeStats
     std::size_t nmi_failures = 0u;
     std::size_t irq_scenarios = 0u;
     std::size_t irq_failures = 0u;
+    interrupt_precision::SecondaryMismatchStats secondary{};
 };
 
 constexpr std::array<std::uint8_t, 16u> light_opcodes{
@@ -170,6 +173,10 @@ bool run_one_scenario(tools6502::LockstepScenarioRunner& runner,
         ++opcode_stats.irq_scenarios;
     }
 
+    const auto secondary = interrupt_precision::count_secondary_mismatches(result);
+    interrupt_precision::add_secondary_mismatches(stats.secondary, secondary);
+    interrupt_precision::add_secondary_mismatches(opcode_stats.secondary, secondary);
+
     if (result.passed) {
         ++stats.scenarios_passed;
         return true;
@@ -231,11 +238,17 @@ int interrupt_precision::run_nmi_irq_pulse_sweep(int argc,
     }
     detail_log << "core\tmodel\tsuite\tmode\topcode\tmnemonic\taddressing_mode\tlegal_nmos\t"
                << "testcases\tscenarios\tfailures\tnmi_scenarios\tnmi_failures\t"
-               << "irq_scenarios\tirq_failures\tstatus\n";
+               << "irq_scenarios\tirq_failures\tsecondary_mismatches\tsecondary_fetch_tag\t"
+               << "secondary_irq_line\tsecondary_nmi_line\tstatus\n";
 
     tools6502::LockstepConfig base_lockstep_config{};
     base_lockstep_config.memory = tools6502::MemoryUnchanged{};
+    // Primary precision pass/fail is public bus identity: rw/address/data.
+    // Opcode-fetch and visible line annotations are reported as secondary metadata.
+    base_lockstep_config.compare.address = true;
     base_lockstep_config.compare.data = true;
+    base_lockstep_config.compare.read_write = true;
+    base_lockstep_config.compare.opcode_fetch = false;
     base_lockstep_config.compare.registers_on_fetch = false;
 
     tools6502::LockstepScenarioConfig scenario_config{};
@@ -284,10 +297,13 @@ int interrupt_precision::run_nmi_irq_pulse_sweep(int argc,
         bool opcode_passed = true;
 
         for (const auto& test : tests) {
-            auto lockstep_config = base_lockstep_config;
+            auto unchanged_lockstep_config = base_lockstep_config;
+            auto clean_lockstep_config = base_lockstep_config;
+            clean_lockstep_config.memory = tools6502::MemoryFill{context.setup_memory_fill};
             auto runner = runner_factory();
+            bool next_scenario_requires_clean_memory = false;
 
-            if (!runner->setup(test, lockstep_config)) {
+            if (!runner->setup(test, unchanged_lockstep_config)) {
                 opcode_passed = false;
                 ++stats.scenarios_total;
                 ++stats.scenarios_failed;
@@ -309,6 +325,36 @@ int interrupt_precision::run_nmi_irq_pulse_sweep(int argc,
                 continue;
             }
 
+            auto run_checked_scenario = [&](bool nmi,
+                                            std::size_t pulse_start,
+                                            std::size_t pulse_length) {
+                const bool used_recovery_clear = next_scenario_requires_clean_memory;
+                if (next_scenario_requires_clean_memory) {
+                    ++stats.failure_recovery_memory_clears;
+                    runner = runner_factory();
+                    runner->setup(test, clean_lockstep_config);
+                    next_scenario_requires_clean_memory = false;
+                }
+
+                const bool passed = run_one_scenario(*runner,
+                                                     test,
+                                                     nmi,
+                                                     pulse_start,
+                                                     pulse_length,
+                                                     scenario_config,
+                                                     stats,
+                                                     opcode_stats,
+                                                     first_failure);
+
+                if (used_recovery_clear && passed) {
+                    runner->setup(test, unchanged_lockstep_config);
+                }
+                if (!passed) {
+                    opcode_passed = false;
+                    next_scenario_requires_clean_memory = true;
+                }
+            };
+
             for (std::size_t pulse_start = 0u;
                  pulse_start <= max_pulse_start_cycle;
                  ++pulse_start) {
@@ -317,28 +363,8 @@ int interrupt_precision::run_nmi_irq_pulse_sweep(int argc,
                 for (std::size_t pulse_length = min_pulse_length;
                      pulse_length <= max_pulse_length;
                      ++pulse_length) {
-                    if (!run_one_scenario(*runner,
-                                          test,
-                                          true,
-                                          pulse_start,
-                                          pulse_length,
-                                          scenario_config,
-                                          stats,
-                                          opcode_stats,
-                                          first_failure)) {
-                        opcode_passed = false;
-                    }
-                    if (!run_one_scenario(*runner,
-                                          test,
-                                          false,
-                                          pulse_start,
-                                          pulse_length,
-                                          scenario_config,
-                                          stats,
-                                          opcode_stats,
-                                          first_failure)) {
-                        opcode_passed = false;
-                    }
+                    run_checked_scenario(true, pulse_start, pulse_length);
+                    run_checked_scenario(false, pulse_start, pulse_length);
                 }
             }
         }
@@ -368,6 +394,7 @@ int interrupt_precision::run_nmi_irq_pulse_sweep(int argc,
                   << " testcases=" << opcode_stats.testcases
                   << " scenarios=" << opcode_stats.scenarios
                   << " failures=" << opcode_stats.failures
+                  << " secondary=" << opcode_stats.secondary.total
                   << '\n' << std::flush;
     }
 
@@ -394,6 +421,11 @@ int interrupt_precision::run_nmi_irq_pulse_sweep(int argc,
               << " fail=" << stats.nmi_scenarios_failed << '\n'
               << "  IRQ:       total=" << stats.irq_scenarios_total
               << " fail=" << stats.irq_scenarios_failed << '\n'
+              << "  failure recovery memory clears: " << stats.failure_recovery_memory_clears << '\n'
+              << "  secondary metadata mismatches: total=" << stats.secondary.total
+              << " fetch_tag=" << stats.secondary.opcode_fetch
+              << " irq_line=" << stats.secondary.irq_line
+              << " nmi_line=" << stats.secondary.nmi_line << '\n'
               << "  detail log: " << detail_log_path << '\n';
 
     if (first_failure.set) {

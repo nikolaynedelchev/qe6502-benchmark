@@ -38,6 +38,7 @@ struct GroupStats
     std::size_t brk_irq_first_handler_fetches = 0u;
     std::size_t nmi_handler_fetches = 0u;
     std::size_t brk_irq_handler_fetches = 0u;
+    interrupt_precision::SecondaryMismatchStats secondary{};
 };
 
 struct SummaryStats
@@ -52,6 +53,7 @@ struct SummaryStats
     std::size_t brk_irq_first_handler_fetches = 0u;
     std::size_t nmi_handler_fetches = 0u;
     std::size_t brk_irq_handler_fetches = 0u;
+    interrupt_precision::SecondaryMismatchStats secondary{};
 };
 
 struct FirstFailure
@@ -246,7 +248,9 @@ tools6502::LockstepConfig make_lockstep_config(std::uint8_t setup_memory_fill)
     lockstep_config.compare.address = true;
     lockstep_config.compare.data = true;
     lockstep_config.compare.read_write = true;
-    lockstep_config.compare.opcode_fetch = true;
+    // Primary precision pass/fail is public bus identity: rw/address/data.
+    // Opcode-fetch and visible line annotations are reported as secondary metadata.
+    lockstep_config.compare.opcode_fetch = false;
     lockstep_config.compare.registers_on_fetch = false;
     return lockstep_config;
 }
@@ -264,6 +268,10 @@ void record_result(const tools6502::LockstepScenarioResult& result,
 {
     ++summary.scenarios_total;
     ++group.scenarios;
+
+    const auto secondary = interrupt_precision::count_secondary_mismatches(result);
+    interrupt_precision::add_secondary_mismatches(summary.secondary, secondary);
+    interrupt_precision::add_secondary_mismatches(group.secondary, secondary);
 
     const auto first_handler = observe_first_handler_fetch(result);
     if (first_handler == FirstHandlerFetch::Nmi) {
@@ -651,8 +659,10 @@ int interrupt_precision::run_interrupt_arbitration(const SuiteContext& context,
         return 2;
     }
     detail_log << "core\tmodel\tsuite\tgroup\troot_opcode\tmnemonic\taddressing_mode\tlegal_nmos\t"
-               << "scenarios\tfailures\tnmi_first_handler_fetches\tbrk_irq_first_handler_fetches\t"
-               << "nmi_handler_fetches\tbrk_irq_handler_fetches\thijacks\tstatus\n";
+               << "scenarios\tfailures\tsecondary_mismatches\tsecondary_fetch_tag\t"
+               << "secondary_irq_line\tsecondary_nmi_line\t"
+               << "expected_left_nmi_first_handler_fetches\texpected_left_brk_irq_first_handler_fetches\t"
+               << "expected_left_nmi_handler_fetches\texpected_left_brk_irq_handler_fetches\thijacks\tstatus\n";
 
     SummaryStats summary{};
     FirstFailure first_failure{};
@@ -684,6 +694,10 @@ int interrupt_precision::run_interrupt_arbitration(const SuiteContext& context,
                    << interrupt_precision::yes_no(metadata.legal_nmos) << '	'
                    << group.scenarios << '	'
                    << group.failures << '	'
+                   << group.secondary.total << '	'
+                   << group.secondary.opcode_fetch << '	'
+                   << group.secondary.irq_line << '	'
+                   << group.secondary.nmi_line << '	'
                    << group.nmi_first_handler_fetches << '	'
                    << group.brk_irq_first_handler_fetches << '	'
                    << group.nmi_handler_fetches << '	'
@@ -694,11 +708,12 @@ int interrupt_precision::run_interrupt_arbitration(const SuiteContext& context,
         std::cout << name << ": " << (group_passed ? "PASS" : "FAIL")
                   << " scenarios=" << group.scenarios
                   << " failures=" << group.failures
+                  << " secondary=" << group.secondary.total
                   << " hijacks=" << hijacks
-                  << " nmi_first_handler_fetches=" << group.nmi_first_handler_fetches
-                  << " brk_irq_first_handler_fetches=" << group.brk_irq_first_handler_fetches
-                  << " nmi_handler_fetches=" << group.nmi_handler_fetches
-                  << " brk_irq_handler_fetches=" << group.brk_irq_handler_fetches
+                  << " expected_left_nmi_first_handler_fetches=" << group.nmi_first_handler_fetches
+                  << " expected_left_brk_irq_first_handler_fetches=" << group.brk_irq_first_handler_fetches
+                  << " expected_left_nmi_handler_fetches=" << group.nmi_handler_fetches
+                  << " expected_left_brk_irq_handler_fetches=" << group.brk_irq_handler_fetches
                   << '\n' << std::flush;
     };
 
@@ -790,10 +805,14 @@ int interrupt_precision::run_interrupt_arbitration(const SuiteContext& context,
               << "  scenarios: total=" << summary.scenarios_total
               << " pass=" << summary.scenarios_passed
               << " fail=" << summary.scenarios_failed << '\n'
-              << "  first handler fetches: nmi=" << summary.nmi_first_handler_fetches
+              << "  expected-left first handler fetches: nmi=" << summary.nmi_first_handler_fetches
               << " brk_irq=" << summary.brk_irq_first_handler_fetches << '\n'
-              << "  all handler fetches:   nmi=" << summary.nmi_handler_fetches
+              << "  expected-left all handler fetches:   nmi=" << summary.nmi_handler_fetches
               << " brk_irq=" << summary.brk_irq_handler_fetches << '\n'
+              << "  secondary metadata mismatches: total=" << summary.secondary.total
+              << " fetch_tag=" << summary.secondary.opcode_fetch
+              << " irq_line=" << summary.secondary.irq_line
+              << " nmi_line=" << summary.secondary.nmi_line << '\n'
               << "  detail log: " << detail_log_path << '\n';
 
     if (first_failure.set) {

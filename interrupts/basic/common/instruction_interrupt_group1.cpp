@@ -7,6 +7,7 @@
 #include <exception>
 #include <fstream>
 #include <functional>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -204,6 +205,65 @@ void test_nmi_after_reset(const InstructionCpuFactory& factory)
     auto cpu = make_loaded_cpu(factory, compile_simple_loop());
     trigger_nmi_until(*cpu, marker, 0x11u, 8u);
     require(cpu->read(marker) == 0x11u, name, "NMI handler did not run");
+}
+
+void require_state_unchanged(const instruction_cpu_state& before,
+                             const instruction_cpu_state& after,
+                             std::string_view name,
+                             std::string_view signal_name)
+{
+    require(after.pc == before.pc, name, std::string(signal_name) + " assertion changed PC synchronously");
+    require(after.a == before.a, name, std::string(signal_name) + " assertion changed A synchronously");
+    require(after.x == before.x, name, std::string(signal_name) + " assertion changed X synchronously");
+    require(after.y == before.y, name, std::string(signal_name) + " assertion changed Y synchronously");
+    require(after.s == before.s, name, std::string(signal_name) + " assertion changed S synchronously");
+    require(after.p == before.p, name, std::string(signal_name) + " assertion changed P synchronously");
+}
+
+void test_assert_nmi_for_not_synchronous(const InstructionCpuFactory& factory)
+{
+    constexpr std::string_view name = "assert_nmi_for is not synchronous";
+    auto cpu = make_loaded_cpu(factory, compile_simple_loop());
+    const auto before_state = cpu->state();
+    const auto before_marker = cpu->read(marker);
+
+    cpu->assert_nmi_for(1);
+
+    require_state_unchanged(before_state, cpu->state(), name, "NMI");
+    require(cpu->read(marker) == before_marker, name, "NMI handler changed memory before step_instruction");
+
+    run_to_marker(*cpu, marker, 0x11u, 8u);
+    require(cpu->read(marker) == 0x11u, name, "deferred NMI did not run after step_instruction");
+}
+
+void test_assert_irq_for_not_synchronous(const InstructionCpuFactory& factory)
+{
+    constexpr std::string_view name = "assert_irq_for is not synchronous";
+    const auto program = base_program()
+        .org(main_addr, "main")
+            .cli()
+            .nop()
+            .jmp("main")
+        .org(irq_addr, "irq_handler")
+            .lda(0x22u)
+            .sta(asm6502::absolute, marker)
+            .rti()
+        .org(nmi_addr, "nmi_handler")
+            .rti()
+        .end()
+        .compile();
+    auto cpu = make_loaded_cpu(factory, program);
+    step(*cpu); // CLI complete before IRQ assertion.
+    const auto before_state = cpu->state();
+    const auto before_marker = cpu->read(marker);
+
+    cpu->assert_irq_for(1);
+
+    require_state_unchanged(before_state, cpu->state(), name, "IRQ");
+    require(cpu->read(marker) == before_marker, name, "IRQ handler changed memory before step_instruction");
+
+    run_to_marker(*cpu, marker, 0x22u, 8u);
+    require(cpu->read(marker) == 0x22u, name, "deferred IRQ did not run after step_instruction");
 }
 
 void test_irq_masked_by_sei(const InstructionCpuFactory& factory)
@@ -667,6 +727,8 @@ int run_instruction_interrupt_group1(const InstructionCpuFactory& factory)
         {"I flag after reset", test_i_after_reset},
         {"IRQ masked after reset", test_irq_masked_after_reset},
         {"NMI accepted after reset", test_nmi_after_reset},
+        {"assert_nmi_for is not synchronous", test_assert_nmi_for_not_synchronous},
+        {"assert_irq_for is not synchronous", test_assert_irq_for_not_synchronous},
         {"IRQ masked when I=1", test_irq_masked_by_sei},
         {"IRQ accepted when I=0", test_irq_accepted_when_clear},
         {"IRQ deasserted before unmask", test_irq_deasserted_before_unmask},

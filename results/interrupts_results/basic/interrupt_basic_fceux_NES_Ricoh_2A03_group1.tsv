@@ -3,6 +3,8 @@ group1	fceux	NES/Ricoh 2A03	reset vector routing	pass
 group1	fceux	NES/Ricoh 2A03	I flag after reset	pass	
 group1	fceux	NES/Ricoh 2A03	IRQ masked after reset	pass	
 group1	fceux	NES/Ricoh 2A03	NMI accepted after reset	pass	
+group1	fceux	NES/Ricoh 2A03	assert_nmi_for is not synchronous	pass	
+group1	fceux	NES/Ricoh 2A03	assert_irq_for is not synchronous	pass	
 group1	fceux	NES/Ricoh 2A03	IRQ masked when I=1	pass	
 group1	fceux	NES/Ricoh 2A03	IRQ accepted when I=0	pass	
 group1	fceux	NES/Ricoh 2A03	IRQ deasserted before unmask	pass	

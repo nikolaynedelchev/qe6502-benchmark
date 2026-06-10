@@ -32,6 +32,7 @@ struct GroupStats
 {
     std::size_t scenarios = 0u;
     std::size_t failures = 0u;
+    interrupt_precision::SecondaryMismatchStats secondary{};
 };
 
 struct SummaryStats
@@ -42,6 +43,7 @@ struct SummaryStats
     std::size_t scenarios_total = 0u;
     std::size_t scenarios_passed = 0u;
     std::size_t scenarios_failed = 0u;
+    interrupt_precision::SecondaryMismatchStats secondary{};
 };
 
 struct FirstFailure
@@ -235,6 +237,10 @@ bool run_one_irq_scenario(tools6502::LockstepScenarioRunner& runner,
     ++summary.scenarios_total;
     ++group_stats.scenarios;
 
+    const auto secondary = interrupt_precision::count_secondary_mismatches(result);
+    interrupt_precision::add_secondary_mismatches(summary.secondary, secondary);
+    interrupt_precision::add_secondary_mismatches(group_stats.secondary, secondary);
+
     if (result.passed) {
         ++summary.scenarios_passed;
         return true;
@@ -268,14 +274,17 @@ int interrupt_precision::run_i_flag_windows(const SuiteContext& context,
         return 2;
     }
     detail_log << "core\tmodel\tsuite\tgroup\topcode\tmnemonic\taddressing_mode\tlegal_nmos\t"
-               << "scenarios\tfailures\tstatus\n";
+               << "scenarios\tfailures\tsecondary_mismatches\tsecondary_fetch_tag\t"
+               << "secondary_irq_line\tsecondary_nmi_line\tstatus\n";
 
     tools6502::LockstepConfig lockstep_config{};
     lockstep_config.memory = tools6502::MemoryFill{context.setup_memory_fill};
     lockstep_config.compare.address = true;
     lockstep_config.compare.data = true;
     lockstep_config.compare.read_write = true;
-    lockstep_config.compare.opcode_fetch = true;
+    // Primary precision pass/fail is public bus identity: rw/address/data.
+    // Opcode-fetch and visible line annotations are reported as secondary metadata.
+    lockstep_config.compare.opcode_fetch = false;
     lockstep_config.compare.registers_on_fetch = false;
 
     tools6502::LockstepScenarioConfig scenario_config{};
@@ -342,11 +351,16 @@ int interrupt_precision::run_i_flag_windows(const SuiteContext& context,
                    << interrupt_precision::yes_no(metadata.legal_nmos) << '	'
                    << group.scenarios << '	'
                    << group.failures << '	'
+                   << group.secondary.total << '	'
+                   << group.secondary.opcode_fetch << '	'
+                   << group.secondary.irq_line << '	'
+                   << group.secondary.nmi_line << '	'
                    << interrupt_precision::pass_fail(group_passed) << '\n';
 
         std::cout << test_case.name << ": " << (group_passed ? "PASS" : "FAIL")
                   << " scenarios=" << group.scenarios
                   << " failures=" << group.failures
+                  << " secondary=" << group.secondary.total
                   << '\n' << std::flush;
     }
 
@@ -357,6 +371,10 @@ int interrupt_precision::run_i_flag_windows(const SuiteContext& context,
               << "  scenarios: total=" << summary.scenarios_total
               << " pass=" << summary.scenarios_passed
               << " fail=" << summary.scenarios_failed << '\n'
+              << "  secondary metadata mismatches: total=" << summary.secondary.total
+              << " fetch_tag=" << summary.secondary.opcode_fetch
+              << " irq_line=" << summary.secondary.irq_line
+              << " nmi_line=" << summary.secondary.nmi_line << '\n'
               << "  detail log: " << detail_log_path << '\n';
 
     if (first_failure.set) {

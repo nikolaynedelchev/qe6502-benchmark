@@ -1,4 +1,4 @@
-core	model	suite	mode	opcode	mnemonic	addressing_mode	legal_nmos	testcases	scenarios	failures	nmi_scenarios	nmi_failures	irq_scenarios	irq_failures	status
+core	model	suite	mode	opcode	mnemonic	addressing_mode	legal_nmos	testcases	scenarios	failures	nmi_scenarios	nmi_failures	irq_scenarios	irq_failures	secondary_mismatches	secondary_fetch_tag	secondary_irq_line	secondary_nmi_line	status
 qe6502	nmos	nmi_irq_pulse_sweep	full	0x00	BRK	implied	yes	1	108	0	54	0	54	0	passed
 qe6502	nmos	nmi_irq_pulse_sweep	full	0x01	ORA	(zero page,X)	yes	1	108	0	54	0	54	0	passed
 qe6502	nmos	nmi_irq_pulse_sweep	full	0x02	???	illegal	no	1	108	0	54	0	54	0	passed

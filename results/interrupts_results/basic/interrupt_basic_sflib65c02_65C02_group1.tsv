@@ -3,6 +3,8 @@ group1	sflib65c02	65C02	reset vector routing	pass
 group1	sflib65c02	65C02	I flag after reset	pass	
 group1	sflib65c02	65C02	IRQ masked after reset	pass	
 group1	sflib65c02	65C02	NMI accepted after reset	pass	
+group1	sflib65c02	65C02	assert_nmi_for is not synchronous	pass	
+group1	sflib65c02	65C02	assert_irq_for is not synchronous	pass	
 group1	sflib65c02	65C02	IRQ masked when I=1	pass	
 group1	sflib65c02	65C02	IRQ accepted when I=0	pass	
 group1	sflib65c02	65C02	IRQ deasserted before unmask	pass	

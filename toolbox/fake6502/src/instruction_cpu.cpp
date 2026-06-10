@@ -50,12 +50,16 @@ public:
         clear_scheduled_irq_deassert();
         clear_scheduled_nmi_deassert();
         irq_asserted_ = false;
+        nmi_pending_ = false;
         fake6502_instruction_reset();
     }
 
     void step_instruction() override
     {
-        if (irq_asserted_) {
+        if (nmi_pending_) {
+            fake6502_instruction_nmi();
+            nmi_pending_ = false;
+        } else if (irq_asserted_) {
             fake6502_instruction_irq();
         }
 
@@ -81,11 +85,12 @@ public:
     void assert_nmi_for(int instruction_count) override
     {
         if (instruction_count <= 0) {
+            nmi_pending_ = false;
             clear_scheduled_nmi_deassert();
             return;
         }
 
-        fake6502_instruction_nmi();
+        nmi_pending_ = true;
         nmi_deassert_at_ = instruction_count_ + static_cast<std::uint64_t>(instruction_count);
         has_nmi_deassert_at_ = true;
     }
@@ -133,6 +138,7 @@ private:
         }
 
         if (has_nmi_deassert_at_ && instruction_count_ >= nmi_deassert_at_) {
+            nmi_pending_ = false;
             clear_scheduled_nmi_deassert();
         }
     }
@@ -143,6 +149,7 @@ private:
     bool has_irq_deassert_at_ = false;
     bool has_nmi_deassert_at_ = false;
     bool irq_asserted_ = false;
+    bool nmi_pending_ = false;
 };
 
 } // namespace

@@ -31,6 +31,19 @@ std::string resolve_detail_log_path(const SuiteContext& context);
 const char* yes_no(bool value) noexcept;
 const char* pass_fail(bool passed) noexcept;
 
+struct SecondaryMismatchStats
+{
+    std::size_t total = 0u;
+    std::size_t opcode_fetch = 0u;
+    std::size_t irq_line = 0u;
+    std::size_t nmi_line = 0u;
+};
+
+SecondaryMismatchStats count_secondary_mismatches(const tools6502::LockstepRunResult& result);
+SecondaryMismatchStats count_secondary_mismatches(const tools6502::LockstepScenarioResult& result);
+void add_secondary_mismatches(SecondaryMismatchStats& destination,
+                              const SecondaryMismatchStats& source) noexcept;
+
 void print_failure_trace(std::ostream& out,
                          const tools6502::LockstepRunResult& result,
                          std::size_t context_before = 4u,

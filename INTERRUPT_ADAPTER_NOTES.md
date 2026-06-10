@@ -19,6 +19,23 @@ An adapter should model this contract as well as the underlying core allows:
 
 A test failure should not be hidden by broadening skip rules unless the core has a clearly documented limitation, such as legal-opcode-only support or missing native IRQ/NMI support.
 
+## Test harness notes as of v43
+
+The basic interrupt tests now include two explicit `IInstructionCpu` contract guards in group1:
+
+- `assert_nmi_for is not synchronous`;
+- `assert_irq_for is not synchronous`.
+
+These guards check that calling `assert_nmi_for(N)` or `assert_irq_for(N)` records the asserted line/event without synchronously changing CPU registers, PC, stack, or handler-visible RAM before the next `step_instruction()` call. They also verify that the deferred assertion is still consumed by later stepping.
+
+The opcode sweep still keeps the same skip policy and still reports real failures, but its output now classifies failure causes instead of mixing all failures into a single bucket. The classes separate synthetic boundary failures, synthetic IRQ-mask failures, testcase bootstrap/setup failures, testcase precondition failures, post-opcode NMI failures, post-opcode IRQ failures, and other unexpected exceptions. The TSV log has a `failure_class` column, and the console summary prints per-class totals.
+
+The synthetic reset-NMI case is now named `first_reset_nmi_reaches_handler` instead of the old over-specific `first_reset_nmi_before_opcode`. That name is intentionally weaker: the test checks that the first reset-time NMI reaches the handler and that the continuation marker did not run, but it should not be described as a strict proof that every target opcode had zero internal side effects before NMI sampling. The prefixed NMI/IRQ cases now record the interrupt stack PC and require the interrupt to occur at the prefix-JMP or target-fetch boundary, so those cases better detect if the target opcode has actually run before the handler.
+
+The precision `nmi_irq_pulse_sweep` keeps its normal `MemoryUnchanged` reuse for successful scenario sequences. When a scenario fails, only the following scenario is re-setup with a clean `MemoryFill` image to prevent failure-cascade contamination; if that recovery scenario passes, the runner returns to the normal unchanged-memory mode. The summary reports how many recovery memory clears were needed.
+
+The precision `interrupt_arbitration` TSV and console labels now mark handler-fetch counters as `expected_left_*`, because those counters are derived from the left/reference side of the lockstep comparison.
+
 ## qe6502
 
 Status: reference implementation, clean integration.
@@ -55,7 +72,7 @@ Important adapter choices:
 Observed result:
 
 - Group1, group2, and group3 pass.
-- The opcode sweep reports 12 failures, all in `first_reset_nmi_before_opcode` for specific illegal opcodes: `$03 $13 $23 $33 $43 $53 $63 $73 $C3 $D3 $E3 $F3`.
+- The opcode sweep reports 12 failures, all in `first_reset_nmi_reaches_handler` for specific illegal opcodes: `$03 $13 $23 $33 $43 $53 $63 $73 $C3 $D3 $E3 $F3`.
 - Legal opcodes pass in the sweep.
 
 Risk notes:
@@ -74,15 +91,16 @@ Important adapter choices:
 
 - `step_instruction()` calls the native instruction step once.
 - Held IRQ is represented by adapter state. Before each instruction step, if IRQ is currently asserted, the adapter calls the native IRQ entrypoint and then executes the instruction-level step.
-- NMI is represented as an assertion event by calling the native NMI entrypoint when `assert_nmi_for(N)` is requested.
+- NMI is represented as an adapter-side pending assertion. `assert_nmi_for(N)` records the event without synchronously changing CPU state; the native NMI entrypoint is consumed at the beginning of the next `step_instruction()`.
 - The adapter still uses instruction-count deassert bookkeeping so test code sees the same duration contract as with cycle-level cores.
 
-Observed result: all basic groups and opcode sweep pass.
+Observed result: all basic groups and opcode sweep pass after deferring the native NMI entrypoint to `step_instruction()` instead of running it synchronously inside `assert_nmi_for(N)`.
 
 Risk notes:
 
 - This is not a pin-accurate interrupt adapter. It is a best mapping from immediate interrupt entrypoints to the instruction-level interface.
-- The current basic tests accept this mapping, but future tests that depend on true line sampling inside a specific instruction would not be appropriate for this adapter.
+- The current basic tests accept this mapping, including the guard that `assert_nmi_for(N)` and `assert_irq_for(N)` must not synchronously mutate CPU state before the next `step_instruction()`.
+- Future tests that depend on true line sampling inside a specific instruction would not be appropriate for this adapter.
 
 ## AppleWin
 
@@ -430,3 +448,24 @@ Risk notes:
 - Status: added in v41.
 - Purpose: runs the complete instruction-level basic interrupt collection for every core that currently has a real `benchmark6502::IInstructionCpu` adapter.
 - Inclusion policy: it includes integrated cores only. Cores documented as excluded because they lack a clean native IRQ/NMI adapter surface are intentionally not included.
+
+## v44 precision interrupt comparison note
+
+v44 changes the precision interrupt suites to separate primary public-bus identity from secondary trace metadata differences.
+
+Primary precision pass/fail now treats the externally visible bus tuple as the important lockstep signal:
+
+- read/write direction;
+- address;
+- data.
+
+Opcode-fetch classification and visible IRQ/NMI line annotation differences are still collected, but they are reported as secondary metadata counters rather than being mixed into the primary bus mismatch count. The detail TSV files now include:
+
+- `secondary_mismatches`;
+- `secondary_fetch_tag`;
+- `secondary_irq_line`;
+- `secondary_nmi_line`.
+
+This is especially useful for cycle-level adapters such as CLK, where a row can have the same public bus read/write/address/data but disagree on whether that row is annotated as `FETCH`. Those cases are now visible as secondary metadata differences. They should not be described as vector/address/data failures unless a primary public-bus mismatch also occurs.
+
+The strict precision suites still fail on real bus divergence. Secondary metadata differences are diagnostic context and do not by themselves make a scenario fail.

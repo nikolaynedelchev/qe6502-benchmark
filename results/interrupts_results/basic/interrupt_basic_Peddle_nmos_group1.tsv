@@ -3,6 +3,8 @@ group1	Peddle	nmos	reset vector routing	pass
 group1	Peddle	nmos	I flag after reset	pass	
 group1	Peddle	nmos	IRQ masked after reset	pass	
 group1	Peddle	nmos	NMI accepted after reset	fail	NMI handler did not run
+group1	Peddle	nmos	assert_nmi_for is not synchronous	fail	deferred NMI did not run after step_instruction
+group1	Peddle	nmos	assert_irq_for is not synchronous	fail	deferred IRQ did not run after step_instruction
 group1	Peddle	nmos	IRQ masked when I=1	pass	
 group1	Peddle	nmos	IRQ accepted when I=0	fail	IRQ handler did not run with I clear
 group1	Peddle	nmos	IRQ deasserted before unmask	pass	
