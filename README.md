@@ -23,6 +23,17 @@ The report is based on the repository contents in this snapshot, especially:
 
 All performance numbers below are from the printed result files. They should be read as measurements for this exact build/run environment, not as universal hardware-independent speeds. Integration notes are based on the wrappers and vendored core APIs visible in this repository snapshot.
 
+
+## How to read these results
+
+This benchmark suite was created during `qe6502` development, but it was not written to make `qe6502` look correct. It was written to find mismatches.
+
+The project tests several layers of behavior: functional ROM execution, instruction results, cycle counts, bus traces, CPU-model differences, and later detailed interrupt behavior. These tests exposed real bugs and corner cases during `qe6502` development, and they are included here so other emulator authors can use the same scenarios to investigate their own cores.
+
+When possible, the expected behavior comes from external sources such as SingleStep testcase corpora and `perfect6502`-style netlist lockstep comparisons, not from `qe6502` itself. A clean `qe6502` result is therefore a validation result against those tested scenarios, not a self-referential pass.
+
+During integration, each external core was given individual attention and the adapters were written to use the core as fairly and correctly as possible for these tests. Even so, the benchmark cannot guarantee that every adapter or usage pattern is 100% optimal or equivalent to how the original author would integrate the core. Some mismatches may therefore reflect adapter limitations, API mismatches, or harness usage issues rather than defects in the core itself.
+
 # Part I — Objective data and statistics
 
 ## Build/runtime environment for the supplied result files
@@ -433,3 +444,133 @@ This appendix intentionally lists patterns rather than every opcode for broad-fa
 - To compare **65C02 behavior**, read WDC, Rockwell, and Synertek/ST separately; do not collapse them into one generic CMOS score.
 
 The most compact way to inspect a specific core is: Klaus row -> SingleStep headline row -> failed-case detail row -> core-by-core practical profile -> ranking comment.
+
+# Appendix C — Interrupt test results added after the main evaluation
+
+This appendix summarizes the interrupt-focused results that were added after the main smoke, Klaus, SingleStep, speed, and adoption sections above. It is intentionally a separate appendix so that the earlier analysis and overall ranking remain readable as originally written. The full interrupt deep-dive and adapter notes are preserved in [`results/interrupts_results/INTERRUPT_ADAPTER_NOTES.md`](results/interrupts_results/INTERRUPT_ADAPTER_NOTES.md); this README section keeps only the most important conclusions.
+
+## What the interrupt tests measure
+
+The interrupt tests are split into two families with different goals.
+
+| Family | Scope | What a pass means | What it does not prove |
+| --- | --- | --- | --- |
+| **Basic instruction-level tests** | All integrated `IInstructionCpu` adapters. Group1 has 19 tests, group2 has 13, group3 has 4. The opcode sweep has 1536 rows, with 114 intentionally skipped KIL/JAM or unstable NMOS rows. | The adapter/core handles reset-vector state, IRQ masking, NMI acceptance, stack frames, pushed flags, BRK/RTI behavior, interrupt vectors, held-line duration, priority, and post-opcode IRQ/NMI probes at instruction boundaries. | Cycle-exact bus timing, BRK/NMI hijack windows, or every transistor-level interrupt edge case. |
+| **Precision bus/lockstep tests** | Cycle/bus-visible interrupt candidates: `qe6502`, `floooh/chips`, `CLK`, `O2`, and `Peddle`. The suites include I-flag windows, interrupt arbitration, and opcode pulse sweeps. | The target matches the reference public bus stream for the tested edge cases. The primary comparison is read/write direction, address, and data. | Applicability to instruction-only cores. Precision failures can still include adapter boundary issues, not only upstream CPU design errors. |
+
+For the precision tests, opcode-fetch tags and visible IRQ/NMI line annotations are tracked as **secondary metadata**. If the public bus tuple matches but only a `FETCH` tag differs, that is reported separately and should not be confused with a wrong vector, wrong address, wrong data byte, or extra/missing interrupt sequence.
+
+The opcode sweep also has an important interpretation rule: a `testcase_precondition` failure usually means the core did not execute the selected NMOS opcode testcase in the expected way before the interrupt probe. That is useful diagnostic data, but it is not the same thing as a direct IRQ/NMI failure.
+
+## Basic instruction-level interrupt overview
+
+| Core | Grouped basic tests | Basic opcode sweep | Interrupt-specific reading |
+| --- | ---: | ---: | --- |
+| `qe6502` | 19/19 + 13/13 + 4/4 | 1422 pass, 0 fail, 114 skip | Clean reference result for the basic suite. |
+| `AppleWin` | 19/19 + 13/13 + 4/4 | 1422 pass, 0 fail, 114 skip | Clean instruction-level result; do not read it as a cycle/bus precision claim. |
+| `MAME` | 19/19 + 13/13 + 4/4 | 1422 pass, 0 fail, 114 skip | Clean instruction-level result through the current standalone adapter; not a bus-trace target here. |
+| `ares` | 19/19 + 13/13 + 4/4 | 1422 pass, 0 fail, 114 skip | Clean instruction-level interrupt adapter result, despite the separate SingleStep caveats discussed earlier. |
+| `fake6502` | 19/19 + 13/13 + 4/4 | 1422 pass, 0 fail, 114 skip | Clean after mapping the immediate interrupt API onto deferred instruction-boundary assertions. |
+| `FCEUX` | 19/19 + 13/13 + 4/4 | 1422 pass, 0 fail, 114 skip | Clean NES/Ricoh-style instruction-level result; not a generic full-NMOS precision claim. |
+| `gianlucag_mos6502` | 19/19 + 13/13 + 4/4 | 1422 pass, 0 fail, 114 skip | Clean instruction-level basic interrupt result. |
+| `floooh/chips` | 19/19 + 13/13 + 4/4 | 1410 pass, 12 fail, 114 skip | Grouped and legal-opcode basic interrupt behavior passes. The 12 failures are illegal-opcode synthetic-boundary rows, not broad IRQ/NMI breakage. |
+| `CLK P6502` | 18/19 + 13/13 + 4/4 | 1185 pass, 237 fail, 114 skip | Mostly good grouped behavior, but one `IRQ RTI resumes` failure and many post-opcode IRQ probe failures show remaining boundary/acceptance risk. |
+| `O2` | 17/19 + 13/13 + 3/4 | 912 pass, 510 fail, 114 skip | Some grouped behavior works, but BRK/RTI, NMI live-I status, short IRQ duration, and many synthetic/post-opcode rows fail. Current interrupt integration is noisy. |
+| `Peddle` | 8/19 + 1/13 + 1/4 | 238 pass, 1184 fail, 114 skip | The current interrupt adapter is not a passing implementation of the shared instruction-level contract. Treat these as integration/investigation results. |
+| `vrEmu6502` | 19/19 + 13/13 + 4/4 | 1420 pass, 2 fail, 114 skip | Grouped interrupt behavior passes. The only failures are `$6C JMP (abs)` NMOS indirect-wrap testcase-precondition rows. |
+| `chris_pikul_mos6502` | 19/19 + 13/13 + 4/4 | 1262 pass, 160 fail, 114 skip | Grouped and legal-opcode interrupt behavior passes. Failures are undocumented NMOS opcode testcase-precondition rows. |
+| `olcNES` | 19/19 + 13/13 + 4/4 | 1262 pass, 160 fail, 114 skip | Same pattern as `chris_pikul_mos6502`; legal/basic interrupt behavior passes, undocumented NMOS opcode flow differs. |
+| `sflib6502` | 19/19 + 13/13 + 4/4 | 1282 pass, 140 fail, 114 skip | Grouped interrupt behavior passes. Sweep failures are testcase-precondition rows, mostly undocumented opcodes plus `$6C JMP (abs)`. |
+| `sflib65c02` | 19/19 + 13/13 + 4/4 | 1282 pass, 140 fail, 114 skip | Grouped interrupt behavior passes, but the current sweep is NMOS-oriented and should be considered diagnostic rather than a 65C02-specific interrupt conformance result. |
+| `altirrasdl` | not integrated | not integrated | Excluded from this interrupt matrix because the current wrapper has no clean public IRQ/NMI control surface for the shared adapter contract. |
+
+The clean-pass group for the basic instruction-level interrupt contract is therefore `qe6502`, `AppleWin`, `MAME`, `ares`, `fake6502`, `FCEUX`, and `gianlucag_mos6502`. Several other cores also have clean grouped behavior, but retain opcode/testcase diagnostic failures that should remain visible.
+
+## Precision interrupt overview
+
+Precision interrupt tests are intentionally much stricter and only apply to cores with useful cycle/bus visibility in this benchmark tree.
+
+| Core | I-flag windows | Interrupt arbitration | Pulse sweep | Interpretation |
+| --- | ---: | ---: | ---: | --- |
+| `qe6502` | 0/210 primary failures, secondary=0 | 0/132 primary failures, secondary=0 | 0/35856 failures | Full pass in the current precision interrupt suite. |
+| `floooh/chips` | 0/210 primary failures, secondary=0 | 53/132 primary failures, secondary=0 | 2061/35856 failures | Simple I-flag IRQ windows match, but precision BRK/NMI hijack, NMI priority/lost-window, and illegal-opcode pulse windows diverge. |
+| `CLK P6502` | 46/210 primary failures, secondary=68 | 34/132 primary failures, secondary=44 | 3431/35856 failures | Real bus mismatches remain, but many additional differences are lower-severity fetch-tag metadata mismatches. NMI pulse windows and branch opcodes are prominent failure clusters. |
+| `O2` | 82/210 primary failures, secondary=39 | 73/132 primary failures, secondary=21 | 23987/35856 failures | Heavy precision divergence. Secondary fetch-tag noise exists but is small compared with primary bus mismatches. |
+| `Peddle` | 86/210 primary failures, secondary=0 | 48/132 primary failures, secondary=0 | 19182/35856 failures | Heavy precision divergence with no secondary-metadata explanation in the suites that report secondary columns. |
+
+The v45 pulse-sweep TSV output has a reporting caveat: the header contains secondary metadata columns, but the per-opcode rows do not yet emit those fields. The primary pulse-sweep failure counts above are still usable, but per-opcode secondary pulse metadata should not be relied on until the writer is fixed.
+
+## Per-core interrupt notes
+
+| Core | Most important interrupt conclusion |
+| --- | --- |
+| `qe6502` | Current reference for both basic instruction-level and precision bus/lockstep interrupt behavior. It passes all grouped, opcode-sweep, I-flag, arbitration, and pulse-window tests in this result set. |
+| `AppleWin` | Strong basic instruction-level interrupt result through the current adapter. It remains a flat-memory emulator extraction, so the result should not be upgraded into a bus-cycle claim. |
+| `MAME` | Strong basic instruction-level interrupt result. This is valuable because of MAME's CPU-family breadth, but the current adapter is not a host-visible precision bus target. |
+| `ares` | Clean basic interrupt adapter result. This is separate from the older SingleStep adapter weaknesses, which should not be mixed into the interrupt appendix. |
+| `fake6502` | Clean basic result after the adapter defers immediate native IRQ/NMI entry until `step_instruction()`, matching the shared assertion-duration contract. |
+| `FCEUX` | Clean basic result for the NES/Ricoh-style path. Keep it separate from full generic NMOS claims, just as in the Klaus section. |
+| `gianlucag_mos6502` | Clean basic instruction-level result with no remaining interrupt-specific caveat in this suite. |
+| `floooh/chips` | Better than a raw fail count suggests: grouped basic and legal basic sweep pass. Precision still exposes real public-bus differences in BRK/NMI hijack and nested/lost-NMI timing. |
+| `CLK P6502` | A mixed result. The core remains very strong in the non-interrupt SingleStep data above, but interrupt tests reveal post-opcode IRQ and precision boundary issues. Fetch-tag-only mismatches are now separated from real public-bus mismatches. |
+| `O2` | Current interrupt integration is not clean. It has some working grouped behavior, but status/BRK/short-duration problems and very broad precision divergence make it experimental for interrupts. |
+| `Peddle` | Current interrupt integration is the weakest among the precision candidates. Failures are broad enough that they should be treated as adapter/core-investigation data, not a final upstream-core verdict. |
+| `vrEmu6502` | Grouped interrupts pass. The two opcode-sweep failures are `$6C JMP (abs)` NMOS testcase-precondition issues, not direct IRQ/NMI failures. |
+| `chris_pikul_mos6502` | Grouped and legal-opcode basic interrupts pass. The remaining sweep failures are undocumented NMOS opcode testcase-flow differences. |
+| `olcNES` | Similar to `chris_pikul_mos6502`: legal/basic interrupts pass, undocumented NMOS opcode behavior is not complete. This is not surprising for a NES-style educational core. |
+| `sflib6502` | Grouped interrupts pass. The sweep failures are diagnostic opcode-flow differences, mostly undocumented opcodes plus the NMOS `$6C` indirect-wrap testcase. |
+| `sflib65c02` | Grouped interrupts pass, but the current interrupt opcode sweep is NMOS-oriented; a future 65C02-specific sweep would be a fairer measure. |
+| `altirrasdl` | Not scored for interrupts because a clean public IRQ/NMI adapter surface is missing. This should be treated as not applicable, not as a failed interrupt result. |
+
+## Interrupt-only ranking summary
+
+This ranking is deliberately limited to the interrupt test data above. It is not meant to replace the main overall ranking, which also considers speed, general SingleStep results, bus visibility, model breadth, and adoption tradeoffs.
+
+| Interrupt tier | Cores | Reading |
+| --- | --- | --- |
+| **Reference pass** | `qe6502` | Passes both the instruction-level basic suite and the precision bus/lockstep interrupt suite. |
+| **Clean basic instruction-level pass** | `AppleWin`, `MAME`, `ares`, `fake6502`, `FCEUX`, `gianlucag_mos6502` | Strong practical interrupt behavior at the shared instruction-boundary adapter level. No precision claim unless a separate precision adapter exists. |
+| **Clean grouped behavior with opcode/testcase caveats** | `vrEmu6502`, `chris_pikul_mos6502`, `olcNES`, `sflib6502`, `sflib65c02` | IRQ/NMI grouped behavior is good. Reported sweep failures are mostly opcode/testcase-precondition limitations and should not be presented as direct interrupt failures. |
+| **Strong basic result but precision edge failures** | `floooh/chips` | Basic behavior is good, including legal opcode sweep rows, but precision tests expose real NMI/BRK arbitration and lost-window differences. |
+| **Promising but not clean** | `CLK P6502` | Many basic cases pass and some mismatches are only fetch-tag metadata, but real interrupt-boundary public-bus failures remain. |
+| **Noisy / experimental interrupt integrations** | `O2`, `Peddle` | Current results are useful for debugging adapters and core edge behavior, but they are not clean interrupt-conformance passes. |
+| **Not applicable** | `altirrasdl` | Excluded until a clean public IRQ/NMI control API is available. |
+
+The main practical takeaway is that raw interrupt fail counts need interpretation. A core with grouped pass plus `testcase_precondition` opcode-sweep failures is in a very different situation from a core with broad grouped failures or precision public-bus divergence. The most important split for users is: instruction-level interrupt behavior, opcode/testcase compatibility, and true precision bus-window behavior are separate questions.
+
+
+# Appendix D — External project and test-suite links
+
+This section collects external links for the CPU cores and major external test suites referenced in this report. These links are provided for convenience; the benchmark results above are based on the vendored/integrated snapshots in this repository, not necessarily on the current upstream HEAD of each project.
+
+## CPU core / emulator project links
+
+| Core in this report | External project link | Notes |
+| --- | --- | --- |
+| `qe6502` | [nikolaynedelchev/qe6502](https://github.com/nikolaynedelchev/qe6502) | Main project behind this benchmark. |
+| `clk` / Clock Signal | [TomHarte/CLK](https://github.com/TomHarte/CLK) | Clock Signal / CLK emulator project. |
+| `floooh/chips` | [floooh/chips](https://github.com/floooh/chips) | Standalone C header chip/system emulators; this benchmark uses the `m6502` core. |
+| `Peddle` | [dirkwhoffmann/Peddle](https://github.com/dirkwhoffmann/Peddle) | Standalone Peddle repository. See also the [Peddle project page](https://dirkwhoffmann.github.io/Peddle/index.html). |
+| `O2` | [ericssonpaul/O2](https://github.com/ericssonpaul/O2) | Cycle-oriented 6502 emulator. |
+| `vrEmu6502` | [visrealm/vrEmu6502](https://github.com/visrealm/vrEmu6502) | C99 6502/65C02 emulator library. |
+| `MAME` | [mamedev/mame](https://github.com/mamedev/mame) | Multi-system emulation framework. |
+| `AppleWin` | [AppleWin/AppleWin](https://github.com/AppleWin/AppleWin) | Apple II emulator for Windows. |
+| `fake6502` | [omarandlorraine/fake6502](https://github.com/omarandlorraine/fake6502) | Small C 6502 emulator library. |
+| `fake65c02` | [C-Chads/MyLittle6502](https://github.com/C-Chads/MyLittle6502) | Fake6502-derived project including `fake65c02`; archived upstream. |
+| `gianlucag_mos6502` | [gianlucag/mos6502](https://github.com/gianlucag/mos6502) | C++ MOS 6502 emulator. |
+| `sflib6502` | [ShonFrazier/lib6502](https://github.com/ShonFrazier/lib6502) | lib6502 fork used as the source project for the `sflib6502` comparison. |
+| `sflib65c02` | [ShonFrazier/lib6502](https://github.com/ShonFrazier/lib6502) | Same family as `sflib6502`, adapted here as the 65C02 comparison target. |
+| `olcNES` | [OneLoneCoder/olcNES](https://github.com/OneLoneCoder/olcNES) | NES emulator tutorial project; this benchmark uses the 6502 CPU component. |
+| `chris_pikul_mos6502` | [chris-pikul/mos6502](https://github.com/chris-pikul/mos6502) | C++ MOS 6502 emulator. |
+| `ares` | [ares-emulator/ares](https://github.com/ares-emulator/ares) | Multi-system emulator project. |
+| `AltirraSDL` / `altirrasdl` | [ilmenit/AltirraSDL](https://github.com/ilmenit/AltirraSDL) | Portable SDL-based Altirra fork used for this comparison. |
+| `FCEUX` | [TASEmulators/fceux](https://github.com/TASEmulators/fceux) | NES emulator project. |
+
+## External test-suite links
+
+| Test suite | Link | Used for |
+| --- | --- | --- |
+| Klaus Dormann 6502/65C02 functional tests | [Klaus2m5/6502_65C02_functional_tests](https://github.com/Klaus2m5/6502_65C02_functional_tests) | Long-running functional ROM tests for 6502 and 65C02 behavior. |
+| SingleStepTests / ProcessorTests | [SingleStepTests/ProcessorTests](https://github.com/SingleStepTests/ProcessorTests) | Per-instruction state, cycle-count, and bus-trace testcase corpora used by the SingleStep comparisons. |
+| perfect6502 | [mist64/perfect6502](https://github.com/mist64/perfect6502) | Transistor/netlist-style reference used by the precision lockstep interrupt work. |
+
