@@ -547,7 +547,7 @@ This section collects external links for the CPU cores and major external test s
 
 | Core in this report | External project link | Notes |
 | --- | --- | --- |
-| `qe6502` | [nikolaynedelchev/qe6502](https://github.com/nikolaynedelchev/qe6502) | Main project behind this benchmark. |
+| `qe6502` | [nnqe/qe6502](https://github.com/nnqe/qe6502) | Main project behind this benchmark. |
 | `clk` / Clock Signal | [TomHarte/CLK](https://github.com/TomHarte/CLK) | Clock Signal / CLK emulator project. |
 | `floooh/chips` | [floooh/chips](https://github.com/floooh/chips) | Standalone C header chip/system emulators; this benchmark uses the `m6502` core. |
 | `Peddle` | [dirkwhoffmann/Peddle](https://github.com/dirkwhoffmann/Peddle) | Standalone Peddle repository. See also the [Peddle project page](https://dirkwhoffmann.github.io/Peddle/index.html). |
